@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Esteira de Palestras</title>
+<meta name="description" content="Dashboard da Esteira de Produção de Palestras: pontualidade, tempos de produção, fluxo por etapa, vazão e capacidade da equipe.">
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11,11,11,0.10);
+  --wash: rgba(11,11,11,0.04);
+  --series-1: #2a78d6;
+  /* ordinal ramp (etapas) */
+  --stage-1: #86b6ef;
+  --stage-2: #2a78d6;
+  --stage-3: #104281;
+  /* status */
+  --good: #0ca30c;
+  --warning: #fab219;
+  --critical: #d03b3b;
+  --neutral: #c3c2b7;
+  --good-text: #006300;
+  --bad-text: #b02a2a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #ffffff;
+    --ink-2: #c3c2b7;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255,255,255,0.10);
+    --wash: rgba(255,255,255,0.05);
+    --series-1: #3987e5;
+    --stage-1: #6da7ec;
+    --stage-2: #3987e5;
+    --stage-3: #184f95;
+    --neutral: #62615c;
+    --good-text: #0ca30c;
+    --bad-text: #e66767;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --ink: #ffffff;
+  --ink-2: #c3c2b7;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255,255,255,0.10);
+  --wash: rgba(255,255,255,0.05);
+  --series-1: #3987e5;
+  --stage-1: #6da7ec;
+  --stage-2: #3987e5;
+  --stage-3: #184f95;
+  --neutral: #62615c;
+  --good-text: #0ca30c;
+  --bad-text: #e66767;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.wrap { max-width: 1240px; margin: 0 auto; padding: 24px 16px 48px; }
+header.top {
+  display: flex; flex-wrap: wrap; gap: 12px 24px;
+  align-items: flex-end; justify-content: space-between;
+  margin-bottom: 20px;
+}
+h1 { font-size: 22px; margin: 0 0 4px; font-weight: 650; letter-spacing: -0.01em; }
+.sub { color: var(--ink-2); margin: 0; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+button, select, .file-btn {
+  font: inherit; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 6px 12px; cursor: pointer;
+}
+button:hover, .file-btn:hover, select:hover { background: var(--wash); }
+.file-btn input { display: none; }
+.source { color: var(--muted); font-size: 12px; }
+
+h2 {
+  font-size: 13px; font-weight: 650; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--ink-2); margin: 32px 0 12px;
+}
+.grid { display: grid; gap: 16px; }
+.kpis { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.two { grid-template-columns: 1fr 1fr; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 18px; min-width: 0;
+}
+.card h3 { font-size: 14px; font-weight: 600; margin: 0 0 2px; }
+.card .hint { color: var(--muted); font-size: 12px; margin: 0 0 12px; }
+.card-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: flex-start; }
+.tile .value { font-size: 34px; font-weight: 650; letter-spacing: -0.02em; margin: 6px 0 2px; }
+.tile .value small { font-size: 16px; font-weight: 500; color: var(--ink-2); margin-left: 2px; }
+.tile .foot { color: var(--ink-2); font-size: 12px; }
+.meter { height: 6px; background: var(--grid); border-radius: 3px; margin-top: 10px; overflow: hidden; }
+.meter > span { display: block; height: 100%; border-radius: 3px; background: var(--series-1); }
+.span-2 { grid-column: 1 / -1; }
+
+svg { display: block; max-width: 100%; overflow: visible; }
+svg text { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+svg text.lbl { fill: var(--ink-2); font-size: 12px; }
+svg text.val { fill: var(--ink); font-size: 12px; font-weight: 600; }
+.gridline { stroke: var(--grid); stroke-width: 1; }
+.baseline { stroke: var(--axis); stroke-width: 1; }
+.hit { fill: transparent; }
+.hit:hover { fill: var(--wash); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0 0 10px; color: var(--ink-2); font-size: 12px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.seg button { border: 0; border-radius: 0; padding: 4px 10px; font-size: 12px; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+
+.donut-wrap { display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center; }
+.donut-wrap > svg { width: 180px; height: 180px; flex: 0 0 180px; }
+.donut-list { list-style: none; padding: 0; margin: 0; flex: 1 1 160px; }
+.donut-list li { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--grid); }
+.donut-list li:last-child { border-bottom: 0; }
+.donut-list .n { margin-left: auto; font-weight: 600; font-variant-numeric: tabular-nums; }
+.donut-list .p { color: var(--muted); width: 42px; text-align: right; font-variant-numeric: tabular-nums; }
+.ico { width: 14px; height: 14px; flex: 0 0 14px; }
+
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--grid); }
+th { color: var(--muted); font-weight: 600; font-size: 12px; white-space: nowrap; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+th.num { text-align: right; }
+.pill {
+  display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px;
+  border: 1px solid var(--border); color: var(--ink-2); white-space: nowrap;
+}
+.age-hi { color: var(--bad-text); font-weight: 650; }
+.empty { color: var(--muted); padding: 16px 0; text-align: center; }
+
+#tip {
+  position: fixed; pointer-events: none; z-index: 10; display: none;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0,0,0,.12); border-radius: 8px;
+  padding: 8px 10px; font-size: 12px; max-width: 260px;
+}
+#tip b { display: block; margin-bottom: 2px; }
+#tip .row { display: flex; gap: 12px; justify-content: space-between; color: var(--ink-2); }
+#tip .row span:last-child { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Esteira de Produção de Palestras</h1>
+      <p class="sub">Saúde, fluxo e capacidade da produção · pipeline de tíquetes</p>
+    </div>
+    <div class="controls">
+      <label class="file-btn">Importar CSV do HubSpot<input type="file" id="csv" accept=".csv,text/csv"></label>
+      <button id="sample">Dados de exemplo</button>
+      <button id="download">Baixar CSV modelo</button>
+      <button id="theme" aria-label="Alternar tema">Tema</button>
+    </div>
+  </header>
+  <p class="source" id="source"></p>
+
+  <!-- SEÇÃO 1 -->
+  <h2>1 · KPIs de Saúde e Ritmo</h2>
+  <div class="grid kpis">
+    <div class="card tile">
+      <h3>Índice de Pontualidade</h3>
+      <p class="hint">Concluídos até a Data de Fechamento Esperada</p>
+      <div class="value" id="k-pont">–</div>
+      <div class="foot" id="k-pont-foot"></div>
+      <div class="meter"><span id="k-pont-bar" style="width:0"></span></div>
+    </div>
+    <div class="card tile">
+      <h3>Tempo Médio · Novos Produtos</h3>
+      <p class="hint">Criação → fechamento, concluídos</p>
+      <div class="value" id="k-novo">–</div>
+      <div class="foot" id="k-novo-foot"></div>
+    </div>
+    <div class="card tile">
+      <h3>Tempo Médio · Ajustes</h3>
+      <p class="hint">Abertura do ajuste → entrega</p>
+      <div class="value" id="k-ajuste">–</div>
+      <div class="foot" id="k-ajuste-foot"></div>
+    </div>
+    <div class="card tile">
+      <h3>Incidentes na Operação</h3>
+      <p class="hint">Tíquetes com Incidente Operacional marcado</p>
+      <div class="value" id="k-inc">–</div>
+      <div class="foot" id="k-inc-foot"></div>
+    </div>
+    <div class="card span-2">
+      <h3>Incidentes por tipo</h3>
+      <p class="hint">Contagem de tíquetes por Incidente Operacional</p>
+      <div id="c-inc"></div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 2 -->
+  <h2>2 · O Fluxo das Demandas</h2>
+  <div class="grid two">
+    <div class="card">
+      <h3>Volume na Esteira por Etapa</h3>
+      <p class="hint">Tíquetes ativos em Ideação, Desenvolvimento e Homologação</p>
+      <div id="c-etapa"></div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h3>Vazão da Equipe</h3>
+          <p class="hint">Tíquetes concluídos por Data de Fechamento</p>
+        </div>
+        <div class="seg" role="group" aria-label="Agrupamento">
+          <button data-bucket="7" aria-pressed="true">Semana</button>
+          <button data-bucket="14" aria-pressed="false">Quinzena</button>
+        </div>
+      </div>
+      <div id="c-vazao"></div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3 -->
+  <h2>3 · Capacidade e Sobrecarga</h2>
+  <div class="grid two">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h3>Alocação por Colaborador</h3>
+          <p class="hint">Tíquetes ativos (não concluídos) por proprietário</p>
+        </div>
+        <div class="seg" role="group" aria-label="Empilhar por">
+          <button data-stack="etapa" aria-pressed="true">Etapa</button>
+          <button data-stack="cargo" aria-pressed="false">Especialidade</button>
+        </div>
+      </div>
+      <div class="legend" id="l-aloc"></div>
+      <div id="c-aloc"></div>
+    </div>
+    <div class="card">
+      <h3>Demandas por Status Geral</h3>
+      <p class="hint">Status interno da tarefa</p>
+      <div class="donut-wrap" id="c-status"></div>
+    </div>
+    <div class="card span-2">
+      <h3>Projetos Bloqueados · Gargalos Críticos</h3>
+      <p class="hint">Status = Bloqueado, ordenado pelo tempo no status atual</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Nome do Projeto</th><th>Proprietário</th><th>Etapa</th><th class="num">Dias no status atual</th><th>Motivo do Bloqueio</th></tr></thead>
+          <tbody id="t-bloq"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+(() => {
+  "use strict";
+  const DAY = 864e5;
+  const STAGES = ["Ideação", "Em Desenvolvimento", "Homologação", "Pronto para Entrega / Concluído"];
+  const ACTIVE_STAGES = STAGES.slice(0, 3);
+  const STAGE_VAR = ["--stage-1", "--stage-2", "--stage-3"];
+  const ROLES = ["Designer", "Copywriter", "Dev"];
+  const STATUS = [
+    { k: "A fazer",      c: "--neutral",  icon: "circle" },
+    { k: "Em andamento", c: "--series-1", icon: "half" },
+    { k: "Bloqueado",    c: "--critical", icon: "block" },
+    { k: "Concluído",    c: "--good",     icon: "check" },
+  ];
+  const COLS = {
+    id: "ID do tíquete", nome: "Nome do tíquete", dono: "Proprietário do tíquete",
+    cargo: "Especialidade", tipo: "Tipo de Demanda", etapa: "Etapa do tíquete",
+    status: "Status da Tarefa", criado: "Data de criação", esperado: "Data de Fechamento Esperada",
+    fechado: "Data de fechamento", incidente: "Incidente Operacional",
+    motivo: "Motivo do Bloqueio", noStatus: "Data de entrada na etapa atual",
+  };
+
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const fmt1 = n => n.toLocaleString("pt-BR", { maximumFractionDigits: 1 });
+  const fmtDate = d => d.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }).replace(".", "");
+  const days = (a, b) => (b - a) / DAY;
+  const avg = xs => xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : NaN;
+
+  let state = { rows: [], today: new Date(), bucket: 7, stack: "etapa", source: "" };
+
+  /* ---------- dados de exemplo (determinísticos) ---------- */
+  function sampleData() {
+    let seed = 42;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const pick = a => a[Math.floor(rnd() * a.length)];
+    const team = [
+      ["Ana Ribeiro", "Designer"], ["Bruno Lima", "Designer"], ["Carla Mendes", "Copywriter"],
+      ["Diego Souza", "Copywriter"], ["Elisa Prado", "Dev"], ["Felipe Rocha", "Dev"],
+    ];
+    const temas = ["Liderança Ágil", "IA no Varejo", "Cultura de Dados", "Vendas Consultivas", "ESG na Prática",
+      "Gestão de Crises", "Futuro do Trabalho", "Customer Success", "Inovação Aberta", "Saúde Mental",
+      "Negociação Estratégica", "Marketing de Conteúdo", "Transformação Digital", "Comunicação Não Violenta"];
+    const incid = ["Atraso técnico", "Atraso técnico", "Retrabalho de conteúdo", "Falha de briefing",
+      "Indisponibilidade de fornecedor", "Erro de aprovação"];
+    const motivos = ["Aguardando aprovação da liderança", "Aguardando conteúdo do palestrante",
+      "Dependência de outro time", "Falta de capacidade", "Pendência jurídica/contratual"];
+    const today = new Date(); today.setHours(12, 0, 0, 0);
+    const rows = [];
+    for (let i = 1; i <= 96; i++) {
+      const [dono0, cargo0] = pick(team);
+      // sobrecarga proposital: Ana (Designer) recebe mais demandas ativas
+      const [dono, cargo] = (i > 64 && rnd() < 0.35) ? team[0] : [dono0, cargo0];
+      const tipo = rnd() < 0.55 ? "Novo Produto" : "Ajuste/Customização";
+      const dur = tipo === "Novo Produto" ? 14 + rnd() * 26 : 3 + rnd() * 10;
+      const criado = new Date(today - (i <= 64 ? 20 + rnd() * 90 : rnd() * 30) * DAY);
+      const esperado = new Date(+criado + dur * (0.8 + rnd() * 0.5) * DAY);
+      let etapa, status, fechado = null, noStatus;
+      if (i <= 64) {
+        etapa = STAGES[3]; status = "Concluído";
+        fechado = new Date(Math.min(+criado + dur * DAY, +today - rnd() * 2 * DAY));
+        noStatus = fechado;
+      } else {
+        const r = rnd();
+        etapa = r < 0.25 ? STAGES[0] : r < 0.75 ? STAGES[1] : STAGES[2];
+        const s = rnd();
+        status = s < 0.22 ? "Bloqueado" : (etapa === STAGES[0] && s < 0.6) ? "A fazer" : "Em andamento";
+        noStatus = new Date(today - Math.min(days(criado, today), 1 + rnd() * 18) * DAY);
+      }
+      rows.push({
+        id: String(1000 + i),
+        nome: `${tipo === "Novo Produto" ? "Palestra" : "Ajuste"} · ${pick(temas)}`,
+        dono, cargo, tipo, etapa, status, criado, esperado, fechado,
+        incidente: rnd() < 0.3 ? pick(incid) : "",
+        motivo: status === "Bloqueado" ? pick(motivos) : "",
+        noStatus,
+      });
+    }
+    return { rows, today };
+  }
+
+  /* ---------- CSV ---------- */
+  function parseCSV(text) {
+    const sep = (text.split("\n")[0].match(/;/g) || []).length > (text.split("\n")[0].match(/,/g) || []).length ? ";" : ",";
+    const out = []; let row = [], cur = "", q = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (q) {
+        if (c === '"' && text[i + 1] === '"') { cur += '"'; i++; }
+        else if (c === '"') q = false;
+        else cur += c;
+      } else if (c === '"') q = true;
+      else if (c === sep) { row.push(cur); cur = ""; }
+      else if (c === "\n" || c === "\r") {
+        if (c === "\r" && text[i + 1] === "\n") i++;
+        row.push(cur); cur = "";
+        if (row.some(x => x.trim() !== "")) out.push(row);
+        row = [];
+      } else cur += c;
+    }
+    row.push(cur); if (row.some(x => x.trim() !== "")) out.push(row);
+    return out;
+  }
+  const norm = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+  function parseDate(s) {
+    s = String(s || "").trim(); if (!s) return null;
+    let m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+    if (m) return new Date(+m[3], +m[2] - 1, +m[1], 12);
+    m = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (m) return new Date(+m[1], +m[2] - 1, +m[3], 12);
+    const d = new Date(s); return isNaN(d) ? null : d;
+  }
+  function matchStage(s) {
+    const n = norm(s);
+    if (n.startsWith("idea")) return STAGES[0];
+    if (n.includes("desenvolv")) return STAGES[1];
+    if (n.startsWith("homolog")) return STAGES[2];
+    if (n.includes("conclu") || n.includes("pronto") || n.includes("entreg")) return STAGES[3];
+    return s || "";
+  }
+  function matchStatus(s, etapa) {
+    const n = norm(s);
+    if (n.startsWith("bloq")) return "Bloqueado";
+    if (n.startsWith("conclu")) return "Concluído";
+    if (n.includes("andamento")) return "Em andamento";
+    if (n.includes("fazer")) return "A fazer";
+    return etapa === STAGES[3] ? "Concluído" : "Em andamento";
+  }
+  function fromCSV(text) {
+    const t = parseCSV(text.replace(/^﻿/, ""));
+    if (t.length < 2) throw new Error("CSV vazio");
+    const head = t[0].map(norm);
+    const idx = {};
+    for (const [k, label] of Object.entries(COLS)) idx[k] = head.indexOf(norm(label));
+    if (idx.etapa < 0) throw new Error(`Coluna obrigatória ausente: "${COLS.etapa}"`);
+    const get = (r, k) => idx[k] >= 0 ? (r[idx[k]] || "").trim() : "";
+    const rows = t.slice(1).map(r => {
+      const etapa = matchStage(get(r, "etapa"));
+      const inc = get(r, "incidente");
+      return {
+        id: get(r, "id"), nome: get(r, "nome") || `Tíquete ${get(r, "id")}`,
+        dono: get(r, "dono") || "Sem proprietário", cargo: get(r, "cargo"),
+        tipo: norm(get(r, "tipo")).startsWith("novo") ? "Novo Produto" : get(r, "tipo") ? "Ajuste/Customização" : "",
+        etapa, status: matchStatus(get(r, "status"), etapa),
+        criado: parseDate(get(r, "criado")), esperado: parseDate(get(r, "esperado")),
+        fechado: parseDate(get(r, "fechado")),
+        incidente: /^(nenhum|n\/a|-)?$/i.test(inc) ? "" : inc,
+        motivo: get(r, "motivo"), noStatus: parseDate(get(r, "noStatus")),
+      };
+    });
+    return { rows, today: new Date() };
+  }
+  function toCSV(rows) {
+    const iso = d => d ? `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}` : "";
+    const q = v => /[",\n;]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
+    const keys = Object.keys(COLS);
+    const lines = [keys.map(k => COLS[k]).join(",")];
+    for (const r of rows) lines.push(keys.map(k => q(r[k] instanceof Date ? iso(r[k]) : String(r[k] ?? ""))).join(","));
+    return "﻿" + lines.join("\n");
+  }
+
+  /* ---------- tooltip ---------- */
+  const tip = document.getElementById("tip");
+  function showTip(e, title, rows) {
+    tip.innerHTML = `<b>${esc(title)}</b>` + rows.map(([a, b]) => `<div class="row"><span>${esc(a)}</span><span>${esc(b)}</span></div>`).join("");
+    tip.style.display = "block";
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = e.clientX + 14, y = e.clientY + 14;
+    if (x + w > innerWidth - 8) x = e.clientX - w - 14;
+    if (y + h > innerHeight - 8) y = e.clientY - h - 14;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  }
+  const hideTip = () => { tip.style.display = "none"; };
+  function bindTips(root) {
+    root.querySelectorAll("[data-tip]").forEach(el => {
+      const d = JSON.parse(el.dataset.tip);
+      el.addEventListener("mousemove", e => showTip(e, d.t, d.r));
+      el.addEventListener("mouseleave", hideTip);
+    });
+  }
+  const tipAttr = (t, r) => `data-tip="${esc(JSON.stringify({ t, r }))}"`;
+
+  /* ---------- helpers SVG ---------- */
+  // barra com cantos arredondados (4px) só na ponta de dados
+  function barPath(x, y, w, h, dir, r = 4) {
+    if (w <= 0 || h <= 0) return "";
+    if (dir === "up") {
+      r = Math.min(r, w / 2, h);
+      return `M${x},${y + h}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h}Z`;
+    }
+    r = Math.min(r, h / 2, w);
+    return `M${x},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h - r}Q${x + w},${y + h} ${x + w - r},${y + h}H${x}Z`;
+  }
+  function niceMax(v) {
+    if (v <= 5) return 5;
+    const p = Math.pow(10, Math.floor(Math.log10(v)));
+    for (const m of [1, 2, 2.5, 5, 10]) if (m * p >= v) return m * p;
+    return 10 * p;
+  }
+  const ticks = (max, n = 4) => Array.from({ length: n + 1 }, (_, i) => max / n * i);
+
+  /* ---------- gráficos ---------- */
+  function hbar(el, items, { color = "--series-1", labelW = 200 } = {}) {
+    if (!items.length) { el.innerHTML = `<p class="empty">Nenhum registro.</p>`; return; }
+    const W = Math.max(280, el.clientWidth || 720), rowH = 30, bh = 16, H = items.length * rowH + 22;
+    labelW = Math.min(labelW, W * 0.42);
+    const plotW = W - labelW - 40, max = niceMax(Math.max(...items.map(d => d.v)));
+    const x = v => labelW + v / max * plotW;
+    let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico de barras horizontais">`;
+    for (const t of ticks(max)) s += `<line class="gridline" x1="${x(t)}" x2="${x(t)}" y1="0" y2="${H - 20}"/><text x="${x(t)}" y="${H - 6}" text-anchor="middle">${fmt1(t)}</text>`;
+    items.forEach((d, i) => {
+      const y = i * rowH + (rowH - bh) / 2;
+      const maxCh = Math.floor((labelW - 12) / 6.6), lbl = d.k.length > maxCh ? d.k.slice(0, maxCh - 1) + "…" : d.k;
+      s += `<text class="lbl" x="${labelW - 10}" y="${y + bh / 2 + 4}" text-anchor="end">${esc(lbl)}</text>`;
+      s += `<path d="${barPath(labelW, y, d.v / max * plotW, bh, "right")}" fill="var(${color})"/>`;
+      s += `<text class="val" x="${x(d.v) + 6}" y="${y + bh / 2 + 4}">${d.v}</text>`;
+      s += `<rect class="hit" x="0" y="${i * rowH}" width="${W}" height="${rowH}" ${tipAttr(d.k, [["Tíquetes", d.v], ["Participação", d.p]])}/>`;
+    });
+    s += `<line class="baseline" x1="${labelW}" x2="${labelW}" y1="0" y2="${H - 20}"/></svg>`;
+    el.innerHTML = s; bindTips(el);
+  }
+
+  function vbar(el, items, { colorFor, labelFor = d => d.k, sub = () => [] } = {}) {
+    const W = Math.max(280, el.clientWidth || 560), H = 280, L = 36, B = 44, T = 18, plotH = H - B - T, plotW = W - L - 8;
+    const max = niceMax(Math.max(1, ...items.map(d => d.v)));
+    const bw = Math.min(64, plotW / items.length * 0.56), step = plotW / items.length;
+    const y = v => T + plotH - v / max * plotH;
+    let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico de colunas">`;
+    for (const t of ticks(max)) s += `<line class="gridline" x1="${L}" x2="${W - 8}" y1="${y(t)}" y2="${y(t)}"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end">${fmt1(t)}</text>`;
+    const labelEvery = Math.ceil(items.length / Math.max(2, Math.floor(plotW / 80)));
+    items.forEach((d, i) => {
+      const cx = L + step * i + step / 2, h = d.v / max * plotH;
+      s += `<path d="${barPath(cx - bw / 2, y(d.v), bw, h, "up")}" fill="var(${colorFor(d, i)})"/>`;
+      if (d.showVal) s += `<text class="val" x="${cx}" y="${y(d.v) - 6}" text-anchor="middle">${d.v}</text>`;
+      if (i % labelEvery === 0) s += `<text class="lbl" x="${cx}" y="${H - B + 18}" text-anchor="middle">${esc(labelFor(d))}</text>`;
+      s += `<rect class="hit" x="${cx - step / 2}" y="${T}" width="${step}" height="${plotH}" ${tipAttr(d.title || d.k, [["Tíquetes", d.v], ...sub(d)])}/>`;
+    });
+    s += `<line class="baseline" x1="${L}" x2="${W - 8}" y1="${T + plotH}" y2="${T + plotH}"/></svg>`;
+    el.innerHTML = s; bindTips(el);
+  }
+
+  function stacked(el, legendEl, people, keys, colors) {
+    legendEl.innerHTML = keys.map((k, i) => `<span><i style="background:var(${colors[i]})"></i>${esc(k)}</span>`).join("");
+    if (!people.length) { el.innerHTML = `<p class="empty">Nenhum tíquete ativo.</p>`; return; }
+    const W = Math.max(280, el.clientWidth || 560), rowH = 34, bh = 18, labelW = Math.min(150, W * 0.35), H = people.length * rowH + 22;
+    const plotW = W - labelW - 36, max = niceMax(Math.max(...people.map(p => p.total)));
+    const x = v => labelW + v / max * plotW;
+    let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Barras empilhadas de alocação">`;
+    for (const t of ticks(max)) s += `<line class="gridline" x1="${x(t)}" x2="${x(t)}" y1="0" y2="${H - 20}"/><text x="${x(t)}" y="${H - 6}" text-anchor="middle">${fmt1(t)}</text>`;
+    people.forEach((p, i) => {
+      const y = i * rowH + (rowH - bh) / 2;
+      s += `<text class="lbl" x="${labelW - 10}" y="${y + bh / 2 - 1}" text-anchor="end">${esc(p.dono)}</text>`;
+      s += `<text x="${labelW - 10}" y="${y + bh / 2 + 12}" text-anchor="end">${esc(p.cargo || "")}</text>`;
+      let acc = 0;
+      const segs = keys.map((k, j) => ({ k, j, v: p.by[k] || 0 })).filter(d => d.v > 0);
+      segs.forEach((d, n) => {
+        const x0 = x(acc) + (n ? 1 : 0), x1 = x(acc + d.v) - (n < segs.length - 1 ? 1 : 0);
+        s += n === segs.length - 1
+          ? `<path d="${barPath(x0, y, x1 - x0, bh, "right")}" fill="var(${colors[d.j]})"/>`
+          : `<rect x="${x0}" y="${y}" width="${Math.max(0, x1 - x0)}" height="${bh}" fill="var(${colors[d.j]})"/>`;
+        acc += d.v;
+      });
+      s += `<text class="val" x="${x(p.total) + 6}" y="${y + bh / 2 + 4}">${p.total}</text>`;
+      s += `<rect class="hit" x="0" y="${i * rowH}" width="${W}" height="${rowH}" ${tipAttr(`${p.dono}${p.cargo ? " · " + p.cargo : ""}`, [...keys.map(k => [k, p.by[k] || 0]), ["Total ativo", p.total]])}/>`;
+    });
+    s += `<line class="baseline" x1="${labelW}" x2="${labelW}" y1="0" y2="${H - 20}"/></svg>`;
+    el.innerHTML = s; bindTips(el);
+  }
+
+  const ICONS = {
+    circle: `<circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="2"/>`,
+    half: `<circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 2a5 5 0 0 1 0 10z" fill="currentColor"/>`,
+    block: `<circle cx="7" cy="7" r="6" fill="currentColor"/><rect x="3.5" y="6" width="7" height="2" fill="var(--surface)"/>`,
+    check: `<circle cx="7" cy="7" r="6" fill="currentColor"/><path d="M4.2 7.2l2 2 3.8-4" fill="none" stroke="var(--surface)" stroke-width="1.8"/>`,
+  };
+  function donut(el, counts) {
+    const total = counts.reduce((a, d) => a + d.v, 0);
+    const R = 80, r = 54, C = 90;
+    let s = `<svg viewBox="0 0 180 180" role="img" aria-label="Gráfico de rosca por status">`;
+    if (!total) s += `<circle cx="${C}" cy="${C}" r="${(R + r) / 2}" fill="none" stroke="var(--grid)" stroke-width="${R - r}"/>`;
+    let a0 = -Math.PI / 2;
+    const gap = counts.filter(d => d.v).length > 1 ? 0.025 : 0;
+    counts.forEach(d => {
+      if (!d.v) return;
+      const a1 = a0 + d.v / total * Math.PI * 2;
+      const s0 = a0 + gap / 2, s1 = a1 - gap / 2, large = s1 - s0 > Math.PI ? 1 : 0;
+      const p = (rad, a) => `${C + rad * Math.cos(a)},${C + rad * Math.sin(a)}`;
+      const path = (s1 - s0) >= Math.PI * 2 - 0.001
+        ? `M${C - R},${C}a${R},${R} 0 1,0 ${2 * R},0a${R},${R} 0 1,0 ${-2 * R},0M${C - r},${C}a${r},${r} 0 1,1 ${2 * r},0a${r},${r} 0 1,1 ${-2 * r},0Z`
+        : `M${p(R, s0)}A${R},${R} 0 ${large} 1 ${p(R, s1)}L${p(r, s1)}A${r},${r} 0 ${large} 0 ${p(r, s0)}Z`;
+      s += `<path d="${path}" fill="var(${d.c})" fill-rule="evenodd" ${tipAttr(d.k, [["Tíquetes", d.v], ["Participação", fmt1(d.v / total * 100) + "%"]])}/>`;
+      a0 = a1;
+    });
+    s += `<text x="${C}" y="${C + 2}" text-anchor="middle" style="fill:var(--ink);font-size:26px;font-weight:650">${total}</text>`;
+    s += `<text x="${C}" y="${C + 20}" text-anchor="middle">tíquetes</text></svg>`;
+    s += `<ul class="donut-list">` + counts.map(d => `<li><svg class="ico" viewBox="0 0 14 14" style="color:var(${d.c})" aria-hidden="true">${ICONS[d.icon]}</svg>${esc(d.k)}<span class="n">${d.v}</span><span class="p">${total ? Math.round(d.v / total * 100) : 0}%</span></li>`).join("") + `</ul>`;
+    el.innerHTML = s; bindTips(el);
+  }
+
+  /* ---------- render ---------- */
+  function render() {
+    const { rows, today } = state;
+    const done = rows.filter(r => r.etapa === STAGES[3] || r.status === "Concluído");
+    const active = rows.filter(r => !done.includes(r));
+    document.getElementById("source").textContent = `${state.source} · ${rows.length} tíquetes · ${active.length} ativos · atualizado em ${today.toLocaleDateString("pt-BR")}`;
+
+    // KPI: pontualidade
+    const withDue = done.filter(r => r.fechado && r.esperado);
+    const onTime = withDue.filter(r => r.fechado <= new Date(+r.esperado + DAY - 1)).length;
+    const pct = withDue.length ? onTime / withDue.length * 100 : NaN;
+    document.getElementById("k-pont").innerHTML = isNaN(pct) ? "–" : `${Math.round(pct)}<small>%</small>`;
+    document.getElementById("k-pont-foot").textContent = withDue.length ? `${onTime} de ${withDue.length} entregues no prazo` : "Sem datas esperadas";
+    document.getElementById("k-pont-bar").style.width = (isNaN(pct) ? 0 : pct) + "%";
+
+    // KPI: tempos médios
+    const leadTime = tipo => done.filter(r => r.tipo === tipo && r.criado && r.fechado).map(r => days(r.criado, r.fechado));
+    for (const [id, tipo] of [["k-novo", "Novo Produto"], ["k-ajuste", "Ajuste/Customização"]]) {
+      const lt = leadTime(tipo), m = avg(lt);
+      document.getElementById(id).innerHTML = isNaN(m) ? "–" : `${fmt1(m)}<small>dias</small>`;
+      document.getElementById(id + "-foot").textContent = lt.length ? `média de ${lt.length} concluídos · máx. ${fmt1(Math.max(...lt))} dias` : "Nenhum concluído";
+    }
+
+    // KPI + gráfico: incidentes
+    const inc = rows.filter(r => r.incidente);
+    const incMap = {};
+    inc.forEach(r => incMap[r.incidente] = (incMap[r.incidente] || 0) + 1);
+    const incItems = Object.entries(incMap).sort((a, b) => b[1] - a[1]).map(([k, v]) => ({ k, v, p: fmt1(v / inc.length * 100) + "%" }));
+    document.getElementById("k-inc").textContent = inc.length;
+    document.getElementById("k-inc-foot").textContent = rows.length ? `${fmt1(inc.length / rows.length * 100)}% dos tíquetes · principal: ${incItems[0]?.k || "—"}` : "";
+    hbar(document.getElementById("c-inc"), incItems);
+
+    // Volume por etapa
+    const etapaItems = ACTIVE_STAGES.map((k, i) => {
+      const v = active.filter(r => r.etapa === k).length;
+      return { k, v, i, showVal: true };
+    });
+    const peak = Math.max(...etapaItems.map(d => d.v));
+    vbar(document.getElementById("c-etapa"), etapaItems, {
+      colorFor: d => STAGE_VAR[d.i],
+      labelFor: d => document.getElementById("c-etapa").clientWidth < 460 ? ["Ideação", "Desenv.", "Homolog."][d.i] : d.k,
+      sub: d => [["Bloqueados", active.filter(r => r.etapa === d.k && r.status === "Bloqueado").length],
+                 ["Participação", fmt1(d.v / Math.max(1, active.length) * 100) + "%"], ...(d.v === peak && d.v ? [["", "maior acúmulo"]] : [])],
+    });
+
+    // Vazão
+    const B = state.bucket, nBuckets = B === 7 ? 12 : 8;
+    const end = new Date(today); end.setHours(23, 59, 59, 999);
+    const buckets = Array.from({ length: nBuckets }, (_, i) => {
+      const to = new Date(+end - (nBuckets - 1 - i) * B * DAY), from = new Date(+to - B * DAY + 1);
+      return { from, to, v: 0 };
+    });
+    done.forEach(r => { if (!r.fechado) return; const b = buckets.find(b => r.fechado >= b.from && r.fechado <= b.to); if (b) b.v++; });
+    const vazaoAvg = avg(buckets.map(b => b.v));
+    vbar(document.getElementById("c-vazao"), buckets.map((b, i) => ({
+      ...b, k: fmtDate(b.from), title: `${fmtDate(b.from)} – ${fmtDate(b.to)}`, showVal: i === buckets.length - 1,
+    })), { colorFor: () => "--series-1", sub: () => [["Média do período", fmt1(vazaoAvg)]] });
+
+    // Alocação
+    const byPerson = {};
+    active.forEach(r => {
+      const p = byPerson[r.dono] ||= { dono: r.dono, cargo: r.cargo, by: {}, total: 0 };
+      const key = state.stack === "etapa" ? r.etapa : (r.cargo || "Sem especialidade");
+      p.by[key] = (p.by[key] || 0) + 1; p.total++;
+    });
+    const people = Object.values(byPerson).sort((a, b) => b.total - a.total);
+    const stackKeys = state.stack === "etapa" ? ACTIVE_STAGES : [...ROLES, ...(active.some(r => !r.cargo) ? ["Sem especialidade"] : [])];
+    const stackColors = state.stack === "etapa" ? STAGE_VAR : ["--stage-1", "--stage-2", "--stage-3", "--neutral"];
+    stacked(document.getElementById("c-aloc"), document.getElementById("l-aloc"), people, stackKeys, stackColors);
+
+    // Status
+    donut(document.getElementById("c-status"), STATUS.map(s => ({ ...s, v: rows.filter(r => r.status === s.k).length })));
+
+    // Bloqueados
+    const blocked = rows.filter(r => r.status === "Bloqueado")
+      .map(r => ({ ...r, dias: r.noStatus ? Math.max(0, Math.floor(days(r.noStatus, today))) : null }))
+      .sort((a, b) => (b.dias ?? -1) - (a.dias ?? -1));
+    document.getElementById("t-bloq").innerHTML = blocked.length ? blocked.map(r => `<tr>
+        <td>${esc(r.nome)}</td><td>${esc(r.dono)}</td><td><span class="pill">${esc(r.etapa)}</span></td>
+        <td class="num ${r.dias >= 7 ? "age-hi" : ""}">${r.dias ?? "—"}${r.dias >= 7 ? " ⚠" : ""}</td>
+        <td>${esc(r.motivo || "Não informado")}</td></tr>`).join("")
+      : `<tr><td colspan="5" class="empty">Nenhum projeto bloqueado.</td></tr>`;
+  }
+
+  /* ---------- eventos ---------- */
+  function load(data, source) { state.rows = data.rows; state.today = data.today; state.source = source; render(); }
+  document.getElementById("sample").onclick = () => load(sampleData(), "Dados de exemplo");
+  document.getElementById("csv").onchange = e => {
+    const f = e.target.files[0]; if (!f) return;
+    f.text().then(t => load(fromCSV(t), `Arquivo: ${f.name}`)).catch(err => alert("Não foi possível ler o CSV: " + err.message));
+    e.target.value = "";
+  };
+  document.getElementById("download").onclick = () => {
+    const blob = new Blob([toCSV(state.rows)], { type: "text/csv;charset=utf-8" });
+    const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: "tiquetes-esteira-palestras.csv" });
+    a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  };
+  document.querySelectorAll("[data-bucket]").forEach(b => b.onclick = () => {
+    state.bucket = +b.dataset.bucket;
+    document.querySelectorAll("[data-bucket]").forEach(x => x.setAttribute("aria-pressed", x === b));
+    render();
+  });
+  document.querySelectorAll("[data-stack]").forEach(b => b.onclick = () => {
+    state.stack = b.dataset.stack;
+    document.querySelectorAll("[data-stack]").forEach(x => x.setAttribute("aria-pressed", x === b));
+    render();
+  });
+  document.getElementById("theme").onclick = () => {
+    const root = document.documentElement;
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("esteira-theme", root.dataset.theme); } catch (_) {}
+  };
+  try { const t = localStorage.getItem("esteira-theme"); if (t) document.documentElement.dataset.theme = t; } catch (_) {}
+
+  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(render, 150); });
+  load(sampleData(), "Dados de exemplo");
+})();
+</script>
+</body>
+</html>
