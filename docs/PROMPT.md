@@ -2,7 +2,7 @@
 
 > Prompt original usado para gerar o dashboard deste repositório.
 > Guia prático de configuração: [`configuracao-hubspot.md`](./configuracao-hubspot.md).
-> Dashboard gerado: [`../dashboard/index.html`](../dashboard/index.html).
+> Dashboard gerado: [`../index.html`](../index.html).
 
 ## Pré-requisitos
 

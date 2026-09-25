@@ -3,7 +3,7 @@
 Passo a passo para montar, dentro do HubSpot (Service Hub), o pipeline, as
 propriedades e os relatórios descritos em [`PROMPT.md`](./PROMPT.md).
 
-> O arquivo [`../dashboard/index.html`](../dashboard/index.html) é uma versão
+> O arquivo [`../index.html`](../index.html) é uma versão
 > offline do mesmo painel: abra no navegador e importe a exportação CSV dos
 > tíquetes para visualizar os mesmos indicadores fora do HubSpot.
 

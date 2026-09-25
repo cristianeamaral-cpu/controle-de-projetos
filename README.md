@@ -7,11 +7,11 @@ produção, fluxo por etapa, vazão da equipe, alocação e gargalos.
 |---------|----------|
 | [`docs/PROMPT.md`](docs/PROMPT.md) | Prompt/especificação original do dashboard |
 | [`docs/configuracao-hubspot.md`](docs/configuracao-hubspot.md) | Passo a passo: pipeline, propriedades customizadas e relatórios no HubSpot |
-| [`dashboard/index.html`](dashboard/index.html) | Dashboard pronto (HTML único, sem dependências) |
+| [`index.html`](index.html) | Dashboard pronto (HTML único, sem dependências) |
 
 ## Como usar o dashboard
 
-1. Abra `dashboard/index.html` no navegador. Ele já carrega dados de exemplo.
+1. Abra `index.html` no navegador. Ele já carrega dados de exemplo.
 2. No HubSpot, exporte os tíquetes do pipeline **Esteira de Produção de Palestras**
    em CSV, com as colunas listadas em `docs/configuracao-hubspot.md` (seção 4).
 3. Clique em **Importar CSV do HubSpot**. Todos os indicadores são recalculados
