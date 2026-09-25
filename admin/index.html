@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin · Demandas</title>
+<meta name="description" content="Cadastro de projetos, listas de opções e seções do dashboard Controle de Demandas.">
+<link rel="stylesheet" href="../assets/style.css">
+<script>try { const t = localStorage.getItem("esteira-theme"); if (t) document.documentElement.dataset.theme = t; } catch (_) {}</script>
+<style>
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--grid); margin: 8px 0 20px; overflow-x: auto; }
+  .tabs button { border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; padding: 10px 14px; color: var(--ink-2); white-space: nowrap; }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--series-1); font-weight: 600; }
+  .tabs button:hover { background: var(--wash); }
+  .painel[hidden] { display: none; }
+  .barra { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+  .barra .cresce { flex: 1 1 200px; }
+  input[type=text], input[type=search], input[type=date], input[type=number], select, textarea {
+    font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 10px; min-width: 0;
+  }
+  input:focus, select:focus, button:focus-visible { outline: 2px solid var(--series-1); outline-offset: 1px; }
+  .primario { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+  .primario:hover { background: var(--ink); opacity: .88; }
+  .perigo { color: var(--bad-text); }
+  .mini { padding: 3px 8px; font-size: 12px; }
+  .icone { padding: 3px 7px; font-size: 12px; min-width: 28px; }
+  .salvo { font-size: 12px; color: var(--muted); }
+  .salvo.ok { color: var(--good-text); }
+  .salvo.erro { color: var(--bad-text); font-weight: 600; }
+  td .acoes { display: flex; gap: 6px; justify-content: flex-end; }
+  .contador { color: var(--muted); font-size: 12px; margin-top: 8px; }
+
+  .listas { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); }
+  .item { display: flex; gap: 6px; align-items: center; padding: 4px 0; }
+  .item input[type=text] { flex: 1 1 auto; }
+  .item select { flex: 0 1 140px; }
+  .item label { font-size: 12px; color: var(--ink-2); white-space: nowrap; display: flex; gap: 4px; align-items: center; }
+  .novo { display: flex; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--grid); }
+  .novo input { flex: 1 1 auto; }
+
+  .secao-admin { margin-bottom: 16px; }
+  .secao-admin > .cab { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+  .secao-admin > .cab input { flex: 1 1 220px; font-weight: 600; }
+  .widget { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--grid); }
+  .widget .tipo { color: var(--muted); font-size: 12px; }
+  .widget .ctrl { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .widget.oculto .info { opacity: .55; }
+  @media (max-width: 640px) { .widget { grid-template-columns: auto minmax(0, 1fr); } .widget .ctrl { grid-column: 1 / -1; justify-content: flex-start; } }
+
+  dialog { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--ink); padding: 0; width: min(640px, calc(100vw - 32px)); max-height: calc(100vh - 48px); }
+  dialog::backdrop { background: rgba(0,0,0,.45); }
+  dialog form { padding: 20px; }
+  dialog h3 { margin: 0 0 16px; font-size: 16px; }
+  .campos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 14px; }
+  .campos .inteiro { grid-column: 1 / -1; }
+  .campos label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--ink-2); font-weight: 600; }
+  .campos label small { font-weight: 400; color: var(--muted); }
+  .filtro { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  @media (max-width: 560px) { .campos, .filtro { grid-template-columns: minmax(0, 1fr); } }
+  .rodape { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+  .zona { border-top: 1px solid var(--grid); margin-top: 16px; padding-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Admin · <span id="nomeDash">Controle de Demandas</span></h1>
+      <p class="sub">Cadastre projetos, edite as listas de opções e monte as seções do dashboard. As alterações são salvas automaticamente.</p>
+    </div>
+    <div class="controls">
+      <span class="salvo" id="salvo" aria-live="polite">Carregando…</span>
+      <a class="btn-link" href="../">Ver dashboard</a>
+      <button id="theme" aria-label="Alternar tema">Tema</button>
+    </div>
+  </header>
+  <div id="aviso"></div>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="projetos" aria-selected="true">Projetos</button>
+    <button role="tab" data-tab="listas" aria-selected="false">Listas de opções</button>
+    <button role="tab" data-tab="secoes" aria-selected="false">Seções do dashboard</button>
+    <button role="tab" data-tab="geral" aria-selected="false">Geral</button>
+  </nav>
+
+  <section class="painel" id="p-projetos">
+    <div class="barra">
+      <input type="search" id="busca" class="cresce" placeholder="Buscar por nome ou responsável" aria-label="Buscar">
+      <select id="fEtapa" aria-label="Filtrar por etapa"></select>
+      <select id="fStatus" aria-label="Filtrar por status"></select>
+      <button class="primario" id="novoProjeto">+ Novo projeto</button>
+    </div>
+    <div class="card"><div class="table-scroll"><table>
+      <thead><tr><th>Nome</th><th>Responsável</th><th>Etapa</th><th>Status</th><th>Prazo</th><th>Entrega</th><th></th></tr></thead>
+      <tbody id="tProjetos"></tbody>
+    </table></div></div>
+    <p class="contador" id="contProjetos"></p>
+  </section>
+
+  <section class="painel" id="p-listas" hidden>
+    <p class="hint" style="margin-top:0">Renomear um item atualiza todos os projetos que o usam. Excluir um item deixa o campo vazio nesses projetos.</p>
+    <div class="listas" id="listas"></div>
+  </section>
+
+  <section class="painel" id="p-secoes" hidden>
+    <div class="barra">
+      <button class="primario" id="novaSecao">+ Nova seção</button>
+      <span class="hint" style="margin:0">Marque a caixa para mostrar ou esconder um item. Use ↑ ↓ para mudar a ordem.</span>
+    </div>
+    <div id="secoes"></div>
+  </section>
+
+  <section class="painel" id="p-geral" hidden>
+    <div class="card">
+      <div class="campos">
+        <label class="inteiro">Título do dashboard<input type="text" id="gTitulo"></label>
+        <label class="inteiro">Subtítulo<input type="text" id="gSubtitulo"></label>
+      </div>
+      <div class="zona">
+        <button id="backup">Baixar cópia de segurança (JSON)</button>
+        <label class="file-btn">Restaurar cópia de segurança<input type="file" id="restaurar" accept=".json,application/json"></label>
+      </div>
+      <div class="zona">
+        <button id="secoesPadrao">Restaurar seções padrão</button>
+        <button id="exemplos">Substituir projetos pelos de exemplo</button>
+        <button class="perigo" id="apagarTudo">Apagar todos os projetos</button>
+      </div>
+      <p class="contador" id="infoModo"></p>
+    </div>
+  </section>
+</div>
+
+<dialog id="dProjeto">
+  <form method="dialog" id="fProjeto">
+    <h3 id="dProjetoTitulo">Projeto</h3>
+    <div class="campos">
+      <label class="inteiro">Nome do projeto<input type="text" name="nome" required></label>
+      <label>Responsável<select name="responsavel"></select></label>
+      <label>Especialidade<select name="especialidade"></select></label>
+      <label>Tipo de Demanda<select name="tipo"></select></label>
+      <label>Etapa<select name="etapa"></select></label>
+      <label>Status<select name="status"></select></label>
+      <label>No status atual desde<input type="date" name="statusDesde"><small>Usado em “dias no status atual”. Muda sozinho ao trocar o status.</small></label>
+      <label>Data de criação<input type="date" name="criado"></label>
+      <label>Prazo esperado<input type="date" name="esperado"></label>
+      <label>Data de entrega<input type="date" name="entregue"><small>Preenchida ao concluir, se estiver vazia.</small></label>
+      <label>Incidente Operacional<select name="incidente"></select></label>
+      <label class="inteiro">Motivo do Bloqueio<select name="motivo"></select></label>
+    </div>
+    <div class="rodape">
+      <button value="cancelar" formnovalidate>Cancelar</button>
+      <button class="primario" value="salvar" id="salvarProjeto">Salvar</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dWidget">
+  <form method="dialog" id="fWidget">
+    <h3 id="dWidgetTitulo">Configurar</h3>
+    <div class="campos" id="camposWidget"></div>
+    <div class="rodape">
+      <button value="cancelar" formnovalidate>Cancelar</button>
+      <button class="primario" value="salvar">Salvar</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="../assets/core.js"></script>
+<script src="../assets/admin.js"></script>
+</body>
+</html>
