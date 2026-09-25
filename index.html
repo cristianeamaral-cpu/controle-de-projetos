@@ -329,12 +329,14 @@ th.num { text-align: right; }
       const tipo = rnd() < 0.55 ? "Novo Produto" : "Ajuste/Customização";
       const dur = tipo === "Novo Produto" ? 14 + rnd() * 26 : 3 + rnd() * 10;
       const criado = new Date(today - (i <= 64 ? 20 + rnd() * 90 : rnd() * 30) * DAY);
-      const esperado = new Date(+criado + dur * (0.8 + rnd() * 0.5) * DAY);
+      let esperado = new Date(+criado + dur * (0.8 + rnd() * 0.5) * DAY);
       let etapa, status, fechado = null, noStatus;
       if (i <= 64) {
         etapa = STAGES[3]; status = "Concluído";
         fechado = new Date(Math.min(+criado + dur * DAY, +today - rnd() * 2 * DAY));
         noStatus = fechado;
+        // pontualidade de exemplo ≈ 5%: só 3 de 64 entregues no prazo
+        esperado = i % 20 === 0 ? new Date(+fechado + 3 * DAY) : new Date(+criado + (fechado - criado) * 0.6);
       } else {
         const r = rnd();
         etapa = r < 0.25 ? STAGES[0] : r < 0.75 ? STAGES[1] : STAGES[2];
