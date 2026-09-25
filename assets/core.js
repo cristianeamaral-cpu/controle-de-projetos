@@ -271,6 +271,47 @@
   }
   const usoValor = (doc, campo, valor) => doc.projetos.filter(p => p[campo] === valor).length;
 
+  /* ---------- destaque "em atraso" ---------- */
+  // Toda ocorrência de "atraso" / "em atraso" / "atrasado(a)(s)" na página fica em
+  // vermelho — em textos cadastrados, rótulos de gráficos, tabelas e dicas.
+  const RE_ATRASO = /(?:em\s+)?atras(?:o|ad[oa])s?\b/gi;
+  const IGNORAR = new Set(["SCRIPT", "STYLE", "TITLE", "OPTION", "TEXTAREA", "NOSCRIPT"]);
+  const SVGNS = "http://www.w3.org/2000/svg";
+  function destacarNo(no) {
+    const texto = no.nodeValue, pai = no.parentNode;
+    if (!pai || IGNORAR.has(pai.nodeName) || (pai.classList && pai.classList.contains("atraso"))) return;
+    RE_ATRASO.lastIndex = 0;
+    if (!RE_ATRASO.test(texto)) return;
+    const svg = pai.namespaceURI === SVGNS;
+    const frag = document.createDocumentFragment();
+    let ultimo = 0;
+    texto.replace(RE_ATRASO, (m, i) => {
+      if (i > ultimo) frag.appendChild(document.createTextNode(texto.slice(ultimo, i)));
+      const el = svg ? document.createElementNS(SVGNS, "tspan") : document.createElement("span");
+      el.setAttribute("class", "atraso");
+      el.textContent = m;
+      frag.appendChild(el);
+      ultimo = i + m.length;
+    });
+    if (ultimo < texto.length) frag.appendChild(document.createTextNode(texto.slice(ultimo)));
+    pai.replaceChild(frag, no);
+  }
+  function destacarAtraso(raiz) {
+    if (raiz.nodeType === 3) return destacarNo(raiz);
+    if (raiz.nodeType !== 1 || IGNORAR.has(raiz.nodeName)) return;
+    const w = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT);
+    const nos = []; while (w.nextNode()) nos.push(w.currentNode);
+    nos.forEach(destacarNo);
+  }
+  function observarAtraso() {
+    destacarAtraso(document.body);
+    new MutationObserver(ms => ms.forEach(m => {
+      if (m.type === "characterData") destacarNo(m.target);
+      else m.addedNodes.forEach(destacarAtraso);
+    })).observe(document.body, { childList: true, subtree: true, characterData: true });
+  }
+  if (document.body) observarAtraso(); else document.addEventListener("DOMContentLoaded", observarAtraso);
+
   g.CD = {
     DAY, CAMPOS, LISTA_DO_CAMPO, CATEGORIAS, ESCOPOS, OPS, TIPOS_WIDGET,
     uid, iso, parseData, hoje, esc, clone,

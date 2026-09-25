@@ -173,3 +173,7 @@ a { color: var(--series-1); }
 }
 .aviso b { color: var(--ink); }
 .vazio-dash { color: var(--muted); text-align: center; padding: 48px 16px; }
+
+/* palavra "atraso" / "em atraso" sempre em vermelho */
+.atraso { color: var(--bad-text); font-weight: 650; }
+svg .atraso { fill: var(--bad-text); font-weight: 650; }
