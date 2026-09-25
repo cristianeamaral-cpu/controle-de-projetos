@@ -182,3 +182,8 @@ svg .atraso { fill: var(--bad-text); font-weight: 650; }
    o fundo da lista em branco e o texto herdava a cor clara do tema escuro) */
 select option, select optgroup { background-color: var(--surface); color: var(--ink); }
 select option:disabled { color: var(--muted); }
+/* status "Em atraso": texto vermelho sobre fundo claro, nos dois temas */
+.atraso-status {
+  background: #fde8e8; color: #b02a2a;
+  padding: 1px 8px; border-radius: 999px; white-space: nowrap;
+}

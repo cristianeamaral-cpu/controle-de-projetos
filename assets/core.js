@@ -288,7 +288,8 @@
     texto.replace(RE_ATRASO, (m, i) => {
       if (i > ultimo) frag.appendChild(document.createTextNode(texto.slice(ultimo, i)));
       const el = svg ? document.createElementNS(SVGNS, "tspan") : document.createElement("span");
-      el.setAttribute("class", "atraso");
+      // "em atraso" (o status) vira etiqueta: texto vermelho sobre fundo claro
+      el.setAttribute("class", !svg && /^em\s/i.test(m) ? "atraso atraso-status" : "atraso");
       el.textContent = m;
       frag.appendChild(el);
       ultimo = i + m.length;
