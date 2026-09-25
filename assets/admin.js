@@ -143,7 +143,9 @@
           <button class="icone" data-mover="1" aria-label="Descer"${i === itens.length - 1 ? " disabled" : ""}>↓</button>
           <button class="icone perigo" data-remover aria-label="Excluir">✕</button>
         </div>`).join("")}
-        <form class="novo"><input type="text" placeholder="Novo item" aria-label="Novo item" required><button class="mini">Adicionar</button></form>
+        <form class="novo"><input type="text" placeholder="${L.extra === "categoria" ? "Novo status" : "Novo item"}" aria-label="Novo item" required>
+          ${L.extra === "categoria" ? `<select data-nova-categoria aria-label="Categoria do novo status">${Object.entries(CATEGORIAS).map(([k, v]) => `<option value="${k}"${k === "andamento" ? " selected" : ""}>${esc(v)}</option>`).join("")}</select>` : ""}
+          <button class="mini">Adicionar</button></form>
       </div>`;
     }).join("");
 
@@ -186,7 +188,7 @@
         const input = e.target.querySelector("input"), nome = input.value.trim();
         if (!nome) return;
         if (existe(nome)) return alert("Já existe um item com esse nome.");
-        arr.push(L.extra === "especialidade" ? { nome, especialidade: "" } : L.extra === "final" ? { nome } : L.extra === "categoria" ? { nome, categoria: "andamento" } : nome);
+        arr.push(L.extra === "especialidade" ? { nome, especialidade: "" } : L.extra === "final" ? { nome } : L.extra === "categoria" ? { nome, categoria: e.target.querySelector("[data-nova-categoria]").value } : nome);
         tudo(); alterado();
         $("listas").querySelector(`[data-lista="${L.k}"] form.novo input`).focus();
       };
