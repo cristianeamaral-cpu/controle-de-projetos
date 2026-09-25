@@ -177,3 +177,8 @@ a { color: var(--series-1); }
 /* palavra "atraso" / "em atraso" sempre em vermelho */
 .atraso { color: var(--bad-text); font-weight: 650; }
 svg .atraso { fill: var(--bad-text); font-weight: 650; }
+
+/* opções das listas suspensas sempre legíveis (no Windows o navegador desenha
+   o fundo da lista em branco e o texto herdava a cor clara do tema escuro) */
+select option, select optgroup { background-color: var(--surface); color: var(--ink); }
+select option:disabled { color: var(--muted); }
