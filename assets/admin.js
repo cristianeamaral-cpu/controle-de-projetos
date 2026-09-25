@@ -69,7 +69,7 @@
       const p = doc().projetos.find(p => p.id === b.dataset.excluir);
       if (!confirm(`Excluir o projeto “${p.nome}”? Esta ação não pode ser desfeita.`)) return;
       doc().projetos = doc().projetos.filter(x => x !== p);
-      renderProjetos(); alterado();
+      renderProjetos(); renderTime(); alterado();
     });
   }
   ["busca", "fEtapa", "fStatus"].forEach(id => $(id).addEventListener("input", renderProjetos));
@@ -114,9 +114,79 @@
       const p = projetoAtual || { id: uid() };
       for (const k of ["nome", "responsavel", "especialidade", "tipo", "etapa", "status", "incidente", "motivo", "criado", "esperado", "entregue", "statusDesde"]) p[k] = f[k].value.trim();
       if (!projetoAtual) doc().projetos.push(p);
-      renderProjetos(); alterado();
+      renderProjetos(); renderTime(); alterado();
     });
   })();
+
+  /* ================= TIME ================= */
+  // aplica responsável/status a um projeto, com as mesmas regras do formulário
+  function atribuir(p, { responsavel, status }) {
+    if (responsavel !== undefined && responsavel !== p.responsavel) {
+      p.responsavel = responsavel;
+      const pessoa = doc().opcoes.pessoas.find(x => x.nome === responsavel);
+      if (pessoa && pessoa.especialidade) p.especialidade = pessoa.especialidade;
+    }
+    if (status !== undefined && status !== p.status) {
+      p.status = status;
+      p.statusDesde = iso(hoje());
+      if (CD.contexto(doc()).cat[status] === "concluido" && !p.entregue) p.entregue = iso(hoje());
+    }
+  }
+
+  function renderTime() {
+    const d = doc(), { concluido } = CD.contexto(d);
+    // formulário "Atribuir demanda"
+    const f = $("fAtribuir"), escolhida = f.demanda.value;
+    const ordenados = [...d.projetos].sort((a, b) => (concluido(a) - concluido(b)) || a.nome.localeCompare(b.nome, "pt-BR"));
+    f.demanda.innerHTML = `<option value="">Selecione a demanda…</option>` + ordenados.map(p =>
+      `<option value="${esc(p.id)}"${p.id === escolhida ? " selected" : ""}>${esc(p.nome)}${concluido(p) ? " (concluída)" : ""}</option>`).join("");
+    const atual = d.projetos.find(p => p.id === f.demanda.value);
+    f.responsavel.innerHTML = opcoesHTML(nomes("responsavel"), atual ? atual.responsavel : "", "— Sem responsável —");
+    f.status.innerHTML = opcoesHTML(nomes("status"), atual ? atual.status : "");
+
+    // filtros
+    $("tResp").innerHTML = opcoesHTML(nomes("responsavel"), $("tResp").value, "Todo o time");
+    $("tStatus").innerHTML = opcoesHTML(nomes("status"), $("tStatus").value, "Todos os status");
+    $("tTipo").innerHTML = opcoesHTML(nomes("tipo"), $("tTipo").value, "Todos os tipos de demanda");
+    const fr = $("tResp").value, fs = $("tStatus").value, ft = $("tTipo").value, verConcl = $("tConcluidos").checked;
+    const visiveis = d.projetos.filter(p => (verConcl || !concluido(p)) && (!fs || p.status === fs) && (!ft || p.tipo === ft));
+
+    // um cartão por pessoa (+ "Sem responsável" se houver)
+    const pessoas = d.opcoes.pessoas.map(p => p.nome);
+    visiveis.forEach(p => { const n = p.responsavel || ""; if (!pessoas.includes(n)) pessoas.push(n); });
+    const cat = CD.contexto(d).cat;
+    const cards = pessoas.filter(n => !fr || n === fr).map(nome => {
+      const deles = visiveis.filter(p => (p.responsavel || "") === nome)
+        .sort((a, b) => String(a.esperado || "9").localeCompare(String(b.esperado || "9")));
+      const todosAtivos = d.projetos.filter(p => (p.responsavel || "") === nome && !concluido(p));
+      const travados = todosAtivos.filter(p => cat[p.status] === "bloqueado").length;
+      const pessoa = d.opcoes.pessoas.find(p => p.nome === nome);
+      return `<div class="card membro">
+        <div class="cab"><div><h3>${esc(nome || "Sem responsável")}</h3><p class="hint" style="margin:0">${esc(pessoa ? pessoa.especialidade || "" : "")}</p></div>
+          <div class="nums"><span><b>${todosAtivos.length}</b> ativas</span><span><b>${travados}</b> bloqueadas</span></div></div>
+        ${deles.length ? `<div class="table-scroll"><table><thead><tr><th>Demanda</th><th>Etapa</th><th>Status</th><th>Prazo</th></tr></thead><tbody>
+          ${deles.map(p => `<tr><td>${esc(p.nome)}</td><td><span class="pill">${esc(p.etapa || "—")}</span></td>
+            <td><select data-status-de="${esc(p.id)}" aria-label="Status de ${esc(p.nome)}">${opcoesHTML(nomes("status"), p.status)}</select></td>
+            <td>${fmtData(p.esperado)}</td></tr>`).join("")}
+        </tbody></table></div>` : `<p class="empty">Nenhuma demanda neste filtro.</p>`}
+      </div>`;
+    });
+    $("time").innerHTML = cards.join("") || `<p class="vazio-dash">Nenhuma pessoa cadastrada. Adicione em Listas de opções → Pessoas da equipe.</p>`;
+    $("time").querySelectorAll("[data-status-de]").forEach(sel => sel.onchange = () => {
+      atribuir(d.projetos.find(p => p.id === sel.dataset.statusDe), { status: sel.value });
+      renderProjetos(); renderTime(); alterado();
+    });
+  }
+  ["tResp", "tStatus", "tTipo", "tConcluidos"].forEach(id => $(id).addEventListener("change", renderTime));
+  $("fAtribuir").demanda.addEventListener("change", renderTime);
+  $("fAtribuir").addEventListener("submit", e => {
+    e.preventDefault();
+    const f = e.target, p = doc().projetos.find(x => x.id === f.demanda.value);
+    if (!p) return;
+    atribuir(p, { responsavel: f.responsavel.value, status: f.status.value });
+    marcar(`“${p.nome}” atribuída`);
+    renderProjetos(); renderTime(); alterado();
+  });
 
   /* ================= LISTAS ================= */
   const LISTAS = [
@@ -362,7 +432,7 @@
     doc().projetos = []; tudo(); alterado();
   };
 
-  function tudo() { renderProjetos(); renderListas(); renderSecoes(); renderGeral(); }
+  function tudo() { renderProjetos(); renderTime(); renderListas(); renderSecoes(); renderGeral(); }
 
   $("theme").onclick = () => {
     const root = document.documentElement;
