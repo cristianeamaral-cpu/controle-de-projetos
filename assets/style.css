@@ -187,3 +187,6 @@ select option:disabled { color: var(--muted); }
   background: #fde8e8; color: #b02a2a;
   padding: 1px 8px; border-radius: 999px; white-space: nowrap;
 }
+input[type=text].atraso-campo, input.atraso-campo, select.atraso-campo, option.atraso-campo {
+  background-color: #fde8e8; color: #b02a2a; font-weight: 650;
+}

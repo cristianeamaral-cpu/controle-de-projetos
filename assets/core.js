@@ -304,12 +304,28 @@
     const nos = []; while (w.nextNode()) nos.push(w.currentNode);
     nos.forEach(destacarNo);
   }
+  // campos (texto digitado, listas suspensas e suas opções) cujo valor é "Em atraso"
+  const RE_CAMPO_ATRASO = /^\s*em\s+atraso\s*$/i;
+  function marcarCampos() {
+    document.querySelectorAll("input[type=text], input:not([type]), select").forEach(el => {
+      const v = el.tagName === "SELECT" ? (el.selectedOptions[0] || {}).textContent || "" : el.value;
+      el.classList.toggle("atraso-campo", RE_CAMPO_ATRASO.test(v));
+    });
+    document.querySelectorAll("option").forEach(o => o.classList.toggle("atraso-campo", RE_CAMPO_ATRASO.test(o.textContent)));
+  }
   function observarAtraso() {
     destacarAtraso(document.body);
-    new MutationObserver(ms => ms.forEach(m => {
-      if (m.type === "characterData") destacarNo(m.target);
-      else m.addedNodes.forEach(destacarAtraso);
-    })).observe(document.body, { childList: true, subtree: true, characterData: true });
+    marcarCampos();
+    let agendado = false;
+    new MutationObserver(ms => {
+      ms.forEach(m => {
+        if (m.type === "characterData") destacarNo(m.target);
+        else m.addedNodes.forEach(destacarAtraso);
+      });
+      if (!agendado) { agendado = true; requestAnimationFrame(() => { agendado = false; marcarCampos(); }); }
+    }).observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.addEventListener("input", marcarCampos, true);
+    document.addEventListener("change", marcarCampos, true);
   }
   if (document.body) observarAtraso(); else document.addEventListener("DOMContentLoaded", observarAtraso);
 
