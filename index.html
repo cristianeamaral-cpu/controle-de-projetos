@@ -48,6 +48,8 @@
   estado = await CD.carregar();
   if (estado.modo === "local") {
     $("aviso").innerHTML = `<p class="aviso"><b>Banco de dados não configurado.</b> Mostrando ${estado.novo ? "dados de exemplo" : "os dados salvos neste navegador"}. Para toda a equipe ver os mesmos dados, conecte o banco na Vercel (veja <code>docs/banco-de-dados.md</code>).</p>`;
+  } else if (estado.doNavegador) {
+    $("aviso").innerHTML = `<p class="aviso"><b>Banco conectado e ainda vazio.</b> Abra <a href="admin/">Editar dados</a> neste navegador para enviar ao banco o que você já tinha cadastrado.</p>`;
   } else if (estado.novo) {
     $("aviso").innerHTML = `<p class="aviso"><b>Dados de exemplo.</b> Nada foi cadastrado ainda. Use <a href="admin/">Editar dados</a> para começar.</p>`;
   }

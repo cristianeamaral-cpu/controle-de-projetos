@@ -445,6 +445,9 @@
   estado = await CD.carregar();
   if (estado.modo === "local") {
     $("aviso").innerHTML = `<p class="aviso"><b>Banco de dados não configurado.</b> O que você salvar aqui fica só neste navegador. Para a equipe toda ver, conecte o banco na Vercel (passo a passo em <code>docs/banco-de-dados.md</code>).</p>`;
+  } else if (estado.doNavegador) {
+    $("aviso").innerHTML = `<p class="aviso"><b>Banco conectado.</b> Os dados que você tinha cadastrado neste navegador foram enviados para o banco e agora aparecem para toda a equipe.</p>`;
+    salvando = salvando.then(gravar);
   } else if (estado.novo) {
     $("aviso").innerHTML = `<p class="aviso"><b>Banco conectado e vazio.</b> Carregamos projetos de exemplo para você começar. Para zerar, use Geral → “Apagar todos os projetos”.</p>`;
   }

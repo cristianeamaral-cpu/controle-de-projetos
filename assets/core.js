@@ -208,6 +208,9 @@
       if (r.ok && (r.headers.get("content-type") || "").includes("json")) {
         const j = await r.json();
         if (j.data) return { data: normalizar(j.data), versao: j.version || 0, modo: "nuvem", atualizado: j.updatedAt };
+        // banco recém-conectado e vazio: aproveita o que já foi cadastrado neste navegador
+        const local = lsGet();
+        if (local && local.data) return { data: normalizar(local.data), versao: 0, modo: "nuvem", novo: true, doNavegador: true };
         return { data: documentoPadrao(), versao: 0, modo: "nuvem", novo: true };
       }
     } catch (_) { /* sem API: segue para o modo local */ }
