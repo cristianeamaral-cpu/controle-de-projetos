@@ -1,4 +1,4 @@
-# Configuração no HubSpot — Esteira de Produção de Palestras
+# Configuração no HubSpot — Esteira de Produção de Projetos
 
 Passo a passo para montar, dentro do HubSpot (Service Hub), o pipeline, as
 propriedades e os relatórios descritos em [`PROMPT.md`](./PROMPT.md).
@@ -13,7 +13,7 @@ propriedades e os relatórios descritos em [`PROMPT.md`](./PROMPT.md).
 
 **Configurações → Objetos → Tíquetes → Pipelines → Criar pipeline**
 
-Nome: `Esteira de Produção de Palestras`
+Nome: `Esteira de Produção de Projetos`
 
 | # | Etapa | Status do tíquete (HubSpot) |
 |---|-------|-----------------------------|
@@ -28,7 +28,7 @@ Marcar a etapa 4 como *Fechado* faz o HubSpot preencher automaticamente a
 ## 2. Propriedades Customizadas
 
 **Configurações → Propriedades → Propriedades de tíquete → Criar propriedade**
-(grupo sugerido: *Esteira de Palestras*)
+(grupo sugerido: *Esteira de Projetos*)
 
 | Rótulo | Nome interno | Tipo de campo | Opções |
 |--------|--------------|---------------|--------|
@@ -53,8 +53,8 @@ precisam delas:
 
 ## 3. Relatórios
 
-**Relatórios → Dashboards → Criar dashboard** → nome: `Esteira de Produção de Palestras`.
-Em todos os relatórios, filtre por **Pipeline = Esteira de Produção de Palestras**.
+**Relatórios → Dashboards → Criar dashboard** → nome: `Esteira de Produção de Projetos`.
+Em todos os relatórios, filtre por **Pipeline = Esteira de Produção de Projetos**.
 
 ### Seção 1 — KPIs de Saúde e Ritmo (cartões de resumo)
 

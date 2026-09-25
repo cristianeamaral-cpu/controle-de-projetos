@@ -1,6 +1,6 @@
-# Controle de Projetos — Esteira de Produção de Palestras
+# Controle de Projetos — Esteira de Produção de Projetos
 
-Dashboard de acompanhamento da produção de palestras: pontualidade, tempos de
+Dashboard de acompanhamento da produção de projetos: pontualidade, tempos de
 produção, fluxo por etapa, vazão da equipe, alocação e gargalos.
 
 | Arquivo | Conteúdo |
@@ -12,7 +12,7 @@ produção, fluxo por etapa, vazão da equipe, alocação e gargalos.
 ## Como usar o dashboard
 
 1. Abra `index.html` no navegador. Ele já carrega dados de exemplo.
-2. No HubSpot, exporte os tíquetes do pipeline **Esteira de Produção de Palestras**
+2. No HubSpot, exporte os tíquetes do pipeline **Esteira de Produção de Projetos**
    em CSV, com as colunas listadas em `docs/configuracao-hubspot.md` (seção 4).
 3. Clique em **Importar CSV do HubSpot**. Todos os indicadores são recalculados
    no próprio navegador. Nenhum dado sai da sua máquina.

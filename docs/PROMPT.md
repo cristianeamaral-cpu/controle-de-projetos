@@ -1,4 +1,4 @@
-# Prompt — Dashboard "Esteira de Produção de Palestras"
+# Prompt — Dashboard "Esteira de Produção de Projetos"
 
 > Prompt original usado para gerar o dashboard deste repositório.
 > Guia prático de configuração: [`configuracao-hubspot.md`](./configuracao-hubspot.md).
@@ -7,7 +7,7 @@
 ## Pré-requisitos
 
 Para que os relatórios funcionem, configure um **Pipeline de Tíquetes** chamado
-`Esteira de Produção de Palestras` com as seguintes etapas:
+`Esteira de Produção de Projetos` com as seguintes etapas:
 
 1. Ideação (Briefing/Pesquisa)
 2. Em Desenvolvimento (Roteiro/Design/Dev)

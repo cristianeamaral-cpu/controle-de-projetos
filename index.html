@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Controle de Demandas</title>
-<meta name="description" content="Dashboard da Esteira de Produção de Palestras: pontualidade, tempos de produção, fluxo por etapa, vazão e capacidade da equipe.">
+<meta name="description" content="Dashboard da Esteira de Produção de Projetos: pontualidade, tempos de produção, fluxo por etapa, vazão e capacidade da equipe.">
 <style>
 :root {
   color-scheme: light;
@@ -344,7 +344,7 @@ th.num { text-align: right; }
       }
       rows.push({
         id: String(1000 + i),
-        nome: `${tipo === "Novo Produto" ? "Palestra" : "Ajuste"} · ${pick(temas)}`,
+        nome: `${tipo === "Novo Produto" ? "Projeto" : "Ajuste"} · ${pick(temas)}`,
         dono, cargo, tipo, etapa, status, criado, esperado, fechado,
         incidente: rnd() < 0.3 ? pick(incid) : "",
         motivo: status === "Bloqueado" ? pick(motivos) : "",
@@ -666,7 +666,7 @@ th.num { text-align: right; }
   };
   document.getElementById("download").onclick = () => {
     const blob = new Blob([toCSV(state.rows)], { type: "text/csv;charset=utf-8" });
-    const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: "tiquetes-esteira-palestras.csv" });
+    const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: "tiquetes-esteira-projetos.csv" });
     a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   };
   document.querySelectorAll("[data-bucket]").forEach(b => b.onclick = () => {
