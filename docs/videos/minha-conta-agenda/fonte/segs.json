@@ -1,152 +1,27 @@
 [
-[
-"intro",
-"Olá! Neste vídeo, você vai conhecer a área Minha Conta, e aprender a sincronizar a sua agenda com o Google Calendar.",
-0.72,
-"Tom acolhedor, sorrindo. Pausa longa ao final."
-],
-[
-"c0",
-"Vamos começar pela área Minha Conta.",
-0.48,
-"Natural, como quem mostra a tela a um colega."
-],
-[
-"c1",
-"Aqui, você atualiza os seus dados cadastrais sempre que precisar.",
-0.36,
-"Destaque para “dados cadastrais”."
-],
-[
-"c2",
-"Também pode alterar o seu plano,",
-0.25,
-"Vírgula: pausa curta, sem baixar o tom."
-],
-[
-"c3",
-"e conferir o seu consumo de créditos.",
-0.54,
-"Feche a frase com o tom descendente."
-],
-[
-"c4",
-"E este aqui é o seu PSA Score.",
-0.42,
-"Leve ênfase em “PSA Score”. Pausa antes de explicar."
-],
-[
-"c4b",
-"Ele é o indicador de qualidade da sua jornada profissional na plataforma.",
-0.6,
-"Explicativo, sem arrastar."
-],
-[
-"c5",
-"Para sincronizar a sua agenda, clique em Sincronizar calendário.",
-0.66,
-"Instrução clara; acompanhe o clique na tela."
-],
-[
-"s1",
-"Conectar o seu Google Calendar ajuda você a organizar melhor a sua rotina, e a não perder nenhuma oportunidade.",
-0.36,
-"Tom de benefício, animado."
-],
-[
-"s1b",
-"E o melhor: leva menos de um minuto!",
-0.6,
-"Pequena pausa depois de “E o melhor:”."
-],
-[
-"s2",
-"O processo é simples, e funciona em três passos.",
-0.54,
-"Pausa antes de iniciar os passos."
-],
-[
-"p1",
-"Primeiro passo: conecte o seu calendário.",
-0.3,
-"Marque o número do passo."
-],
-[
-"p1b",
-"Basta autorizar o acesso à sua conta do Google Calendar.",
-0.6,
-"Acompanhe o clique em “Permitir”."
-],
-[
-"p2",
-"Segundo passo: nós vemos a sua disponibilidade.",
-0.3,
-"Marque o número do passo."
-],
-[
-"p2b",
-"A plataforma identifica as datas e os locais dos seus compromissos.",
-0.6,
-"Explicativo."
-],
-[
-"p3",
-"Terceiro passo: tudo em um só lugar.",
-0.3,
-"Marque o número do passo."
-],
-[
-"p3b",
-"Os seus eventos externos passam a aparecer junto com os compromissos criados na PSA.",
-0.72,
-"Pausa longa: fim do bloco dos passos."
-],
-[
-"d0",
-"Agora, vamos entender quais informações a plataforma acessa, e por quê.",
-0.48,
-"Tom de transparência, próximo."
-],
-[
-"d1",
-"Para evitar conflitos de agenda, ela lê as datas e os horários dos seus compromissos,",
-0.25,
-"Vírgula: pausa curta."
-],
-[
-"d2",
-"e os títulos dos eventos, para exibi-los na sua agenda.",
-0.48,
-""
-],
-[
-"d3",
-"Ela também acessa o local dos eventos.",
-0.3,
-"Destaque para “local”."
-],
-[
-"d3b",
-"Essa informação é fundamental para sugerir oportunidades específicas na sua região.",
-0.66,
-"Tom de benefício."
-],
-[
-"f1",
-"Pronto! Agora é só clicar em Conectar Google Calendar.",
-0.48,
-"Animado; acompanhe o clique."
-],
-[
-"f2",
-"E fique tranquilo: você pode desconectar a sua agenda a qualquer momento.",
-0.6,
-"Tom tranquilizador."
-],
-[
-"out",
-"Agenda organizada, mais oportunidades. Até a próxima!",
-0.3,
-"Encerramento sorrindo."
-]
+["intro","Olá! Vamos conhecer a área Minha Conta e ver como sincronizar a sua agenda com o Google Calendar.",0.7,"Simpática, sorrindo. Abertura leve."],
+["c0","Na área Minha Conta,",0.1,"Emende com a próxima fala."],
+["c1","você atualiza os seus dados cadastrais,",0.1,"Fluido, em sequência."],
+["c2","altera o seu plano",0.05,"Sem pausa."],
+["c3","e confere o seu consumo de créditos.",0.35,"Feche a frase."],
+["c4","Aqui também fica o seu PSA Score:",0.1,"Leve destaque em “PSA Score”."],
+["c4b","o indicador de qualidade da sua jornada profissional.",0.5,"Explicativo, sem arrastar."],
+["c5","Para conectar a agenda, é só clicar em Sincronizar calendário.",0.5,"Acompanhe o clique na tela."],
+["s1","Com o Google Calendar conectado, você organiza melhor a sua rotina e não perde nenhuma oportunidade.",0.15,"Tom de benefício."],
+["s1b","E leva menos de um minuto!",0.3,"Animada."],
+["s2","São só três passos.",0.3,""],
+["p1","Primeiro, conecte o seu calendário:",0.05,"Emende com a explicação."],
+["p1b","é só autorizar o acesso à sua conta do Google.",0.4,"Acompanhe o clique em “Permitir”."],
+["p2","Depois, a plataforma vê a sua disponibilidade,",0.05,"Emende."],
+["p2b","identificando as datas e os locais dos seus compromissos.",0.4,""],
+["p3","E pronto: tudo em um só lugar.",0.1,""],
+["p3b","Seus eventos externos aparecem junto com os compromissos criados na PSA.",0.5,"Fecha o bloco dos passos."],
+["d0","E quais informações a plataforma acessa?",0.15,"Pergunta leve, de conversa."],
+["d1","As datas e os horários dos compromissos, para evitar conflitos de agenda,",0.05,"Enumeração fluida."],
+["d2","os títulos dos eventos,",0.05,""],
+["d3","e o local,",0.05,"Destaque em “local”."],
+["d3b","que ajuda a sugerir oportunidades na sua região.",0.45,"Tom de benefício."],
+["f1","Agora é só clicar em Conectar Google Calendar.",0.3,"Acompanhe o clique."],
+["f2","E, se quiser, você pode desconectar a sua agenda a qualquer momento.",0.5,"Tranquilizadora."],
+["out","Agenda organizada, mais oportunidades. Até a próxima!",0.3,"Encerramento sorrindo."]
 ]
