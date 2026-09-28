@@ -416,13 +416,14 @@ html,body{font-family:"Manrope",system-ui,sans-serif}
 const TL = __TL__;
 const T=TL.T, D=TL.D, END=TL.END;
 const E=k=>T[k]+D[k];
+const SP=0.9; // fator de velocidade da locução
 const CAPS={
  intro:"Olá! Neste vídeo, você vai conhecer a área <b>Minha Conta</b> e aprender<br>a sincronizar a sua agenda com o <b>Google Calendar</b>.",
  c0:"Vamos começar pela área <b>Minha Conta</b>.",
- c1:"Aqui, você pode atualizar os seus <b>dados cadastrais</b> sempre que precisar.",
+ c1:"Aqui, você atualiza os seus <b>dados cadastrais</b> sempre que precisar.",
  c2:"Também pode alterar o seu <b>plano</b>,",
  c3:"e conferir o seu <b>consumo de créditos</b>.",
- c4:"E este é o seu <b>PSA Score</b>.",
+ c4:"E este aqui é o seu <b>PSA Score</b>.",
  c4b:"Ele é o indicador de qualidade da sua <b>jornada profissional</b> na plataforma.",
  c5:"Para sincronizar a sua agenda, clique em <b>Sincronizar calendário</b>.",
  s1:"Conectar o seu Google Calendar ajuda você a organizar melhor a sua rotina<br>e a não perder nenhuma <b>oportunidade</b>.",
@@ -507,26 +508,26 @@ scene('#sB',T.c0-1.0,tBout,.6);
 gsap.set(camB,{x:all.x,y:all.y,scale:all.scale});
 tl.fromTo(camB,{x:all.x-30,y:all.y,scale:all.scale*1.03},{x:all.x,y:all.y,scale:all.scale,duration:2.2,ease:'power2.out'},T.c0-1.0);
 tl.to(camB,{...csDados,duration:1.3},T.c1-.3);
-ring('#bDados .ring',T.c1+1.4,T.c2-.1);
-tl.fromTo('#bEdit',{backgroundColor:'#fff'},{backgroundColor:'#FFF1E8',color:'#FF650F',borderColor:'#FFD9C2',duration:.3},T.c1+2.4);
+ring('#bDados .ring',T.c1+1.4*SP,T.c2-.1);
+tl.fromTo('#bEdit',{backgroundColor:'#fff'},{backgroundColor:'#FFF1E8',color:'#FF650F',borderColor:'#FFD9C2',duration:.3},T.c1+2.4*SP);
 tl.to(camB,{...csRow,duration:.9},T.c2-.4);
-ring('#bPlano .ring',T.c2+.6,T.c3-.05);
-tl.fromTo('#bPlanBtn',{scale:1},{scale:1.08,duration:.3,yoyo:true,repeat:1,ease:'power1.inOut'},T.c2+1.1);
-ring('#bCred .ring',T.c3+.4,T.c4-.2);
-tl.to('#bCredBar',{width:'68%',duration:1.4,ease:'power2.out'},T.c3+.6);
-const cred={v:0};tl.to(cred,{v:34,duration:1.4,ease:'power2.out',onUpdate:()=>{$('#bCredN').textContent=Math.round(cred.v)}},T.c3+.6);
+ring('#bPlano .ring',T.c2+.6*SP,T.c3-.05);
+tl.fromTo('#bPlanBtn',{scale:1},{scale:1.08,duration:.3,yoyo:true,repeat:1,ease:'power1.inOut'},T.c2+1.1*SP);
+ring('#bCred .ring',T.c3+.4*SP,T.c4-.2);
+tl.to('#bCredBar',{width:'68%',duration:1.4,ease:'power2.out'},T.c3+.6*SP);
+const cred={v:0};tl.to(cred,{v:34,duration:1.4,ease:'power2.out',onUpdate:()=>{$('#bCredN').textContent=Math.round(cred.v)}},T.c3+.6*SP);
 tl.to(camB,{...csScore,duration:1.1},T.c4-.4);
-ring('#bScore .ring',T.c4+.5,E('c4b')+.3);
-const sc={v:0};tl.to(sc,{v:87,duration:2.2,ease:'power2.out',onUpdate:()=>{$('#bScoreN').textContent=Math.round(sc.v);$('#bArc').setAttribute('stroke-dashoffset',879.6*(1-sc.v/100))}},T.c4+.4);
-tl.fromTo('#bScoreTag',{opacity:0,y:14},{opacity:1,y:0,duration:.5,ease:'back.out(2)'},T.c4b+1.4);
-tl.from('#bc1',{opacity:0,x:-20,duration:.5},T.c4b+2.4);
+ring('#bScore .ring',T.c4+.5*SP,E('c4b')+.3);
+const sc={v:0};tl.to(sc,{v:87,duration:2.2,ease:'power2.out',onUpdate:()=>{$('#bScoreN').textContent=Math.round(sc.v);$('#bArc').setAttribute('stroke-dashoffset',879.6*(1-sc.v/100))}},T.c4+.4*SP);
+tl.fromTo('#bScoreTag',{opacity:0,y:14},{opacity:1,y:0,duration:.5,ease:'back.out(2)'},T.c4b+1.4*SP);
+tl.from('#bc1',{opacity:0,x:-20,duration:.5},T.c4b+2.4*SP);
 // ir para Sincronizar calendário
 tl.to(camB,{...csAll2,duration:1.0},T.c5-.3);
 const pBtn=scr(csAll2,R['#bSyncBtn']);
-cursorIn(T.c5+.5);
-cursorTo(pBtn,T.c5+.6,1.4);
-click(pBtn,T.c5+2.7);
-tl.to('#bSyncBtn',{scale:.95,duration:.1,yoyo:true,repeat:1},T.c5+2.7);
+cursorIn(T.c5+.5*SP);
+cursorTo(pBtn,T.c5+.6*SP,1.4);
+click(pBtn,T.c5+2.7*SP);
+tl.to('#bSyncBtn',{scale:.95,duration:.1,yoyo:true,repeat:1},T.c5+2.7*SP);
 tl.to(cur,{opacity:0,duration:.3},tBout+.1);
 tl.to(camB,{x:csAll2.x-(csAll2.scale*.08)*R['#bSyncBtn'].x,scale:csAll2.scale*1.08,y:csAll2.y-(csAll2.scale*.08)*R['#bSyncBtn'].y,duration:.8,ease:'power2.in'},tBout-.2);
 
@@ -540,12 +541,12 @@ const cAccR=focus(R['#cAcc'],{pad:50,max:1.25,cx:1380,areaW:1000});
 const cReadyF=focus(R['#cReady'],{pad:70,max:1.2});
 scene('#sC',T.s1-.6,T.out-.8,.6);
 tl.fromTo(camC,{x:cAll.x-40,y:cAll.y-20,scale:cAll.scale*1.04},{x:cAll.x,y:cAll.y,scale:cAll.scale,duration:1.6,ease:'power3.out'},T.s1-.6);
-ring('#rs1 .ring',T.s1b+1.0,T.s2-.2);
-tl.fromTo('#cBtn',{scale:1},{scale:1.05,duration:.35,yoyo:true,repeat:1,ease:'power1.inOut'},T.s1b+1.3);
+ring('#rs1 .ring',T.s1b+1.0*SP,T.s2-.2);
+tl.fromTo('#cBtn',{scale:1},{scale:1.05,duration:.35,yoyo:true,repeat:1,ease:'power1.inOut'},T.s1b+1.3*SP);
 // 3 passos
 tl.to(camC,{...cHowF,duration:1.1},T.s2-.5);
-ring('#cHow > .ring',T.s2+.3,T.p1-.1);
-tl.from('#st1,#st2,#st3',{x:-14,opacity:.35,stagger:.25,duration:.5,ease:'power2.out'},T.s2+1.4);
+ring('#cHow > .ring',T.s2+.3*SP,T.p1-.1);
+tl.from('#st1,#st2,#st3',{x:-14,opacity:.35,stagger:.25,duration:.5,ease:'power2.out'},T.s2+1.4*SP);
 tl.to(camC,{...cHowL,duration:1.0},T.p1-.5);
 function stepOn(n,tin,tout){
   const s='#st'+n;
@@ -560,58 +561,58 @@ function panel(sel,tin,tout){
 }
 // passo 1
 stepOn(1,T.p1,T.p2-.3);
-panel('#pConsent',T.p1+.4,T.p2-.35);
-tl.from('#pConsent .perm',{opacity:0,x:20,stagger:.25,duration:.4,ease:'power2.out'},T.p1+1.0);
+panel('#pConsent',T.p1+.4*SP,T.p2-.35);
+tl.from('#pConsent .perm',{opacity:0,x:20,stagger:.25,duration:.4,ease:'power2.out'},T.p1+1.0*SP);
 const pA=R['#pAllow']; const pAllow={x:pA.x+pA.w/2,y:pA.y+pA.h/2};
-cursorIn(T.p1b+.1);
-cursorTo(pAllow,T.p1b+.2,1.3);
-click(pAllow,T.p1b+1.8);
-tl.to('#pOk',{opacity:1,duration:.4},T.p1b+2.1).from('#pOk .c',{scale:0,duration:.6,ease:'back.out(2.5)'},T.p1b+2.2);
-tl.to(cur,{opacity:0,duration:.3},T.p1b+2.4);
+cursorIn(T.p1b+.1*SP);
+cursorTo(pAllow,T.p1b+.2*SP,1.3);
+click(pAllow,T.p1b+1.8*SP);
+tl.to('#pOk',{opacity:1,duration:.4},T.p1b+2.1*SP).from('#pOk .c',{scale:0,duration:.6,ease:'back.out(2.5)'},T.p1b+2.2*SP);
+tl.to(cur,{opacity:0,duration:.3},T.p1b+2.4*SP);
 // passo 2
 stepOn(2,T.p2,T.p3-.3);
-panel('#pWeek',T.p2+.1,T.p3-.35);
+panel('#pWeek',T.p2+.1*SP,T.p3-.35);
 tl.fromTo('#scan',{opacity:0,top:48},{opacity:1,duration:.2},T.p2b)
   .to('#scan',{top:430,duration:2.6,ease:'power1.inOut'},T.p2b)
-  .to('#scan',{opacity:0,duration:.3},T.p2b+2.6);
-tl.fromTo('#pWeek .ev',{backgroundColor:'#C9D6EE'},{backgroundColor:'#093CA7',stagger:.5,duration:.3},T.p2b+.2);
-tl.fromTo('#pWeek .ev',{scale:1},{scale:1.06,stagger:.5,duration:.2,yoyo:true,repeat:1,immediateRender:false},T.p2b+.2);
-tl.to('#f1,#f2,#f3',{opacity:1,stagger:.35,duration:.4},T.p2b+2.7);
+  .to('#scan',{opacity:0,duration:.3},T.p2b+2.6*SP);
+tl.fromTo('#pWeek .ev',{backgroundColor:'#C9D6EE'},{backgroundColor:'#093CA7',stagger:.5,duration:.3},T.p2b+.2*SP);
+tl.fromTo('#pWeek .ev',{scale:1},{scale:1.06,stagger:.5,duration:.2,yoyo:true,repeat:1,immediateRender:false},T.p2b+.2*SP);
+tl.to('#f1,#f2,#f3',{opacity:1,stagger:.35,duration:.4},T.p2b+2.7*SP);
 // passo 3
 stepOn(3,T.p3,T.d0-.2);
-panel('#pUni',T.p3+.1,T.d0-.4);
-tl.from('#u1,#u3',{opacity:0,x:-30,stagger:.25,duration:.5,ease:'power2.out'},T.p3+.7);
-tl.from('#u2,#u4,#u5',{opacity:0,x:60,stagger:.4,duration:.6,ease:'back.out(1.6)'},T.p3b+.4);
-tl.fromTo('#u2,#u4,#u5',{backgroundColor:'#E8EEFA'},{backgroundColor:'#F9FAFC',duration:1.4,stagger:.4},T.p3b+1.2);
+panel('#pUni',T.p3+.1*SP,T.d0-.4);
+tl.from('#u1,#u3',{opacity:0,x:-30,stagger:.25,duration:.5,ease:'power2.out'},T.p3+.7*SP);
+tl.from('#u2,#u4,#u5',{opacity:0,x:60,stagger:.4,duration:.6,ease:'back.out(1.6)'},T.p3b+.4*SP);
+tl.fromTo('#u2,#u4,#u5',{backgroundColor:'#E8EEFA'},{backgroundColor:'#F9FAFC',duration:1.4,stagger:.4},T.p3b+1.2*SP);
 // o que acessamos
 tl.to(camC,{...cAccF,duration:1.2},T.d0-.3);
-ring('#cAcc > .ring',T.d0+.8,T.d1+.6);
+ring('#cAcc > .ring',T.d0+.8*SP,T.d1+.6*SP);
 function accOn(n,tin,tout){
   ring('#acc'+n+' > .ring',tin,tout);
   tl.fromTo('#acc'+n+' .ico2',{opacity:0,scale:.5},{opacity:1,scale:1,duration:.4,ease:'back.out(2)'},tin+.1);
   tl.fromTo('#acc'+n+' svg.ck',{scale:1},{scale:1.35,duration:.2,yoyo:true,repeat:1,immediateRender:false},tin);
 }
-accOn(1,T.d1+2.7,T.d3-.2);
-accOn(3,T.d1+3.6,T.d3-.2);
-accOn(4,T.d2+.4,T.d3-.2);
+accOn(1,T.d1+2.7*SP,T.d3-.2);
+accOn(3,T.d1+3.6*SP,T.d3-.2);
+accOn(4,T.d2+.4*SP,T.d3-.2);
 tl.to(camC,{...cAccR,duration:1.0},T.d3-.3);
-accOn(2,T.d3+1.0,T.f1-.3);
-panel('#pMap',T.d3+.3,T.f1-.35);
-tl.fromTo('#m0',{opacity:0,y:-30},{opacity:1,y:0,duration:.5,ease:'bounce.out'},T.d3+.9)
-  .fromTo('#mp0',{opacity:.9,scale:.5},{opacity:0,scale:5,duration:1.4,repeat:3,ease:'power1.out',immediateRender:false},T.d3+1.2)
-  .fromTo('#m1,#m2,#m3',{opacity:0,y:-40},{opacity:1,y:0,duration:.55,stagger:.35,ease:'bounce.out'},T.d3b+.3)
-  .to('#o1,#o2',{opacity:1,stagger:.35,duration:.4},T.d3b+2.0);
+accOn(2,T.d3+1.0*SP,T.f1-.3);
+panel('#pMap',T.d3+.3*SP,T.f1-.35);
+tl.fromTo('#m0',{opacity:0,y:-30},{opacity:1,y:0,duration:.5,ease:'bounce.out'},T.d3+.9*SP)
+  .fromTo('#mp0',{opacity:.9,scale:.5},{opacity:0,scale:5,duration:1.4,repeat:3,ease:'power1.out',immediateRender:false},T.d3+1.2*SP)
+  .fromTo('#m1,#m2,#m3',{opacity:0,y:-40},{opacity:1,y:0,duration:.55,stagger:.35,ease:'bounce.out'},T.d3b+.3*SP)
+  .to('#o1,#o2',{opacity:1,stagger:.35,duration:.4},T.d3b+2.0*SP);
 // conectar e desconectar
 tl.to(camC,{...cReadyF,duration:1.1},T.f1-.4);
 const pC=scr(cReadyF,R['#cBtn']);
-cursorIn(T.f1+.3);
-cursorTo(pC,T.f1+.4,1.2);
-click(pC,T.f1+2.3);
-tl.to('#cBtn .done',{opacity:1,duration:.35},T.f1+2.45);
-tl.to(cur,{opacity:0,duration:.3},T.f1+2.9);
-tl.to('#cDisc',{opacity:1,duration:.4},T.f2+.1);
-ring('#rs2 .ring',T.f2+1.0,E('f2')+.5);
-ring('#cDisc > .ring',T.f2+2.0,E('f2')+.5);
+cursorIn(T.f1+.3*SP);
+cursorTo(pC,T.f1+.4*SP,1.2);
+click(pC,T.f1+2.3*SP);
+tl.to('#cBtn .done',{opacity:1,duration:.35},T.f1+2.45*SP);
+tl.to(cur,{opacity:0,duration:.3},T.f1+2.9*SP);
+tl.to('#cDisc',{opacity:1,duration:.4},T.f2+.1*SP);
+ring('#rs2 .ring',T.f2+1.0*SP,E('f2')+.5);
+ring('#cDisc > .ring',T.f2+2.0*SP,E('f2')+.5);
 
 // ---------- D: encerramento
 const tD=T.out-.8;

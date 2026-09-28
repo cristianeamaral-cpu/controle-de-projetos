@@ -5,7 +5,7 @@ def fmt(x): return f"{int(x//60)}:{x%60:04.1f}"
 rows=""
 for i,(k,txt,gap,dirn) in enumerate(segs,1):
     txt=html.escape(txt).replace(", ",", <span class=p>/</span> ").replace(": ",": <span class=p>/</span> ")
-    mark='<span class=p>//</span>' if gap>=0.9 else '<span class=p>/</span>'
+    mark='<span class=p>//</span>' if gap>=0.55 else '<span class=p>/</span>'
     rows+=f"<tr><td class=n>{i:02}</td><td class=t>{fmt(T[k])}<small>≈ {D[k]:.1f}s</small></td><td class=s>{html.escape(tela[k])}</td><td class=f>{txt} {mark}</td><td class=d>{html.escape(dirn)}</td></tr>"
 total=len(" ".join(s[1] for s in segs).split())
 page=f"""<!doctype html><html lang=pt-BR><head><meta charset=utf-8><link href="fonts/fonts.css" rel="stylesheet"><style>
@@ -31,9 +31,9 @@ td.s{{width:190px;color:#555;font-size:9.5pt}} td.f{{font-size:12pt;font-weight:
 <div class=cover><div class=logo>PSA<i>.</i></div><h1>Roteiro de gravação<br><em>Minha Conta e Sincronização de Agenda</em></h1>
 <p>Vídeo explicativo para palestrantes · locução feminina · duração total ≈ {tl['END']:.0f}s · {len(segs)} falas · {total} palavras</p><div class=stamp>Sugestão de locução</div></div>
 <div class=grid>
-<div class=box><b>Tom</b>Acolhedor e didático, como quem apresenta a plataforma a um colega. Sorria ao falar, principalmente na abertura e no fechamento.</div>
-<div class=box><b>Ritmo</b>Calmo: cerca de 130–140 palavras por minuto. É o primeiro contato do palestrante com a funcionalidade, então dê tempo para ele olhar a tela.</div>
-<div class=box><b>Pausas</b><span class=p>/</span> pausa curta (≈0,4s) &nbsp;·&nbsp; <span class=p>//</span> pausa longa (≈1s). Nas falas “Primeiro, segundo, terceiro passo”, respire antes de explicar.</div>
+<div class=box><b>Tom</b>Simpático e próximo, como quem mostra a plataforma a um colega. Sorria ao falar, principalmente na abertura e no fechamento.</div>
+<div class=box><b>Ritmo</b>Natural e explicativo, sem arrastar: cerca de 150–160 palavras por minuto. Simpática, nem formal demais nem informal demais.</div>
+<div class=box><b>Pausas</b><span class=p>/</span> pausa curta (≈0,3s) &nbsp;·&nbsp; <span class=p>//</span> pausa longa (≈0,6s). Nas falas “Primeiro, segundo, terceiro passo”, respire antes de explicar.</div>
 <div class=box><b>Gravação</b>Grave cada fala em arquivo separado (01, 02…) ou numa faixa única, respeitando as pausas. Os tempos batem com o vídeo “sem narração”.</div>
 </div>
 <h2>Falas e marcações</h2>
