@@ -1,61 +1,104 @@
 1
-00:00:00,900 --> 00:00:03,394
-Minha Conta e Sincronização de Agenda
+00:00:01,000 --> 00:00:07,915
+Olá! Neste vídeo, você vai conhecer a área Minha Conta e aprender
+a sincronizar a sua agenda com o Google Calendar.
 
 2
-00:00:04,394 --> 00:00:08,509
-Na área Minha Conta, você pode atualizar seus dados cadastrais,
+00:00:09,415 --> 00:00:11,802
+Vamos começar pela área Minha Conta.
 
 3
-00:00:08,709 --> 00:00:10,135
-alterar seu plano,
+00:00:12,503 --> 00:00:16,996
+Aqui, você pode atualizar os seus dados cadastrais sempre que precisar.
 
 4
-00:00:10,286 --> 00:00:12,592
-conferir seu consumo de créditos
+00:00:17,496 --> 00:00:19,766
+Também pode alterar o seu plano,
 
 5
-00:00:12,791 --> 00:00:18,050
-e acompanhar seu PSA Score — o indicador de qualidade da sua jornada profissional.
+00:00:20,016 --> 00:00:22,659
+e conferir o seu consumo de créditos.
 
 6
-00:00:20,150 --> 00:00:27,801
-Para organizar melhor sua rotina e não perder oportunidades, você pode sincronizar
-seu Google Calendar em menos de um minuto!
+00:00:23,459 --> 00:00:25,528
+E este é o seu PSA Score.
 
 7
-00:00:28,201 --> 00:00:31,228
-O processo é simples e funciona em 3 passos:
+00:00:26,129 --> 00:00:30,975
+Ele é o indicador de qualidade da sua jornada profissional na plataforma.
 
 8
-00:00:31,628 --> 00:00:36,373
-1. Conecte seu calendário: autorize o acesso à sua conta do Google Calendar.
+00:00:31,874 --> 00:00:35,808
+Para sincronizar a sua agenda, clique em Sincronizar calendário.
 
 9
-00:00:37,073 --> 00:00:43,492
-2. Vemos sua disponibilidade: a plataforma identifica as datas
-e os locais dos seus compromissos.
+00:00:37,809 --> 00:00:44,851
+Conectar o seu Google Calendar ajuda você a organizar melhor a sua rotina
+e a não perder nenhuma oportunidade.
 
 10
-00:00:44,192 --> 00:00:51,171
-3. Tudo em um só lugar: seus eventos externos passam a ser exibidos
-junto com os compromissos criados na PSA.
+00:00:45,350 --> 00:00:47,635
+E o melhor: leva menos de um minuto!
 
 11
-00:00:52,070 --> 00:00:59,737
-Para evitar conflitos de agenda e sugerir as melhores oportunidades, a plataforma acessa
-as datas e horários dos compromissos,
+00:00:48,535 --> 00:00:51,733
+O processo é simples e funciona em 3 passos.
 
 12
-00:00:59,938 --> 00:01:01,548
-os títulos dos eventos
+00:00:52,533 --> 00:00:55,169
+1º passo: conecte o seu calendário.
 
 13
-00:01:01,798 --> 00:01:07,534
-e o local — este último fundamental para te sugerir oportunidades
-específicas por região.
+00:00:55,569 --> 00:00:59,010
+Basta autorizar o acesso à sua conta do Google Calendar.
 
 14
-00:01:08,334 --> 00:01:12,812
+00:01:00,509 --> 00:01:03,707
+2º passo: nós vemos a sua disponibilidade.
+
+15
+00:01:04,107 --> 00:01:08,564
+A plataforma identifica as datas e os locais dos seus compromissos.
+
+16
+00:01:09,464 --> 00:01:11,800
+3º passo: tudo em um só lugar.
+
+17
+00:01:12,200 --> 00:01:17,855
+Os seus eventos externos passam a aparecer junto
+com os compromissos criados na PSA.
+
+18
+00:01:18,955 --> 00:01:23,542
+Agora, vamos entender quais informações a plataforma acessa — e por quê.
+
+19
+00:01:24,242 --> 00:01:29,361
+Para evitar conflitos de agenda, ela lê as datas e os horários dos seus compromissos,
+
+20
+00:01:29,611 --> 00:01:32,787
+e os títulos dos eventos, para exibi-los na sua agenda.
+
+21
+00:01:33,486 --> 00:01:36,108
+Ela também acessa o local dos eventos.
+
+22
+00:01:36,508 --> 00:01:42,014
+Essa informação é fundamental para sugerir
+oportunidades específicas na sua região.
+
+23
+00:01:43,015 --> 00:01:46,379
+Pronto! Agora é só clicar em Conectar Google Calendar.
+
+24
+00:01:47,879 --> 00:01:52,442
 E fique tranquilo: você pode desconectar a sua agenda a qualquer momento.
+
+25
+00:01:53,743 --> 00:01:57,530
+Agenda organizada, mais oportunidades. Até a próxima!
 

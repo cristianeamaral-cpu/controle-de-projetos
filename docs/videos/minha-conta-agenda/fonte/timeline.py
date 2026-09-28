@@ -1,8 +1,9 @@
 import json
-d=json.load(open("durs.json"))
-order=["intro","conta1","conta2","conta3","conta4","sync1","sync2","p1","p2","p3","d1","d2","d3","fim"]
-gap={"intro":1.1,"conta1":0.3,"conta2":0.25,"conta3":0.3,"conta4":2.2,"sync1":0.5,"sync2":0.5,"p1":0.8,"p2":0.8,"p3":1.0,"d1":0.3,"d2":0.35,"d3":0.9,"fim":1.0}
-T={};c=0.9
-for k in order: T[k]=round(c,3); c+=d[k]+gap[k]
-END=round(c+4.2,2)
-json.dump({"T":T,"D":d,"END":END},open("tl.json","w"),indent=1); print(T,END)
+d=json.load(open("v2/durs.json")); segs=json.load(open("v2/segs.json"))
+T={};c=1.0
+for key,_,gap,_ in segs:
+    # extra room for scene transitions / on-screen actions
+    extra={"intro":0.4,"c5":1.0,"p1b":0.6,"f1":0.8,"f2":0.4}.get(key,0)
+    T[key]=round(c,3); c+=d[key]+gap+extra
+END=round(c+3.2,2)
+json.dump({"T":T,"D":d,"END":END},open("v2/tl.json","w"),indent=1); print(END)

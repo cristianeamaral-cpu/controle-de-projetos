@@ -161,6 +161,36 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-l
 .progress{position:absolute;left:0;top:0;height:6px;background:var(--or);width:0;z-index:70}
 .wm{position:absolute;right:36px;top:30px;z-index:65;display:flex;align-items:center;gap:12px;font-weight:800;font-size:21px;color:#fff;opacity:0;background:rgba(22,12,5,.72);padding:7px 18px 7px 7px;border-radius:999px}
 .wm .mark{width:40px;height:40px;border-radius:12px;background:var(--or);display:grid;place-items:center;font-size:15px;font-weight:900}
+/* ===== v2: tipografia e identidade do site PSA ===== */
+:root{--or:#FF650F;--or2:#FF8A3D;--blue:#093CA7;--blue-soft:#E8EEFA}
+html,body{font-family:"Manrope",system-ui,sans-serif}
+.disp,.ahead h2,.hero h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.5px}
+.ahead h2{font-size:70px;gap:24px}
+.ahead h2 svg{font-size:58px;stroke-width:2.4}
+.hero h1{font-size:128px;line-height:1.0;margin:30px 0 30px;letter-spacing:1px}
+.hero h1 em{color:var(--or)}
+.hero p.sub{font-size:34px;font-weight:500;max-width:980px;line-height:1.4}
+.hero p.sub b{font-weight:800}
+.bglow{position:absolute;width:1400px;height:1400px;right:-420px;top:-300px;border-radius:50%;background:radial-gradient(circle,rgba(9,60,167,.95),rgba(9,60,167,.35) 40%,rgba(9,60,167,0) 68%)}
+.bglow2{position:absolute;width:700px;height:700px;right:380px;bottom:-420px;border-radius:50%;background:radial-gradient(circle,rgba(255,101,15,.28),rgba(255,101,15,0) 65%)}
+.logo{font-family:"Anton",Impact,sans-serif;font-size:74px;color:#fff;letter-spacing:1px;line-height:1;position:relative}
+.logo i{font-style:normal;color:var(--or)}
+.stamp{position:relative;display:inline-block;width:max-content;font-family:"Anton",Impact,sans-serif;text-transform:uppercase;color:var(--or);font-size:40px;letter-spacing:1px;padding:4px 18px 2px;border:4px solid var(--or);transform:rotate(-4deg);background:transparent}
+.shard{position:absolute;left:-120px;top:-60px;width:760px;height:520px;background:var(--or);clip-path:polygon(0 0,100% 0,62% 26%,78% 38%,36% 52%,52% 70%,0 100%)}
+.shard2{position:absolute;right:-40px;bottom:-40px;width:520px;height:300px;background:var(--or);clip-path:polygon(100% 0,100% 100%,0 100%)}
+.foot{position:absolute;left:170px;bottom:70px;font-size:26px;font-weight:700;color:#fff;opacity:.9}
+.floatcard{right:170px;top:330px}
+.cap{font-family:"Manrope",sans-serif;font-weight:700;font-size:32px}
+.wm{font-family:"Anton",Impact,sans-serif;font-weight:400;font-size:26px;letter-spacing:1px;padding:8px 22px}
+.wm i{font-style:normal;color:var(--or)}
+.gauge .num b,.ready h3,.tag,.ch{letter-spacing:0}
+.gauge .num b{font-family:"Anton",Impact,sans-serif;font-weight:400;font-size:104px;letter-spacing:1px}
+.ready h3{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:50px;letter-spacing:1px}
+.okbadge b{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:40px;letter-spacing:1px}
+.wm{gap:0}
+.step .tag{right:18px;top:-16px;font-size:20px;padding:8px 16px}
+#fade{position:absolute;left:0;right:0;bottom:0;height:260px;z-index:55;pointer-events:none;background:linear-gradient(180deg,rgba(236,237,241,0),rgba(236,237,241,.92) 55%,rgba(236,237,241,.97));opacity:0}
+.foot{bottom:auto;top:92px;left:auto;right:170px}
 </style></head>
 <body>
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
@@ -184,17 +214,17 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-l
 
 <div id="stage">
  <div class="progress" id="prog"></div>
- <div class="wm" id="wm"><div class="mark">PSA</div>Profissionais S.A.</div>
+ <div class="wm" id="wm">PSA<i>.</i></div>
 
  <!-- ============ INTRO ============ -->
- <section class="scene grad" id="sA">
+ <section class="scene" id="sA" style="background:#050505">
   <div class="hero">
-   <div class="glow"></div><div class="ring1"></div><div class="ring2"></div>
-   <div class="brand" id="aBrand"><div class="mark">PSA</div>Profissionais S.A.</div>
-   <div style="height:70px"></div>
-   <div class="chip" id="aChip"><svg class="i"><use href="#mic"/></svg>Guia rápido para palestrantes</div>
-   <h1 id="aTitle">Minha Conta e<br><em>Sincronização de Agenda</em></h1>
-   <p class="sub" id="aSub">Atualize seus dados, acompanhe seu PSA Score e conecte o Google Calendar em menos de um minuto.</p>
+   <div class="bglow"></div><div class="bglow2"></div>
+   <div class="logo" id="aBrand">PSA<i>.</i></div>
+   <div style="height:60px"></div>
+   <div class="stamp" id="aChip">Guia rápido</div>
+   <h1 class="disp" id="aTitle">Minha Conta e<br><em>Sincronização<br>de Agenda</em></h1>
+   <p class="sub" id="aSub"><b>Para palestrantes:</b> atualize seus dados, acompanhe seu PSA Score e conecte o Google Calendar em menos de um minuto.</p>
    <div class="floatcard" id="aCard">
     <div class="fh"><svg class="i"><use href="#cal"/></svg>Sua agenda</div>
     <div class="fev"><div class="bar"></div><div>Palestra · Liderança<small>14:00 · São Paulo, SP</small></div></div>
@@ -366,48 +396,60 @@ svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-l
  </section>
 
  <!-- ============ OUTRO ============ -->
- <section class="scene grad" id="sD">
-  <div class="hero" style="align-items:center;text-align:center;padding:0 200px">
-   <div class="glow" style="right:auto;left:50%;margin-left:-550px;top:-100px"></div>
-   <div class="brand" id="dBrand"><div class="mark">PSA</div>Profissionais S.A.</div>
-   <h1 id="dTitle" style="font-size:92px;margin:46px 0 26px;max-width:1500px">Agenda organizada,<br><em>mais oportunidades.</em></h1>
-   <p class="sub" id="dSub" style="max-width:1300px">Acesse <b>Minha Conta › Sincronizar calendário</b> e conecte seu Google Calendar agora.</p>
-   <div class="chip" id="dChip" style="margin-top:44px"><svg class="i"><use href="#power"/></svg>Você pode desconectar quando quiser</div>
+ <section class="scene" id="sD" style="background:#093CA7">
+  <div class="shard"></div><div class="shard2"></div>
+  <div class="hero" style="padding:0 170px">
+   <div class="logo" id="dBrand" style="color:#fff">PSA<i>.</i></div>
+   <h1 class="disp" id="dTitle" style="margin:44px 0 28px">Agenda organizada,<br><em>mais oportunidades.</em></h1>
+   <p class="sub" id="dSub">Acesse <b>Minha Conta › Sincronizar calendário</b> e conecte o seu Google Calendar agora.</p>
+   <div class="stamp" id="dChip" style="margin-top:50px">Desconecte quando quiser</div>
+   <div class="foot" id="dFoot">Palestras • Conhecimento • Educação</div>
   </div>
  </section>
 
  <svg id="cursor" viewBox="0 0 24 24"><path d="M4 2 L4 19 L8.5 15 L11.5 22 L14.5 20.7 L11.5 14 L18 14 Z" fill="#111" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
  <div id="click"></div>
+ <div id="fade"></div>
  <div id="caps"></div>
 </div>
-
 <script>
 const TL = __TL__;
 const T=TL.T, D=TL.D, END=TL.END;
+const E=k=>T[k]+D[k];
 const CAPS={
- intro:"<b>Minha Conta</b> e <b>Sincronização de Agenda</b>",
- conta1:"Na área <b>Minha Conta</b>, você pode atualizar seus <b>dados cadastrais</b>,",
- conta2:"alterar seu <b>plano</b>,",
- conta3:"conferir seu <b>consumo de créditos</b>",
- conta4:"e acompanhar seu <b>PSA Score</b> — o indicador de qualidade da sua jornada profissional.",
- sync1:"Para organizar melhor sua rotina e não perder oportunidades, você pode sincronizar<br>seu <b>Google Calendar</b> em menos de um minuto!",
- sync2:"O processo é simples e funciona em <b>3 passos</b>:",
- p1:"<b>1. Conecte seu calendário:</b> autorize o acesso à sua conta do Google Calendar.",
- p2:"<b>2. Vemos sua disponibilidade:</b> a plataforma identifica as datas<br>e os locais dos seus compromissos.",
- p3:"<b>3. Tudo em um só lugar:</b> seus eventos externos passam a ser exibidos<br>junto com os compromissos criados na PSA.",
- d1:"Para evitar conflitos de agenda e sugerir as melhores oportunidades, a plataforma acessa<br>as <b>datas e horários</b> dos compromissos,",
- d2:"os <b>títulos</b> dos eventos",
- d3:"e o <b>local</b> — este último fundamental para te sugerir oportunidades<br>específicas por região.",
- fim:"E fique tranquilo: você pode <b>desconectar</b> a sua agenda a qualquer momento."
+ intro:"Olá! Neste vídeo, você vai conhecer a área <b>Minha Conta</b> e aprender<br>a sincronizar a sua agenda com o <b>Google Calendar</b>.",
+ c0:"Vamos começar pela área <b>Minha Conta</b>.",
+ c1:"Aqui, você pode atualizar os seus <b>dados cadastrais</b> sempre que precisar.",
+ c2:"Também pode alterar o seu <b>plano</b>,",
+ c3:"e conferir o seu <b>consumo de créditos</b>.",
+ c4:"E este é o seu <b>PSA Score</b>.",
+ c4b:"Ele é o indicador de qualidade da sua <b>jornada profissional</b> na plataforma.",
+ c5:"Para sincronizar a sua agenda, clique em <b>Sincronizar calendário</b>.",
+ s1:"Conectar o seu Google Calendar ajuda você a organizar melhor a sua rotina<br>e a não perder nenhuma <b>oportunidade</b>.",
+ s1b:"E o melhor: leva <b>menos de um minuto</b>!",
+ s2:"O processo é simples e funciona em <b>3 passos</b>.",
+ p1:"<b>1º passo:</b> conecte o seu calendário.",
+ p1b:"Basta <b>autorizar o acesso</b> à sua conta do Google Calendar.",
+ p2:"<b>2º passo:</b> nós vemos a sua disponibilidade.",
+ p2b:"A plataforma identifica as <b>datas</b> e os <b>locais</b> dos seus compromissos.",
+ p3:"<b>3º passo:</b> tudo em um só lugar.",
+ p3b:"Os seus eventos externos passam a aparecer junto<br>com os compromissos criados na <b>PSA</b>.",
+ d0:"Agora, vamos entender <b>quais informações</b> a plataforma acessa — e por quê.",
+ d1:"Para evitar conflitos de agenda, ela lê as <b>datas</b> e os <b>horários</b> dos seus compromissos,",
+ d2:"e os <b>títulos</b> dos eventos, para exibi-los na sua agenda.",
+ d3:"Ela também acessa o <b>local</b> dos eventos.",
+ d3b:"Essa informação é fundamental para sugerir<br><b>oportunidades específicas na sua região</b>.",
+ f1:"Pronto! Agora é só clicar em <b>Conectar Google Calendar</b>.",
+ f2:"E fique tranquilo: você pode <b>desconectar</b> a sua agenda a qualquer momento.",
+ out:"Agenda organizada, mais oportunidades. <b>Até a próxima!</b>"
 };
 const $=s=>document.querySelector(s);
 const caps=$('#caps');
 for(const k in CAPS){const d=document.createElement('div');d.className='cap';d.id='cap_'+k;d.innerHTML=CAPS[k];caps.appendChild(d);}
 
-// measure page rects (cams at identity)
 function rect(sel,cam){const c=$(cam).getBoundingClientRect(),r=$(sel).getBoundingClientRect();return {x:r.left-c.left,y:r.top-c.top,w:r.width,h:r.height};}
 function union(...rs){const x=Math.min(...rs.map(r=>r.x)),y=Math.min(...rs.map(r=>r.y));const X=Math.max(...rs.map(r=>r.x+r.w)),Y=Math.max(...rs.map(r=>r.y+r.h));return{x,y,w:X-x,h:Y-y};}
-const VIS_H=1080-170; // keep captions area free
+const VIS_H=1080-170;
 function focus(r,{pad=60,max=1.6,cx=960,cy=VIS_H/2+10,areaW=1920}={}){
   const s=Math.min(max,(areaW-2*pad)/r.w,(VIS_H-2*pad)/r.h);
   return {x:cx-s*(r.x+r.w/2),y:cy-s*(r.y+r.h/2),scale:s};
@@ -429,26 +471,29 @@ function ring(sel,tin,tout){
   if(tout!=null) tl.to(sel,{opacity:0,duration:.35,ease:'power1.in'},tout);
 }
 function cap(k){tl.fromTo('#cap_'+k,{opacity:0,y:14},{opacity:1,y:0,duration:.3,ease:'power2.out'},T[k]-.08);
-  tl.to('#cap_'+k,{opacity:0,duration:.25,ease:'power1.in'},T[k]+D[k]+.05);}
+  tl.to('#cap_'+k,{opacity:0,duration:.25,ease:'power1.in'},E(k)+.1);}
 for(const k in CAPS) cap(k);
 tl.to('#prog',{width:1920,duration:END,ease:'none'},0);
 const cur=$('#cursor');
+function cursorIn(t){tl.fromTo(cur,{x:1500,y:1150,opacity:0},{opacity:1,duration:.3,immediateRender:false},t);}
 function cursorTo(p,t,dur=.8){tl.to(cur,{x:p.x-6,y:p.y-4,duration:dur,ease:'power2.inOut'},t);}
 function click(p,t){tl.fromTo('#click',{x:p.x,y:p.y,scale:.3,opacity:.9},{scale:1.4,opacity:0,duration:.5,ease:'power2.out',immediateRender:false},t);
   tl.to(cur,{scale:.85,duration:.1,yoyo:true,repeat:1,ease:'power1.inOut',transformOrigin:'10% 10%'},t);}
+gsap.set(cur,{opacity:0});
 
-// ---------- A: intro
-const tAout=T.conta1-1.0;
+// ---------- A: abertura
+const tAout=T.c0-1.0;
 scene('#sA',0,tAout,.5);
 tl.from('#aBrand',{y:30,opacity:0,duration:.7,ease:'power3.out'},.15)
-  .from('#aChip',{y:30,opacity:0,duration:.7,ease:'power3.out'},.35)
-  .from('#aTitle',{y:50,opacity:0,duration:.9,ease:'power3.out'},.5)
-  .from('#aSub',{y:30,opacity:0,duration:.8,ease:'power3.out'},.8)
-  .from('#aCard',{y:80,rotation:4,opacity:0,duration:1.1,ease:'power3.out'},.7)
-  .from('#aCard .fev',{x:40,opacity:0,stagger:.2,duration:.6,ease:'power3.out'},1.3)
-  .to('#aCard',{y:-16,duration:2,ease:'sine.inOut'},1.8)
+  .from('#aChip',{scale:1.6,opacity:0,duration:.5,ease:'back.out(2.5)'},.9)
+  .from('#aTitle',{y:50,opacity:0,duration:.9,ease:'power3.out'},.4)
+  .from('#aSub',{y:30,opacity:0,duration:.8,ease:'power3.out'},1.1)
+  .from('#aCard',{y:80,rotation:4,opacity:0,duration:1.1,ease:'power3.out'},1.0)
+  .from('#aCard .fev',{x:40,opacity:0,stagger:.25,duration:.6,ease:'power3.out'},1.7)
+  .to('#aCard',{y:-18,duration:4,ease:'sine.inOut'},2.4)
   .to('#sA .hero',{scale:1.05,duration:1.2,ease:'power2.in'},tAout-.4);
-tl.to('#wm',{opacity:1,duration:.5},T.conta1-.6).to('#wm',{opacity:0,duration:.5},END-4.2);
+tl.to('#fade',{opacity:1,duration:.6},T.c0-.8).to('#fade',{opacity:0,duration:.6},T.out-.8);
+tl.to('#wm',{opacity:1,duration:.5},T.c0-.6).to('#wm',{opacity:0,duration:.5},T.out-.8);
 
 // ---------- B: Minha Conta
 const camB=$('#camB');
@@ -457,52 +502,51 @@ const csDados=focus(R['#bDados'],{pad:80,max:1.45});
 const csRow=focus(union(R['#bPlano'],R['#bCred']),{pad:90,max:1.5});
 const csScore=focus(R['#bScore'],{pad:60,max:1.35});
 const csAll2=focus({x:0,y:300,w:1920,h:960},{pad:10,max:1});
-const tBout=T.sync1-.45;
-scene('#sB',T.conta1-1.0,tBout,.6);
+const tBout=T.s1-.6;
+scene('#sB',T.c0-1.0,tBout,.6);
 gsap.set(camB,{x:all.x,y:all.y,scale:all.scale});
-tl.fromTo(camB,{x:all.x,y:all.y,scale:all.scale},{...csDados,duration:1.3},T.conta1-.2);
-ring('#bDados .ring',T.conta1+.9,T.conta2-.1);
-tl.fromTo('#bEdit',{backgroundColor:'#fff'},{backgroundColor:'#FFF1E8',color:'#FF620B',borderColor:'#FFD9C2',duration:.3},T.conta1+1.6);
-tl.to(camB,{...csRow,duration:.9},T.conta2-.35);
-ring('#bPlano .ring',T.conta2+.1,T.conta3-.05);
-tl.fromTo('#bPlanBtn',{scale:1},{scale:1.08,duration:.3,yoyo:true,repeat:1,ease:'power1.inOut'},T.conta2+.4);
-ring('#bCred .ring',T.conta3+.05,T.conta4+.2);
-tl.to('#bCredBar',{width:'68%',duration:1.4,ease:'power2.out'},T.conta3+.2);
-const cred={v:0};tl.to(cred,{v:34,duration:1.4,ease:'power2.out',onUpdate:()=>{$('#bCredN').textContent=Math.round(cred.v)}},T.conta3+.2);
-tl.to(camB,{...csScore,duration:1.1},T.conta4-.3);
-ring('#bScore .ring',T.conta4+.6,T.conta4+D.conta4+.2);
-const sc={v:0};tl.to(sc,{v:87,duration:2.2,ease:'power2.out',onUpdate:()=>{$('#bScoreN').textContent=Math.round(sc.v);$('#bArc').setAttribute('stroke-dashoffset',879.6*(1-sc.v/100))}},T.conta4+.5);
-tl.fromTo('#bScoreTag',{opacity:0,y:14},{opacity:1,y:0,duration:.5,ease:'back.out(2)'},T.conta4+2.2);
-tl.from('#bc1',{opacity:0,x:-20,duration:.5},T.conta4+2.6);
-// go to sync button
-const tZ=T.conta4+D.conta4+.1;
-tl.to(camB,{...csAll2,duration:1.0},tZ);
+tl.fromTo(camB,{x:all.x-30,y:all.y,scale:all.scale*1.03},{x:all.x,y:all.y,scale:all.scale,duration:2.2,ease:'power2.out'},T.c0-1.0);
+tl.to(camB,{...csDados,duration:1.3},T.c1-.3);
+ring('#bDados .ring',T.c1+1.4,T.c2-.1);
+tl.fromTo('#bEdit',{backgroundColor:'#fff'},{backgroundColor:'#FFF1E8',color:'#FF650F',borderColor:'#FFD9C2',duration:.3},T.c1+2.4);
+tl.to(camB,{...csRow,duration:.9},T.c2-.4);
+ring('#bPlano .ring',T.c2+.6,T.c3-.05);
+tl.fromTo('#bPlanBtn',{scale:1},{scale:1.08,duration:.3,yoyo:true,repeat:1,ease:'power1.inOut'},T.c2+1.1);
+ring('#bCred .ring',T.c3+.4,T.c4-.2);
+tl.to('#bCredBar',{width:'68%',duration:1.4,ease:'power2.out'},T.c3+.6);
+const cred={v:0};tl.to(cred,{v:34,duration:1.4,ease:'power2.out',onUpdate:()=>{$('#bCredN').textContent=Math.round(cred.v)}},T.c3+.6);
+tl.to(camB,{...csScore,duration:1.1},T.c4-.4);
+ring('#bScore .ring',T.c4+.5,E('c4b')+.3);
+const sc={v:0};tl.to(sc,{v:87,duration:2.2,ease:'power2.out',onUpdate:()=>{$('#bScoreN').textContent=Math.round(sc.v);$('#bArc').setAttribute('stroke-dashoffset',879.6*(1-sc.v/100))}},T.c4+.4);
+tl.fromTo('#bScoreTag',{opacity:0,y:14},{opacity:1,y:0,duration:.5,ease:'back.out(2)'},T.c4b+1.4);
+tl.from('#bc1',{opacity:0,x:-20,duration:.5},T.c4b+2.4);
+// ir para Sincronizar calendário
+tl.to(camB,{...csAll2,duration:1.0},T.c5-.3);
 const pBtn=scr(csAll2,R['#bSyncBtn']);
-tl.fromTo(cur,{x:1500,y:1150,opacity:0},{opacity:1,duration:.3},tZ+.5);
-cursorTo(pBtn,tZ+.6,.9);
-click(pBtn,tZ+1.55);
-tl.to('#bSyncBtn',{scale:.95,duration:.1,yoyo:true,repeat:1},tZ+1.55);
+cursorIn(T.c5+.5);
+cursorTo(pBtn,T.c5+.6,1.4);
+click(pBtn,T.c5+2.7);
+tl.to('#bSyncBtn',{scale:.95,duration:.1,yoyo:true,repeat:1},T.c5+2.7);
 tl.to(cur,{opacity:0,duration:.3},tBout+.1);
 tl.to(camB,{x:csAll2.x-(csAll2.scale*.08)*R['#bSyncBtn'].x,scale:csAll2.scale*1.08,y:csAll2.y-(csAll2.scale*.08)*R['#bSyncBtn'].y,duration:.8,ease:'power2.in'},tBout-.2);
 
-// ---------- C: Sincronizar
+// ---------- C: Sincronizar calendário
 const camC=$('#camC');
 const cAll=focus({x:0,y:0,w:1920,h:1420},{pad:0,max:1,cy:VIS_H/2+20});
+const cHowF=focus(R['#cHow'],{pad:60,max:1.2});
 const cHowL=focus(R['#cHow'],{pad:50,max:1.25,cx:520,areaW:1000});
 const cAccF=focus(R['#cAcc'],{pad:50,max:1.3});
 const cAccR=focus(R['#cAcc'],{pad:50,max:1.25,cx:1380,areaW:1000});
 const cReadyF=focus(R['#cReady'],{pad:70,max:1.2});
-scene('#sC',T.sync1-.5,null,.6);
-tl.to('#sC',{autoAlpha:0,duration:.6},T.fim+D.fim+.6);
-tl.fromTo(camC,{x:cAll.x-40,y:cAll.y-20,scale:cAll.scale*1.04},{x:cAll.x,y:cAll.y,scale:cAll.scale,duration:1.4,ease:'power3.out'},T.sync1-.5);
-// "menos de um minuto"
-ring('#rs1 .ring',T.sync1+4.6,T.sync2-.2);
-tl.fromTo('#cBtn',{scale:1},{scale:1.05,duration:.35,yoyo:true,repeat:1,ease:'power1.inOut'},T.sync1+5.4);
-// sync2 -> how card
-tl.to(camC,{...focus(R['#cHow'],{pad:60,max:1.2}),duration:1.1},T.sync2-.4);
-ring('#cHow > .ring',T.sync2+.4,T.p1-.1);
-tl.from('#st1,#st2,#st3',{x:-14,opacity:.35,stagger:.25,duration:.5,ease:'power2.out'},T.sync2+1.0);
-tl.to(camC,{...cHowL,duration:1.0},T.p1-.4);
+scene('#sC',T.s1-.6,T.out-.8,.6);
+tl.fromTo(camC,{x:cAll.x-40,y:cAll.y-20,scale:cAll.scale*1.04},{x:cAll.x,y:cAll.y,scale:cAll.scale,duration:1.6,ease:'power3.out'},T.s1-.6);
+ring('#rs1 .ring',T.s1b+1.0,T.s2-.2);
+tl.fromTo('#cBtn',{scale:1},{scale:1.05,duration:.35,yoyo:true,repeat:1,ease:'power1.inOut'},T.s1b+1.3);
+// 3 passos
+tl.to(camC,{...cHowF,duration:1.1},T.s2-.5);
+ring('#cHow > .ring',T.s2+.3,T.p1-.1);
+tl.from('#st1,#st2,#st3',{x:-14,opacity:.35,stagger:.25,duration:.5,ease:'power2.out'},T.s2+1.4);
+tl.to(camC,{...cHowL,duration:1.0},T.p1-.5);
 function stepOn(n,tin,tout){
   const s='#st'+n;
   tl.to(s+' .bg',{opacity:1,duration:.4,ease:'power2.out'},tin)
@@ -514,68 +558,71 @@ function panel(sel,tin,tout){
   tl.fromTo(sel,{autoAlpha:0,y:40,scale:.96},{autoAlpha:1,y:0,scale:1,duration:.6,ease:'power3.out'},tin);
   tl.to(sel,{autoAlpha:0,y:-20,duration:.45,ease:'power2.in'},tout);
 }
-// p1
+// passo 1
 stepOn(1,T.p1,T.p2-.3);
-panel('#pConsent',T.p1+.1,T.p2-.35);
-tl.from('#pConsent .perm',{opacity:0,x:20,stagger:.18,duration:.4,ease:'power2.out'},T.p1+.6);
+panel('#pConsent',T.p1+.4,T.p2-.35);
+tl.from('#pConsent .perm',{opacity:0,x:20,stagger:.25,duration:.4,ease:'power2.out'},T.p1+1.0);
 const pA=R['#pAllow']; const pAllow={x:pA.x+pA.w/2,y:pA.y+pA.h/2};
-tl.fromTo(cur,{x:1500,y:1150,opacity:0},{opacity:1,duration:.3,immediateRender:false},T.p1+1.2);
-cursorTo(pAllow,T.p1+1.3,1.0);
-click(pAllow,T.p1+2.5);
-tl.to('#pOk',{opacity:1,duration:.4},T.p1+2.8).from('#pOk .c',{scale:0,duration:.6,ease:'back.out(2.5)'},T.p1+2.9);
-tl.to(cur,{opacity:0,duration:.3},T.p1+3.2);
-// p2
+cursorIn(T.p1b+.1);
+cursorTo(pAllow,T.p1b+.2,1.3);
+click(pAllow,T.p1b+1.8);
+tl.to('#pOk',{opacity:1,duration:.4},T.p1b+2.1).from('#pOk .c',{scale:0,duration:.6,ease:'back.out(2.5)'},T.p1b+2.2);
+tl.to(cur,{opacity:0,duration:.3},T.p1b+2.4);
+// passo 2
 stepOn(2,T.p2,T.p3-.3);
-panel('#pWeek',T.p2+.05,T.p3-.35);
-tl.fromTo('#scan',{opacity:0,top:48},{opacity:1,duration:.2},T.p2+.8)
-  .to('#scan',{top:430,duration:2.4,ease:'power1.inOut'},T.p2+.8)
-  .to('#scan',{opacity:0,duration:.3},T.p2+3.2);
-tl.fromTo('#pWeek .ev',{backgroundColor:'#C9D6EE'},{backgroundColor:'#2D6CDF',stagger:.45,duration:.3},T.p2+1.0);
-tl.fromTo('#pWeek .ev',{scale:1},{scale:1.06,stagger:.45,duration:.2,yoyo:true,repeat:1},T.p2+1.0);
-tl.to('#f1,#f2,#f3',{opacity:1,stagger:.35,duration:.4},T.p2+3.3);
-// p3
-stepOn(3,T.p3,T.d1-.2);
-panel('#pUni',T.p3+.05,T.d1-.4);
-tl.from('#u1,#u3',{opacity:0,x:-30,stagger:.2,duration:.5,ease:'power2.out'},T.p3+.6);
-tl.from('#u2,#u4,#u5',{opacity:0,x:60,stagger:.35,duration:.6,ease:'back.out(1.6)'},T.p3+2.3);
-tl.fromTo('#u2,#u4,#u5',{backgroundColor:'#EAF1FD'},{backgroundColor:'#F9FAFC',duration:1.2,stagger:.35},T.p3+3.0);
-// d1: right card
-tl.to(camC,{...cAccF,duration:1.2},T.d1-.3);
-ring('#cAcc > .ring',T.d1+.8,T.d1+3.9);
+panel('#pWeek',T.p2+.1,T.p3-.35);
+tl.fromTo('#scan',{opacity:0,top:48},{opacity:1,duration:.2},T.p2b)
+  .to('#scan',{top:430,duration:2.6,ease:'power1.inOut'},T.p2b)
+  .to('#scan',{opacity:0,duration:.3},T.p2b+2.6);
+tl.fromTo('#pWeek .ev',{backgroundColor:'#C9D6EE'},{backgroundColor:'#093CA7',stagger:.5,duration:.3},T.p2b+.2);
+tl.fromTo('#pWeek .ev',{scale:1},{scale:1.06,stagger:.5,duration:.2,yoyo:true,repeat:1,immediateRender:false},T.p2b+.2);
+tl.to('#f1,#f2,#f3',{opacity:1,stagger:.35,duration:.4},T.p2b+2.7);
+// passo 3
+stepOn(3,T.p3,T.d0-.2);
+panel('#pUni',T.p3+.1,T.d0-.4);
+tl.from('#u1,#u3',{opacity:0,x:-30,stagger:.25,duration:.5,ease:'power2.out'},T.p3+.7);
+tl.from('#u2,#u4,#u5',{opacity:0,x:60,stagger:.4,duration:.6,ease:'back.out(1.6)'},T.p3b+.4);
+tl.fromTo('#u2,#u4,#u5',{backgroundColor:'#E8EEFA'},{backgroundColor:'#F9FAFC',duration:1.4,stagger:.4},T.p3b+1.2);
+// o que acessamos
+tl.to(camC,{...cAccF,duration:1.2},T.d0-.3);
+ring('#cAcc > .ring',T.d0+.8,T.d1+.6);
 function accOn(n,tin,tout){
   ring('#acc'+n+' > .ring',tin,tout);
   tl.fromTo('#acc'+n+' .ico2',{opacity:0,scale:.5},{opacity:1,scale:1,duration:.4,ease:'back.out(2)'},tin+.1);
-  tl.fromTo('#acc'+n+' svg.ck',{scale:1},{scale:1.35,duration:.2,yoyo:true,repeat:1},tin);
+  tl.fromTo('#acc'+n+' svg.ck',{scale:1},{scale:1.35,duration:.2,yoyo:true,repeat:1,immediateRender:false},tin);
 }
-accOn(1,T.d1+4.2,T.d2-.1);
-accOn(3,T.d1+5.2,T.d2-.1);
-accOn(4,T.d2,T.d3-.1);
-tl.to(camC,{...cAccR,duration:1.0},T.d3-.2);
-accOn(2,T.d3+.1,T.fim-.3);
-panel('#pMap',T.d3+.5,T.fim-.35);
-tl.fromTo('#m0',{opacity:0,y:-30},{opacity:1,y:0,duration:.5,ease:'bounce.out'},T.d3+1.0)
-  .fromTo('#mp0',{opacity:.9,scale:.5},{opacity:0,scale:5,duration:1.4,repeat:2,ease:'power1.out',immediateRender:false},T.d3+1.3)
-  .fromTo('#m1,#m2,#m3',{opacity:0,y:-40},{opacity:1,y:0,duration:.55,stagger:.3,ease:'bounce.out'},T.d3+2.2)
-  .to('#o1,#o2',{opacity:1,stagger:.3,duration:.4},T.d3+3.2);
-// fim
-tl.to(camC,{...cReadyF,duration:1.1},T.fim-.4);
+accOn(1,T.d1+2.7,T.d3-.2);
+accOn(3,T.d1+3.6,T.d3-.2);
+accOn(4,T.d2+.4,T.d3-.2);
+tl.to(camC,{...cAccR,duration:1.0},T.d3-.3);
+accOn(2,T.d3+1.0,T.f1-.3);
+panel('#pMap',T.d3+.3,T.f1-.35);
+tl.fromTo('#m0',{opacity:0,y:-30},{opacity:1,y:0,duration:.5,ease:'bounce.out'},T.d3+.9)
+  .fromTo('#mp0',{opacity:.9,scale:.5},{opacity:0,scale:5,duration:1.4,repeat:3,ease:'power1.out',immediateRender:false},T.d3+1.2)
+  .fromTo('#m1,#m2,#m3',{opacity:0,y:-40},{opacity:1,y:0,duration:.55,stagger:.35,ease:'bounce.out'},T.d3b+.3)
+  .to('#o1,#o2',{opacity:1,stagger:.35,duration:.4},T.d3b+2.0);
+// conectar e desconectar
+tl.to(camC,{...cReadyF,duration:1.1},T.f1-.4);
 const pC=scr(cReadyF,R['#cBtn']);
-tl.fromTo(cur,{x:1500,y:1150,opacity:0},{opacity:1,duration:.3,immediateRender:false},T.fim+.2);
-cursorTo(pC,T.fim+.3,.8);
-click(pC,T.fim+1.15);
-tl.to('#cBtn .done',{opacity:1,duration:.35},T.fim+1.3);
-tl.to('#cDisc',{opacity:1,duration:.4},T.fim+1.6);
-tl.to(cur,{opacity:0,duration:.3},T.fim+1.6);
-ring('#rs2 .ring',T.fim+1.8,T.fim+D.fim+.4);
-ring('#cDisc > .ring',T.fim+2.3,T.fim+D.fim+.4);
+cursorIn(T.f1+.3);
+cursorTo(pC,T.f1+.4,1.2);
+click(pC,T.f1+2.3);
+tl.to('#cBtn .done',{opacity:1,duration:.35},T.f1+2.45);
+tl.to(cur,{opacity:0,duration:.3},T.f1+2.9);
+tl.to('#cDisc',{opacity:1,duration:.4},T.f2+.1);
+ring('#rs2 .ring',T.f2+1.0,E('f2')+.5);
+ring('#cDisc > .ring',T.f2+2.0,E('f2')+.5);
 
-// ---------- D: outro
-const tD=T.fim+D.fim+.6;
+// ---------- D: encerramento
+const tD=T.out-.8;
 scene('#sD',tD,null,.6);
-tl.from('#dBrand',{y:30,opacity:0,duration:.7,ease:'power3.out'},tD+.2)
+tl.from('.shard',{x:-300,y:-200,duration:.9,ease:'power3.out'},tD)
+  .from('.shard2',{x:300,y:200,duration:.9,ease:'power3.out'},tD+.1)
+  .from('#dBrand',{y:30,opacity:0,duration:.7,ease:'power3.out'},tD+.2)
   .from('#dTitle',{y:50,opacity:0,duration:.9,ease:'power3.out'},tD+.4)
-  .from('#dSub',{y:30,opacity:0,duration:.8,ease:'power3.out'},tD+.8)
-  .from('#dChip',{y:30,opacity:0,duration:.8,ease:'power3.out'},tD+1.1);
+  .from('#dSub',{y:30,opacity:0,duration:.8,ease:'power3.out'},tD+.9)
+  .from('#dChip',{scale:1.6,opacity:0,duration:.5,ease:'back.out(2.5)'},tD+1.5)
+  .from('#dFoot',{opacity:0,duration:.6},tD+1.8);
 tl.to({}, {duration:.01}, END);
 
 window.render=t=>{tl.seek(t,false);};

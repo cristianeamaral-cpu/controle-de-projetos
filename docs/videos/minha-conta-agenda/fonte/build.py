@@ -1,3 +1,2 @@
-import json
-h=open("video.html").read().replace("__TL__",open("tl.json").read())
-open("video_built.html","w").write(h)
+h=open("v2/video.html").read().replace("__TL__",open("v2/tl.json").read())
+open("v2/video_built.html","w").write(h)
