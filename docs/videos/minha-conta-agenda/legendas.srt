@@ -1,56 +1,56 @@
 1
-00:00:00,700 --> 00:00:05,865
+00:00:00,700 --> 00:00:05,914
 Olá! Vamos conhecer a área Minha Conta e ver como sincronizar a sua agenda com o Google Calendar.
 
 2
-00:00:06,765 --> 00:00:13,329
+00:00:06,814 --> 00:00:13,422
 Na área Minha Conta, você atualiza os seus dados cadastrais, altera o seu plano e confere o seu consumo de créditos.
 
 3
-00:00:13,579 --> 00:00:18,799
+00:00:13,671 --> 00:00:18,913
 Aqui também fica o seu PSA Score: o indicador de qualidade da sua jornada profissional.
 
 4
-00:00:19,199 --> 00:00:22,781
+00:00:19,313 --> 00:00:22,976
 Para conectar a agenda, é só clicar em Sincronizar calendário.
 
 5
-00:00:23,981 --> 00:00:31,361
+00:00:24,176 --> 00:00:31,556
 Com o Google Calendar conectado, você organiza melhor a sua rotina e não perde nenhuma oportunidade. E leva menos de um minuto!
 
 6
-00:00:31,561 --> 00:00:33,038
+00:00:31,757 --> 00:00:33,162
 São só três passos.
 
 7
-00:00:33,238 --> 00:00:37,832
+00:00:33,362 --> 00:00:37,942
 Primeiro, conecte o seu calendário: é só autorizar o acesso à sua conta do Google.
 
 8
-00:00:38,832 --> 00:00:45,006
+00:00:38,942 --> 00:00:45,187
 Depois, a plataforma vê a sua disponibilidade, identificando as datas e os locais dos seus compromissos.
 
 9
-00:00:45,306 --> 00:00:51,457
+00:00:45,486 --> 00:00:51,773
 E pronto: tudo em um só lugar. Seus eventos externos aparecem junto com os compromissos criados na PSA.
 
 10
-00:00:51,857 --> 00:00:54,364
+00:00:52,173 --> 00:00:54,742
 E quais informações a plataforma acessa?
 
 11
-00:00:54,413 --> 00:01:03,067
+00:00:54,792 --> 00:01:03,512
 As datas e os horários dos compromissos, para evitar conflitos de agenda, os títulos dos eventos, e o local, que ajuda a sugerir oportunidades na sua região.
 
 12
-00:01:03,417 --> 00:01:06,182
+00:01:03,861 --> 00:01:06,687
 Agora é só clicar em Conectar Google Calendar.
 
 13
-00:01:07,182 --> 00:01:10,888
+00:01:07,688 --> 00:01:11,372
 E, se quiser, você pode desconectar a sua agenda a qualquer momento.
 
 14
-00:01:11,488 --> 00:01:14,920
+00:01:11,972 --> 00:01:15,379
 Agenda organizada, mais oportunidades. Até a próxima!
 

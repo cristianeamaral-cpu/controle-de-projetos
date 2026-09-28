@@ -1,8 +1,8 @@
 import json, numpy as np, soundfile as sf
 from kokoro_onnx import Kokoro
 k=Kokoro("kokoro.onnx","voices.bin")
-VOICE=k.get_voice_style("pf_dora")*0.7+k.get_voice_style("if_sara")*0.3
-segs=json.load(open("v5/segs.json")); d=json.load(open("v5/durs.json"))
+VOICE="pf_dora"
+segs=json.load(open("v6/segs.json")); d=json.load(open("v6/durs.json"))
 groups=[["intro"],["c0","c1","c2","c3"],["c4","c4b"],["c5"],["s1","s1b"],["s2"],["p1","p1b"],["p2","p2b"],["p3","p3b"],["d0"],["d1","d2","d3","d3b"],["f1"],["f2"],["out"]]
 text={s[0]:s[1] for s in segs}; gap={s[0]:s[2] for s in segs}
 fix=[("PSA Score","PSA Scór"),("na PSA","na pê ésse á"),("Google Calendar","Gúgol Calêndar"),("conta do Google","conta do Gúgol")]
@@ -30,6 +30,6 @@ N=int(END*sr); v=np.zeros(N)
 for t0,s in clips: i=int(t0*sr); v[i:i+len(s)]+=s
 v=v/np.max(np.abs(v))*0.89
 fade=np.clip((END-np.arange(N)/sr)/0.5,0,1)
-sf.write("v5/voz_crua.wav",v*fade,sr)
-json.dump({"T":T,"D":D,"END":END},open("v5/tl.json","w"),indent=1)
+sf.write("v6/voz_crua.wav",v*fade,sr)
+json.dump({"T":T,"D":D,"END":END},open("v6/tl.json","w"),indent=1)
 print(END, {x:(T[x],D[x]) for x in T})
