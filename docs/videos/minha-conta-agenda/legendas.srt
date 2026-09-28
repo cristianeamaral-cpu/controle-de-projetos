@@ -1,0 +1,61 @@
+1
+00:00:00,900 --> 00:00:03,394
+Minha Conta e Sincronização de Agenda
+
+2
+00:00:04,394 --> 00:00:08,509
+Na área Minha Conta, você pode atualizar seus dados cadastrais,
+
+3
+00:00:08,709 --> 00:00:10,135
+alterar seu plano,
+
+4
+00:00:10,286 --> 00:00:12,592
+conferir seu consumo de créditos
+
+5
+00:00:12,791 --> 00:00:18,050
+e acompanhar seu PSA Score — o indicador de qualidade da sua jornada profissional.
+
+6
+00:00:20,150 --> 00:00:27,801
+Para organizar melhor sua rotina e não perder oportunidades, você pode sincronizar
+seu Google Calendar em menos de um minuto!
+
+7
+00:00:28,201 --> 00:00:31,228
+O processo é simples e funciona em 3 passos:
+
+8
+00:00:31,628 --> 00:00:36,373
+1. Conecte seu calendário: autorize o acesso à sua conta do Google Calendar.
+
+9
+00:00:37,073 --> 00:00:43,492
+2. Vemos sua disponibilidade: a plataforma identifica as datas
+e os locais dos seus compromissos.
+
+10
+00:00:44,192 --> 00:00:51,171
+3. Tudo em um só lugar: seus eventos externos passam a ser exibidos
+junto com os compromissos criados na PSA.
+
+11
+00:00:52,070 --> 00:00:59,737
+Para evitar conflitos de agenda e sugerir as melhores oportunidades, a plataforma acessa
+as datas e horários dos compromissos,
+
+12
+00:00:59,938 --> 00:01:01,548
+os títulos dos eventos
+
+13
+00:01:01,798 --> 00:01:07,534
+e o local — este último fundamental para te sugerir oportunidades
+específicas por região.
+
+14
+00:01:08,334 --> 00:01:12,812
+E fique tranquilo: você pode desconectar a sua agenda a qualquer momento.
+
