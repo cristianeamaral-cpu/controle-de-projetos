@@ -13,7 +13,7 @@ for i,g in enumerate(groups,1):
     srt+=f"{i}\n{ts(a)} --> {ts(e+.1)}\n{t}\n\n"
 open("legendas.srt","w").write(srt)
 words=len(" ".join(s[1] for s in segs).split())
-page=open("../v3/roteiro.html").read().replace("locução feminina","locução masculina")
+page=open("../v3/roteiro.html").read()
 page=re.sub(r"<table>.*</table>",f"<table><tr><th>#</th><th>Início</th><th>Na tela</th><th>Fala</th><th>Direção</th></tr>{rows}</table>",page,flags=re.S)
 page=re.sub(r"<div class=box><b>Tom</b>.*?</div>","<div class=box><b>Tom</b>Didático, motivador, profissional e direto ao ponto. Sem sotaque regional marcado.</div>",page,flags=re.S)
 page=re.sub(r"duração total ≈ \d+s · \d+ falas · \d+ palavras",f"duração total ≈ {tl['END']:.0f}s · {len(groups)} falas · {words} palavras",page)

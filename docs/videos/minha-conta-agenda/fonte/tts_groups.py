@@ -1,11 +1,11 @@
-# Narração: voz masculina pt-BR nativa (Piper "cadu", via sherpa-onnx)
+# Narração: voz feminina pt-BR nativa (Piper "dii", alta qualidade, via sherpa-onnx)
 import json, numpy as np, soundfile as sf, sherpa_onnx
-V='piper/vits-piper-pt_BR-cadu-medium'
+V='piper/vits-piper-pt_BR-dii-high'
 cfg=sherpa_onnx.OfflineTtsConfig(model=sherpa_onnx.OfflineTtsModelConfig(vits=sherpa_onnx.OfflineTtsVitsModelConfig(
-    model=f'{V}/pt_BR-cadu-medium.onnx',tokens=f'{V}/tokens.txt',data_dir=f'{V}/espeak-ng-data',
+    model='piper/vits-piper-pt_BR-dii-high/pt_BR-dii-high.onnx',tokens=f'{V}/tokens.txt',data_dir=f'{V}/espeak-ng-data',
     noise_scale=0.667,noise_scale_w=0.8,length_scale=1.0),num_threads=4))
-tts=sherpa_onnx.OfflineTts(cfg); SPEED=0.86
-segs=json.load(open("v8/segs.json")); text={s[0]:s[1] for s in segs}; gap={s[0]:s[2] for s in segs}
+tts=sherpa_onnx.OfflineTts(cfg); SPEED=0.82
+segs=json.load(open("v9/segs.json")); text={s[0]:s[1] for s in segs}; gap={s[0]:s[2] for s in segs}
 groups=[["c0","c1","c2","c3","c4","c4b"],["c5"],["s1","s1b","s2"],["p1","p1b"],["p2","p2b"],["p3","p3b"],["d0","d1","d1h","d3","d2"],["d3b","f2"],["f1","out"]]
 fix=[("PSA Score","pê ésse á Scór"),("da PSA","da pê ésse á"),("Google Calendar","Gúgol Calêndar"),("conta do Google","conta do Gúgol")]
 def say(t):
@@ -27,6 +27,6 @@ for g in groups:
 END=round(c+3.4,2); N=int(END*sr); v=np.zeros(N)
 for t0,s in clips: i=int(t0*sr); v[i:i+len(s)]+=s
 v=v/np.max(np.abs(v))*0.89
-sf.write("v8/voz_crua.wav",v,sr); json.dump({"T":T,"D":D,"END":END},open("v8/tl.json","w"),indent=1)
+sf.write("v9/voz_crua.wav",v,sr); json.dump({"T":T,"D":D,"END":END},open("v9/tl.json","w"),indent=1)
 words=sum(len(text[k].split()) for k in text); talk=sum(len(s) for _,s in clips)/sr
 print(END,'ppm',round(words/talk*60)); print({x:(T[x],D[x]) for x in T})
