@@ -3,34 +3,34 @@
 Aqui na área Minha Conta, você consegue atualizar seus dados cadastrais, alterar seu plano e acompanhar o consumo dos seus créditos.
 
 2
-00:00:12,090 --> 00:00:20,139
-Ah, e pra facilitar sua rotina e garantir que você não perca nenhuma oportunidade, vale muito a pena sincronizar o seu Google Calendar!
+00:00:12,090 --> 00:00:20,014
+E pra facilitar sua rotina e garantir que você não perca nenhuma oportunidade, vale muito a pena sincronizar o seu Google Calendar!
 
 3
-00:00:21,339 --> 00:00:26,107
+00:00:21,214 --> 00:00:25,982
 Leva menos de um minuto, e o processo é super simples, em três passos rápidos:
 
 4
-00:00:26,507 --> 00:00:31,399
+00:00:26,382 --> 00:00:31,274
 Primeiro, você conecta seu calendário, autorizando o acesso à sua conta do Google.
 
 5
-00:00:32,499 --> 00:00:37,032
+00:00:32,374 --> 00:00:36,907
 Depois, o sistema identifica a sua disponibilidade de datas e locais.
 
 6
-00:00:37,432 --> 00:00:44,429
+00:00:37,307 --> 00:00:44,304
 E por fim, pronto! Todos os seus compromissos externos aparecem reunidos no mesmo lugar, com as agendas da PSA.
 
 7
-00:00:44,929 --> 00:00:53,036
+00:00:44,804 --> 00:00:52,911
 Para evitar conflitos de horários e sugerir as melhores palestras na sua região, a plataforma analisa apenas as datas, horários e locais.
 
 8
-00:00:53,436 --> 00:00:57,836
+00:00:53,311 --> 00:00:57,711
 Tudo com total segurança, e você pode desconectar a qualquer momento.
 
 9
-00:00:58,836 --> 00:01:04,234
+00:00:58,711 --> 00:01:04,108
 Faça a conexão agora mesmo e mantenha seu perfil sempre pronto para novas oportunidades!
 
