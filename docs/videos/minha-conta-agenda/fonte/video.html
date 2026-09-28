@@ -224,7 +224,7 @@ html,body{font-family:"Manrope",system-ui,sans-serif}
    <div style="height:60px"></div>
    <div class="stamp" id="aChip">Guia rápido</div>
    <h1 class="disp" id="aTitle">Minha Conta e<br><em>Sincronização<br>de Agenda</em></h1>
-   <p class="sub" id="aSub"><b>Para palestrantes:</b> atualize seus dados, acompanhe seu PSA Score e conecte o Google Calendar em menos de um minuto.</p>
+   <p class="sub" id="aSub"><b>Para palestrantes:</b> atualize seus dados e conecte o Google Calendar em menos de um minuto.</p>
    <div class="floatcard" id="aCard">
     <div class="fh"><svg class="i"><use href="#cal"/></svg>Sua agenda</div>
     <div class="fev"><div class="bar"></div><div>Palestra · Liderança<small>14:00 · São Paulo, SP</small></div></div>
@@ -240,10 +240,10 @@ html,body{font-family:"Manrope",system-ui,sans-serif}
    <div class="ahead grad">
     <div class="back"><svg class="i"><use href="#al"/></svg>Voltar para o painel</div>
     <h2><svg class="i"><use href="#user"/></svg>Minha Conta</h2>
-    <p>Gerencie seus dados, seu plano e seus créditos — e acompanhe sua evolução na plataforma.</p>
+    <p>Gerencie seus dados cadastrais, seu plano e seus créditos em um só lugar.</p>
    </div>
    <!-- dados -->
-   <div class="card" id="bDados" style="left:210px;top:380px;width:880px;height:340px;padding:34px 38px">
+   <div class="card" id="bDados" style="left:210px;top:380px;width:1500px;height:340px;padding:34px 38px">
     <div class="ring"></div>
     <div class="ch"><div class="ico soft"><svg class="i"><use href="#user"/></svg></div>Dados cadastrais
       <div class="btn ghost" id="bEdit" style="margin-left:auto;font-size:22px;padding:12px 22px"><svg class="i"><use href="#edit"/></svg>Editar</div></div>
@@ -258,33 +258,18 @@ html,body{font-family:"Manrope",system-ui,sans-serif}
     </div>
    </div>
    <!-- plano -->
-   <div class="card" id="bPlano" style="left:210px;top:750px;width:425px;height:250px;padding:32px 34px">
+   <div class="card" id="bPlano" style="left:210px;top:750px;width:735px;height:250px;padding:32px 34px">
     <div class="ring"></div>
     <div class="ch" style="font-size:28px"><div class="ico soft"><svg class="i"><use href="#layers"/></svg></div>Seu plano</div>
     <div style="font-size:38px;font-weight:900;margin:22px 0 18px">Profissional</div>
     <div class="btn" id="bPlanBtn" style="font-size:22px;padding:13px 24px">Alterar plano<svg class="i"><use href="#ar"/></svg></div>
    </div>
    <!-- creditos -->
-   <div class="card" id="bCred" style="left:665px;top:750px;width:425px;height:250px;padding:32px 34px">
+   <div class="card" id="bCred" style="left:975px;top:750px;width:735px;height:250px;padding:32px 34px">
     <div class="ring"></div>
     <div class="ch" style="font-size:28px"><div class="ico soft"><svg class="i"><use href="#zap"/></svg></div>Créditos</div>
     <div style="display:flex;align-items:baseline;gap:10px;margin:22px 0 16px"><b style="font-size:48px;font-weight:900" id="bCredN">0</b><span style="font-size:24px;font-weight:700;color:var(--mute)">de 50 usados</span></div>
     <div class="pbar"><i id="bCredBar"></i></div>
-   </div>
-   <!-- score -->
-   <div class="card" id="bScore" style="left:1130px;top:380px;width:580px;height:620px;padding:34px 40px">
-    <div class="ring"></div>
-    <div class="ch"><div class="ico"><svg class="i"><use href="#award"/></svg></div>PSA Score</div>
-    <div class="gauge" style="margin-top:22px">
-     <svg viewBox="0 0 330 330"><circle cx="165" cy="165" r="140" stroke="#F3EEEA" stroke-width="26" fill="none"/>
-      <circle id="bArc" cx="165" cy="165" r="140" stroke="url(#gg)" stroke-width="26" fill="none" stroke-linecap="round" stroke-dasharray="879.6" stroke-dashoffset="879.6"/>
-      <defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#FFB27F"/><stop offset="1" stop-color="#FF620B"/></linearGradient></defs></svg>
-     <div class="num"><b id="bScoreN">0</b><span>de 100</span></div>
-    </div>
-    <div class="tag or" id="bScoreTag" style="left:50%;top:420px;transform:translateX(-50%)">Qualidade da sua jornada profissional</div>
-    <div style="margin-top:78px">
-     <div class="crit" id="bc1"><svg class="i"><use href="#ck"/></svg>Perfil completo<span class="pc">100%</span></div>
-    </div>
    </div>
    <!-- agenda -->
    <div class="card" id="bAgenda" style="left:210px;top:1030px;width:1500px;height:170px;padding:0 44px;display:flex;align-items:center;gap:26px">
@@ -443,7 +428,7 @@ function focus(r,{pad=60,max=1.6,cx=960,cy=VIS_H/2+10,areaW=1920}={}){
 function scr(cs,r){return {x:cs.x+cs.scale*(r.x+r.w/2),y:cs.y+cs.scale*(r.y+r.h/2)};}
 
 const R={};
-['#bDados','#bPlano','#bCred','#bScore','#bAgenda','#bSyncBtn','#bEdit'].forEach(s=>R[s]=rect(s,'#camB'));
+['#bDados','#bPlano','#bCred','#bAgenda','#bSyncBtn','#bEdit'].forEach(s=>R[s]=rect(s,'#camB'));
 ['#cHow','#cAcc','#cReady','#st1','#st2','#st3','#acc1','#acc2','#acc3','#acc4','#cBtn','#cDisc','#rs1','#rs2'].forEach(s=>R[s]=rect(s,'#camC'));
 R['#pAllow']=(()=>{const r=$('#pAllow').getBoundingClientRect();return{x:r.left,y:r.top,w:r.width,h:r.height}})();
 
@@ -487,7 +472,6 @@ const camB=$('#camB');
 const all=focus({x:0,y:0,w:1920,h:1260},{pad:0,max:1,cy:VIS_H/2});
 const csDados=focus(R['#bDados'],{pad:80,max:1.45});
 const csRow=focus(union(R['#bPlano'],R['#bCred']),{pad:90,max:1.5});
-const csScore=focus(R['#bScore'],{pad:60,max:1.35});
 const csAll2=focus({x:0,y:300,w:1920,h:960},{pad:10,max:1});
 const tBout=T.s1-.6;
 scene('#sB',T.c0-1.0,tBout,.6);
@@ -502,11 +486,6 @@ tl.fromTo('#bPlanBtn',{scale:1},{scale:1.08,duration:.3,yoyo:true,repeat:1,ease:
 ring('#bCred .ring',T.c3+.2,T.c4-.2);
 tl.to('#bCredBar',{width:'68%',duration:1.4,ease:'power2.out'},T.c3+.6*SP);
 const cred={v:0};tl.to(cred,{v:34,duration:1.4,ease:'power2.out',onUpdate:()=>{$('#bCredN').textContent=Math.round(cred.v)}},T.c3+.6*SP);
-tl.to(camB,{...csScore,duration:1.1},T.c4-.4);
-ring('#bScore .ring',T.c4+.5*SP,E('c4b')+.3);
-const sc={v:0};tl.to(sc,{v:87,duration:2.2,ease:'power2.out',onUpdate:()=>{$('#bScoreN').textContent=Math.round(sc.v);$('#bArc').setAttribute('stroke-dashoffset',879.6*(1-sc.v/100))}},T.c4+.4*SP);
-tl.fromTo('#bScoreTag',{opacity:0,y:14},{opacity:1,y:0,duration:.5,ease:'back.out(2)'},T.c4b+1.4*SP);
-tl.from('#bc1',{opacity:0,x:-20,duration:.5},T.c4b+2.4*SP);
 // ir para Sincronizar calendário
 tl.to(camB,{...csAll2,duration:1.0},T.c5-.3);
 const pBtn=scr(csAll2,R['#bSyncBtn']);
