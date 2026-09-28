@@ -1,7 +1,7 @@
 import numpy as np, soundfile as sf, librosa, json
 from scipy.signal import butter, sosfilt, fftconvolve
 sr=48000
-v,_=librosa.load("v5/voz_crua.wav",sr=sr); m,_=sf.read("v5/trilha.wav")
+v,_=librosa.load("v8/voz_crua.wav",sr=sr); m,_=sf.read("v8/trilha.wav")
 N=min(len(v),len(m)); v=v[:N]; m=m[:N]
 m=m-0.5*sosfilt(butter(2,170,'low',fs=sr,output='sos'),m)+0.8*sosfilt(butter(2,3000,'high',fs=sr,output='sos'),m)
 def sos(t,f,**k): return butter(2,f,t,fs=sr,output='sos')
@@ -20,8 +20,8 @@ duck=np.convolve(speak,np.ones(int(.35*sr))/int(.35*sr),'same')
 gain=0.30-0.17*np.clip(duck,0,1)   # ~-10 dB sem voz, ~-18 dB sob a voz
 mix=v+m*gain
 rms=np.sqrt((mix**2).mean()); mix=mix*(10**(-16.5/20)/rms); mix=np.tanh(mix*1.1)/1.1; mix=mix/max(1,np.max(np.abs(mix))/0.97)
-sf.write("v5/mix.wav",mix.astype(np.float32),sr)
-sf.write("v5/trilha_sem_voz.wav",(m*0.30/np.max(np.abs(m*0.30))*0.6).astype(np.float32),sr)
+sf.write("v8/mix.wav",mix.astype(np.float32),sr)
+sf.write("v8/trilha_sem_voz.wav",(m*0.30/np.max(np.abs(m*0.30))*0.6).astype(np.float32),sr)
 def bands(y):
     S=np.abs(librosa.stft(y)); fq=librosa.fft_frequencies(sr=sr); s=S.mean(1)
     return [round(20*np.log10(s[(fq>=a)&(fq<b)].mean()),1) for a,b in [(20,80),(80,200),(200,500),(500,2000),(2000,6000),(6000,12000)]]

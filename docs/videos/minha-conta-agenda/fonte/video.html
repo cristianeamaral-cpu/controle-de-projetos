@@ -418,22 +418,18 @@ const T=TL.T, D=TL.D, END=TL.END;
 const E=k=>T[k]+D[k];
 const SP=0.9; // fator de velocidade da locução
 const CAPS={
- intro:"Oi! Neste vídeo rápido, você vai ver como funciona a área <b>Minha Conta</b><br>e como deixar a sua agenda sincronizada com o <b>Google Calendar</b>.",
- c0:"Começando pela <b>Minha Conta</b>: é aqui que você mantém os seus <b>dados</b> sempre atualizados,<br>troca de <b>plano</b> quando quiser e acompanha quantos <b>créditos</b> já usou.",
- c4:"Aqui também aparece o seu <b>PSA Score</b>, que mostra como anda<br>a qualidade da sua jornada na plataforma.",
- c5:"Agora, pra conectar a sua agenda, é só clicar em <b>Sincronizar calendário</b>.",
- s1:"Com o Google Calendar conectado, fica bem mais fácil organizar a rotina e você não deixa<br>passar nenhuma oportunidade. E o melhor: leva <b>menos de um minuto</b>.",
- s2:"Funciona assim:",
- p1:"<b>1.</b> Primeiro, você conecta o seu calendário, <b>autorizando o acesso</b> à sua conta do Google.",
- p2:"<b>2.</b> Em seguida, a plataforma confere a sua disponibilidade,<br>olhando as <b>datas</b> e os <b>locais</b> dos seus compromissos.",
- p3:"<b>3.</b> E pronto! Fica tudo num lugar só: os seus eventos do Google<br>aparecem junto com os que você criou na <b>PSA</b>.",
- d0:"Ah, e você deve estar se perguntando: o que exatamente a plataforma vê?",
- d1:"Ela usa as <b>datas</b> e os <b>horários</b>, pra evitar conflito na agenda, os <b>títulos</b>, pra mostrar<br>os seus compromissos, e o <b>local</b>, que permite sugerir oportunidades perto de você.",
- f1:"Agora é com você: clique em <b>Conectar Google Calendar</b>.",
- f2:"E, se mudar de ideia, dá pra <b>desconectar</b> a qualquer momento.",
- out:"Agenda organizada, mais oportunidades. <b>Até a próxima!</b>"
+ c0:"Aqui na área <b>Minha Conta</b>, você consegue atualizar seus <b>dados cadastrais</b>,<br>alterar seu <b>plano</b>, acompanhar o <b>consumo dos seus créditos</b>",
+ c4:"e conferir o seu <b>PSA Score</b> — que é o indicador de qualidade<br>da sua jornada por aqui.",
+ c5:"Ah, e pra facilitar sua rotina e garantir que você não perca nenhuma oportunidade,<br>vale muito a pena sincronizar o seu <b>Google Calendar</b>!",
+ s1:"Leva <b>menos de um minuto</b> e o processo é super simples, em <b>três passos</b> rápidos:",
+ p1:"<b>1.</b> Primeiro, você conecta seu calendário <b>autorizando o acesso</b> à sua conta do Google.",
+ p2:"<b>2.</b> Depois, o sistema identifica a sua <b>disponibilidade</b> de datas e locais.",
+ p3:"<b>3.</b> E por fim, pronto! Todos os seus compromissos externos aparecem<br><b>reunidos no mesmo lugar</b> com as agendas da PSA.",
+ d0:"Para evitar conflitos de horários e sugerir as melhores palestras na sua região, a plataforma<br>analisa apenas as <b>datas</b>, <b>horários</b>, <b>locais</b> e <b>títulos</b> das suas agendas.",
+ d3b:"Tudo com <b>total segurança</b> — e você pode <b>desconectar</b> a qualquer momento.",
+ f1:"Faça a conexão agora mesmo e mantenha seu perfil sempre pronto<br>para <b>novas oportunidades</b>!"
 };
-const CAPEND={intro:'intro',c0:'c3',c4:'c4b',c5:'c5',s1:'s1b',s2:'s2',p1:'p1b',p2:'p2b',p3:'p3b',d0:'d0',d1:'d3b',f1:'f1',f2:'f2',out:'out'};
+const CAPEND={c0:'c3',c4:'c4b',c5:'c5',s1:'s2',p1:'p1b',p2:'p2b',p3:'p3b',d0:'d2',d3b:'f2',f1:'out'};
 const $=s=>document.querySelector(s);
 const caps=$('#caps');
 for(const k in CAPS){const d=document.createElement('div');d.className='cap';d.id='cap_'+k;d.innerHTML=CAPS[k];caps.appendChild(d);}
@@ -474,6 +470,7 @@ gsap.set(cur,{opacity:0});
 
 // ---------- A: abertura
 const tAout=T.c0-1.0;
+const tD=T.out+.6;
 scene('#sA',0,tAout,.5);
 tl.from('#aBrand',{y:30,opacity:0,duration:.7,ease:'power3.out'},.15)
   .from('#aChip',{scale:1.6,opacity:0,duration:.5,ease:'back.out(2.5)'},.9)
@@ -483,8 +480,8 @@ tl.from('#aBrand',{y:30,opacity:0,duration:.7,ease:'power3.out'},.15)
   .from('#aCard .fev',{x:40,opacity:0,stagger:.25,duration:.6,ease:'power3.out'},1.7)
   .to('#aCard',{y:-18,duration:4,ease:'sine.inOut'},2.4)
   .to('#sA .hero',{scale:1.05,duration:1.2,ease:'power2.in'},tAout-.4);
-tl.to('#fade',{opacity:1,duration:.6},T.c0-.8).to('#fade',{opacity:0,duration:.6},T.out-.8);
-tl.to('#wm',{opacity:1,duration:.5},T.c0-.6).to('#wm',{opacity:0,duration:.5},T.out-.8);
+tl.to('#fade',{opacity:1,duration:.6},T.c0-.8).to('#fade',{opacity:0,duration:.6},tD);
+tl.to('#wm',{opacity:1,duration:.5},T.c0-.6).to('#wm',{opacity:0,duration:.5},tD);
 
 // ---------- B: Minha Conta
 const camB=$('#camB');
@@ -514,10 +511,10 @@ tl.from('#bc1',{opacity:0,x:-20,duration:.5},T.c4b+2.4*SP);
 // ir para Sincronizar calendário
 tl.to(camB,{...csAll2,duration:1.0},T.c5-.3);
 const pBtn=scr(csAll2,R['#bSyncBtn']);
-cursorIn(T.c5+.5*SP);
-cursorTo(pBtn,T.c5+.6,1.4);
-click(pBtn,T.c5+2.9);
-tl.to('#bSyncBtn',{scale:.95,duration:.1,yoyo:true,repeat:1},T.c5+2.9);
+cursorIn(E('c5')-2.6);
+cursorTo(pBtn,E('c5')-2.5,1.5);
+click(pBtn,E('c5')-.5);
+tl.to('#bSyncBtn',{scale:.95,duration:.1,yoyo:true,repeat:1},E('c5')-.5);
 tl.to(cur,{opacity:0,duration:.3},tBout+.1);
 tl.to(camB,{x:csAll2.x-(csAll2.scale*.08)*R['#bSyncBtn'].x,scale:csAll2.scale*1.08,y:csAll2.y-(csAll2.scale*.08)*R['#bSyncBtn'].y,duration:.8,ease:'power2.in'},tBout-.2);
 
@@ -529,10 +526,10 @@ const cHowL=focus(R['#cHow'],{pad:50,max:1.25,cx:520,areaW:1000});
 const cAccF=focus(R['#cAcc'],{pad:50,max:1.3});
 const cAccR=focus(R['#cAcc'],{pad:50,max:1.25,cx:1380,areaW:1000});
 const cReadyF=focus(R['#cReady'],{pad:70,max:1.2});
-scene('#sC',T.s1-.6,T.out-.8,.6);
+scene('#sC',T.s1-.6,tD,.6);
 tl.fromTo(camC,{x:cAll.x-40,y:cAll.y-20,scale:cAll.scale*1.04},{x:cAll.x,y:cAll.y,scale:cAll.scale,duration:1.6,ease:'power3.out'},T.s1-.6);
-ring('#rs1 .ring',T.s1b+.2,T.s2-.2);
-tl.fromTo('#cBtn',{scale:1},{scale:1.05,duration:.35,yoyo:true,repeat:1,ease:'power1.inOut'},T.s1b+.6);
+ring('#rs1 .ring',T.s1+.1,T.s2+.6);
+tl.fromTo('#cBtn',{scale:1},{scale:1.05,duration:.35,yoyo:true,repeat:1,ease:'power1.inOut'},T.s1+.6);
 // 3 passos
 tl.to(camC,{...cHowF,duration:1.0},T.s2-.6);
 ring('#cHow > .ring',T.s2+.1,T.p1-.1);
@@ -575,37 +572,35 @@ tl.from('#u1,#u3',{opacity:0,x:-30,stagger:.25,duration:.5,ease:'power2.out'},T.
 tl.from('#u2,#u4,#u5',{opacity:0,x:60,stagger:.4,duration:.6,ease:'back.out(1.6)'},T.p3b+.4*SP);
 tl.fromTo('#u2,#u4,#u5',{backgroundColor:'#E8EEFA'},{backgroundColor:'#F9FAFC',duration:1.4,stagger:.4},T.p3b+1.2*SP);
 // o que acessamos
-tl.to(camC,{...cAccF,duration:1.2},T.d0-.3);
+tl.to(camC,{...cAccR,duration:1.2},T.d0-.3);
 ring('#cAcc > .ring',T.d0+.5,T.d1);
 function accOn(n,tin,tout){
   ring('#acc'+n+' > .ring',tin,tout);
   tl.fromTo('#acc'+n+' .ico2',{opacity:0,scale:.5},{opacity:1,scale:1,duration:.4,ease:'back.out(2)'},tin+.1);
   tl.fromTo('#acc'+n+' svg.ck',{scale:1},{scale:1.35,duration:.2,yoyo:true,repeat:1,immediateRender:false},tin);
 }
-accOn(1,T.d1+.1,T.d3-.2);
-accOn(3,T.d1+.9,T.d3-.2);
-accOn(4,T.d2+.1,T.d3-.2);
-tl.to(camC,{...cAccR,duration:.8},T.d3-.5);
-accOn(2,T.d3+.1,T.f1-.3);
-panel('#pMap',T.d3-.1,T.f1-.35);
-tl.fromTo('#m0',{opacity:0,y:-30},{opacity:1,y:0,duration:.5,ease:'bounce.out'},T.d3+.4)
-  .fromTo('#mp0',{opacity:.9,scale:.5},{opacity:0,scale:5,duration:1.4,repeat:3,ease:'power1.out',immediateRender:false},T.d3+.7)
-  .fromTo('#m1,#m2,#m3',{opacity:0,y:-40},{opacity:1,y:0,duration:.55,stagger:.3,ease:'bounce.out'},T.d3b+.1)
-  .to('#o1,#o2',{opacity:1,stagger:.3,duration:.4},T.d3b+1.3);
+accOn(1,E('d1')-.7,T.d3b);
+accOn(3,T.d1h,T.d3b);
+accOn(4,T.d2+.4,T.d3b);
+accOn(2,T.d3,T.f2-.3);
+panel('#pMap',T.d0+.4,T.f2-.35);
+tl.fromTo('#m0',{opacity:0,y:-30},{opacity:1,y:0,duration:.5,ease:'bounce.out'},T.d0+1.0)
+  .fromTo('#mp0',{opacity:.9,scale:.5},{opacity:0,scale:5,duration:1.4,repeat:3,ease:'power1.out',immediateRender:false},T.d0+1.3)
+  .fromTo('#m1,#m2,#m3',{opacity:0,y:-40},{opacity:1,y:0,duration:.55,stagger:.3,ease:'bounce.out'},T.d3+.1)
+  .to('#o1,#o2',{opacity:1,stagger:.3,duration:.4},T.d2+.8);
 // conectar e desconectar
-tl.to(camC,{...cReadyF,duration:1.1},T.f1-.4);
+tl.to(camC,{...cReadyF,duration:1.1},T.f2-.4);
 const pC=scr(cReadyF,R['#cBtn']);
-cursorIn(T.f1+.3*SP);
-cursorTo(pC,T.f1+.4*SP,1.2);
-click(pC,T.f1+2.3*SP);
-tl.to('#cBtn .done',{opacity:1,duration:.35},T.f1+2.45*SP);
-tl.to(cur,{opacity:0,duration:.3},T.f1+2.9*SP);
-tl.to('#cDisc',{opacity:1,duration:.4},T.f2+.1*SP);
-ring('#rs2 .ring',T.f2+1.0*SP,E('f2')+.5);
-ring('#cDisc > .ring',T.f2+2.0*SP,E('f2')+.5);
+cursorIn(T.f2+.9);
+cursorTo(pC,T.f2+1.0,1.3);
+click(pC,T.f1+.4);
+tl.to('#cBtn .done',{opacity:1,duration:.35},T.f1+.55);
+tl.to(cur,{opacity:0,duration:.3},T.f1+1.0);
+tl.to('#cDisc',{opacity:1,duration:.4},T.f1+.8);
+ring('#rs2 .ring',T.f2+.3,T.f1+.3);
+ring('#cDisc > .ring',T.f1+1.1,tD);
 
 // ---------- D: encerramento
-const tD=T.out-.8;
 scene('#sD',tD,null,.6);
 tl.from('.shard',{x:-300,y:-200,duration:.9,ease:'power3.out'},tD)
   .from('.shard2',{x:300,y:200,duration:.9,ease:'power3.out'},tD+.1)

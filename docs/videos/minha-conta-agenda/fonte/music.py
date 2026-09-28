@@ -1,7 +1,7 @@
 # Trilha sintetizada: eletrônica/cinematográfica escura, 117 BPM, Sol menor
 import json, numpy as np, soundfile as sf
 from scipy.signal import butter, sosfilt, fftconvolve
-sr=48000; tl=json.load(open("v5/tl.json")); T=tl["T"]; END=tl["END"]
+sr=48000; tl=json.load(open("v8/tl.json")); T=tl["T"]; END=tl["END"]
 N=int(END*sr); t=np.arange(N)/sr
 BPM=117; beat=60/BPM; bar=4*beat
 rng=np.random.default_rng(7)
@@ -16,7 +16,7 @@ prog=[[55,58,62],[51,55,58],[46,50,53],[53,57,60]]  # tríades (MIDI)
 roots=[43,39,46,41]
 # intensidade ao longo do vídeo (0..1): intro calma, corpo, respiros, final
 def env_at(x):
-    pts=[(0,.35),(T["c0"]-1,.55),(T["c0"],.8),(T["s1"]-1,.8),(T["s1"],.95),(T["d0"]-.5,.95),(T["d0"],.75),(T["f1"],.9),(T["out"]-.8,1.0),(END-2.2,.9),(END,0)]
+    pts=[(0,.35),(T["c0"]-1,.55),(T["c0"],.8),(T["s1"]-1,.8),(T["s1"],.95),(T["d0"]-.5,.95),(T["d0"],.75),(T["f1"],.9),(T["out"]+.6,1.0),(END-2.2,.9),(END,0)]
     xs,ys=zip(*pts); return np.interp(x,xs,ys)
 I=env_at(t)
 out=np.zeros(N); drums=np.zeros(N)
@@ -70,12 +70,12 @@ dm=np.clip((t-(T["c0"]-1.2))/1.5,0,1)*np.clip((END-2.4-t)/0.8,0,1)
 drums=(kick*0.30+clap*0.05+hat*0.035)*dm
 # whooshes nas trocas de cena
 wh=np.zeros(N)
-for tc in [T["c0"]-1.0,T["s1"]-.6,T["out"]-.8]:
+for tc in [T["c0"]-1.0,T["s1"]-.6,T["out"]+.6]:
     L=1.4; a=int((tc-L+.3)*sr); z=a+int(L*sr); n=rng.standard_normal(z-a); x=np.linspace(0,1,z-a)
     e=x**2*np.exp(-(1-x)*0)*(1-np.clip((x-.85)/.15,0,1))
     wh[a:z]+=bp(n,300,6000)*e*0.06
 # impacto final (sub + ruído)
-a=int((T["out"]-.8)*sr); L=int(2.5*sr); tt=np.arange(L)/sr
+a=int((T["out"]+.6)*sr); L=int(2.5*sr); tt=np.arange(L)/sr
 imp=np.sin(2*np.pi*np.cumsum(38+60*np.exp(-tt*10))/sr)*np.exp(-tt*2.2)*0.35
 wh[a:a+L]+=imp[:max(0,min(L,N-a))]
 mus=(pad+bass*side+arp*(.6+.4*side))*I+drums+wh
@@ -85,5 +85,5 @@ mus=mus+0.25*fftconvolve(mus,ir)[:N]
 mus*=np.clip(t/1.0,0,1)*np.clip((END-t)/1.8,0,1)
 mus=np.tanh(mus*1.6)/1.6
 mus=mus/np.max(np.abs(mus))*0.9
-sf.write("v5/trilha.wav",mus.astype(np.float32),sr)
+sf.write("v8/trilha.wav",mus.astype(np.float32),sr)
 print("ok",END)
