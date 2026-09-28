@@ -1,8 +1,8 @@
 import json,html,re
 segs=json.load(open("segs.json")); tl=json.load(open("tl.json")); T,D=tl["T"],tl["D"]
 text={s[0]:s[1] for s in segs}; dirn={s[0]:s[3] for s in segs}
-groups=[["intro"],["c0","c1","c2","c3"],["c4","c4b"],["c5"],["s1","s1b"],["s2"],["p1","p1b"],["p2","p2b"],["p3","p3b"],["d0"],["d1","d2","d3","d3b"],["f1"],["f2"],["out"]]
-tela=["Abertura com o título","Minha Conta: dados, plano e créditos em destaque","PSA Score (indicador sobe até 87)","Cursor clica em “Sincronizar calendário”","Tela Sincronizar calendário; destaque “menos de um minuto”","Cartão “Como funciona”","Passo 1 + janela de autorização (clique em Permitir)","Passo 2 + semana sendo mapeada","Passo 3 + agenda unificada (PSA + Google)","Cartão “O que acessamos”","Datas, horários, títulos e local em destaque + mapa","Clique em “Conectar Google Calendar”","Destaque em “Desconectar”","Encerramento"]
+groups=[["intro"],["c0","c1","c2","c3","c4","c4b"],["c5"],["s1","s1b"],["s2","p1","p1b"],["p2","p2b"],["p3","p3b"],["d0"],["d1","d2","d3","d3b"],["f1"],["f2"],["out"]]
+tela=["Abertura com o título","Minha Conta: dados, plano, créditos e PSA Score em destaque","Cursor clica em “Sincronizar calendário”","Tela Sincronizar calendário; destaque “menos de um minuto”","“Como funciona” + passo 1 com janela de autorização (clique em Permitir)","Passo 2 + semana sendo mapeada","Passo 3 + agenda unificada (PSA + Google)","Cartão “O que acessamos”","Datas, horários, títulos e local em destaque + mapa","Clique em “Conectar Google Calendar”","Destaque em “Desconectar”","Encerramento"]
 def fmt(x): return f"{int(x//60)}:{x%60:04.1f}"
 def ts(x): return f"{int(x//3600):02}:{int(x%3600//60):02}:{int(x%60):02},{int(round((x%1)*1000))%1000:03}"
 rows="";srt=""
