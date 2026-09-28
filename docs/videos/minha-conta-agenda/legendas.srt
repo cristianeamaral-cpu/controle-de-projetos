@@ -1,40 +1,36 @@
 1
-00:00:03,600 --> 00:00:11,197
-Aqui na área Minha Conta, você consegue atualizar seus dados cadastrais, alterar seu plano, acompanhar o consumo dos seus créditos
+00:00:03,600 --> 00:00:11,590
+Aqui na área Minha Conta, você consegue atualizar seus dados cadastrais, alterar seu plano e acompanhar o consumo dos seus créditos.
 
 2
-00:00:11,097 --> 00:00:16,186
-e conferir o seu PSA Score, que é o indicador de qualidade da sua jornada por aqui.
-
-3
-00:00:16,785 --> 00:00:24,584
+00:00:14,790 --> 00:00:22,839
 Ah, e pra facilitar sua rotina e garantir que você não perca nenhuma oportunidade, vale muito a pena sincronizar o seu Google Calendar!
 
-4
-00:00:25,935 --> 00:00:30,882
-Leva menos de um minuto, e o processo é super simples, em três passos rápidos.
+3
+00:00:24,039 --> 00:00:28,807
+Leva menos de um minuto, e o processo é super simples, em três passos rápidos:
 
-5
-00:00:31,382 --> 00:00:36,219
+4
+00:00:29,207 --> 00:00:34,099
 Primeiro, você conecta seu calendário, autorizando o acesso à sua conta do Google.
 
-6
-00:00:37,419 --> 00:00:41,883
+5
+00:00:35,199 --> 00:00:39,732
 Depois, o sistema identifica a sua disponibilidade de datas e locais.
 
-7
-00:00:42,382 --> 00:00:49,733
+6
+00:00:40,132 --> 00:00:47,129
 E por fim, pronto! Todos os seus compromissos externos aparecem reunidos no mesmo lugar, com as agendas da PSA.
 
-8
-00:00:50,383 --> 00:01:00,580
-Para evitar conflitos de horários e sugerir as melhores palestras na sua região, a plataforma analisa apenas as datas, horários, locais e títulos das suas agendas.
+7
+00:00:47,629 --> 00:00:55,736
+Para evitar conflitos de horários e sugerir as melhores palestras na sua região, a plataforma analisa apenas as datas, horários e locais.
 
-9
-00:01:01,130 --> 00:01:05,023
+8
+00:00:56,136 --> 00:01:00,536
 Tudo com total segurança, e você pode desconectar a qualquer momento.
 
-10
-00:01:06,173 --> 00:01:11,641
+9
+00:01:01,536 --> 00:01:06,934
 Faça a conexão agora mesmo e mantenha seu perfil sempre pronto para novas oportunidades!
 

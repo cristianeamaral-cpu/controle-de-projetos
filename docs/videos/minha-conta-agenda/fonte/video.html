@@ -418,18 +418,17 @@ const T=TL.T, D=TL.D, END=TL.END;
 const E=k=>T[k]+D[k];
 const SP=0.9; // fator de velocidade da locução
 const CAPS={
- c0:"Aqui na área <b>Minha Conta</b>, você consegue atualizar seus <b>dados cadastrais</b>,<br>alterar seu <b>plano</b>, acompanhar o <b>consumo dos seus créditos</b>",
- c4:"e conferir o seu <b>PSA Score</b> — que é o indicador de qualidade<br>da sua jornada por aqui.",
+ c0:"Aqui na área <b>Minha Conta</b>, você consegue atualizar seus <b>dados cadastrais</b>,<br>alterar seu <b>plano</b> e acompanhar o <b>consumo dos seus créditos</b>.",
  c5:"Ah, e pra facilitar sua rotina e garantir que você não perca nenhuma oportunidade,<br>vale muito a pena sincronizar o seu <b>Google Calendar</b>!",
  s1:"Leva <b>menos de um minuto</b> e o processo é super simples, em <b>três passos</b> rápidos:",
  p1:"<b>1.</b> Primeiro, você conecta seu calendário <b>autorizando o acesso</b> à sua conta do Google.",
  p2:"<b>2.</b> Depois, o sistema identifica a sua <b>disponibilidade</b> de datas e locais.",
  p3:"<b>3.</b> E por fim, pronto! Todos os seus compromissos externos aparecem<br><b>reunidos no mesmo lugar</b> com as agendas da PSA.",
- d0:"Para evitar conflitos de horários e sugerir as melhores palestras na sua região, a plataforma<br>analisa apenas as <b>datas</b>, <b>horários</b>, <b>locais</b> e <b>títulos</b> das suas agendas.",
+ d0:"Para evitar conflitos de horários e sugerir as melhores palestras na sua região,<br>a plataforma analisa apenas as <b>datas</b>, <b>horários</b> e <b>locais</b>.",
  d3b:"Tudo com <b>total segurança</b> — e você pode <b>desconectar</b> a qualquer momento.",
  f1:"Faça a conexão agora mesmo e mantenha seu perfil sempre pronto<br>para <b>novas oportunidades</b>!"
 };
-const CAPEND={c0:'c3',c4:'c4b',c5:'c5',s1:'s2',p1:'p1b',p2:'p2b',p3:'p3b',d0:'d2',d3b:'f2',f1:'out'};
+const CAPEND={c0:'c3',c5:'c5',s1:'s2',p1:'p1b',p2:'p2b',p3:'p3b',d0:'d3',d3b:'f2',f1:'out'};
 const $=s=>document.querySelector(s);
 const caps=$('#caps');
 for(const k in CAPS){const d=document.createElement('div');d.className='cap';d.id='cap_'+k;d.innerHTML=CAPS[k];caps.appendChild(d);}
@@ -581,13 +580,12 @@ function accOn(n,tin,tout){
 }
 accOn(1,E('d1')-.7,T.d3b);
 accOn(3,T.d1h,T.d3b);
-accOn(4,T.d2+.4,T.d3b);
 accOn(2,T.d3,T.f2-.3);
 panel('#pMap',T.d0+.4,T.f2-.35);
 tl.fromTo('#m0',{opacity:0,y:-30},{opacity:1,y:0,duration:.5,ease:'bounce.out'},T.d0+1.0)
   .fromTo('#mp0',{opacity:.9,scale:.5},{opacity:0,scale:5,duration:1.4,repeat:3,ease:'power1.out',immediateRender:false},T.d0+1.3)
   .fromTo('#m1,#m2,#m3',{opacity:0,y:-40},{opacity:1,y:0,duration:.55,stagger:.3,ease:'bounce.out'},T.d3+.1)
-  .to('#o1,#o2',{opacity:1,stagger:.3,duration:.4},T.d2+.8);
+  .to('#o1,#o2',{opacity:1,stagger:.3,duration:.4},T.d3+.9);
 // conectar e desconectar
 tl.to(camC,{...cReadyF,duration:1.1},T.f2-.4);
 const pC=scr(cReadyF,R['#cBtn']);

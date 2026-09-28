@@ -1,152 +1,24 @@
 [
-[
-"c0",
-"Aqui na área Minha Conta,",
-0.05,
-"Didático, acolhedor."
-],
-[
-"c1",
-"você consegue atualizar seus dados cadastrais,",
-0.05,
-""
-],
-[
-"c2",
-"alterar seu plano,",
-0.05,
-""
-],
-[
-"c3",
-"acompanhar o consumo dos seus créditos",
-0.05,
-""
-],
-[
-"c4",
-"e conferir o seu PSA Score,",
-0.05,
-"Destaque em “PSA Score”."
-],
-[
-"c4b",
-"que é o indicador de qualidade da sua jornada por aqui.",
-0.7,
-"Explique o termo com clareza."
-],
-[
-"c5",
-"Ah, e pra facilitar sua rotina e garantir que você não perca nenhuma oportunidade, vale muito a pena sincronizar o seu Google Calendar!",
-0.65,
-"Motivador."
-],
-[
-"s1",
-"Leva menos de um minuto,",
-0.05,
-""
-],
-[
-"s1b",
-"e o processo é super simples,",
-0.05,
-""
-],
-[
-"s2",
-"em três passos rápidos.",
-0.6,
-""
-],
-[
-"p1",
-"Primeiro, você conecta seu calendário,",
-0.05,
-"Marque o “Primeiro”."
-],
-[
-"p1b",
-"autorizando o acesso à sua conta do Google.",
-0.6,
-""
-],
-[
-"p2",
-"Depois, o sistema identifica",
-0.05,
-"Marque o “Depois”."
-],
-[
-"p2b",
-"a sua disponibilidade de datas e locais.",
-0.6,
-""
-],
-[
-"p3",
-"E por fim, pronto!",
-0.05,
-"Marque o “E por fim”."
-],
-[
-"p3b",
-"Todos os seus compromissos externos aparecem reunidos no mesmo lugar, com as agendas da PSA.",
-0.75,
-""
-],
-[
-"d0",
-"Para evitar conflitos de horários e sugerir as melhores palestras na sua região,",
-0.05,
-"Direto ao ponto."
-],
-[
-"d1",
-"a plataforma analisa apenas as datas,",
-0.05,
-"Enumere com clareza."
-],
-[
-"d1h",
-"horários,",
-0.05,
-""
-],
-[
-"d3",
-"locais",
-0.05,
-""
-],
-[
-"d2",
-"e títulos das suas agendas.",
-0.65,
-""
-],
-[
-"d3b",
-"Tudo com total segurança,",
-0.05,
-"Tom de confiança."
-],
-[
-"f2",
-"e você pode desconectar a qualquer momento.",
-0.65,
-""
-],
-[
-"f1",
-"Faça a conexão agora mesmo",
-0.05,
-"Chamada para ação, motivador."
-],
-[
-"out",
-"e mantenha seu perfil sempre pronto para novas oportunidades!",
-0.5,
-""
-]
+["c0","Aqui na área Minha Conta,",0.05,"Didático, acolhedor."],
+["c1","você consegue atualizar seus dados cadastrais,",0.05,""],
+["c2","alterar seu plano",0.05,""],
+["c3","e acompanhar o consumo dos seus créditos.",0.3,""],
+["c5","Ah, e pra facilitar sua rotina e garantir que você não perca nenhuma oportunidade, vale muito a pena sincronizar o seu Google Calendar!",0.5,"Motivador."],
+["s1","Leva menos de um minuto,",0.05,""],
+["s1b","e o processo é super simples,",0.05,""],
+["s2","em três passos rápidos:",0.5,""],
+["p1","Primeiro, você conecta seu calendário,",0.05,"Marque o “Primeiro”."],
+["p1b","autorizando o acesso à sua conta do Google.",0.5,""],
+["p2","Depois, o sistema identifica",0.05,"Marque o “Depois”."],
+["p2b","a sua disponibilidade de datas e locais.",0.5,""],
+["p3","E por fim, pronto!",0.05,"Marque o “E por fim”."],
+["p3b","Todos os seus compromissos externos aparecem reunidos no mesmo lugar, com as agendas da PSA.",0.6,""],
+["d0","Para evitar conflitos de horários e sugerir as melhores palestras na sua região,",0.05,"Direto ao ponto."],
+["d1","a plataforma analisa apenas as datas,",0.05,"Enumere com clareza."],
+["d1h","horários",0.05,""],
+["d3","e locais.",0.5,""],
+["d3b","Tudo com total segurança,",0.05,"Tom de confiança."],
+["f2","e você pode desconectar a qualquer momento.",0.5,""],
+["f1","Faça a conexão agora mesmo",0.05,"Chamada para ação, motivador."],
+["out","e mantenha seu perfil sempre pronto para novas oportunidades!",0.3,""]
 ]

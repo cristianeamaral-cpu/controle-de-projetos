@@ -1,8 +1,8 @@
 import json,html,re
 segs=json.load(open("segs.json")); tl=json.load(open("tl.json")); T,D=tl["T"],tl["D"]
 text={s[0]:s[1] for s in segs}; dirn={s[0]:s[3] for s in segs}
-groups=[["c0","c1","c2","c3"],["c4","c4b"],["c5"],["s1","s1b","s2"],["p1","p1b"],["p2","p2b"],["p3","p3b"],["d0","d1","d1h","d3","d2"],["d3b","f2"],["f1","out"]]
-tela=["Minha Conta: dados cadastrais, plano e créditos em destaque","PSA Score (indicador sobe até 87)","Cursor clica em “Sincronizar calendário”","Tela Sincronizar calendário; destaque “menos de um minuto” e “Como funciona”","Passo 1 – Autorizar acesso (janela de autorização, clique em Permitir)","Passo 2 – Mapear disponibilidade (semana sendo lida)","Passo 3 – Visualização unificada (PSA + Google)","“O que acessamos”: datas, horários, local e títulos + mapa da região","Destaque “Você pode desconectar quando quiser”","Clique em “Conectar Google Calendar” e encerramento"]
+groups=[["c0","c1","c2","c3"],["c5"],["s1","s1b","s2"],["p1","p1b"],["p2","p2b"],["p3","p3b"],["d0","d1","d1h","d3"],["d3b","f2"],["f1","out"]]
+tela=["Minha Conta: dados cadastrais, plano e créditos em destaque; em seguida o PSA Score (pausa só com trilha)","Cursor clica em “Sincronizar calendário”","Tela Sincronizar calendário; destaque “menos de um minuto” e “Como funciona”","Passo 1 – Autorizar acesso (janela de autorização, clique em Permitir)","Passo 2 – Mapear disponibilidade (semana sendo lida)","Passo 3 – Visualização unificada (PSA + Google)","“O que acessamos”: datas, horários e local + mapa da região","Destaque “Você pode desconectar quando quiser”","Clique em “Conectar Google Calendar” e encerramento"]
 def fmt(x): return f"{int(x//60)}:{x%60:04.1f}"
 def ts(x): return f"{int(x//3600):02}:{int(x%3600//60):02}:{int(x%60):02},{int(round((x%1)*1000))%1000:03}"
 rows="";srt=""
