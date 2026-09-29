@@ -2,6 +2,7 @@
 
 | Vídeo | Duração | Conteúdo |
 |-------|---------|----------|
+| [`temas-e-macro-temas.mp4`](temas-e-macro-temas.mp4) | 39 s | Aba **Temas**: seleção de múltiplos Macro Temas (até 6), a regra de **exatamente 1 Tema Principal** (a maior bandeira na plataforma), Salvar, e como o algoritmo cruza os temas com os briefings dos clientes. Fontes em [`fonte-temas/`](fonte-temas/). |
 | [`meu-perfil-completo.mp4`](meu-perfil-completo.mp4) | 1 min 43 s | Aba **Meu Perfil**: Força da Página (meta 100%), foto de perfil (a mesma exibida no site para contratantes), Biografia Profissional com **Gerar com IA**, Frase de Destaque (30 a 60 caracteres), Dados Pessoais, Contato, Redes Sociais, Localização, Seu momento atual e Salvar alterações. Fontes em [`fonte-meu-perfil/`](fonte-meu-perfil/). |
 | [`como-acessar-o-ecossistema-psa.mp4`](como-acessar-o-ecossistema-psa.mp4) | 52 s | Login no site (botão **Login** no canto superior direito), entrada por e-mail, Google ou LinkedIn, dica de LGPD (perfil único, sem logins secundários para assessores ou assistentes) e recomendação do Google Chrome. |
 
