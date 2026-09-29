@@ -7,7 +7,7 @@ segs=[
  "Acesse o site profissionais ésse á, ponto com, ponto bê érre, e clique em lóguin, no canto superior direito.",
  "Você pode entrar digitando seu imêiu cadastrado, ou clicando diretamente no botão do gúgou, ou do Linquedín.",
  "Dica importante: Por conformidade com a éle gê pê dê, cada palestrante deve possuir apenas um perfil único.",
- "Não sendo permitido criar lóguins secundários para assessorias.",
+ "Não sendo permitido criar lóguins secundários para assessores, assistentes, etcétera.",
  "Além disso, recomendamos usar o navegador gúgou Crôume, para ter a melhor experiência possível.",
  "Faça seu lóguin, e nos vemos no próximo vídeo!",
 ]

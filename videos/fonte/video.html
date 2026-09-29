@@ -192,7 +192,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family
       <div class="prof"><div class="av">EU</div><div><div style="font-size:28px;font-weight:800">1 palestrante</div><div style="font-size:22px;color:var(--mut)">= 1 login pessoal e intransferível</div></div></div>
       <div style="height:34px"></div>
       <div class="row" id="r4b"><div class="no">✕</div><div><div class="t">Logins secundários</div><div class="d">Não é permitido criar acessos extras.</div></div></div>
-      <div class="row" id="r4c"><div class="no">✕</div><div><div class="t">Perfis para assessorias</div><div class="d">A assessoria não deve ter um login próprio.</div></div></div>
+      <div class="row" id="r4c"><div class="no">✕</div><div><div class="t">Assessores, assistentes, etc.</div><div class="d">Não devem ter um login próprio na plataforma.</div></div></div>
       <div class="stamp" id="st4">NÃO PERMITIDO</div>
     </div>
   </div>
@@ -241,7 +241,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family
 <div class="cap" id="c2">Acesse o site <b>profissionaissa.com.br</b> e clique em <b>Login</b>,<br>no canto superior direito.</div>
 <div class="cap" id="c3">Você pode entrar digitando seu <b>e-mail cadastrado</b><br>ou clicando no botão do <b>Google</b> ou do <b>LinkedIn</b>.</div>
 <div class="cap" id="c4"><b>Dica importante:</b> por conformidade com a <b>LGPD</b>,<br>cada palestrante deve possuir apenas <b>um perfil único</b>.</div>
-<div class="cap" id="c5">Não é permitido criar <b>logins secundários</b> para assessorias.</div>
+<div class="cap" id="c5">Não é permitido criar <b>logins secundários</b> para assessores, assistentes, etc.</div>
 <div class="cap" id="c6">Recomendamos usar o navegador <b>Google Chrome</b><br>para ter a <b>melhor experiência</b> possível.</div>
 <div class="cap" id="c7">Faça seu <b>login</b> e nos vemos no <b>próximo vídeo</b>!</div>
 </div>
@@ -250,8 +250,9 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family
 const $=s=>document.querySelector(s);
 const E={lin:x=>x,out:x=>1-Math.pow(1-x,3),io:x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,back:x=>{const c=1.5;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)}};
 const TW=[];  // {el,prop,t0,t1,a,b,e}
-function A(sel,t0,t1,from,to,e='out'){const el=$(sel);for(const k in to)TW.push({el,k,t0,t1,a:from[k],b:to[k],e:E[e]});}
-const TX=[]; function T(sel,t0,t1,text){TX.push({el:$(sel),t0,t1,text});}
+const SH_AT=35.45,SH=1.5,sh=t=>t>=SH_AT?t+SH:t;
+function A(sel,t0,t1,from,to,e='out'){t0=sh(t0);t1=sh(t1);const el=$(sel);for(const k in to)TW.push({el,k,t0,t1,a:from[k],b:to[k],e:E[e]});}
+const TX=[]; function T(sel,t0,t1,text){t0=sh(t0);t1=sh(t1);TX.push({el:$(sel),t0,t1,text});}
 const DEF={o:1,x:0,y:0,s:1,r:0};
 // scene fade helper
 function scene(sel,t0,t1,dir=1){A(sel,t0,t0+.6,{o:0,s:1.04},{o:1,s:1});A(sel,t1-.5,t1,{o:1,s:1},{o:0,s:.97},'io');}
@@ -306,7 +307,7 @@ A('#r4b',31.9,32.5,{o:0,x:30},{o:1,x:0});
 A('#r4c',32.6,33.2,{o:0,x:30},{o:1,x:0});
 A('#st4',33.3,33.7,{o:0,s:2},{o:1,s:1},'back');
 A('#c4a',30.5,31.2,{s:1},{s:1.02},'io');A('#c4a',31.8,32.4,{s:1.02},{s:.98},'io');
-cap('#c4',25.2,31.6); cap('#c5',31.9,35.6);
+cap('#c4',25.2,31.6); cap('#c5',31.9,35.9);
 
 // S5 Chrome 36 - 42.4
 scene('#s5',36,42.4);
