@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="fonts2.css">
+<style>
+:root{--or:#FD6E06;--ort:#F74E00;--eye:#FF5A0A;--dk:#121417;--line:#E7E9EE;--mut:#6B7280;--grn:#1FAE5B;--soft:#FFF1E7}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family:Manrope,sans-serif;color:var(--dk)}
+#stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(1300px 800px at 62% 18%,#0a1a44 0%,#061232 35%,#020818 70%,#000105 100%)}
+.H{font-family:Archivo;font-weight:900;font-stretch:68%;letter-spacing:-.5px;text-transform:uppercase}
+.scene{position:absolute;inset:0;opacity:0}
+.corner{position:absolute;right:48px;top:36px;color:#6a6c6c;font-size:46px;z-index:30}
+.corner i{color:var(--ort);font-style:normal}
+.hdr{position:absolute;left:210px;top:66px}
+.eyebrow{color:var(--eye);font-weight:700;font-size:25px;letter-spacing:.38em;margin-bottom:12px}
+.ttl{font-size:92px;line-height:.86;color:#fdfdfd}
+.ttl span{display:block;color:var(--ort)}
+/* strength chip (header right) */
+#chip{position:absolute;right:210px;top:104px;width:330px;opacity:0;z-index:20}
+#chip .l{display:flex;justify-content:space-between;color:#cfd3dc;font-weight:700;font-size:17px;letter-spacing:.3em;margin-bottom:10px}
+#chip .l b{color:#fff;letter-spacing:0;font-size:22px}
+#chip .bar{height:10px;border-radius:6px;background:rgba(255,255,255,.14);overflow:hidden}
+#chip .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ort),var(--or));border-radius:6px}
+#chip.full .bar i,.sbar.full i{background:linear-gradient(90deg,#15924b,var(--grn))}
+/* panel */
+.panel{position:absolute;left:210px;top:330px;width:1500px;height:730px;background:linear-gradient(180deg,#fff 62%,#eef0f3);border-radius:24px;box-shadow:0 40px 120px rgba(0,0,0,.6);overflow:hidden}
+.band{height:118px;background:linear-gradient(90deg,#2a1206 0%,#7a2d06 45%,var(--ort) 100%);position:relative;padding:26px 40px;color:#fff}
+.band:before{content:"";position:absolute;left:0;top:0;height:5px;width:32%;background:var(--ort)}
+.band .t{font-size:44px;display:flex;align-items:center;gap:14px}
+.band .s{font-size:19px;font-weight:600;opacity:.9;margin-top:2px}
+.band .psa{position:absolute;right:30px;top:36px;background:#3a3c40;color:#fff;font-size:24px;padding:6px 16px 4px;border-radius:22px}
+.band .psa i{color:var(--ort);font-style:normal}
+.body{position:absolute;left:0;right:0;top:118px;bottom:0;padding:34px 40px}
+.card{background:#fff;border:1.5px solid #EDEEF2;border-radius:20px;padding:28px 30px;box-shadow:0 6px 24px rgba(20,25,40,.06);position:relative}
+.ch{display:flex;align-items:center;gap:14px;font-size:25px;font-weight:800;margin-bottom:20px}
+.ch .ic{width:44px;height:44px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center}
+.ch .ic svg{width:24px;height:24px;stroke:var(--or);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ch .tag{margin-left:auto;background:var(--or);color:#fff;font-size:14px;font-weight:800;padding:6px 12px;border-radius:8px;letter-spacing:.04em}
+.grid{display:grid;gap:16px 22px}
+.f label{display:block;font-size:14px;font-weight:800;color:#8a909b;letter-spacing:.08em;margin-bottom:7px}
+.in{height:54px;border:1.5px solid var(--line);background:#FAFBFC;border-radius:12px;padding:0 18px;display:flex;align-items:center;font-size:20px;font-weight:600;color:#1d2026;gap:12px;white-space:nowrap;overflow:hidden;position:relative}
+.in .ph{color:#b0b5bf;font-weight:500}
+.in.done{border-color:#cfe9da;background:#F6FCF8}
+.in .soc{width:30px;height:30px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:15px}
+.hl{position:absolute;inset:-10px;border:4px solid var(--or);border-radius:24px;opacity:0;box-shadow:0 0 0 8px rgba(253,110,6,.14);pointer-events:none}
+.cursor{position:absolute;left:0;top:0;width:34px;height:34px;z-index:40;filter:drop-shadow(0 3px 5px rgba(0,0,0,.35));transform-origin:0 0}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:12px;padding:14px 24px;font-size:19px;font-weight:800}
+.btn.or{background:var(--or);color:#fff;box-shadow:0 8px 20px rgba(253,110,6,.3)}
+.btn.ln{border:2px solid var(--or);color:var(--or);background:#fff}
+.note{font-size:17px;color:var(--mut);font-weight:600}
+/* strength card */
+.sbar{height:22px;border-radius:12px;background:#EEF0F3;overflow:hidden;position:relative}
+.sbar i{display:block;height:100%;background:linear-gradient(90deg,var(--ort),var(--or));border-radius:12px}
+.pctbig{font-size:120px;line-height:.9;color:var(--ort)}
+.pctbig.full{color:var(--grn)}
+/* avatar */
+.ava{border-radius:50%;overflow:hidden;position:relative;flex:none}
+.ava .ph0{position:absolute;inset:0;background:#F1F2F5;border:3px dashed #cfd3da;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#9aa0aa;font-weight:700;font-size:18px;gap:6px}
+.toast{position:absolute;left:50%;margin-left:-160px;bottom:60px;background:#fff;border-radius:16px;padding:18px 26px;box-shadow:0 16px 40px rgba(0,0,0,.18);display:flex;gap:14px;align-items:center;font-weight:800;font-size:22px;opacity:0;z-index:5;border-left:6px solid var(--grn)}
+.ok{width:36px;height:36px;border-radius:50%;background:#E8F7EE;color:var(--grn);font-weight:900;font-size:21px;display:flex;align-items:center;justify-content:center;flex:none}
+.chipsel{display:inline-flex;align-items:center;gap:10px;border:2px solid var(--line);border-radius:30px;padding:12px 22px;font-size:19px;font-weight:700;color:#444;margin:0 12px 14px 0;background:#fff}
+.chipsel i{width:22px;height:22px;border-radius:50%;border:2px solid #c7cbd3;display:inline-block;font-style:normal;font-size:14px;color:#fff;text-align:center;line-height:19px}
+.chipsel.sel{border-color:var(--or);background:var(--soft);color:var(--ort)}
+.chipsel.sel i{background:var(--or);border-color:var(--or)}
+.bio{height:250px;border:1.5px solid var(--line);background:#FAFBFC;border-radius:14px;padding:18px 20px;font-size:20px;line-height:1.55;color:#1d2026;font-weight:500;position:relative;overflow:hidden}
+.ai{background:linear-gradient(90deg,#7b3cff,#c04bff);color:#fff}
+/* intro / outro */
+#s1 .hdr{left:310px;top:360px}
+#s1 .ttl{font-size:150px}
+.tile{position:absolute;left:1380px;top:390px;width:300px;height:300px;border-radius:44px;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden}
+.tile .top{height:78px;background:var(--ort)}
+.tile svg{position:absolute;left:75px;top:108px}
+#s10 .cen{position:absolute;left:0;right:0;top:290px;text-align:center}
+#s10 .lg2{font-size:64px;color:#fff}
+#s10 .big{font-size:150px;line-height:.86;color:#fff;margin-top:34px}
+#s10 .big span{display:block;color:var(--ort)}
+#s10 .pl{display:inline-block;margin-top:40px;border:2px solid rgba(255,255,255,.3);border-radius:40px;padding:12px 30px;color:#fff;font-size:27px;font-weight:700}
+#s10 .pl b{color:var(--eye);font-weight:700}
+#s10 .sp{color:#e8e8e8;font-weight:700;font-size:23px;letter-spacing:.38em;margin-top:28px}
+</style></head><body>
+<div id="stage">
+%%STARS%%
+<div class="corner H" id="corner">PSA<i>.</i></div>
+<div id="chip"><div class="l">FORÇA DA PÁGINA <b class="pnum">0%</b></div><div class="bar"><i class="pbar"></i></div></div>
+
+<!-- reusable avatar svg (defined once, cloned by JS) -->
+<template id="face"><svg viewBox="0 0 200 200" width="100%" height="100%"><defs><linearGradient id="bgp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFB27A"/><stop offset="1" stop-color="#F74E00"/></linearGradient></defs><rect width="200" height="200" fill="url(#bgp)"/><path d="M40 200c4-40 30-62 60-62s56 22 60 62z" fill="#1d2433"/><path d="M86 140l14 26 14-26z" fill="#fff"/><path d="M96 146l4 30 4-30z" fill="#F74E00"/><rect x="88" y="112" width="24" height="30" rx="8" fill="#e9b48f"/><ellipse cx="100" cy="88" rx="34" ry="40" fill="#f2c29d"/><path d="M64 84c0-30 16-46 38-46s36 16 34 44c-6-14-18-22-36-22-18 0-30 8-36 24z" fill="#2b1d16"/></svg></template>
+
+<!-- S1 INTRO -->
+<div class="scene" id="s1">
+  <div class="hdr"><div class="eyebrow" id="s1e">GUIA RÁPIDO · PARA PALESTRANTES</div>
+  <div class="ttl H"><div id="s1a">MEU PERFIL</div><span id="s1b">COMPLETO.</span></div></div>
+  <div class="tile" id="s1c"><div class="top"></div>
+    <svg width="150" height="150" viewBox="0 0 24 24" fill="none" stroke="#F74E00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c0-4.2 3.4-7 7.5-7s7.5 2.8 7.5 7"/></svg></div>
+</div>
+
+<!-- S2 FORÇA DA PÁGINA -->
+<div class="scene" id="s2">
+  <div class="hdr"><div class="eyebrow">MEU PERFIL</div><div class="ttl H">FORÇA DA SUA PÁGINA.<span>META: 100%.</span></div></div>
+  <div class="panel" id="p2"><div class="band"><div class="t H">MEU PERFIL</div><div class="s">Estruture e preencha a sua página de palestrante.</div><div class="psa H">PSA<i>.</i></div></div>
+    <div class="body">
+      <div class="card" id="k2" style="padding:36px 40px">
+        <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>Força da sua página<div class="tag" id="meta2" style="opacity:0">META 100%</div></div>
+        <div style="display:flex;align-items:flex-end;gap:40px">
+          <div class="pctbig H pnumbig">0%</div>
+          <div style="flex:1;padding-bottom:14px"><div class="note" style="margin-bottom:14px">Complete todas as seções para deixar sua página pronta para os contratantes.</div>
+            <div class="sbar"><i class="pbar"></i></div></div>
+        </div>
+        <div class="hl" id="hl2"></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:26px" id="list2">
+        <div class="chipsel">Foto de perfil</div><div class="chipsel">Biografia</div><div class="chipsel">Frase de destaque</div><div class="chipsel">Dados pessoais</div><div class="chipsel">Contato</div><div class="chipsel">Redes sociais</div><div class="chipsel">Localização</div>
+      </div>
+    </div></div>
+</div>
+
+<!-- S3 FOTO -->
+<div class="scene" id="s3">
+  <div class="hdr"><div class="eyebrow">FOTO DE PERFIL</div><div class="ttl H">SUA IMAGEM<span>PROFISSIONAL.</span></div></div>
+  <div class="panel" id="p3"><div class="band"><div class="t H">MEU PERFIL</div><div class="s">Foto de perfil</div><div class="psa H">PSA<i>.</i></div></div>
+    <div class="body" style="display:flex;gap:30px">
+      <div class="card" style="flex:1.1">
+        <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h3l2-3h6l2 3h3v13H4z"/><circle cx="12" cy="13" r="4"/></svg></div>Foto de perfil</div>
+        <div style="display:flex;align-items:center;gap:36px">
+          <div class="ava" style="width:250px;height:250px"><div class="face" id="face3" style="position:absolute;inset:0;opacity:0"></div><div class="ph0" id="ph3">Sem foto</div></div>
+          <div><div class="btn or" id="up3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg>Enviar foto</div>
+            <div class="note" style="margin-top:18px;max-width:330px;line-height:1.45">Use uma foto profissional, com boa iluminação e rosto em destaque.</div></div>
+        </div>
+        <div class="hl" id="hl3a"></div>
+        <svg class="cursor" id="cur3" viewBox="0 0 24 24"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="#111" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="card" style="flex:.9;background:#0b1430;border-color:#0b1430;color:#fff" id="pub3">
+        <div style="font-size:15px;font-weight:800;letter-spacing:.3em;color:var(--eye)">SITE DA PSA · PÚBLICO</div>
+        <div style="display:flex;gap:22px;align-items:center;margin-top:22px">
+          <div class="ava" style="width:130px;height:130px"><div class="face" id="face3b" style="position:absolute;inset:0"></div></div>
+          <div><div style="font-size:28px;font-weight:800">Seu nome artístico</div><div style="color:#aab3c8;font-size:19px;margin-top:4px">Palestrante · Liderança</div></div></div>
+        <div style="margin-top:26px;border-top:1px solid rgba(255,255,255,.12);padding-top:20px;color:#cdd3e0;font-size:19px;line-height:1.5">A mesma foto enviada no seu perfil é exibida para os <b style="color:#fff">contratantes</b>.</div>
+        <div class="hl" id="hl3b"></div>
+      </div>
+    </div></div>
+</div>
+
+<!-- S4 BIOGRAFIA -->
+<div class="scene" id="s4">
+  <div class="hdr"><div class="eyebrow">BIOGRAFIA PROFISSIONAL</div><div class="ttl H">SUA TRAJETÓRIA,<span>SUAS CONQUISTAS.</span></div></div>
+  <div class="panel" id="p4"><div class="band"><div class="t H">MEU PERFIL</div><div class="s">Sua biografia profissional</div><div class="psa H">PSA<i>.</i></div></div>
+    <div class="body">
+      <div class="card">
+        <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 4h10l4 4v12H5z"/><path d="M9 12h6M9 16h6M9 8h3"/></svg></div>Sua Biografia Profissional
+          <div class="btn ai" id="ai4" style="margin-left:auto;padding:12px 22px;font-size:18px;position:relative"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2zM19 15l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"/></svg>Gerar com IA<div class="hl" id="hl4b" style="inset:-8px;border-radius:18px;border-color:#9b4dff;box-shadow:0 0 0 8px rgba(155,77,255,.15)"></div></div></div>
+        <div style="display:flex;gap:26px;margin-bottom:16px" class="note"><span>✓ Trajetória</span><span>✓ Conquistas</span><span>✓ Experiência de palco</span></div>
+        <div class="bio"><span id="bio1"></span><span id="bio2" style="position:absolute;left:20px;right:20px;top:18px;opacity:0"></span></div>
+        <div class="hl" id="hl4a" style="top:auto;height:0"></div>
+        <svg class="cursor" id="cur4" viewBox="0 0 24 24"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="#111" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </div>
+    </div></div>
+</div>
+
+<!-- S5 FRASE -->
+<div class="scene" id="s5">
+  <div class="hdr"><div class="eyebrow">FRASE DE DESTAQUE</div><div class="ttl H">SEU POSICIONAMENTO<span>EM UMA FRASE.</span></div></div>
+  <div class="panel" id="p5"><div class="band"><div class="t H">MEU PERFIL</div><div class="s">Frase de destaque</div><div class="psa H">PSA<i>.</i></div></div>
+    <div class="body">
+      <div class="card" style="padding:40px">
+        <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M7 7h4v6H5V9a2 2 0 0 1 2-2zM15 7h4v6h-6V9a2 2 0 0 1 2-2zM5 13c0 3 1 5 4 6M13 13c0 3 1 5 4 6"/></svg></div>Frase de Destaque<div class="tag" style="background:#2a2d33">30 A 60 CARACTERES</div></div>
+        <div class="in" id="in5" style="height:74px;font-size:28px"><span id="fr5"></span><span class="ph" id="fr5ph">Ex.: Transformo liderança em resultados reais</span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:16px" class="note"><span>Um resumo objetivo do seu posicionamento.</span><span id="cnt5wrap"><b id="cnt5">0</b>/60</span></div>
+        <div style="margin-top:30px;height:14px;border-radius:8px;background:#EEF0F3;position:relative">
+          <div style="position:absolute;left:50%;width:50%;top:0;bottom:0;background:#E3F5EA;border-radius:0 8px 8px 0"></div>
+          <i id="m5" style="position:absolute;top:-6px;width:6px;height:26px;border-radius:3px;background:var(--or);left:0"></i>
+          <span class="note" style="position:absolute;left:50%;top:22px;transform:translateX(-50%)">30</span><span class="note" style="position:absolute;right:0;top:22px">60</span></div>
+        <div class="hl" id="hl5"></div>
+      </div>
+    </div></div>
+</div>
+
+<!-- S6 DADOS + CONTATO -->
+<div class="scene" id="s6">
+  <div class="hdr"><div class="eyebrow">DADOS PESSOAIS · CONTATO</div><div class="ttl H">SEUS DADOS,<span>SEUS CONTATOS.</span></div></div>
+  <div class="panel" id="p6"><div class="band"><div class="t H">MEU PERFIL</div><div class="s">Dados pessoais e contato</div><div class="psa H">PSA<i>.</i></div></div>
+    <div class="body" style="display:flex;gap:26px">
+      <div class="card" style="flex:1.25">
+        <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2.5"/><path d="M14 10h4M14 14h4M5.5 16c.6-1.6 2-2.5 3.5-2.5s2.9.9 3.5 2.5"/></svg></div>Dados Pessoais</div>
+        <div class="grid" style="grid-template-columns:1fr 1fr">
+          <div class="f"><label>NOME</label><div class="in"><span id="d1"></span></div></div>
+          <div class="f"><label>NOME ARTÍSTICO</label><div class="in"><span id="d2"></span></div></div>
+          <div class="f"><label>CPF</label><div class="in"><span id="d3"></span></div></div>
+          <div class="f"><label>RG</label><div class="in"><span id="d4"></span></div></div>
+          <div class="f" style="grid-column:1/3"><label>FORMAÇÃO</label><div class="in"><span id="d5"></span></div></div>
+        </div>
+        <div class="hl" id="hl6a"></div>
+      </div>
+      <div class="card" style="flex:1">
+        <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1"/></svg></div>Contato</div>
+        <div class="grid">
+          <div class="f"><label>E-MAIL</label><div class="in"><span id="e1"></span></div></div>
+          <div class="f"><label>WHATSAPP</label><div class="in"><div class="soc" style="background:#25D366">✆</div><span id="e2"></span></div></div>
+          <div class="f"><label>CONTATO DE EMERGÊNCIA</label><div class="in"><span id="e3"></span></div></div>
+        </div>
+        <div class="hl" id="hl6b"></div>
+      </div>
+    </div></div>
+</div>
+
+<!-- S7 REDES -->
+<div class="scene" id="s7">
+  <div class="hdr"><div class="eyebrow">REDES SOCIAIS</div><div class="ttl H">SUAS REDES<span>E SEU VÍDEO.</span></div></div>
+  <div class="panel" id="p7"><div class="band"><div class="t H">MEU PERFIL</div><div class="s">Redes sociais</div><div class="psa H">PSA<i>.</i></div></div>
+    <div class="body">
+      <div class="card">
+        <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg></div>Redes Sociais</div>
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:22px 26px">
+          <div class="f rel" style="position:relative"><label>INSTAGRAM</label><div class="in"><div class="soc" style="background:linear-gradient(45deg,#f9a825,#e91e63,#7b1fa2)">◎</div><span id="r1"></span></div><div class="hl" id="hr1"></div></div>
+          <div class="f" style="position:relative"><label>FACEBOOK</label><div class="in"><div class="soc" style="background:#1877F2">f</div><span id="r2"></span></div><div class="hl" id="hr2"></div></div>
+          <div class="f" style="position:relative"><label>LINKEDIN</label><div class="in"><div class="soc" style="background:#0A66C2">in</div><span id="r3"></span></div><div class="hl" id="hr3"></div></div>
+          <div class="f" style="position:relative"><label>VÍDEO EM DESTAQUE · YOUTUBE</label><div class="in"><div class="soc" style="background:#FF0000">▶</div><span id="r4"></span></div><div class="hl" id="hr4"></div></div>
+        </div>
+        <div style="margin-top:26px;display:flex;align-items:center;gap:22px;opacity:0" id="yt7">
+          <div style="width:250px;height:140px;border-radius:14px;background:linear-gradient(135deg,#1a1f2e,#3a2a5e 60%,#F74E00);position:relative"><div style="position:absolute;left:50%;top:50%;width:60px;height:42px;margin:-21px 0 0 -30px;background:#FF0000;border-radius:12px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px">▶</div></div>
+          <div><div style="font-size:23px;font-weight:800">Vídeo em destaque</div><div class="note" style="margin-top:6px">Exibido na sua página para os contratantes.</div></div></div>
+      </div>
+    </div></div>
+</div>
+
+<!-- S8 LOCALIZAÇÃO + MOMENTO -->
+<div class="scene" id="s8">
+  <div class="hdr"><div class="eyebrow">LOCALIZAÇÃO · MOMENTO ATUAL</div><div class="ttl H">ONDE VOCÊ ESTÁ<span>E SEU MOMENTO.</span></div></div>
+  <div class="panel" id="p8"><div class="band"><div class="t H">MEU PERFIL</div><div class="s">Localização e seu momento atual</div><div class="psa H">PSA<i>.</i></div></div>
+    <div class="body" style="display:flex;gap:26px">
+      <div class="card" style="flex:1">
+        <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>Localização</div>
+        <div class="grid" style="grid-template-columns:1.4fr .6fr">
+          <div class="f"><label>CIDADE</label><div class="in"><span id="l1"></span></div></div>
+          <div class="f"><label>ESTADO</label><div class="in"><span id="l2"></span></div></div>
+        </div>
+        <div style="margin-top:20px;height:150px;border-radius:14px;background:#EFE9DF;position:relative;overflow:hidden" id="map8">
+          <svg width="100%" height="100%" viewBox="0 0 600 150" preserveAspectRatio="none"><path d="M0 100 C150 60 250 130 600 70" stroke="#fff" stroke-width="10" fill="none"/><path d="M200 0 C230 60 210 100 260 150" stroke="#fff" stroke-width="8" fill="none"/><circle cx="90" cy="40" r="22" fill="#d5e8d4"/><circle cx="520" cy="120" r="28" fill="#d5e8d4"/></svg>
+          <div id="pin8" style="position:absolute;left:47%;top:30px;opacity:0"><svg width="44" height="54" viewBox="0 0 24 30"><path d="M12 29s-10-9-10-16a10 10 0 0 1 20 0c0 7-10 16-10 16z" fill="#F74E00"/><circle cx="12" cy="12" r="4" fill="#fff"/></svg></div>
+        </div>
+        <div class="note" style="margin-top:14px">Essencial para o cálculo logístico dos eventos.</div>
+        <div class="hl" id="hl8a"></div>
+      </div>
+      <div class="card" style="flex:1">
+        <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 18l5-6 4 3 7-9"/><path d="M15 6h5v5"/></svg></div>Seu momento atual</div>
+        <div id="chips8">
+          <div class="chipsel" id="m1"><i>✓</i>Já palestro profissionalmente</div>
+          <div class="chipsel" id="m2"><i>✓</i>Estou começando</div>
+          <div class="chipsel" id="m3"><i>✓</i>Disponível para viagens</div>
+          <div class="chipsel" id="m4"><i>✓</i>Eventos corporativos</div>
+          <div class="chipsel" id="m5"><i>✓</i>Eventos on-line</div>
+        </div>
+        <div class="hl" id="hl8b"></div>
+      </div>
+    </div></div>
+</div>
+
+<!-- S9 SALVAR -->
+<div class="scene" id="s9">
+  <div class="hdr"><div class="eyebrow">PRONTO</div><div class="ttl H">PERFIL COMPLETO<span>E ATUALIZADO.</span></div></div>
+  <div class="panel" id="p9"><div class="band"><div class="t H">MEU PERFIL</div><div class="s">Revisão final</div><div class="psa H">PSA<i>.</i></div></div>
+    <div class="body" style="display:flex;gap:26px">
+      <div class="card" style="flex:1.2">
+        <div class="ch"><div class="ic"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>Força da sua página</div>
+        <div style="display:flex;align-items:flex-end;gap:30px"><div class="pctbig H pnumbig" id="pb9">95%</div>
+          <div style="flex:1;padding-bottom:14px"><div class="sbar" id="sb9"><i class="pbar"></i></div></div></div>
+        <div style="display:flex;flex-wrap:wrap;margin-top:24px" class="done9">
+          <div class="chipsel sel"><i>✓</i>Foto</div><div class="chipsel sel"><i>✓</i>Biografia</div><div class="chipsel sel"><i>✓</i>Frase</div><div class="chipsel sel"><i>✓</i>Dados</div><div class="chipsel sel"><i>✓</i>Contato</div><div class="chipsel sel"><i>✓</i>Redes</div><div class="chipsel sel"><i>✓</i>Localização</div></div>
+        <div style="text-align:right;margin-top:6px"><div class="btn or" id="save9" style="font-size:22px;padding:18px 34px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v6h8V3M8 21v-7h8v7"/></svg>Salvar alterações</div></div>
+        <svg class="cursor" id="cur9" viewBox="0 0 24 24"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="#111" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="card" style="flex:.8;background:#0b1430;border-color:#0b1430;color:#fff" id="pub9">
+        <div style="font-size:15px;font-weight:800;letter-spacing:.3em;color:var(--eye)">VISÃO DO CONTRATANTE</div>
+        <div style="display:flex;gap:20px;align-items:center;margin-top:22px"><div class="ava" style="width:110px;height:110px"><div class="face" style="position:absolute;inset:0"></div></div>
+          <div><div style="font-size:26px;font-weight:800">Seu nome artístico</div><div style="color:#aab3c8;font-size:18px;margin-top:4px">São Paulo, SP</div></div></div>
+        <div style="margin-top:20px;color:#fff;font-size:21px;font-weight:700;line-height:1.4">“Transformo liderança em resultados reais.”</div>
+        <div style="margin-top:14px;color:#aab3c8;font-size:17px;line-height:1.5">Palestrante com mais de 10 anos de palco e experiência em eventos corporativos…</div>
+        <div style="margin-top:18px;display:inline-block;background:#E8F7EE;color:var(--grn);font-weight:800;font-size:16px;padding:8px 14px;border-radius:20px">✓ PRONTO PARA VISUALIZAÇÃO</div>
+      </div>
+    </div>
+    <div class="toast" id="toast9"><div class="ok">✓</div>Alterações salvas!</div>
+  </div>
+</div>
+
+<!-- S10 OUTRO -->
+<div class="scene" id="s10">
+  <div class="cen">
+    <div class="lg2 H" id="o_lg">PSA<i style="color:var(--ort);font-style:normal">.</i></div>
+    <div class="big H"><div id="o_a">PERFIL COMPLETO.</div><span id="o_b">MAIS OPORTUNIDADES.</span></div>
+    <div class="pl" id="o_s">Acesse <b>Meu Perfil</b> › preencha tudo › <b>Salvar alterações</b></div>
+    <div class="sp" id="o_st">META: 100% DE FORÇA DA PÁGINA</div>
+  </div>
+</div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+$$('.face').forEach(f=>f.appendChild($('#face').content.cloneNode(true)));
+const E={lin:x=>x,out:x=>1-Math.pow(1-x,3),io:x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,back:x=>{const c=1.5;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)}};
+const TW=[],TX=[],CL=[];
+function A(sel,t0,t1,from,to,e='out'){const el=$(sel);if(!el)throw sel;for(const k in to)TW.push({el,k,t0,t1,a:from[k],b:to[k],e:E[e]});}
+function T(sel,t0,t1,text){const el=$(sel);if(!el)throw sel;TX.push({el,t0,t1,text});}
+function C(sel,t,cls){CL.push({el:$(sel),t,cls});}   // add class from time t
+function scene(sel,t0,t1){A(sel,t0,t0+.6,{o:0,s:1.03},{o:1,s:1});A(sel,t1-.5,t1,{o:1,s:1},{o:0,s:.98},'io');}
+function head(sel,t0){A(sel+' .eyebrow',t0,t0+.6,{o:0,x:-30},{o:1,x:0});A(sel+' .ttl',t0+.1,t0+.8,{o:0,y:40},{o:1,y:0});}
+function panel(sel,t0){A(sel,t0,t0+.9,{o:0,y:90},{o:1,y:0});}
+function pulse(sel,t0,t1){A(sel,t0,t0+.35,{o:0,s:1.06},{o:1,s:1});A(sel,t1,t1+.3,{o:1},{o:0},'lin');}
+function fill(sel,t0,text,cps=28){T(sel,t0,t0+text.length/cps,text);C(sel,t0+text.length/cps,'x');}
+// strength % keyframes [t, value]
+const PK=[[9.4,0],[11.2,35],[21.6,35],[22.4,45],[45.2,45],[46,60],[54.6,60],[55.2,65],[61.8,65],[62.4,72],[66.8,72],[67.4,80],[73.8,80],[74.4,90],[83.6,90],[84.2,95],[87.1,95],[88.3,100]];
+function pct(t){if(t<=PK[0][0])return PK[0][1];for(let i=1;i<PK.length;i++){if(t<=PK[i][0]){const [a,va]=PK[i-1],[b,vb]=PK[i];return va+(vb-va)*E.io((t-a)/(b-a));}}return 100;}
+
+/* ---- timeline ---- */
+A('#stars',0,100,{x:0,y:0},{x:-120,y:-40},'lin');
+// S1 intro 0 - 7.6   (v0 0.9)
+scene('#s1',0,7.6);
+A('#s1e',.3,1.0,{o:0,x:-30},{o:1,x:0});
+A('#s1a',.5,1.3,{o:0,y:60},{o:1,y:0});
+A('#s1b',.75,1.55,{o:0,y:60},{o:1,y:0});
+A('#s1c',1.0,2.0,{o:0,y:80,r:8,s:.8},{o:1,y:0,r:0,s:1},'back');
+A('#s1c',2.0,7.6,{y:0},{y:-16},'lin');
+A('#chip',7.8,8.4,{o:0,y:-10},{o:1,y:0}); A('#chip',93.2,93.7,{o:1},{o:0},'lin');
+
+// S2 força 7.6 - 18.2   (v1 8.2, v2 14.4)
+scene('#s2',7.6,18.2); head('#s2',7.7); panel('#p2',7.9);
+pulse('#hl2',10.6,13.8);
+A('#meta2',14.5,15.0,{o:0,s:1.4},{o:1,s:1},'back');
+A('#list2',15.0,15.7,{o:0,y:20},{o:1,y:0});
+
+// S3 foto 18.2 - 32.7   (v3 18.8, v4 29.1)
+scene('#s3',18.2,32.7); head('#s3',18.3); panel('#p3',18.4);
+A('#cur3',18.8,20.2,{x:700,y:420},{x:500,y:160},'io');
+A('#up3',20.4,20.55,{s:1},{s:.93},'lin'); A('#up3',20.55,20.8,{s:.93},{s:1});
+A('#ph3',20.9,21.3,{o:1},{o:0},'lin'); A('#face3',20.9,21.6,{o:0,s:.8},{o:1,s:1},'back');
+pulse('#hl3a',21.2,24.2);
+A('#pub3',19.0,19.9,{o:0,x:40},{o:1,x:0});
+pulse('#hl3b',24.4,28.9);
+A('#face3b',24.4,25.0,{o:0,s:.8},{o:1,s:1},'back');
+
+// S4 bio 32.7 - 48.8   (v5 33.3, v6 41.3)
+scene('#s4',32.7,48.8); head('#s4',32.8); panel('#p4',32.9);
+T('#bio1',34.4,39.8,'Palestrante há 10 anos, já subi em mais de 300 palcos falando sobre liderança…');
+A('#cur4',41.4,42.8,{x:600,y:420},{x:1270,y:20},'io');
+pulse('#hl4b',42.6,44.6);
+A('#ai4',43.4,43.55,{s:1},{s:.93},'lin'); A('#ai4',43.55,43.8,{s:.93},{s:1});
+A('#bio1',43.8,44.1,{o:1},{o:0},'lin'); A('#bio2',44.0,44.1,{o:0},{o:1},'lin');
+T('#bio2',44.1,47.6,'Com mais de 10 anos de trajetória e 300 palestras realizadas em todo o Brasil, é referência em liderança e gestão de pessoas. Reconhecido pela comunicação envolvente e pela experiência de palco, conecta conteúdo prático a resultados reais para empresas e eventos.');
+
+// S5 frase 48.8 - 56.8   (v7 49.4)
+scene('#s5',48.8,56.8); head('#s5',48.9); panel('#p5',49.0);
+A('#fr5ph',50.4,50.5,{o:1},{o:0},'lin');
+T('#fr5',50.5,53.8,'Transformo liderança em resultados reais');
+pulse('#hl5',50.3,55.8);
+
+// S6 dados + contato 56.8 - 68.4   (v8 57.4, v9 63.5)
+scene('#s6',56.8,68.4); head('#s6',56.9); panel('#p6',57.0);
+pulse('#hl6a',57.6,63.2);
+fill('#d1',58.0,'Carlos Eduardo Lima'); fill('#d2',59.0,'Edu Lima'); fill('#d3',59.8,'000.000.000-00');
+fill('#d4',60.8,'00.000.000-0'); fill('#d5',61.7,'MBA em Gestão de Pessoas');
+pulse('#hl6b',63.4,67.9);
+fill('#e1',63.7,'contato@edulima.com.br'); fill('#e2',64.8,'(11) 90000-0000'); fill('#e3',66.0,'Ana Lima · (11) 90000-1111');
+
+// S7 redes 68.4 - 75.8   (v10 69.0)
+scene('#s7',68.4,75.8); head('#s7',68.5); panel('#p7',68.6);
+pulse('#hr1',69.9,71.2); fill('#r1',70.1,'instagram.com/edulima',30);
+pulse('#hr2',70.9,72.1); fill('#r2',71.1,'facebook.com/edulima',30);
+pulse('#hr3',71.6,72.9); fill('#r3',71.8,'linkedin.com/in/edulima',30);
+pulse('#hr4',72.6,75.2); fill('#r4',72.8,'youtube.com/watch?v=palestra',30);
+A('#yt7',73.8,74.5,{o:0,y:20},{o:1,y:0});
+
+// S8 localização 75.8 - 85.2   (v11 76.4)
+scene('#s8',75.8,85.2); head('#s8',75.9); panel('#p8',76.0);
+pulse('#hl8a',76.8,80.8);
+fill('#l1',77.2,'São Paulo'); fill('#l2',77.8,'SP');
+A('#pin8',78.4,79.0,{o:0,y:-30},{o:1,y:0},'back');
+pulse('#hl8b',81.0,84.7);
+C('#m1',81.8,'sel'); C('#m3',82.7,'sel'); C('#m4',83.4,'sel');
+
+// S9 salvar 85.2 - 93.8   (v12 85.8)
+scene('#s9',85.2,93.8); head('#s9',85.3); panel('#p9',85.4);
+A('#cur9',85.8,86.8,{x:500,y:470},{x:790,y:440},'io');
+A('#save9',86.9,87.05,{s:1},{s:.93},'lin'); A('#save9',87.05,87.3,{s:.93},{s:1});
+A('#toast9',87.4,87.9,{o:0,x:60},{o:1,x:0},'back'); A('#toast9',92.0,92.4,{o:1},{o:0},'lin');
+A('#pub9',88.4,89.2,{o:0,x:40},{o:1,x:0});
+
+// S10 outro 93.8 - 99
+A('#s10',93.6,94.2,{o:0},{o:1},'lin');
+A('#corner',93.4,93.9,{o:1},{o:0},'lin');
+A('#o_lg',93.9,94.6,{o:0,y:30},{o:1,y:0});
+A('#o_a',94.1,94.8,{o:0,y:50},{o:1,y:0});
+A('#o_b',94.3,95.0,{o:0,y:50},{o:1,y:0});
+A('#o_s',94.7,95.4,{o:0,y:20},{o:1,y:0});
+A('#o_st',95.1,95.8,{o:0},{o:1},'lin');
+A('#stage',98.2,99,{o:1},{o:0},'lin');
+
+/* ---- engine ---- */
+const byEl=new Map();
+for(const t of TW){if(!byEl.has(t.el))byEl.set(t.el,{});const m=byEl.get(t.el);(m[t.k]=m[t.k]||[]).push(t);}
+for(const m of byEl.values())for(const k in m)m[k].sort((a,b)=>a.t0-b.t0);
+function val(list,t){if(t<list[0].t0)return list[0].a;let cur=list[0];for(const w of list)if(w.t0<=t)cur=w;if(t>=cur.t1)return cur.b;const p=cur.e((t-cur.t0)/(cur.t1-cur.t0));return cur.a+(cur.b-cur.a)*p;}
+window.seek=function(t){
+  for(const [el,m] of byEl){const v={};for(const k in m)v[k]=val(m[k],t);
+    if('o' in v)el.style.opacity=v.o;
+    el.style.transform=`translate(${v.x||0}px,${v.y||0}px) scale(${v.s??1}) rotate(${v.r||0}deg)`;}
+  for(const x of TX){const p=Math.max(0,Math.min(1,(t-x.t0)/(x.t1-x.t0)));x.el.textContent=x.text.slice(0,Math.round(p*x.text.length));}
+  for(const c of CL){ if(c.cls==='x'){c.el.parentElement.classList.toggle('done',t>=c.t);} else c.el.classList.toggle(c.cls,t>=c.t);}
+  const p=Math.round(pct(t)), full=p>=100;
+  $$('.pnum,.pnumbig').forEach(e=>{e.textContent=p+'%';e.classList.toggle('full',full);});
+  $$('.pbar').forEach(e=>e.style.width=p+'%');
+  $('#chip').classList.toggle('full',full); $$('.sbar').forEach(e=>e.classList.toggle('full',full));
+  const n=$('#fr5').textContent.length; $('#cnt5').textContent=n;
+  $('#m5').style.left=`calc(${Math.min(n,60)/60*100}% - 3px)`;
+  $('#m5').style.background=n>=30?'var(--grn)':'var(--or)'; $('#cnt5wrap').style.color=n>=30?'var(--grn)':'';
+  $('#in5').classList.toggle('done',n>=30);
+};
+seek(0);
+</script>
+</body></html>

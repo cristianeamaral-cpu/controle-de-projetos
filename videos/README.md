@@ -2,6 +2,7 @@
 
 | Vídeo | Duração | Conteúdo |
 |-------|---------|----------|
+| [`meu-perfil-completo.mp4`](meu-perfil-completo.mp4) | 1 min 39 s | Aba **Meu Perfil**: Força da Página (meta 100%), foto de perfil (a mesma exibida no site para contratantes), Biografia Profissional com **Gerar com IA**, Frase de Destaque (30 a 60 caracteres), Dados Pessoais, Contato, Redes Sociais, Localização, Seu momento atual e Salvar alterações. Fontes em [`fonte-meu-perfil/`](fonte-meu-perfil/). |
 | [`como-acessar-o-ecossistema-psa.mp4`](como-acessar-o-ecossistema-psa.mp4) | 52 s | Login no site (botão **Login** no canto superior direito), entrada por e-mail, Google ou LinkedIn, dica de LGPD (perfil único, sem logins secundários para assessores ou assistentes) e recomendação do Google Chrome. |
 
 Formato: 1920×1080, 30 fps, H.264 + AAC. Mesma trilha de fundo do vídeo
@@ -9,6 +10,14 @@ Formato: 1920×1080, 30 fps, H.264 + AAC. Mesma trilha de fundo do vídeo
 Identidade visual igual à do vídeo "Minha Conta + Google Calendar": fundo azul-marinho
 (`#05102B`) com constelação, títulos em Archivo Black condensada (branco e laranja `#F74E00`),
 sobretítulo laranja espaçado, marcador de passos e textos da interface em Manrope (laranja `#FD6E06`).
+
+## Padrão visual da série
+
+Todos os vídeos seguem o vídeo de referência **"Minha Conta + Google Calendar"**:
+fundo azul-marinho com constelação, títulos em Archivo Black condensada (branco + laranja `#F74E00`),
+sobretítulo laranja espaçado, painel branco com faixa laranja, logo "PSA." no canto e textos da
+interface em Manrope. Sem legendas. Trilha: a mesma música de fundo (repetida com transição suave
+quando o vídeo passa de 68 s). Voz: Kokoro `pf_dora`.
 
 ## Como o vídeo foi gerado (`fonte/`)
 
