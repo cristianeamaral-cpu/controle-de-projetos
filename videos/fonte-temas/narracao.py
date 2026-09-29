@@ -3,11 +3,13 @@ import soundfile as sf, json, numpy as np
 from kokoro_onnx import Kokoro
 k=Kokoro('voices/kokoro-v1.0.onnx','voices/voices-v1.0.bin')
 segs=[
- "A seleção correta dos seus temas é o que define a quais oportunidades de palestras você poderá se candidatar!",
- "Na aba Temas, você pode selecionar múltiplos Macro Temas, para mapear todas as suas áreas de atuação.",
- "Porém, atenção a esta regra: você deve escolher exatamente um Tema Principal.",
- "Ele será a sua maior bandeira na plataforma.",
- "Escolha com cuidado, pois o algoritmo cruza esses temas com os brífins enviados pelos clientes!",
+ "A seleção correta dos seus temas é fundamental para direcionar a sua carreira na plataforma!",
+ "Na aba Temas, você pode escolher múltiplos Macro Temas.",
+ "Quanto mais macrotemas alinhados à sua ekspertíze você selecionar, mais você amplia as suas possibilidades de candidatura a oportunidades,",
+ "e abre um leque ainda maior para gerar pesquisas e insáits no pê ésse á Tréndis.",
+ "Porém, atenção a esta regra importante: você deve escolher exatamente um Tema Principal.",
+ "Ele será a sua maior bandeira, e o seu principal posicionamento no mercado.",
+ "Escolha com carinho, pois nosso algoritmo utiliza essa seleção para cruzar seus dados com os brífins dos clientes, e potencializar seus resultados!",
 ]
 out=[]
 for i,t in enumerate(segs):
