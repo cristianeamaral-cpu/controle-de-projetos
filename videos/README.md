@@ -9,7 +9,7 @@ Formato: 1920×1080, 30 fps, H.264 + AAC. Mesma trilha de fundo do vídeo
 
 ## Como o vídeo foi gerado (`fonte/`)
 
-1. **Telas:** `video.html` contém todas as cenas animadas e as legendas; a função
+1. **Telas:** `video.html` contém todas as cenas animadas (as legendas estão ocultas pela regra `.cap{display:none}`; remova-a para exibi-las); a função
    `seek(t)` posiciona a animação no segundo `t`.
 2. **Quadros:** `node render.js full 52.5` (Playwright) grava `frames/f00000.jpg…` a 30 fps.
    `node render.js test 3,15,27` salva quadros avulsos para conferência.
