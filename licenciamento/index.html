@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Licenciamento TB School</title>
+<meta name="description" content="Gestor de entregas do produto Licenciamento TB School: o que será entregue, em qual ordem e o status de cada etapa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Oswald:wght@500&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: faixa-hero no gradiente dos decks TB School → resumo (progresso + próxima entrega)
+   → trilha das 6 fases → lista ordenada de entregas agrupada por fase. Tema escuro único, como os decks. */
+:root {
+  color-scheme: dark;
+  --bg: #16110e;
+  --surface: #211a16;
+  --surface-2: #2b221d;
+  --line: #3b2f28;
+  --fg: #f4ede7;
+  --muted: #b4a498;
+  --accent: #e8702a;
+  --accent-soft: #f2a05f;
+  --on-accent: #1a0e07;
+  --ok: #6cc592;
+  --warn: #e9bb4f;
+  --crit: #ef6a5e;
+  --info: #8fb2dc;
+  --hero-a: #22100a;
+  --hero-b: #6a2a10;
+  --hero-c: #d65a1c;
+  --f-display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --f-label: "Oswald", "Arial Narrow", "Segoe UI", sans-serif;
+  --f-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --r: 10px;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 15px/1.55 var(--f-body); }
+a { color: var(--accent-soft); }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; }
+
+/* Hero */
+.hero { background: linear-gradient(125deg, var(--hero-a) 0%, var(--hero-b) 55%, var(--hero-c) 100%); padding-block: 36px 34px; }
+.eyebrow { font: 600 12px/1 var(--f-display); letter-spacing: .08em; text-transform: uppercase; color: var(--accent-soft); display: flex; align-items: center; gap: 10px; }
+.dots { color: var(--accent); letter-spacing: 2px; }
+.hero h1 { font: 700 clamp(28px, 5vw, 44px)/1.12 var(--f-display); margin: 18px 0 12px; text-wrap: balance; }
+.hero p { margin: 0; max-width: 66ch; color: #eadfd6; }
+.hero .meta { margin-top: 18px; font-size: 13px; color: #d9c6b8; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.save-state { font-size: 12px; }
+
+/* Seções */
+section { padding-block: 28px 4px; }
+.sec-tag { font: 500 13px/1 var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+h2 { font: 500 clamp(22px, 3.2vw, 30px)/1.15 var(--f-label); margin: 8px 0 16px; text-wrap: balance; }
+.lead { color: var(--muted); margin: -8px 0 18px; max-width: 70ch; }
+
+/* Resumo */
+.summary { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; min-width: 0; }
+.big { font: 700 44px/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.big small { font-size: 16px; color: var(--muted); font-weight: 600; margin-left: 6px; }
+.bar { height: 10px; background: var(--surface-2); border-radius: 99px; overflow: hidden; margin: 14px 0 16px; display: flex; }
+.bar span { display: block; height: 100%; }
+.counts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--muted); }
+.counts b { color: var(--fg); font-variant-numeric: tabular-nums; }
+.sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
+.next { background: var(--accent); color: var(--on-accent); border-color: transparent; display: flex; flex-direction: column; gap: 8px; }
+.next .lbl { font: 500 12px/1 var(--f-label); letter-spacing: .14em; text-transform: uppercase; }
+.next .ttl { font: 700 20px/1.25 var(--f-display); text-wrap: balance; }
+.next p { margin: 0; font-size: 14px; }
+.next a { color: var(--on-accent); font-weight: 600; }
+.alert-line { font-size: 13px; color: var(--crit); margin-top: 10px; }
+.alert-line:empty { display: none; }
+
+/* Produto */
+.product { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; min-width: 0; }
+.card h3 { font: 600 15px/1.3 var(--f-display); margin: 0 0 6px; }
+.card p { margin: 0; font-size: 13.5px; color: var(--muted); }
+.card .n { font: 700 13px/1 var(--f-display); color: var(--accent); display: block; margin-bottom: 10px; }
+.card.hl { background: var(--accent); border-color: transparent; }
+.card.hl p, .card.hl .n { color: var(--on-accent); }
+.card.hl h3 { color: var(--on-accent); }
+.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+.row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+.note { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 12px; }
+details.about > summary { cursor: pointer; color: var(--accent-soft); font-size: 14px; list-style: none; }
+details.about > summary::before { content: "▸ "; }
+details.about[open] > summary::before { content: "▾ "; }
+
+/* Trilha de fases */
+.track { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: var(--surface); }
+.phase { padding: 14px 14px 16px; border-right: 1px solid var(--line); text-decoration: none; color: var(--fg); display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.phase:last-child { border-right: 0; }
+.phase:hover { background: var(--surface-2); }
+.phase .pn { font: 500 12px/1 var(--f-label); letter-spacing: .12em; color: var(--accent); text-transform: uppercase; }
+.phase .pt { font: 600 14px/1.3 var(--f-display); }
+.phase .pp { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.mini { height: 4px; background: var(--surface-2); border-radius: 99px; overflow: hidden; margin-top: auto; }
+.mini span { display: block; height: 100%; background: var(--ok); }
+.phase.done .pn { color: var(--ok); }
+.phase.cur { background: var(--surface-2); box-shadow: inset 0 3px 0 var(--accent); }
+
+/* Barra de filtros */
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
+.toolbar select, .toolbar input[type="search"] { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; min-width: 0; }
+.toolbar input[type="search"] { flex: 1 1 200px; }
+.btn { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); color: var(--on-accent); border-color: transparent; font-weight: 600; }
+
+/* Lista de entregas */
+.group { margin-bottom: 26px; }
+.group-h { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.group-h h3 { font: 500 19px/1.2 var(--f-label); margin: 0; }
+.group-h span { font-size: 13px; color: var(--muted); }
+.items { display: flex; flex-direction: column; gap: 8px; }
+.item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); scroll-margin-top: 16px; }
+.item.target { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.item.is-next { border-color: var(--accent); }
+.item-main { display: grid; grid-template-columns: 46px minmax(0, 1fr) 170px 118px 150px; gap: 14px; align-items: center; padding: 12px 14px; }
+.num { font: 700 20px/1 var(--f-display); color: var(--accent); font-variant-numeric: tabular-nums; }
+.item.st-concluido .num { color: var(--ok); }
+.ttl-btn { background: none; border: 0; padding: 0; text-align: left; cursor: pointer; min-width: 0; }
+.ttl-btn .t { font: 600 15px/1.35 var(--f-display); display: block; }
+.ttl-btn .d { font-size: 13px; color: var(--muted); display: block; margin-top: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.chip { font-size: 11.5px; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); text-decoration: none; max-width: 100%; overflow-wrap: anywhere; }
+a.chip:hover { border-color: var(--accent); color: var(--fg); }
+.chip.dep-ok { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, transparent); }
+.chips > .chip:not(a):not(.late):not(.next-chip) { border-color: transparent; padding-inline: 0 2px; }
+.chip.wait { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 55%, transparent); }
+.chip.late { color: var(--crit); border-color: color-mix(in srgb, var(--crit) 60%, transparent); }
+.chip.next-chip { color: var(--on-accent); background: var(--accent); border-color: transparent; font-weight: 600; }
+.cell { font-size: 13px; min-width: 0; }
+.cell .k { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.cell .v { overflow-wrap: anywhere; }
+.cell .v.late { color: var(--crit); font-weight: 600; }
+.status { width: 100%; border-radius: 99px; padding: 6px 10px; font-size: 13px; font-weight: 600; border: 1px solid transparent; cursor: pointer; background: var(--surface-2); }
+.status option { background: var(--surface); color: var(--fg); }
+.s-concluido { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 50%, transparent); }
+.s-andamento { color: var(--info); border-color: color-mix(in srgb, var(--info) 50%, transparent); }
+.s-revisao { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 50%, transparent); }
+.s-nao { color: var(--muted); border-color: var(--line); }
+.s-bloqueado { color: var(--crit); border-color: color-mix(in srgb, var(--crit) 55%, transparent); }
+
+.edit { border-top: 1px solid var(--line); padding: 14px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.edit label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); min-width: 0; }
+.edit .wide { grid-column: span 2; }
+.edit .full { grid-column: 1 / -1; }
+.edit input, .edit textarea, .edit select { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; color: var(--fg); font-size: 14px; min-width: 0; width: 100%; }
+.edit textarea { min-height: 64px; resize: vertical; }
+.edit .actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; }
+.edit .src { font-size: 12px; color: var(--muted); }
+.confirm-del { color: var(--crit); font-size: 13px; }
+
+.empty { color: var(--muted); padding: 20px; text-align: center; border: 1px dashed var(--line); border-radius: var(--r); }
+footer { border-top: 1px solid var(--line); margin-top: 30px; padding-block: 18px 30px; color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 10px 20px; justify-content: space-between; align-items: center; }
+footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; z-index: 10; }
+.import-box { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+.import-box textarea { width: 100%; min-height: 110px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px; font: 12px/1.4 ui-monospace, Menlo, monospace; }
+
+@media (max-width: 900px) {
+  .summary, .row2 { grid-template-columns: minmax(0, 1fr); }
+  .product { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row3 { grid-template-columns: minmax(0, 1fr); }
+  .track { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .phase:nth-child(3n) { border-right: 0; }
+  .phase:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
+  .item-main { grid-template-columns: 38px minmax(0, 1fr) 150px; }
+  .item-main .c-resp, .item-main .c-prazo { grid-column: 2 / 3; }
+  .item-main .c-prazo { grid-row: 3; }
+  .item-main .c-status { grid-column: 3; grid-row: 1; }
+  .edit { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .wrap { padding-inline: 16px; }
+  .product { grid-template-columns: minmax(0, 1fr); }
+  .track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .phase:nth-child(n) { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .phase:nth-child(2n) { border-right: 0; }
+  .item-main { grid-template-columns: 32px minmax(0, 1fr); gap: 8px 12px; }
+  .item-main .c-status, .item-main .c-resp, .item-main .c-prazo { grid-column: 2; grid-row: auto; }
+  .edit { grid-template-columns: minmax(0, 1fr); }
+  .edit .wide { grid-column: auto; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .item, .phase, .btn { transition: border-color .15s, background-color .15s; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dots" aria-hidden="true">●●●●</span> TB School · Gestor de entregas</div>
+    <h1>Licenciamento TB School</h1>
+    <p>O Licenciamento habilita a pessoa a dar aulas de comunicação e oratória em nome da TB School. Este painel mostra tudo o que precisa ser entregue para o produto ficar pronto para o mercado, em que ordem, com quem e em que situação está cada etapa.</p>
+    <div class="meta">
+      <span>Leandro Vidal · Prof. Vinícius · PSA Profissionais SA</span>
+      <span class="save-state" id="saveState">Carregando…</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section aria-labelledby="h-resumo">
+    <div class="sec-tag">01 · Situação</div>
+    <h2 id="h-resumo">Onde o produto está hoje</h2>
+    <div class="summary">
+      <div class="panel">
+        <div class="big" id="pct">0%<small>concluído</small></div>
+        <div class="bar" id="bar" aria-hidden="true"></div>
+        <div class="counts" id="counts"></div>
+        <div class="alert-line" id="alerts"></div>
+      </div>
+      <div class="panel next" id="next"></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-fases">
+    <div class="sec-tag">02 · Ordem de entrega</div>
+    <h2 id="h-fases">Seis fases, na sequência em que destravam o produto</h2>
+    <p class="lead">Cada fase depende das anteriores. Clique numa fase para ir direto às entregas dela. A próxima entrega é a primeira da ordem que ainda não foi concluída e cujas dependências já estão prontas.</p>
+    <nav class="track" id="track" aria-label="Fases do projeto"></nav>
+  </section>
+
+  <section aria-labelledby="h-entregas">
+    <div class="sec-tag">03 · Entregáveis</div>
+    <h2 id="h-entregas">Tudo o que será entregue</h2>
+    <div class="toolbar">
+      <input type="search" id="fBusca" placeholder="Buscar entrega, responsável ou nota" aria-label="Buscar">
+      <select id="fFase" aria-label="Filtrar por fase"><option value="">Todas as fases</option></select>
+      <select id="fStatus" aria-label="Filtrar por status"><option value="">Todos os status</option></select>
+      <select id="fResp" aria-label="Filtrar por responsável"><option value="">Todos os responsáveis</option></select>
+      <button class="btn primary" id="btnNova" type="button">+ Nova entrega</button>
+    </div>
+    <div id="lista"></div>
+  </section>
+
+  <section aria-labelledby="h-produto">
+    <div class="sec-tag">04 · Referência do produto</div>
+    <h2 id="h-produto">O que é o Licenciamento</h2>
+    <details class="about" id="about" open>
+      <summary>Mostrar ou esconder a referência do produto</summary>
+      <div style="margin-top:14px">
+        <div class="product">
+          <div class="card"><span class="n">1</span><h3>Compra o licenciamento</h3><p>A pessoa adquire o direito de ensinar em nome da TB School.</p></div>
+          <div class="card"><span class="n">2</span><h3>Treinamento nas duas mandalas</h3><p>Mandala do Speaker e Mandala do Licenciado.</p></div>
+          <div class="card"><span class="n">3</span><h3>Avaliado e aprovado</h3><p>Testes teóricos, execuções de Palco e as duas certificações.</p></div>
+          <div class="card hl"><span class="n">4</span><h3>Habilitado a dar aulas</h3><p>Ministra incompany ou em outro formato, seguindo integralmente a metodologia.</p></div>
+        </div>
+        <div class="row2">
+          <div class="card">
+            <h3>Mandala do Speaker · conteúdo replicado em sala</h3>
+            <p>4 eixos, 12 pilares. Expressão (Oratória, Performance, Linguagem Corporal) · Argumento (Retórica, Persuasão, Negociação) · Substância (Narrativa, Perspectiva, Autoridade) · Conexão (Empatia, Escuta Ativa, Presença Digital).</p>
+          </div>
+          <div class="card">
+            <h3>Mandala do Licenciado · formação interna</h3>
+            <p>Ciclo TB School (prova teórica) · Direção (Gestão de Sala, Leitura de Progresso, Calibragem de Exigência) · Relacionamento (Acolhimento, Perguntas de Aprofundamento, Escuta Além da Resposta) · Vendas (Prospecção, Gestão de Leads, Pitch, Máquina de Vendas, Ferramentas de Gestão, Leitura de Nicho).</p>
+          </div>
+        </div>
+        <div class="row3">
+          <div class="card"><h3>Dias 0–6 · 7 dias online</h3><p>Espelho + Plateia dos 12 pilares da Mandala do Speaker, no ritmo do candidato.</p></div>
+          <div class="card"><h3>Dias 7–9 · 3 dias de testes</h3><p>Testes teóricos por eixo, 18 questões cada, nota mínima de 70% para avançar.</p></div>
+          <div class="card hl"><h3>Dias 10–13 · 4 dias presenciais</h3><p>Turma de ~20. 16h Mandala do Speaker + 16h Mandala do Licenciado + as duas certificações.</p></div>
+        </div>
+        <div class="row2">
+          <div class="card">
+            <h3>Certificação Licenciado · ainda no presencial</h3>
+            <p>Aprovação nos 4 testes da Mandala do Speaker (pré-presencial) · participação integral nos 4 dias · aprovação no teste do Ciclo TB School no encerramento do Dia 13. A Certificação Speaker sai no Dia 11, com o radar Espelho × Novo Espelho.</p>
+          </div>
+          <div class="card">
+            <h3>Kit do Licenciado · 7 itens</h3>
+            <p>Livro de referência teórica · Slides esquematizados · Fichas e cartões de exercício · Diagnóstico do cliente + Agente de IA · Canal de vídeos dos exercícios · Relatório de Condução · Comunidade TB School (o item de maior valor).</p>
+          </div>
+        </div>
+        <p class="note">Ciclo TB School em todas as etapas: Espelho → Plateia → Ensaio → Palco → Novo Espelho. Momento 3, depois da certificação: eixo Vendas gravado, Comunidade TB School e Relatório de Condução a cada turma. Fontes: “06 · Manual Final”, “07 · Decisões Finais” e “Arquitetura do Produto · Apresentação Interna”.</p>
+      </div>
+    </details>
+  </section>
+
+  <footer>
+    <span id="modo">—</span>
+    <div class="tools">
+      <button class="btn" id="btnExport" type="button">Copiar backup (JSON)</button>
+      <button class="btn" id="btnImport" type="button">Restaurar backup</button>
+      <button class="btn" id="btnReset" type="button">Voltar ao plano original</button>
+    </div>
+    <div class="import-box" id="importBox" hidden>
+      <textarea id="importTxt" aria-label="Cole o backup JSON aqui" placeholder="Cole aqui o backup em JSON"></textarea>
+      <div class="tools"><button class="btn primary" id="btnImportOk" type="button">Restaurar</button><button class="btn" id="btnImportCancel" type="button">Cancelar</button></div>
+    </div>
+    <div class="import-box" id="resetBox" hidden>
+      <span class="confirm-del">Isto apaga todas as alterações e volta às 23 entregas do plano original.</span>
+      <div class="tools"><button class="btn primary" id="btnResetOk" type="button">Confirmar</button><button class="btn" id="btnResetCancel" type="button">Cancelar</button></div>
+    </div>
+  </footer>
+</main>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(() => {
+  "use strict";
+  const API = "/api/licenciamento";
+  const LS_KEY = "tbschool-licenciamento";
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  const STATUS = [
+    { v: "Não iniciado", cls: "s-nao", cor: "var(--line)" },
+    { v: "Em andamento", cls: "s-andamento", cor: "var(--info)" },
+    { v: "Em revisão", cls: "s-revisao", cor: "var(--warn)" },
+    { v: "Bloqueado", cls: "s-bloqueado", cor: "var(--crit)" },
+    { v: "Concluído", cls: "s-concluido", cor: "var(--ok)" },
+  ];
+  const stInfo = v => STATUS.find(s => s.v === v) || STATUS[0];
+
+  const FASES = [
+    { id: "f1", nome: "Definição do produto" },
+    { id: "f2", nome: "Curadoria e avaliação" },
+    { id: "f3", nome: "Conteúdo online e testes" },
+    { id: "f4", nome: "Plataforma" },
+    { id: "f5", nome: "Kit do Licenciado" },
+    { id: "f6", nome: "Lançamento" },
+  ];
+  const PESSOAS = ["Leandro Vidal", "Prof. Vinícius", "Camila", "Manu", "PSA — Profissionais SA", "A definir"];
+
+  const M = "06 · Manual Final", D = "07 · Decisões Finais", A = "Arquitetura do Produto";
+  const PLANO = () => ({ versaoPlano: 2, entregas: [
+    { id: "e01", fase: "f1", titulo: "Nomenclatura e escopo fechados", entregavel: "Mandala do Mentor passa a ser Mandala do Licenciado, incluindo a formação comercial (Vendas) e o próprio Ciclo TB School como conteúdo.", responsavel: "Leandro Vidal", status: "Concluído", depende: [], fonte: D + ", p. 3" },
+    { id: "e02", fase: "f1", titulo: "Manual da Metodologia e da Jornada do Licenciado", entregavel: "As 7 partes: Mandala do Speaker, Ciclo TB School, Mandala do Licenciado, conexão Ciclo × Mandala, processo de formação, timeline de 14 dias e Kit do Licenciado.", responsavel: "Leandro Vidal", status: "Concluído", depende: ["e01"], fonte: M },
+    { id: "e03", fase: "f1", titulo: "Definição formal do produto Licenciamento", entregavel: "Documento do produto: o que o Licenciado compra, o que pode fazer em nome da TB School e a regra de aplicar integralmente a metodologia (mesmo Ciclo, pilares e rubrica).", responsavel: "Camila", status: "Não iniciado", depende: ["e02"], fonte: A + ", p. 4 e 13", notas: "Fora do escopo de Leandro e Prof. Vinícius." },
+    { id: "e04", fase: "f1", titulo: "Trilha de certificação alinhada", entregavel: "Decisão registrada: duas certificações (Speaker e Licenciado) dentro da jornada de 14 dias, como está no Manual, ou a trilha de 3 níveis (Speaker → Mentor TB School → Mentor Sênior).", responsavel: "Camila", status: "Não iniciado", depende: ["e02"], fonte: A + ", p. 11 · " + M + ", Parte 5" },
+
+    { id: "e05", fase: "f2", titulo: "Bibliografia do eixo Vendas validada", entregavel: "Validação da bibliografia proposta: Jordan Belfort (fechamento), Aaron Ross (prospecção outbound), Neil Rackham (venda consultiva).", responsavel: "Prof. Vinícius", status: "Em revisão", depende: ["e02"], fonte: M + ", Parte 3 · " + D + ", p. 8" },
+    { id: "e06", fase: "f2", titulo: "Tabela de autores revisada", entregavel: "Revisão final da tabela de autores das duas Mandalas, com limite de 5 por eixo para novos levantamentos.", responsavel: "Prof. Vinícius", status: "Não iniciado", depende: ["e05"], fonte: D + ", p. 8" },
+    { id: "e07", fase: "f2", titulo: "Rubricas do Palco", entregavel: "Rubrica descritiva de 1 a 5 para cada um dos 12 pilares da Mandala do Speaker, mais as rubricas de Direção e de Relacionamento da Mandala do Licenciado.", responsavel: "Leandro Vidal", status: "Não iniciado", depende: ["e02"], fonte: M + ", Partes 1 e 3", notas: "O Manual traz o padrão com o exemplo do pilar Oratória (articulação e clareza)." },
+
+    { id: "e08", fase: "f3", titulo: "Questionários de Espelho e Novo Espelho", entregavel: "Autodiagnóstico dos 12 pilares (Dia 0) e a comparação final que alimenta o radar Espelho × Novo Espelho.", responsavel: "Leandro Vidal", status: "Não iniciado", depende: ["e02"], fonte: M + ", Partes 2 e 6" },
+    { id: "e09", fase: "f3", titulo: "Plateia online dos 12 pilares", entregavel: "Conteúdo teórico curado por pilar para os Dias 0 a 5: Expressão, Argumento, Substância e Conexão.", responsavel: "Leandro Vidal", status: "Não iniciado", depende: ["e06"], fonte: M + ", Partes 1 e 6" },
+    { id: "e10", fase: "f3", titulo: "Banco de questões · testes da Mandala do Speaker", entregavel: "4 testes, um por eixo, com 18 questões cada (5 objetivas + 1 subjetiva por pilar): 72 questões. Nota mínima de 70%.", responsavel: "A definir", status: "Não iniciado", depende: ["e09"], fonte: M + ", Partes 5 e 6 · " + D + ", p. 8" },
+    { id: "e11", fase: "f3", titulo: "Banco de questões · teste do Ciclo TB School", entregavel: "1 teste com 20 questões (3 objetivas + 1 subjetiva por etapa do Ciclo), aplicado no encerramento do Dia 13.", responsavel: "A definir", status: "Não iniciado", depende: ["e02"], fonte: M + ", Parte 6 · " + D + ", p. 8" },
+    { id: "e12", fase: "f3", titulo: "Conteúdo gravado do eixo Vendas", entregavel: "6 pilares: Prospecção, Gestão de Leads, Pitch de Vendas, Máquina de Vendas, Ferramentas de Gestão e Leitura de Nicho (Atração · Conversão · Retenção). Todo fora do presencial.", responsavel: "Prof. Vinícius", status: "Não iniciado", depende: ["e05"], fonte: M + ", Partes 3 e 5" },
+
+    { id: "e13", fase: "f4", titulo: "Plataforma no ar", entregavel: "Acesso do candidato, Espelho, Plateia, testes com nota mínima e repetição no Dia 9, radar Espelho × Novo Espelho e emissão dos certificados.", responsavel: "A definir", status: "Não iniciado", depende: ["e08", "e09", "e10", "e11"], fonte: A + ", p. 13 · " + M + ", Parte 5" },
+
+    { id: "e14", fase: "f5", titulo: "Kit 1 · Livro de referência teórica", entregavel: "Curadoria bibliográfica dos 4 eixos de cada Mandala, organizada por pilar.", responsavel: "Prof. Vinícius", status: "Não iniciado", depende: ["e06"], fonte: M + ", Parte 7" },
+    { id: "e15", fase: "f5", titulo: "Kit 2 · Slides esquematizados", entregavel: "O conteúdo de cada Plateia em tópicos prontos para projeção em sala.", responsavel: "A definir", status: "Não iniciado", depende: ["e09"], fonte: M + ", Parte 7" },
+    { id: "e16", fase: "f5", titulo: "Kit 3 · Fichas e cartões de exercício", entregavel: "Questionários de Espelho e Novo Espelho, cartões de exercício do Ensaio e rubrica do Palco, prontos para imprimir, um por aluno.", responsavel: "A definir", status: "Não iniciado", depende: ["e07", "e08"], fonte: M + ", Parte 7" },
+    { id: "e17", fase: "f5", titulo: "Kit 4 · Diagnóstico do cliente + Agente de IA", entregavel: "Documento para levantar dificuldades e necessidades do cliente e agente de IA que conhece a Mandala e ajuda a montar o treinamento. Usado na dinâmica do Dia 13.", responsavel: "A definir", status: "Não iniciado", depende: ["e02"], fonte: M + ", Partes 6 e 7" },
+    { id: "e18", fase: "f5", titulo: "Kit 5 · Canal de vídeos dos exercícios", entregavel: "Canal privado com a condução de todos os exercícios práticos da Mandala do Speaker e os pontos de atenção de cada um.", responsavel: "A definir", status: "Não iniciado", depende: ["e02"], fonte: M + ", Parte 7 · " + D + ", p. 8" },
+    { id: "e19", fase: "f5", titulo: "Kit 6 · Relatório de Condução do Ciclo", entregavel: "Documento obrigatório por turma: etapas executadas, pilares e eixos cobertos, autoavaliação de aderência e dificuldades.", responsavel: "A definir", status: "Não iniciado", depende: ["e02"], fonte: M + ", Parte 7" },
+    { id: "e20", fase: "f5", titulo: "Kit 7 · Comunidade TB School", entregavel: "Encontros mensais ao vivo para todos os licenciados certificados: Encontro de Vendas e Encontro de Metodologia (alimentado pelos Relatórios de Condução).", responsavel: "A definir", status: "Não iniciado", depende: ["e12", "e19"], fonte: M + ", Parte 7" },
+
+    { id: "e21", fase: "f6", titulo: "Apresentação para interessados em ser Licenciado", entregavel: "Apresentação comercial do produto final para quem quer se tornar Licenciado.", responsavel: "A definir", status: "Não iniciado", depende: ["e03", "e04"], fonte: D + ", p. 9" },
+    { id: "e22", fase: "f6", titulo: "Produto pronto para o mercado", entregavel: "Marco: pendências fechadas, plataforma e Kit prontos, produto liberado para venda.", responsavel: "PSA — Profissionais SA", status: "Não iniciado", depende: ["e13", "e14", "e15", "e16", "e17", "e18", "e19", "e20", "e21"], fonte: D + ", p. 9" },
+    { id: "e23", fase: "f6", titulo: "Primeira turma e certificação", entregavel: "Jornada de 14 dias com turma de ~20: online, testes e 4 dias presenciais (16h Speaker + 16h Licenciado), com Certificação Speaker no Dia 11 e Certificação Licenciado no Dia 13.", responsavel: "Leandro Vidal", status: "Não iniciado", depende: ["e22"], fonte: M + ", Partes 5 e 6" },
+  ].map(e => ({ prazo: "", notas: "", ...e })) });
+
+  let doc = null, versao = 0, modo = "local", abertos = new Set(), confirmarExcluir = null, timer = null;
+  const hoje = new Date().toISOString().slice(0, 10);
+
+  /* ---------- Persistência ---------- */
+  function setSave(t) { $("saveState").textContent = t; }
+  function lsGet() { try { return JSON.parse(localStorage.getItem(LS_KEY) || "null"); } catch (_) { return null; } }
+  function lsSet(d) { try { localStorage.setItem(LS_KEY, JSON.stringify(d)); } catch (_) {} }
+
+  async function carregar() {
+    try {
+      const r = await fetch(API, { cache: "no-store" });
+      if (!r.ok) throw new Error(String(r.status));
+      const j = await r.json();
+      modo = "banco"; versao = j.version || 0;
+      if (j.data && Array.isArray(j.data.entregas)) { doc = j.data; }
+      else { doc = lsGet() || PLANO(); await salvarAgora(); }
+    } catch (_) {
+      modo = "local"; doc = lsGet() || PLANO();
+    }
+    $("modo").textContent = modo === "banco"
+      ? "Dados compartilhados com a equipe: as alterações são salvas no banco automaticamente."
+      : "Modo local: as alterações ficam salvas só neste navegador. Ligue o banco na Vercel para compartilhar com a equipe.";
+    setSave(modo === "banco" ? "Salvo no banco" : "Salvo neste navegador");
+  }
+  function salvar() {
+    lsSet(doc);
+    if (modo !== "banco") { setSave("Salvo neste navegador"); return; }
+    setSave("Salvando…");
+    clearTimeout(timer); timer = setTimeout(salvarAgora, 600);
+  }
+  async function salvarAgora() {
+    lsSet(doc);
+    if (modo !== "banco") return;
+    try {
+      const r = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data: doc, baseVersion: versao }) });
+      const j = await r.json().catch(() => ({}));
+      if (r.status === 409) { setSave("Outra pessoa alterou o painel. Recarregue a página para ver a versão mais nova."); return; }
+      if (!r.ok) throw new Error(j.erro || r.status);
+      versao = j.version; setSave("Salvo no banco");
+    } catch (e) { setSave("Não foi possível salvar no banco (" + e.message + "). A cópia ficou neste navegador."); }
+  }
+
+  /* ---------- Cálculos ---------- */
+  const ordenadas = () => {
+    const ordemFase = Object.fromEntries(FASES.map((f, i) => [f.id, i]));
+    return doc.entregas.slice().sort((a, b) => (ordemFase[a.fase] - ordemFase[b.fase]) || (doc.entregas.indexOf(a) - doc.entregas.indexOf(b)));
+  };
+  const numeros = () => Object.fromEntries(ordenadas().map((e, i) => [e.id, i + 1]));
+  const porId = id => doc.entregas.find(e => e.id === id);
+  const concl = e => e && e.status === "Concluído";
+  const pendentesDeps = e => (e.depende || []).map(porId).filter(d => d && !concl(d));
+  const atrasada = e => !concl(e) && e.prazo && e.prazo < hoje;
+  const proxima = () => ordenadas().find(e => !concl(e) && e.status !== "Bloqueado" && pendentesDeps(e).length === 0);
+  const fmtData = s => s ? s.split("-").reverse().join("/") : "Sem prazo";
+  const pad = n => String(n).padStart(2, "0");
+
+  /* ---------- Render ---------- */
+  function render() {
+    const lista = ordenadas(), num = numeros(), tot = lista.length || 1;
+    const nConcl = lista.filter(concl).length;
+    const pct = Math.round(nConcl / tot * 100);
+    $("pct").innerHTML = `${pct}%<small>concluído · ${nConcl} de ${lista.length} entregas</small>`;
+    $("bar").innerHTML = STATUS.slice().reverse().map(s => {
+      const n = lista.filter(e => e.status === s.v).length;
+      return n ? `<span style="width:${n / tot * 100}%;background:${s.cor}"></span>` : "";
+    }).join("");
+    $("counts").innerHTML = STATUS.map(s => `<span><i class="sw" style="background:${s.cor}"></i>${s.v} <b>${lista.filter(e => e.status === s.v).length}</b></span>`).join("");
+    const atr = lista.filter(atrasada), blq = lista.filter(e => e.status === "Bloqueado");
+    $("alerts").textContent = [atr.length ? `${atr.length} em atraso: ${atr.map(e => "#" + pad(num[e.id])).join(", ")}` : "", blq.length ? `${blq.length} bloqueada(s): ${blq.map(e => "#" + pad(num[e.id])).join(", ")}` : ""].filter(Boolean).join(" · ");
+
+    const px = proxima();
+    $("next").innerHTML = px
+      ? `<span class="lbl">Próxima entrega · #${pad(num[px.id])}</span><span class="ttl">${esc(px.titulo)}</span><p>${esc(px.entregavel)}</p><p><b>${esc(px.responsavel || "A definir")}</b> · ${esc(fmtData(px.prazo))} · ${esc(px.status)}</p><a href="#${px.id}" data-go="${px.id}">Abrir esta entrega →</a>`
+      : nConcl === lista.length && lista.length
+        ? `<span class="lbl">Tudo entregue</span><span class="ttl">Produto pronto para o mercado.</span>`
+        : `<span class="lbl">Próxima entrega</span><span class="ttl">Nada liberado agora</span><p>As entregas abertas aguardam dependências ou estão bloqueadas.</p>`;
+
+    const faseAtual = px ? px.fase : null;
+    $("track").innerHTML = FASES.map((f, i) => {
+      const es = lista.filter(e => e.fase === f.id), c = es.filter(concl).length;
+      const done = es.length && c === es.length;
+      return `<a class="phase${done ? " done" : ""}${f.id === faseAtual ? " cur" : ""}" href="#${f.id}" data-go="${f.id}">
+        <span class="pn">Fase ${i + 1}${done ? " · pronta" : f.id === faseAtual ? " · agora" : ""}</span>
+        <span class="pt">${esc(f.nome)}</span>
+        <span class="pp">${c}/${es.length} entregas</span>
+        <span class="mini"><span style="width:${es.length ? c / es.length * 100 : 0}%"></span></span></a>`;
+    }).join("");
+
+    // filtros
+    const fillSel = (id, vals, first) => {
+      const el = $(id), cur = el.value;
+      el.innerHTML = `<option value="">${first}</option>` + vals.map(v => `<option value="${esc(v.v ?? v)}">${esc(v.t ?? v)}</option>`).join("");
+      el.value = cur;
+    };
+    fillSel("fFase", FASES.map((f, i) => ({ v: f.id, t: `Fase ${i + 1} · ${f.nome}` })), "Todas as fases");
+    fillSel("fStatus", STATUS.map(s => s.v).concat(["Em atraso", "Aguardando dependência"]), "Todos os status");
+    const resps = [...new Set(lista.map(e => e.responsavel || "A definir"))].sort();
+    fillSel("fResp", resps, "Todos os responsáveis");
+
+    const q = $("fBusca").value.trim().toLowerCase(), ff = $("fFase").value, fs = $("fStatus").value, fr = $("fResp").value;
+    const passa = e => (!ff || e.fase === ff)
+      && (!fs || (fs === "Em atraso" ? atrasada(e) : fs === "Aguardando dependência" ? (!concl(e) && pendentesDeps(e).length > 0) : e.status === fs))
+      && (!fr || (e.responsavel || "A definir") === fr)
+      && (!q || [e.titulo, e.entregavel, e.responsavel, e.notas, "#" + pad(num[e.id])].join(" ").toLowerCase().includes(q));
+
+    let html = "";
+    FASES.forEach((f, i) => {
+      const es = lista.filter(e => e.fase === f.id && passa(e));
+      if (!es.length) return;
+      const todas = lista.filter(e => e.fase === f.id);
+      html += `<div class="group" id="${f.id}"><div class="group-h"><h3>Fase ${i + 1} · ${esc(f.nome)}</h3><span>${todas.filter(concl).length} de ${todas.length} concluídas</span></div><div class="items">${es.map(e => itemHTML(e, num, px)).join("")}</div></div>`;
+    });
+    $("lista").innerHTML = html || `<div class="empty">Nenhuma entrega com esses filtros.</div>`;
+  }
+
+  function itemHTML(e, num, px) {
+    const st = stInfo(e.status), pend = pendentesDeps(e), late = atrasada(e), aberto = abertos.has(e.id);
+    const deps = (e.depende || []).map(porId).filter(Boolean);
+    const chips = [
+      px && px.id === e.id ? `<span class="chip next-chip">Próxima</span>` : "",
+      late ? `<span class="chip late">Em atraso</span>` : "",
+      deps.length ? `<span class="chip">depende de</span>` : "",
+      ...deps.map(d => `<a class="chip${concl(d) ? " dep-ok" : concl(e) ? "" : " wait"}" href="#${d.id}" data-go="${d.id}" title="${concl(d) ? "Pronta: " : "Aguardando: "}${esc(d.titulo)}">#${pad(num[d.id])}${concl(d) ? " ✓" : ""}</a>`),
+    ].join("");
+    const opts = STATUS.map(s => `<option${s.v === e.status ? " selected" : ""}>${s.v}</option>`).join("");
+    return `<article class="item st-${concl(e) ? "concluido" : "aberto"}${px && px.id === e.id ? " is-next" : ""}" id="${e.id}">
+      <div class="item-main">
+        <span class="num">${pad(num[e.id])}</span>
+        <div style="min-width:0">
+          <button class="ttl-btn" type="button" data-toggle="${e.id}" aria-expanded="${aberto}">
+            <span class="t">${esc(e.titulo)}</span><span class="d">${esc(e.entregavel)}</span>
+          </button>
+          ${chips ? `<div class="chips">${chips}</div>` : ""}
+        </div>
+        <div class="cell c-resp"><span class="k">Responsável</span><span class="v">${esc(e.responsavel || "A definir")}</span></div>
+        <div class="cell c-prazo"><span class="k">Prazo</span><span class="v${late ? " late" : ""}">${esc(fmtData(e.prazo))}</span></div>
+        <div class="c-status"><select class="status ${st.cls}" data-status="${e.id}" id="st-${e.id}" aria-label="Status de ${esc(e.titulo)}">${opts}</select></div>
+      </div>
+      ${aberto ? editHTML(e) : ""}
+    </article>`;
+  }
+
+  function editHTML(e) {
+    const outras = ordenadas().filter(o => o.id !== e.id), num = numeros();
+    const f = (k, lbl, cls = "", tipo = "text", extra = "") => `<label class="${cls}">${lbl}<input type="${tipo}" id="ed-${k}-${e.id}" data-field="${k}" data-id="${e.id}" value="${esc(e[k])}" ${extra}></label>`;
+    return `<div class="edit">
+      ${f("titulo", "Título", "wide")}
+      <label>Fase<select id="ed-fase-${e.id}" data-field="fase" data-id="${e.id}">${FASES.map((x, i) => `<option value="${x.id}"${x.id === e.fase ? " selected" : ""}>Fase ${i + 1} · ${esc(x.nome)}</option>`).join("")}</select></label>
+      ${f("prazo", "Prazo", "", "date")}
+      <label class="wide">Entregável<textarea id="ed-entregavel-${e.id}" data-field="entregavel" data-id="${e.id}">${esc(e.entregavel)}</textarea></label>
+      ${f("responsavel", "Responsável", "", "text", 'list="pessoas"')}
+      <label>Depende de (segure Ctrl/⌘ para marcar várias)<select multiple size="4" id="ed-depende-${e.id}" data-field="depende" data-id="${e.id}">${outras.map(o => `<option value="${o.id}"${(e.depende || []).includes(o.id) ? " selected" : ""}>#${pad(num[o.id])} ${esc(o.titulo)}</option>`).join("")}</select></label>
+      <label class="full">Notas<textarea id="ed-notas-${e.id}" data-field="notas" data-id="${e.id}" placeholder="Decisões, links, próximos passos">${esc(e.notas)}</textarea></label>
+      <div class="actions">
+        <span class="src">${e.fonte ? "Fonte: " + esc(e.fonte) : "Entrega adicionada pela equipe"}</span>
+        <span class="tools" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <button class="btn" type="button" data-move="${e.id}" data-dir="-1">↑ Subir</button>
+          <button class="btn" type="button" data-move="${e.id}" data-dir="1">↓ Descer</button>
+          <button class="btn" type="button" data-link="${e.id}">Copiar link</button>
+          ${confirmarExcluir === e.id
+            ? `<span class="confirm-del">Excluir esta entrega?</span><button class="btn primary" type="button" data-del-ok="${e.id}">Excluir</button><button class="btn" type="button" data-del-no="1">Cancelar</button>`
+            : `<button class="btn" type="button" data-del="${e.id}">Excluir</button>`}
+        </span>
+      </div>
+    </div>`;
+  }
+
+  /* ---------- Interação ---------- */
+  function toast(t) { const el = $("toast"); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => el.hidden = true, 2200); }
+  function irPara(id, abrir) {
+    const el = document.getElementById(id);
+    if (!el) { $("fBusca").value = ""; ["fFase", "fStatus", "fResp"].forEach(k => $(k).value = ""); render(); }
+    if (abrir && porId(id)) { abertos.add(id); render(); }
+    const alvo = document.getElementById(id);
+    if (!alvo) return;
+    document.querySelectorAll(".item.target").forEach(x => x.classList.remove("target"));
+    if (alvo.classList.contains("item")) alvo.classList.add("target");
+    alvo.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  }
+  function copiar(texto, ok) {
+    const fallback = () => { const t = document.createElement("textarea"); t.value = texto; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); toast(ok); } catch (_) { toast("Selecione e copie: " + texto); } t.remove(); };
+    try { navigator.clipboard.writeText(texto).then(() => toast(ok), fallback); } catch (_) { fallback(); }
+  }
+
+  document.addEventListener("click", ev => {
+    const t = ev.target.closest("[data-go],[data-toggle],[data-link],[data-del],[data-del-ok],[data-del-no],[data-move]");
+    if (!t) return;
+    if (t.dataset.go) { ev.preventDefault(); history.replaceState(null, "", "#" + t.dataset.go); irPara(t.dataset.go, false); return; }
+    if (t.dataset.toggle) { const id = t.dataset.toggle; abertos.has(id) ? abertos.delete(id) : abertos.add(id); confirmarExcluir = null; render(); return; }
+    if (t.dataset.link) { copiar(location.href.split("#")[0] + "#" + t.dataset.link, "Link da entrega copiado"); return; }
+    if (t.dataset.del) { confirmarExcluir = t.dataset.del; render(); return; }
+    if (t.dataset.delNo) { confirmarExcluir = null; render(); return; }
+    if (t.dataset.delOk) {
+      const id = t.dataset.delOk;
+      doc.entregas = doc.entregas.filter(e => e.id !== id);
+      doc.entregas.forEach(e => e.depende = (e.depende || []).filter(d => d !== id));
+      abertos.delete(id); confirmarExcluir = null; salvar(); render(); toast("Entrega excluída"); return;
+    }
+    if (t.dataset.move) {
+      const e = porId(t.dataset.move), dir = Number(t.dataset.dir);
+      const mesmas = ordenadas().filter(x => x.fase === e.fase), i = mesmas.indexOf(e), outro = mesmas[i + dir];
+      if (!outro) return;
+      const a = doc.entregas.indexOf(e), b = doc.entregas.indexOf(outro);
+      [doc.entregas[a], doc.entregas[b]] = [doc.entregas[b], doc.entregas[a]];
+      salvar(); render(); document.getElementById(e.id)?.scrollIntoView({ block: "nearest" });
+    }
+  });
+
+  document.addEventListener("change", ev => {
+    const el = ev.target;
+    if (el.dataset.status) { porId(el.dataset.status).status = el.value; salvar(); render(); return; }
+    if (el.dataset.field) {
+      const e = porId(el.dataset.id), k = el.dataset.field;
+      e[k] = k === "depende" ? [...el.selectedOptions].map(o => o.value) : el.value;
+      salvar(); render();
+      const foco = document.getElementById(el.id); if (foco && k !== "depende") foco.focus();
+      return;
+    }
+    if (["fFase", "fStatus", "fResp"].includes(el.id)) render();
+  });
+  $("fBusca").addEventListener("input", render);
+
+  $("btnNova").addEventListener("click", () => {
+    let n = doc.entregas.length + 1, id;
+    do { id = "e" + pad(n++); } while (porId(id));
+    const fase = $("fFase").value || (proxima() || {}).fase || "f1";
+    doc.entregas.push({ id, fase, titulo: "Nova entrega", entregavel: "", responsavel: "A definir", prazo: "", status: "Não iniciado", depende: [], fonte: "", notas: "" });
+    abertos.add(id); salvar(); render(); irPara(id, false);
+    document.getElementById("ed-titulo-" + id)?.select();
+  });
+
+  $("btnExport").addEventListener("click", () => copiar(JSON.stringify(doc, null, 2), "Backup copiado. Cole num arquivo .json para guardar."));
+  $("btnImport").addEventListener("click", () => { $("importBox").hidden = false; $("resetBox").hidden = true; $("importTxt").focus(); });
+  $("btnImportCancel").addEventListener("click", () => $("importBox").hidden = true);
+  $("btnImportOk").addEventListener("click", () => {
+    try {
+      const d = JSON.parse($("importTxt").value);
+      if (!d || !Array.isArray(d.entregas)) throw new Error();
+      doc = d; abertos.clear(); $("importBox").hidden = true; $("importTxt").value = ""; salvar(); render(); toast("Backup restaurado");
+    } catch (_) { toast("Esse texto não é um backup válido do painel. Use o JSON copiado em “Copiar backup”."); }
+  });
+  $("btnReset").addEventListener("click", () => { $("resetBox").hidden = false; $("importBox").hidden = true; });
+  $("btnResetCancel").addEventListener("click", () => $("resetBox").hidden = true);
+  $("btnResetOk").addEventListener("click", () => { doc = PLANO(); abertos.clear(); $("resetBox").hidden = true; salvar(); render(); toast("Plano original restaurado"); });
+
+  const dl = document.createElement("datalist"); dl.id = "pessoas";
+  dl.innerHTML = PESSOAS.map(p => `<option value="${esc(p)}"></option>`).join(""); document.body.appendChild(dl);
+
+  carregar().then(() => {
+    render();
+    const h = location.hash.slice(1);
+    if (h) irPara(h, /^e\d+$/.test(h));
+  });
+  window.addEventListener("hashchange", () => { const h = location.hash.slice(1); if (h) irPara(h, /^e\d+$/.test(h)); });
+})();
+</script>
+</body>
+</html>
