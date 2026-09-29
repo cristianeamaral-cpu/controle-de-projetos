@@ -2,7 +2,7 @@
 
 | Vídeo | Duração | Conteúdo |
 |-------|---------|----------|
-| [`meu-perfil-completo.mp4`](meu-perfil-completo.mp4) | 1 min 43 s | Aba **Meu Perfil**: Força da Página (meta 100%), foto de perfil (a mesma exibida no site para contratantes), Biografia Profissional com **Gerar com IA**, Frase de Destaque (30 a 60 caracteres), Dados Pessoais, Contato, Redes Sociais, Localização, Seu momento atual e Salvar alterações. Fontes em [`fonte-meu-perfil/`](fonte-meu-perfil/). |
+| [`meu-perfil-completo.mp4`](meu-perfil-completo.mp4) | 1 min 48 s | Aba **Meu Perfil**: Força da Página (meta 100%), foto de perfil (a mesma exibida no site para contratantes), Biografia Profissional com **Gerar com IA**, Frase de Destaque (30 a 60 caracteres), Dados Pessoais, Contato, Redes Sociais, Localização, Seu momento atual e Salvar alterações. Narração **gravada** (não sintética), sincronizada frase a frase (`sincronia-gravacao.json`) e mixada com `mixar-gravacao.sh`. Fontes em [`fonte-meu-perfil/`](fonte-meu-perfil/). |
 | [`como-acessar-o-ecossistema-psa.mp4`](como-acessar-o-ecossistema-psa.mp4) | 52 s | Login no site (botão **Login** no canto superior direito), entrada por e-mail, Google ou LinkedIn, dica de LGPD (perfil único, sem logins secundários para assessores ou assistentes) e recomendação do Google Chrome. |
 
 Formato: 1920×1080, 30 fps, H.264 + AAC. Mesma trilha de fundo do vídeo
