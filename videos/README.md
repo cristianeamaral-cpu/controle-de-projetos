@@ -6,10 +6,14 @@
 
 Formato: 1920×1080, 30 fps, H.264 + AAC. Mesma trilha de fundo do vídeo
 "Minha conta e sincronização de agenda" (música separada da narração original).
+Identidade visual igual à do vídeo "Minha Conta + Google Calendar": fundo azul-marinho
+(`#05102B`) com constelação, títulos em Archivo Black condensada (branco e laranja `#F74E00`),
+sobretítulo laranja espaçado, marcador de passos e textos da interface em Manrope (laranja `#FD6E06`).
 
 ## Como o vídeo foi gerado (`fonte/`)
 
-1. **Telas:** `video.html` contém todas as cenas animadas (as legendas estão ocultas pela regra `.cap{display:none}`; remova-a para exibi-las); a função
+1. **Telas:** `video.src.html` é a fonte (o fundo de constelação fica em `stars.svg.html` e é inserido no lugar de `%%STARS%%` para gerar `video.html`);
+   `video.html` contém todas as cenas animadas (as legendas estão ocultas pela regra `.cap{display:none}`; remova-a para exibi-las); a função
    `seek(t)` posiciona a animação no segundo `t`.
 2. **Quadros:** `node render.js full 51.9` (Playwright) grava `frames/f00000.jpg…` a 30 fps.
    `node render.js test 3,15,27` salva quadros avulsos para conferência.
