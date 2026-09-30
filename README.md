@@ -27,9 +27,6 @@ Gestor de entregas do produto Licenciamento TB School, montado a partir do
   entregável, responsável, prazo, status, dependências e a fonte no documento.
 - **Próxima entrega:** a primeira da ordem ainda não concluída cujas dependências
   já estão prontas. Entregas com prazo vencido aparecem como “Em atraso”.
-- **Jornada clicável:** clicar em “7 dias”, “3 dias” ou “4 dias” filtra o quadro
-  para as entregas de que aquela etapa precisa (clique de novo para mostrar
-  todas). A etapa de cada entrega pode ser ajustada na edição.
 - **Link direto por entrega:** `/licenciamento/#e07` abre a entrega 07 (botão
   “Copiar link” dentro de cada uma). `/licenciamento/#f3` abre a fase 3.
 - Edição na própria página; com o banco ligado, a equipe inteira vê o mesmo estado.
