@@ -216,7 +216,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family
     <div class="lg2 H" id="o_lg">PSA<i style="color:var(--ort);font-style:normal">.</i></div>
     <div class="big H"><div id="o_a">TEMAS CERTOS.</div><span id="o_b">MAIS OPORTUNIDADES.</span></div>
     <div class="pl" id="o_s">Aba <b>Temas</b> › Macro Temas › <b>1 Tema Principal</b> › Salvar</div>
-    <div class="sp" id="o_st">ESCOLHA COM CARINHO</div>
+    <div class="sp" id="o_st">ESCOLHA COM ATENÇÃO</div>
   </div>
 </div>
 </div>
@@ -226,7 +226,7 @@ const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 const E={lin:x=>x,out:x=>1-Math.pow(1-x,3),io:x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,back:x=>{const c=1.5;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)}};
 const TW=[],CL=[];
 // time warp: maps the design timeline onto the narration timing
-const WA=[[0, 0], [1.0, 0.6], [6.57, 5.61], [7.9, 6.06], [11.53, 9.39], [12.0, 9.59], [20.53, 16.9], [21.0, 16.94], [25.65, 21.38], [27.1, 21.83], [32.45, 26.64], [32.9, 26.89], [37.23, 30.73], [38.8, 31.18], [47.85, 39.4]];
+const WA=[[0, 0], [1.0, 0.6], [6.57, 5.89], [7.9, 6.39], [11.53, 9.83], [12.0, 10.08], [20.53, 17.76], [21.0, 17.8], [25.65, 22.43], [27.1, 22.93], [32.45, 27.98], [32.9, 28.23], [37.23, 32.37], [38.8, 32.87], [47.85, 41.39]];
 function W(t){if(t<=WA[0][0])return t;for(let i=1;i<WA.length;i++)if(t<=WA[i][0]){const [a,na]=WA[i-1],[b,nb]=WA[i];return na+(nb-na)*(t-a)/(b-a);}const L=WA[WA.length-1];return t+(L[1]-L[0]);}
 function A(sel,t0,t1,from,to,e='out'){t0=W(t0);t1=W(t1);const el=$(sel);if(!el)throw sel;for(const k in to)TW.push({el,k,t0,t1,a:from[k],b:to[k],e:E[e]});}
 function C(sel,t,cls){CL.push({el:$(sel),t:W(t),cls});}
