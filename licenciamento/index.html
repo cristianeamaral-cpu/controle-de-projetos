@@ -90,20 +90,20 @@ h2 { font: 500 clamp(17px, 2.4vw, 23px)/1.15 var(--f-label); margin: 8px 0 16px;
 .journey h3 { font: 500 clamp(17px, 2.4vw, 23px)/1.15 var(--f-label); margin: 0 0 18px; text-wrap: balance; }
 .days { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; }
 .day { background: rgb(255 255 255 / .04); border: 1px solid rgb(255 255 255 / .1); border-radius: var(--r); padding: 18px 18px 26px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-.day-n { font: 500 clamp(26px, 3.5vw, 36px)/1 var(--f-label); color: var(--fg); }
+.day-n { font: 500 clamp(26px, 3.5vw, 36px)/1 var(--f-label); color: var(--psa); }
 .day p { margin: 0; font-size: var(--fs); color: var(--muted); max-width: 30ch; min-height: 3.1em; }
 .day-list { list-style: none; margin: 4px 0 0; padding: 14px 0 0; border-top: 1px solid rgb(255 255 255 / .1); display: flex; flex-direction: column; gap: 10px; }
 .day-list li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 8px; font-size: var(--fs); line-height: 1.45; }
 .day-list b { font: 500 var(--fs)/1.45 var(--f-label); letter-spacing: .06em; text-transform: uppercase; color: var(--accent-soft); font-variant-numeric: tabular-nums; }
 .day-list span { color: var(--fg); min-width: 0; }
 .day.hl { border-color: color-mix(in srgb, var(--accent) 55%, transparent); box-shadow: inset 3px 0 0 var(--accent); }
-.day.hl .day-n { color: var(--accent-soft); }
+.day.hl .day-n { color: var(--psa); }
 /* Destaque ao passar o mouse (cartões só informativos, sem clique) */
 .days:has(.day:hover) .day:not(:hover) { opacity: .6; }
 .days:has(.day:hover) .day.hl:not(:hover) { border-color: rgb(255 255 255 / .1); box-shadow: none; }
-.days:has(.day:hover) .day.hl:not(:hover) .day-n { color: var(--fg); }
+.days:has(.day:hover) .day.hl:not(:hover) .day-n { color: var(--psa); }
 .day:hover { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent), 0 0 0 1px var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
-.day:hover .day-n { color: var(--accent-soft); }
+.day:hover .day-n { color: var(--psa); }
 @media (prefers-reduced-motion: no-preference) {
   .day { transition: opacity .18s, border-color .18s, box-shadow .18s, background-color .18s, transform .18s; }
   .day:hover { transform: translateY(-2px); }
