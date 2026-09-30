@@ -90,19 +90,6 @@ h2 { font: 500 clamp(17px, 2.4vw, 23px)/1.15 var(--f-label); margin: 8px 0 16px;
 .day-list span { color: var(--fg); min-width: 0; }
 .day.hl { border-color: color-mix(in srgb, var(--accent) 55%, transparent); box-shadow: inset 3px 0 0 var(--accent); }
 .day.hl .day-n { color: var(--accent-soft); }
-.day[role="button"] { cursor: pointer; text-align: left; }
-.day[role="button"]:hover { border-color: color-mix(in srgb, var(--accent) 70%, transparent); }
-.days.has-sel .day { opacity: .55; }
-.days.has-sel .day.hl:not(.sel) { border-color: rgb(255 255 255 / .1); box-shadow: none; }
-.days.has-sel .day.hl:not(.sel) .day-n { color: var(--fg); }
-.days .day.sel { opacity: 1; border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent), 0 0 0 1px var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
-.days .day.sel .day-n { color: var(--accent-soft); }
-.day-cta { margin-top: auto; padding-top: 12px; font-size: var(--fs); color: var(--accent-soft); font-weight: 600; }
-.etapa-aviso { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 12px; padding: 10px 12px; border: 1px solid var(--accent); border-radius: 8px; background: color-mix(in srgb, var(--accent) 10%, transparent); font-size: var(--fs); }
-.etapa-aviso b { color: var(--accent-soft); }
-.jornada-opts { display: flex; flex-wrap: wrap; gap: 6px 14px; color: var(--fg); }
-.jornada-opts label { flex-direction: row; align-items: center; gap: 6px; font-size: var(--fs); color: var(--fg); }
-.jornada-opts input { width: auto; }
 
 /* Barra de filtros */
 .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
@@ -226,16 +213,15 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     <div class="journey" role="group" aria-labelledby="h-produto">
       <h3 id="h-produto">Em 14 dias, você sai Licenciado certificado</h3>
       <div class="days">
-        <div class="day" role="button" tabindex="0" aria-pressed="false" data-etapa="online"><span class="day-n">7 dias</span><p>Conteúdo teórico no seu ritmo, online</p>
-          <ol class="day-list"><li><b>Dia 0</b><span>Acesso liberado. Espelho (autodiagnóstico) dos 12 pilares + início da Plateia — Eixo Expressão</span></li><li><b>Dia 1</b><span>Plateia — Eixo Expressão (conclusão) + Eixo Argumento (início)</span></li><li><b>Dia 2</b><span>Plateia — Eixo Argumento (conclusão)</span></li><li><b>Dia 3</b><span>Plateia — Eixo Substância (início)</span></li><li><b>Dia 4</b><span>Plateia — Eixo Substância (conclusão) + Eixo Conexão (início)</span></li><li><b>Dia 5</b><span>Plateia — Eixo Conexão (conclusão)</span></li><li><b>Dia 6</b><span>Revisão livre — estudo autônomo antes dos testes</span></li></ol><span class="day-cta" id="cta-online"></span></div>
-        <div class="day" role="button" tabindex="0" aria-pressed="false" data-etapa="testes"><span class="day-n">3 dias</span><p>Testes de aprovação, nota mínima 70%</p>
-          <ol class="day-list"><li><b>Dia 7</b><span>Teste teórico — Eixo Expressão e Eixo Argumento (18 questões cada, nota mínima 70%)</span></li><li><b>Dia 8</b><span>Teste teórico — Eixo Substância e Eixo Conexão</span></li><li><b>Dia 9</b><span>Dia de tolerância — reforço e repetição de testes não aprovados</span></li></ol><span class="day-cta" id="cta-testes"></span></div>
-        <div class="day hl" role="button" tabindex="0" aria-pressed="false" data-etapa="presencial"><span class="day-n">4 dias</span><p>Imersão presencial, prática e sua performance no palco avaliada</p>
-          <ol class="day-list"><li><b>Dia 10</b><span>Presencial — Dia 1: Mandala do Speaker (Expressão + Argumento)</span></li><li><b>Dia 11</b><span>Presencial — Dia 2: Mandala do Speaker (Substância + Conexão) + Certificação Speaker</span></li><li><b>Dia 12</b><span>Presencial — Dia 3: Mandala do Licenciado (Ciclo TB School + Direção)</span></li><li><b>Dia 13</b><span>Presencial — Dia 4: Mandala do Licenciado (Relacionamento + Ciclo TB School) + Certificação Licenciado</span></li></ol><span class="day-cta" id="cta-presencial"></span></div>
+        <div class="day"><span class="day-n">7 dias</span><p>Conteúdo teórico no seu ritmo, online</p>
+          <ol class="day-list"><li><b>Dia 0</b><span>Acesso liberado. Espelho (autodiagnóstico) dos 12 pilares + início da Plateia — Eixo Expressão</span></li><li><b>Dia 1</b><span>Plateia — Eixo Expressão (conclusão) + Eixo Argumento (início)</span></li><li><b>Dia 2</b><span>Plateia — Eixo Argumento (conclusão)</span></li><li><b>Dia 3</b><span>Plateia — Eixo Substância (início)</span></li><li><b>Dia 4</b><span>Plateia — Eixo Substância (conclusão) + Eixo Conexão (início)</span></li><li><b>Dia 5</b><span>Plateia — Eixo Conexão (conclusão)</span></li><li><b>Dia 6</b><span>Revisão livre — estudo autônomo antes dos testes</span></li></ol></div>
+        <div class="day"><span class="day-n">3 dias</span><p>Testes de aprovação, nota mínima 70%</p>
+          <ol class="day-list"><li><b>Dia 7</b><span>Teste teórico — Eixo Expressão e Eixo Argumento (18 questões cada, nota mínima 70%)</span></li><li><b>Dia 8</b><span>Teste teórico — Eixo Substância e Eixo Conexão</span></li><li><b>Dia 9</b><span>Dia de tolerância — reforço e repetição de testes não aprovados</span></li></ol></div>
+        <div class="day hl"><span class="day-n">4 dias</span><p>Imersão presencial, prática e sua performance no palco avaliada</p>
+          <ol class="day-list"><li><b>Dia 10</b><span>Presencial — Dia 1: Mandala do Speaker (Expressão + Argumento)</span></li><li><b>Dia 11</b><span>Presencial — Dia 2: Mandala do Speaker (Substância + Conexão) + Certificação Speaker</span></li><li><b>Dia 12</b><span>Presencial — Dia 3: Mandala do Licenciado (Ciclo TB School + Direção)</span></li><li><b>Dia 13</b><span>Presencial — Dia 4: Mandala do Licenciado (Relacionamento + Ciclo TB School) + Certificação Licenciado</span></li></ol></div>
       </div>
     </div>
     <div class="sec-tag" style="margin-bottom:14px">03 · Ordem de entrega</div>
-    <div class="etapa-aviso" id="etapaAviso" hidden></div>
     <div class="toolbar">
       <input type="search" id="fBusca" placeholder="Buscar entrega, responsável ou nota" aria-label="Buscar">
       <select id="fStatus" aria-label="Filtrar por status"><option value="">Todos os status</option></select>
@@ -332,19 +318,6 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     { id: "e23", fase: "f6", titulo: "Primeira turma e certificação", entregavel: "Jornada de 14 dias com turma de ~20: online, testes e 4 dias presenciais (16h Speaker + 16h Licenciado), com Certificação Speaker no Dia 11 e Certificação Licenciado no Dia 13.", responsavel: "Leandro Vidal", status: "Não iniciado", depende: ["e22"], fonte: M + ", Partes 5 e 6" },
   ].map(e => ({ prazo: "", notas: "", ...e })) });
 
-  const ETAPAS = {
-    online: { nome: "7 dias · Conteúdo online", dias: "Dias 0 a 6" },
-    testes: { nome: "3 dias · Testes de aprovação", dias: "Dias 7 a 9" },
-    presencial: { nome: "4 dias · Imersão presencial", dias: "Dias 10 a 13" },
-  };
-  // Entregas que cada etapa da jornada precisa para acontecer (editável em cada entrega)
-  const JORNADA_PADRAO = {
-    e08: ["online"], e09: ["online"], e13: ["online", "testes"], e10: ["testes"],
-    e04: ["presencial"], e07: ["presencial"], e11: ["presencial"], e15: ["presencial"],
-    e16: ["presencial"], e17: ["presencial"], e23: ["online", "testes", "presencial"],
-  };
-  const etapasDe = e => Array.isArray(e.jornada) ? e.jornada : (JORNADA_PADRAO[e.id] || []);
-  let etapaSel = null;
   let doc = null, versao = 0, modo = "local", editando = null, confirmarExcluir = null, timer = null;
   const hoje = new Date().toISOString().slice(0, 10);
 
@@ -440,23 +413,9 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     fillSel("fResp", EQUIPE.concat(extras, [SEM_RESP]), "Todos os responsáveis");
 
     const q = $("fBusca").value.trim().toLowerCase(), fs = $("fStatus").value, fr = $("fResp").value;
-    const passa = e => (!etapaSel || etapasDe(e).includes(etapaSel)) && (!fs || (fs === "Em atraso" ? atrasada(e) : fs === "Aguardando dependência" ? (!concl(e) && pendentesDeps(e).length > 0) : e.status === fs))
+    const passa = e => (!fs || (fs === "Em atraso" ? atrasada(e) : fs === "Aguardando dependência" ? (!concl(e) && pendentesDeps(e).length > 0) : e.status === fs))
       && (!fr || (e.responsavel || "A definir") === fr)
       && (!q || [e.titulo, e.entregavel, e.responsavel, e.notas, "#" + pad(num[e.id])].join(" ").toLowerCase().includes(q));
-
-    const days = document.querySelector(".days");
-    days.classList.toggle("has-sel", !!etapaSel);
-    Object.keys(ETAPAS).forEach(k => {
-      const card = days.querySelector(`[data-etapa="${k}"]`), es = lista.filter(e => etapasDe(e).includes(k));
-      card.classList.toggle("sel", etapaSel === k);
-      card.setAttribute("aria-pressed", String(etapaSel === k));
-      $("cta-" + k).textContent = etapaSel === k
-        ? "Filtrando o quadro · clique para mostrar todas"
-        : `${es.length} entrega${es.length === 1 ? "" : "s"} · ${es.filter(concl).length} concluída${es.filter(concl).length === 1 ? "" : "s"} · Ver no quadro →`;
-    });
-    const aviso = $("etapaAviso");
-    aviso.hidden = !etapaSel;
-    if (etapaSel) aviso.innerHTML = `<span>Mostrando só as entregas necessárias para <b>${esc(ETAPAS[etapaSel].nome)}</b> (${ETAPAS[etapaSel].dias}).</span><button class="btn" type="button" id="btnLimparEtapa">Mostrar todas</button>`;
 
     $("board").innerHTML = FASES.map((f, i) => {
       const todas = lista.filter(e => e.fase === f.id), es = todas.filter(passa), c = todas.filter(concl).length;
@@ -507,9 +466,6 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
       <label class="wide">Entregável<textarea id="ed-entregavel-${e.id}" data-field="entregavel" data-id="${e.id}">${esc(e.entregavel)}</textarea></label>
       <label>Responsável<select id="ed-responsavel-${e.id}" data-field="responsavel" data-id="${e.id}">${[...new Set(EQUIPE.concat([e.responsavel || SEM_RESP].filter(r => r !== SEM_RESP), [SEM_RESP]))].map(r => `<option${r === (e.responsavel || SEM_RESP) ? " selected" : ""}>${esc(r)}</option>`).join("")}</select></label>
       <label>Depende de (segure Ctrl/⌘ para marcar várias)<select multiple size="4" id="ed-depende-${e.id}" data-field="depende" data-id="${e.id}">${outras.map(o => `<option value="${o.id}"${(e.depende || []).includes(o.id) ? " selected" : ""}>#${pad(num[o.id])} ${esc(o.titulo)}</option>`).join("")}</select></label>
-      <div class="full"><span style="font-size:var(--fs);color:var(--muted)">Etapa da jornada que precisa desta entrega</span>
-        <div class="jornada-opts">${Object.entries(ETAPAS).map(([k, v]) => `<label><input type="checkbox" id="ed-jornada-${k}-${e.id}" data-jornada="${k}" data-id="${e.id}"${etapasDe(e).includes(k) ? " checked" : ""}>${esc(v.nome)}</label>`).join("")}</div>
-      </div>
       <label class="full">Notas<textarea id="ed-notas-${e.id}" data-field="notas" data-id="${e.id}" placeholder="Decisões, links, próximos passos">${esc(e.notas)}</textarea></label>
       <div class="actions">
         <span class="src">${e.fonte ? "Fonte: " + esc(e.fonte) : "Entrega adicionada pela equipe"}</span>
@@ -539,7 +495,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
   $("btnFechar").addEventListener("click", fecharEditor);
 
   function irPara(id, abrir) {
-    if (!document.getElementById(id)) { etapaSel = null; $("fBusca").value = ""; ["fStatus", "fResp"].forEach(k => $(k).value = ""); render(); }
+    if (!document.getElementById(id)) { $("fBusca").value = ""; ["fStatus", "fResp"].forEach(k => $(k).value = ""); render(); }
     const alvo = document.getElementById(id);
     if (!alvo) return;
     if ($("editor").open) fecharEditor();
@@ -580,11 +536,6 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
 
   document.addEventListener("change", ev => {
     const el = ev.target;
-    if (el.dataset.jornada) {
-      const e = porId(el.dataset.id);
-      e.jornada = [...document.querySelectorAll(`[data-jornada][data-id="${e.id}"]:checked`)].map(x => x.dataset.jornada);
-      salvar(); render(); document.getElementById(el.id)?.focus(); return;
-    }
     if (el.dataset.status) { porId(el.dataset.status).status = el.value; salvar(); render(); return; }
     if (el.dataset.field) {
       const e = porId(el.dataset.id), k = el.dataset.field;
@@ -597,28 +548,11 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
   });
   $("fBusca").addEventListener("input", render);
 
-  function escolherEtapa(k) {
-    etapaSel = etapaSel === k ? null : k;
-    render();
-    if (etapaSel) {
-      const alvo = $("etapaAviso");
-      alvo.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
-    }
-  }
-  document.querySelector(".days").addEventListener("click", ev => {
-    const card = ev.target.closest("[data-etapa]"); if (card) escolherEtapa(card.dataset.etapa);
-  });
-  document.querySelector(".days").addEventListener("keydown", ev => {
-    const card = ev.target.closest("[data-etapa]");
-    if (card && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); escolherEtapa(card.dataset.etapa); }
-  });
-  $("etapaAviso").addEventListener("click", ev => { if (ev.target.id === "btnLimparEtapa") { etapaSel = null; render(); } });
-
   $("btnNova").addEventListener("click", () => {
     let n = doc.entregas.length + 1, id;
     do { id = "e" + pad(n++); } while (porId(id));
     const fase = (proxima() || {}).fase || "f1";
-    doc.entregas.push({ id, fase, titulo: "Nova entrega", entregavel: "", responsavel: "A definir", prazo: "", status: "Não iniciado", depende: [], jornada: [], fonte: "", notas: "" });
+    doc.entregas.push({ id, fase, titulo: "Nova entrega", entregavel: "", responsavel: "A definir", prazo: "", status: "Não iniciado", depende: [], fonte: "", notas: "" });
     salvar(); render(); irPara(id, true);
     document.getElementById("ed-titulo-" + id)?.select();
   });
