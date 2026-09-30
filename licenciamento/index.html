@@ -185,7 +185,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     <h1>Licenciamento TB School</h1>
     <p>O Licenciamento habilita a pessoa a dar aulas de comunicação e oratória em nome da TB School. Este painel mostra tudo o que precisa ser entregue para o produto ficar pronto para o mercado, em que ordem, com quem e em que situação está cada etapa.</p>
     <div class="meta">
-      <span>Leandro Vidal · Prof. Vinícius · PSA Profissionais SA</span>
+      <span>Vinícius Recanello · Leandro Vidal · Camila Loss · Cristiane Amaral · Emanuelle Smaniotto</span>
       <span class="save-state" id="saveState">Carregando…</span>
     </div>
   </div>
@@ -280,28 +280,31 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     { id: "f5", nome: "Kit do Licenciado" },
     { id: "f6", nome: "Lançamento" },
   ];
-  const PESSOAS = ["Leandro Vidal", "Prof. Vinícius", "Camila", "Manu", "PSA — Profissionais SA", "A definir"];
+  const EQUIPE = ["Vinícius Recanello", "Leandro Vidal", "Camila Loss", "Cristiane Amaral", "Emanuelle Smaniotto"];
+  const SEM_RESP = "A definir";
+  // Nomes usados na primeira versão do painel → nome completo da equipe
+  const NOMES_ANTIGOS = { "Prof. Vinícius": "Vinícius Recanello", "Camila": "Camila Loss", "Manu": "Emanuelle Smaniotto", "PSA — Profissionais SA": "Cristiane Amaral" };
 
   const M = "06 · Manual Final", D = "07 · Decisões Finais", A = "Arquitetura do Produto";
   const PLANO = () => ({ versaoPlano: 2, entregas: [
     { id: "e01", fase: "f1", titulo: "Nomenclatura e escopo fechados", entregavel: "Mandala do Mentor passa a ser Mandala do Licenciado, incluindo a formação comercial (Vendas) e o próprio Ciclo TB School como conteúdo.", responsavel: "Leandro Vidal", status: "Concluído", depende: [], fonte: D + ", p. 3" },
     { id: "e02", fase: "f1", titulo: "Manual da Metodologia e da Jornada do Licenciado", entregavel: "As 7 partes: Mandala do Speaker, Ciclo TB School, Mandala do Licenciado, conexão Ciclo × Mandala, processo de formação, timeline de 14 dias e Kit do Licenciado.", responsavel: "Leandro Vidal", status: "Concluído", depende: ["e01"], fonte: M },
-    { id: "e03", fase: "f1", titulo: "Definição formal do produto Licenciamento", entregavel: "Documento do produto: o que o Licenciado compra, o que pode fazer em nome da TB School e a regra de aplicar integralmente a metodologia (mesmo Ciclo, pilares e rubrica).", responsavel: "Camila", status: "Não iniciado", depende: ["e02"], fonte: A + ", p. 4 e 13", notas: "Fora do escopo de Leandro e Prof. Vinícius." },
-    { id: "e04", fase: "f1", titulo: "Trilha de certificação alinhada", entregavel: "Decisão registrada: duas certificações (Speaker e Licenciado) dentro da jornada de 14 dias, como está no Manual, ou a trilha de 3 níveis (Speaker → Mentor TB School → Mentor Sênior).", responsavel: "Camila", status: "Não iniciado", depende: ["e02"], fonte: A + ", p. 11 · " + M + ", Parte 5" },
+    { id: "e03", fase: "f1", titulo: "Definição formal do produto Licenciamento", entregavel: "Documento do produto: o que o Licenciado compra, o que pode fazer em nome da TB School e a regra de aplicar integralmente a metodologia (mesmo Ciclo, pilares e rubrica).", responsavel: "Camila Loss", status: "Não iniciado", depende: ["e02"], fonte: A + ", p. 4 e 13", notas: "Fora do escopo de Leandro e Prof. Vinícius." },
+    { id: "e04", fase: "f1", titulo: "Trilha de certificação alinhada", entregavel: "Decisão registrada: duas certificações (Speaker e Licenciado) dentro da jornada de 14 dias, como está no Manual, ou a trilha de 3 níveis (Speaker → Mentor TB School → Mentor Sênior).", responsavel: "Camila Loss", status: "Não iniciado", depende: ["e02"], fonte: A + ", p. 11 · " + M + ", Parte 5" },
 
-    { id: "e05", fase: "f2", titulo: "Bibliografia do eixo Vendas validada", entregavel: "Validação da bibliografia proposta: Jordan Belfort (fechamento), Aaron Ross (prospecção outbound), Neil Rackham (venda consultiva).", responsavel: "Prof. Vinícius", status: "Em revisão", depende: ["e02"], fonte: M + ", Parte 3 · " + D + ", p. 8" },
-    { id: "e06", fase: "f2", titulo: "Tabela de autores revisada", entregavel: "Revisão final da tabela de autores das duas Mandalas, com limite de 5 por eixo para novos levantamentos.", responsavel: "Prof. Vinícius", status: "Não iniciado", depende: ["e05"], fonte: D + ", p. 8" },
+    { id: "e05", fase: "f2", titulo: "Bibliografia do eixo Vendas validada", entregavel: "Validação da bibliografia proposta: Jordan Belfort (fechamento), Aaron Ross (prospecção outbound), Neil Rackham (venda consultiva).", responsavel: "Vinícius Recanello", status: "Em revisão", depende: ["e02"], fonte: M + ", Parte 3 · " + D + ", p. 8" },
+    { id: "e06", fase: "f2", titulo: "Tabela de autores revisada", entregavel: "Revisão final da tabela de autores das duas Mandalas, com limite de 5 por eixo para novos levantamentos.", responsavel: "Vinícius Recanello", status: "Não iniciado", depende: ["e05"], fonte: D + ", p. 8" },
     { id: "e07", fase: "f2", titulo: "Rubricas do Palco", entregavel: "Rubrica descritiva de 1 a 5 para cada um dos 12 pilares da Mandala do Speaker, mais as rubricas de Direção e de Relacionamento da Mandala do Licenciado.", responsavel: "Leandro Vidal", status: "Não iniciado", depende: ["e02"], fonte: M + ", Partes 1 e 3", notas: "O Manual traz o padrão com o exemplo do pilar Oratória (articulação e clareza)." },
 
     { id: "e08", fase: "f3", titulo: "Questionários de Espelho e Novo Espelho", entregavel: "Autodiagnóstico dos 12 pilares (Dia 0) e a comparação final que alimenta o radar Espelho × Novo Espelho.", responsavel: "Leandro Vidal", status: "Não iniciado", depende: ["e02"], fonte: M + ", Partes 2 e 6" },
     { id: "e09", fase: "f3", titulo: "Plateia online dos 12 pilares", entregavel: "Conteúdo teórico curado por pilar para os Dias 0 a 5: Expressão, Argumento, Substância e Conexão.", responsavel: "Leandro Vidal", status: "Não iniciado", depende: ["e06"], fonte: M + ", Partes 1 e 6" },
     { id: "e10", fase: "f3", titulo: "Banco de questões · testes da Mandala do Speaker", entregavel: "4 testes, um por eixo, com 18 questões cada (5 objetivas + 1 subjetiva por pilar): 72 questões. Nota mínima de 70%.", responsavel: "A definir", status: "Não iniciado", depende: ["e09"], fonte: M + ", Partes 5 e 6 · " + D + ", p. 8" },
     { id: "e11", fase: "f3", titulo: "Banco de questões · teste do Ciclo TB School", entregavel: "1 teste com 20 questões (3 objetivas + 1 subjetiva por etapa do Ciclo), aplicado no encerramento do Dia 13.", responsavel: "A definir", status: "Não iniciado", depende: ["e02"], fonte: M + ", Parte 6 · " + D + ", p. 8" },
-    { id: "e12", fase: "f3", titulo: "Conteúdo gravado do eixo Vendas", entregavel: "6 pilares: Prospecção, Gestão de Leads, Pitch de Vendas, Máquina de Vendas, Ferramentas de Gestão e Leitura de Nicho (Atração · Conversão · Retenção). Todo fora do presencial.", responsavel: "Prof. Vinícius", status: "Não iniciado", depende: ["e05"], fonte: M + ", Partes 3 e 5" },
+    { id: "e12", fase: "f3", titulo: "Conteúdo gravado do eixo Vendas", entregavel: "6 pilares: Prospecção, Gestão de Leads, Pitch de Vendas, Máquina de Vendas, Ferramentas de Gestão e Leitura de Nicho (Atração · Conversão · Retenção). Todo fora do presencial.", responsavel: "Vinícius Recanello", status: "Não iniciado", depende: ["e05"], fonte: M + ", Partes 3 e 5" },
 
     { id: "e13", fase: "f4", titulo: "Plataforma no ar", entregavel: "Acesso do candidato, Espelho, Plateia, testes com nota mínima e repetição no Dia 9, radar Espelho × Novo Espelho e emissão dos certificados.", responsavel: "A definir", status: "Não iniciado", depende: ["e08", "e09", "e10", "e11"], fonte: A + ", p. 13 · " + M + ", Parte 5" },
 
-    { id: "e14", fase: "f5", titulo: "Kit 1 · Livro de referência teórica", entregavel: "Curadoria bibliográfica dos 4 eixos de cada Mandala, organizada por pilar.", responsavel: "Prof. Vinícius", status: "Não iniciado", depende: ["e06"], fonte: M + ", Parte 7" },
+    { id: "e14", fase: "f5", titulo: "Kit 1 · Livro de referência teórica", entregavel: "Curadoria bibliográfica dos 4 eixos de cada Mandala, organizada por pilar.", responsavel: "Vinícius Recanello", status: "Não iniciado", depende: ["e06"], fonte: M + ", Parte 7" },
     { id: "e15", fase: "f5", titulo: "Kit 2 · Slides esquematizados", entregavel: "O conteúdo de cada Plateia em tópicos prontos para projeção em sala.", responsavel: "A definir", status: "Não iniciado", depende: ["e09"], fonte: M + ", Parte 7" },
     { id: "e16", fase: "f5", titulo: "Kit 3 · Fichas e cartões de exercício", entregavel: "Questionários de Espelho e Novo Espelho, cartões de exercício do Ensaio e rubrica do Palco, prontos para imprimir, um por aluno.", responsavel: "A definir", status: "Não iniciado", depende: ["e07", "e08"], fonte: M + ", Parte 7" },
     { id: "e17", fase: "f5", titulo: "Kit 4 · Diagnóstico do cliente + Agente de IA", entregavel: "Documento para levantar dificuldades e necessidades do cliente e agente de IA que conhece a Mandala e ajuda a montar o treinamento. Usado na dinâmica do Dia 13.", responsavel: "A definir", status: "Não iniciado", depende: ["e02"], fonte: M + ", Partes 6 e 7" },
@@ -310,7 +313,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     { id: "e20", fase: "f5", titulo: "Kit 7 · Comunidade TB School", entregavel: "Encontros mensais ao vivo para todos os licenciados certificados: Encontro de Vendas e Encontro de Metodologia (alimentado pelos Relatórios de Condução).", responsavel: "A definir", status: "Não iniciado", depende: ["e12", "e19"], fonte: M + ", Parte 7" },
 
     { id: "e21", fase: "f6", titulo: "Apresentação para interessados em ser Licenciado", entregavel: "Apresentação comercial do produto final para quem quer se tornar Licenciado.", responsavel: "A definir", status: "Não iniciado", depende: ["e03", "e04"], fonte: D + ", p. 9" },
-    { id: "e22", fase: "f6", titulo: "Produto pronto para o mercado", entregavel: "Marco: pendências fechadas, plataforma e Kit prontos, produto liberado para venda.", responsavel: "PSA — Profissionais SA", status: "Não iniciado", depende: ["e13", "e14", "e15", "e16", "e17", "e18", "e19", "e20", "e21"], fonte: D + ", p. 9" },
+    { id: "e22", fase: "f6", titulo: "Produto pronto para o mercado", entregavel: "Marco: pendências fechadas, plataforma e Kit prontos, produto liberado para venda.", responsavel: "Cristiane Amaral", status: "Não iniciado", depende: ["e13", "e14", "e15", "e16", "e17", "e18", "e19", "e20", "e21"], fonte: D + ", p. 9" },
     { id: "e23", fase: "f6", titulo: "Primeira turma e certificação", entregavel: "Jornada de 14 dias com turma de ~20: online, testes e 4 dias presenciais (16h Speaker + 16h Licenciado), com Certificação Speaker no Dia 11 e Certificação Licenciado no Dia 13.", responsavel: "Leandro Vidal", status: "Não iniciado", depende: ["e22"], fonte: M + ", Partes 5 e 6" },
   ].map(e => ({ prazo: "", notas: "", ...e })) });
 
@@ -322,16 +325,21 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
   function lsGet() { try { return JSON.parse(localStorage.getItem(LS_KEY) || "null"); } catch (_) { return null; } }
   function lsSet(d) { try { localStorage.setItem(LS_KEY, JSON.stringify(d)); } catch (_) {} }
 
+  function atualizarNomes(d) {
+    let mudou = false;
+    (d.entregas || []).forEach(e => { const novo = NOMES_ANTIGOS[e.responsavel]; if (novo) { e.responsavel = novo; mudou = true; } });
+    return mudou;
+  }
   async function carregar() {
     try {
       const r = await fetch(API, { cache: "no-store" });
       if (!r.ok) throw new Error(String(r.status));
       const j = await r.json();
       modo = "banco"; versao = j.version || 0;
-      if (j.data && Array.isArray(j.data.entregas)) { doc = j.data; }
+      if (j.data && Array.isArray(j.data.entregas)) { doc = j.data; if (atualizarNomes(doc)) await salvarAgora(); }
       else { doc = lsGet() || PLANO(); await salvarAgora(); }
     } catch (_) {
-      modo = "local"; doc = lsGet() || PLANO();
+      modo = "local"; doc = lsGet() || PLANO(); if (atualizarNomes(doc)) lsSet(doc);
     }
     $("modo").textContent = modo === "banco"
       ? "Dados compartilhados com a equipe: as alterações são salvas no banco automaticamente."
@@ -400,8 +408,8 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
       el.value = cur;
     };
     fillSel("fStatus", STATUS.map(s => s.v).concat(["Em atraso", "Aguardando dependência"]), "Todos os status");
-    const resps = [...new Set(lista.map(e => e.responsavel || "A definir"))].sort();
-    fillSel("fResp", resps, "Todos os responsáveis");
+    const extras = [...new Set(lista.map(e => e.responsavel || SEM_RESP))].filter(r => r !== SEM_RESP && !EQUIPE.includes(r)).sort();
+    fillSel("fResp", EQUIPE.concat(extras, [SEM_RESP]), "Todos os responsáveis");
 
     const q = $("fBusca").value.trim().toLowerCase(), fs = $("fStatus").value, fr = $("fResp").value;
     const passa = e => (!fs || (fs === "Em atraso" ? atrasada(e) : fs === "Aguardando dependência" ? (!concl(e) && pendentesDeps(e).length > 0) : e.status === fs))
@@ -455,7 +463,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
       <label>Fase<select id="ed-fase-${e.id}" data-field="fase" data-id="${e.id}">${FASES.map((x, i) => `<option value="${x.id}"${x.id === e.fase ? " selected" : ""}>Fase ${i + 1} · ${esc(x.nome)}</option>`).join("")}</select></label>
       ${f("prazo", "Prazo", "", "date")}
       <label class="wide">Entregável<textarea id="ed-entregavel-${e.id}" data-field="entregavel" data-id="${e.id}">${esc(e.entregavel)}</textarea></label>
-      ${f("responsavel", "Responsável", "", "text", 'list="pessoas"')}
+      <label>Responsável<select id="ed-responsavel-${e.id}" data-field="responsavel" data-id="${e.id}">${[...new Set(EQUIPE.concat([e.responsavel || SEM_RESP].filter(r => r !== SEM_RESP), [SEM_RESP]))].map(r => `<option${r === (e.responsavel || SEM_RESP) ? " selected" : ""}>${esc(r)}</option>`).join("")}</select></label>
       <label>Depende de (segure Ctrl/⌘ para marcar várias)<select multiple size="4" id="ed-depende-${e.id}" data-field="depende" data-id="${e.id}">${outras.map(o => `<option value="${o.id}"${(e.depende || []).includes(o.id) ? " selected" : ""}>#${pad(num[o.id])} ${esc(o.titulo)}</option>`).join("")}</select></label>
       <label class="full">Notas<textarea id="ed-notas-${e.id}" data-field="notas" data-id="${e.id}" placeholder="Decisões, links, próximos passos">${esc(e.notas)}</textarea></label>
       <div class="actions">
@@ -555,15 +563,13 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     try {
       const d = JSON.parse($("importTxt").value);
       if (!d || !Array.isArray(d.entregas)) throw new Error();
-      doc = d; fecharEditor(); $("importBox").hidden = true; $("importTxt").value = ""; salvar(); render(); toast("Backup restaurado");
+      doc = d; atualizarNomes(doc); fecharEditor(); $("importBox").hidden = true; $("importTxt").value = ""; salvar(); render(); toast("Backup restaurado");
     } catch (_) { toast("Esse texto não é um backup válido do painel. Use o JSON copiado em “Copiar backup”."); }
   });
   $("btnReset").addEventListener("click", () => { $("resetBox").hidden = false; $("importBox").hidden = true; });
   $("btnResetCancel").addEventListener("click", () => $("resetBox").hidden = true);
   $("btnResetOk").addEventListener("click", () => { doc = PLANO(); fecharEditor(); $("resetBox").hidden = true; salvar(); render(); toast("Plano original restaurado"); });
 
-  const dl = document.createElement("datalist"); dl.id = "pessoas";
-  dl.innerHTML = PESSOAS.map(p => `<option value="${esc(p)}"></option>`).join(""); document.body.appendChild(dl);
 
   carregar().then(() => {
     render();
