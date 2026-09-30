@@ -136,6 +136,9 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family
 #s1 .ttl{font-size:124px}
 #s1 .tile{left:1450px}
 #fv{width:62%}
+.fdd{position:absolute;left:20px;right:20px;top:70px;background:#fff;border:1px solid #d5d8de;box-shadow:0 14px 34px rgba(0,0,0,.18);z-index:8;opacity:0}
+.fdd div{padding:7px 18px;font-size:18px;color:#222}
+.fdd div.on{background:#1A6ED8;color:#fff}
 </style></head><body>
 <div id="stage">
 %%STARS%%
@@ -159,7 +162,8 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family
       <div class="subt"><span class="on">Caches</span><span>Prévia</span></div>
       <div class="cfg"><div><div class="t">Caches Configurados</div><div class="d">Configure as opções de cache que você oferece e defina valores para diferentes formatos e logísticas.</div></div><div class="addc">+ Adicionar Cache</div></div>
       <div class="fmt"><div class="fh">⌃ Palestra<span class="del">🗑</span></div>
-        <div class="fb"><div class="fsel">Palestra<span style="margin-left:auto;color:#555">⌄</span></div>
+        <div class="fb" style="position:relative"><div class="fsel" id="fsel">Palestra<span style="margin-left:auto;color:#555">⌄</span><div class="hl" id="hlF" style="inset:-6px;border-radius:12px"></div></div>
+          <div class="fdd" id="fdd"><div class="on">Palestra</div><div>Palestra online</div><div>Treinamento</div><div>Mentoria</div><div>Treinamento online</div><div>Mentoria online</div><div>Mestre de Cerimônias</div></div>
           <div class="lg3">Logísticas</div>
           <div class="cx" id="x1"><div class="ch2">⌃ COMPLEXIDADE BAIXA<div class="dsl" id="d1"><i><b class="f"></b><b></b><b></b></i>Menor deslocamento</div><span class="vv">Valor (R$)</span></div><div class="hl" id="hx1" style="border-radius:16px"></div></div>
           <div class="cx" id="x2"><div class="ch2">⌃ COMPLEXIDADE MÉDIA<div class="dsl" id="d2"><i><b class="f"></b><b class="f"></b><b></b></i>Deslocamento intermediário</div><span class="vv">Valor (R$)</span></div><div class="hl" id="hx2" style="border-radius:16px"></div></div>
@@ -216,7 +220,8 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family
     <div class="lg2 H" id="o_lg">PSA<i style="color:var(--ort);font-style:normal">.</i></div>
     <div class="big H"><div id="o_a">VALORES PRECISOS.</div><span id="o_b">NEGOCIAÇÕES ALINHADAS.</span></div>
     <div class="pl" id="o_s">Aba <b>Cachê e Formatos</b> › Baixa · Média · Alta › <b>valor líquido</b> › Salvar</div>
-    <div class="sp" id="o_st">INFORME O VALOR QUE VOCÊ QUER RECEBER</div>
+    <div class="sp" id="o_st">DEFINA SUA PRECIFICAÇÃO COM ESTRATÉGIA</div>
+    <div class="sp" id="o_st2" style="color:var(--eye);margin-top:14px">NOS VEMOS NO PRÓXIMO VÍDEO</div>
   </div>
 </div>
 </div>
@@ -246,11 +251,16 @@ A('#s1c',2.0,7.4,{y:0},{y:-16},'lin');
 
 // S2 níveis 7.4-17.4 (v1 7.65-16.89: Baixa~11.4 Média~11.9 Alta~12.4 deslocamento~14.6)
 scene('#s2',7.4,17.4); head('#s2',7.5); panel('#p2',7.6);
-A('#cur2',8.0,8.9,{x:800,y:600},{x:342,y:146},'io');
-pulse('#hlC',8.7,9.7); C('#tabC',9.05,'on');
-A('#tabC',9.0,9.12,{s:1},{s:.94},'lin'); A('#tabC',9.12,9.3,{s:.94},{s:1});
-A('#c2',9.4,9.9,{o:0,y:16},{o:1,y:0});
-A('#cur2',9.6,10.4,{x:342,y:146},{x:1300,y:700},'io');
+A('#cur2',7.9,8.6,{x:800,y:600},{x:342,y:146},'io');
+pulse('#hlC',8.4,9.2); C('#tabC',8.65,'on');
+A('#tabC',8.6,8.72,{s:1},{s:.94},'lin'); A('#tabC',8.72,8.9,{s:.94},{s:1});
+A('#c2',8.8,9.2,{o:0,y:16},{o:1,y:0});
+A('#cur2',9.0,9.6,{x:342,y:146},{x:1200,y:386},'io');
+pulse('#hlF',9.5,11.0);
+A('#fdd',9.75,10.0,{o:0,y:-8},{o:1,y:0});
+A('#cur2',10.1,10.5,{x:1200,y:386},{x:400,y:482},'io');
+A('#fdd',10.8,11.0,{o:1},{o:0},'lin');
+A('#cur2',11.0,11.6,{x:400,y:482},{x:1300,y:700},'io');
 pulse('#hx1',11.3,13.2); pulse('#hx2',11.8,13.4); pulse('#hx3',12.3,13.6);
 A('#d1',14.0,14.4,{o:0,x:-14},{o:1,x:0},'back'); A('#d2',14.4,14.8,{o:0,x:-14},{o:1,x:0},'back'); A('#d3',14.8,15.2,{o:0,x:-14},{o:1,x:0},'back');
 
@@ -282,8 +292,9 @@ A('#o_lg',31.5,32.2,{o:0,y:30},{o:1,y:0});
 A('#o_a',31.7,32.4,{o:0,y:50},{o:1,y:0});
 A('#o_b',31.9,32.6,{o:0,y:50},{o:1,y:0});
 A('#o_s',32.3,33.0,{o:0,y:20},{o:1,y:0});
-A('#o_st',32.7,33.4,{o:0},{o:1},'lin');
-A('#stage',36.2,37,{o:1},{o:0},'lin');
+A('#o_st',32.0,32.7,{o:0},{o:1},'lin');
+A('#o_st2',34.2,34.9,{o:0},{o:1},'lin');
+A('#stage',38.4,39.2,{o:1},{o:0},'lin');
 
 /* ---- engine ---- */
 const byEl=new Map();
