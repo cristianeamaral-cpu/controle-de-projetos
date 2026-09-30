@@ -7,12 +7,38 @@ cadastrados manualmente no painel **/admin**.
 | Caminho | Conteúdo |
 |---------|----------|
 | `index.html` | Dashboard (visualização) |
+| `licenciamento/` | **Painel de entregas do Licenciamento TB School**: o que será entregue, em qual ordem e o status de cada etapa |
+| `vercel.json` | Abre o painel do Licenciamento na raiz dos domínios que começam com `licenciamento` |
+| `api/licenciamento.js` | Função da Vercel que guarda o painel do Licenciamento no mesmo banco (chave própria) |
 | `admin/` | Painel de edição: projetos, listas de opções, seções e cartões do dashboard |
 | `api/data.js` | Função da Vercel que lê e grava os dados no banco (Upstash Redis) |
 | `assets/` | Estilos, cálculos e gráficos compartilhados |
 | [`docs/banco-de-dados.md`](docs/banco-de-dados.md) | **Como ligar o banco de dados na Vercel** |
 | [`docs/PROMPT.md`](docs/PROMPT.md) | Prompt/especificação original do dashboard |
 | [`docs/configuracao-hubspot.md`](docs/configuracao-hubspot.md) | Referência de pipeline, propriedades e relatórios no HubSpot |
+
+## Painel do Licenciamento (/licenciamento)
+
+Gestor de entregas do produto Licenciamento TB School, montado a partir do
+“06 · Manual Final”, “07 · Decisões Finais” e “Arquitetura do Produto”.
+
+- **Quadro em 6 colunas, uma por fase**, com as 23 entregas na ordem em que
+  destravam o produto (clique numa entrega para editar), cada uma com
+  entregável, responsável, prazo, status, dependências e a fonte no documento.
+- **Próxima entrega:** a primeira da ordem ainda não concluída cujas dependências
+  já estão prontas. Entregas com prazo vencido aparecem como “Em atraso”.
+- **Link direto por entrega:** `/licenciamento/#e07` abre a entrega 07 (botão
+  “Copiar link” dentro de cada uma). `/licenciamento/#f3` abre a fase 3.
+- Edição na própria página; com o banco ligado, a equipe inteira vê o mesmo estado.
+
+### Endereço próprio (landing page)
+
+O `vercel.json` faz qualquer domínio do projeto que comece com `licenciamento`
+abrir o painel direto na raiz. Para ativar, na Vercel: **Settings → Domains →
+Add** e cadastre, por exemplo, `licenciamento-tbschool.vercel.app` (ou um
+subdomínio seu, como `licenciamento.seudominio.com.br`). O painel continua
+também em `/licenciamento/` no domínio principal, e os links de entrega
+funcionam nos dois (`…/#e07`).
 
 ## O que dá para fazer no /admin
 
