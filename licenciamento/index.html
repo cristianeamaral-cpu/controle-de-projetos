@@ -90,6 +90,16 @@ h2 { font: 500 clamp(17px, 2.4vw, 23px)/1.15 var(--f-label); margin: 8px 0 16px;
 .day-list span { color: var(--fg); min-width: 0; }
 .day.hl { border-color: color-mix(in srgb, var(--accent) 55%, transparent); box-shadow: inset 3px 0 0 var(--accent); }
 .day.hl .day-n { color: var(--accent-soft); }
+/* Destaque ao passar o mouse (cartões só informativos, sem clique) */
+.days:has(.day:hover) .day:not(:hover) { opacity: .6; }
+.days:has(.day:hover) .day.hl:not(:hover) { border-color: rgb(255 255 255 / .1); box-shadow: none; }
+.days:has(.day:hover) .day.hl:not(:hover) .day-n { color: var(--fg); }
+.day:hover { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent), 0 0 0 1px var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.day:hover .day-n { color: var(--accent-soft); }
+@media (prefers-reduced-motion: no-preference) {
+  .day { transition: opacity .18s, border-color .18s, box-shadow .18s, background-color .18s, transform .18s; }
+  .day:hover { transform: translateY(-2px); }
+}
 
 /* Barra de filtros */
 .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
