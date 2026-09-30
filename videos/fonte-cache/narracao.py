@@ -7,7 +7,7 @@ segs=[
  "Na aba Cachê e Formatos, você encontra três níveis de complexidade: Baixa, Média e Alta, estruturados de acordo com o deslocamento exigido para cada evento.",
  "No campo Valor, insira o valor líquido exato que você deseja receber ao final.",
  "A plataforma fará a apresentação adequada dessa informação durante o processo de negociação com o contratante.",
- "Defina sua precificação com estratégia e nos vemos no próximo vídeo!",
+ "Defina sua precificação com estratégia e garanta que seu perfil esteja pronto para as melhores oportunidades!",
 ]
 def squeeze(s,sr,maxp=.18,thr=.008):
     fr=int(.01*sr); e=np.array([np.abs(s[i:i+fr]).max() for i in range(0,len(s),fr)]); q=e<thr
