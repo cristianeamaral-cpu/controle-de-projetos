@@ -285,11 +285,11 @@ A('#s1c',2.0,7.1,{y:0},{y:-16},'lin');
 // S2 eventos 6.9-27.5 (v1 7.12-11.5, v2 11.75-20.03, v3 20.28-27.01)
 scene('#s2',6.9,27.5); A('#h2a .eyebrow',7.0,7.6,{o:0,x:-30},{o:1,x:0}); A('#h2a .ttl',7.1,7.8,{o:0,y:40},{o:1,y:0}); A('#s2 .steps',7.2,7.8,{o:0,s:.8},{o:1,s:1},'back');
 panel('#p2',7.1);
-A('#cur2',7.6,8.4,{x:800,y:600},{x:530,y:146},'io');
+A('#cur2',7.6,8.4,{x:800,y:600},{x:500,y:147},'io');
 pulse('#hlE',8.2,9.2); C('#tE',8.5,'on');
 A('#evc',8.8,9.4,{o:0,y:20},{o:1,y:0});
 pulse('#hlQ',9.8,11.6);
-A('#cur2',9.0,9.8,{x:530,y:146},{x:700,y:520},'io');
+A('#cur2',9.0,9.8,{x:500,y:147},{x:700,y:520},'io');
 A('#ph',11.8,12.5,{o:0,x:60},{o:1,x:0},'back');
 A('#h2a',11.9,12.2,{o:1},{o:0},'lin'); A('#h2b',12.1,12.7,{o:0,y:24},{o:1,y:0});
 A('#scan',12.8,14.8,{y:0},{y:170},'io');
@@ -347,7 +347,11 @@ const byEl=new Map();
 for(const t of TW){if(!byEl.has(t.el))byEl.set(t.el,{});const m=byEl.get(t.el);(m[t.k]=m[t.k]||[]).push(t);}
 for(const m of byEl.values())for(const k in m)m[k].sort((a,b)=>a.t0-b.t0);
 function val(list,t){if(t<list[0].t0)return list[0].a;let cur=list[0];for(const w of list)if(w.t0<=t)cur=w;if(t>=cur.t1)return cur.b;const p=cur.e((t-cur.t0)/(cur.t1-cur.t0));return cur.a+(cur.b-cur.a)*p;}
+function placeHL(){ // centraliza a caixa de destaque sobre a aba Eventos, em coordenadas locais do painel
+  const tab=$('#tE'),hl=$('#hlE');let x=0,y=0,e=tab;while(e&&e.id!=='p2'){x+=e.offsetLeft;y+=e.offsetTop;e=e.offsetParent;}
+  const w=tab.offsetWidth+36,h=46;hl.style.left=(x+tab.offsetWidth/2-w/2)+'px';hl.style.top=(y+tab.offsetHeight/2-h/2)+'px';hl.style.width=w+'px';hl.style.height=h+'px';}
 window.seek=function(t){
+  placeHL();
   for(const [el,m] of byEl){const v={};for(const k in m)v[k]=val(m[k],t);
     if('o' in v)el.style.opacity=v.o;
     el.style.transform=`translate(${v.x||0}px,${v.y||0}px) scale(${v.s??1}) rotate(${v.r||0}deg)`;}
