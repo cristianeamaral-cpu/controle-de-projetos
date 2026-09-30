@@ -21,7 +21,8 @@ cadastrados manualmente no painel **/admin**.
 Gestor de entregas do produto Licenciamento TB School, montado a partir do
 “06 · Manual Final”, “07 · Decisões Finais” e “Arquitetura do Produto”.
 
-- **23 entregas em 6 fases**, na ordem em que destravam o produto, cada uma com
+- **Quadro em 6 colunas, uma por fase**, com as 23 entregas na ordem em que
+  destravam o produto (clique numa entrega para editar), cada uma com
   entregável, responsável, prazo, status, dependências e a fonte no documento.
 - **Próxima entrega:** a primeira da ordem ainda não concluída cujas dependências
   já estão prontas. Entregas com prazo vencido aparecem como “Em atraso”.

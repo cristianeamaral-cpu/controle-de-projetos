@@ -41,7 +41,7 @@ body { margin: 0; background: var(--bg); color: var(--fg); font: 400 15px/1.55 v
 a { color: var(--accent-soft); }
 button, input, select, textarea { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
-.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; }
+.wrap { max-width: 1440px; margin: 0 auto; padding-inline: 20px; }
 
 /* Hero */
 .hero { background: linear-gradient(125deg, var(--hero-a) 0%, var(--hero-b) 55%, var(--hero-c) 100%); padding-block: 36px 34px; }
@@ -92,19 +92,6 @@ details.about > summary { cursor: pointer; color: var(--accent-soft); font-size:
 details.about > summary::before { content: "▸ "; }
 details.about[open] > summary::before { content: "▾ "; }
 
-/* Trilha de fases */
-.track { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: var(--surface); }
-.phase { padding: 14px 14px 16px; border-right: 1px solid var(--line); text-decoration: none; color: var(--fg); display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-.phase:last-child { border-right: 0; }
-.phase:hover { background: var(--surface-2); }
-.phase .pn { font: 500 12px/1 var(--f-label); letter-spacing: .12em; color: var(--accent); text-transform: uppercase; }
-.phase .pt { font: 600 14px/1.3 var(--f-display); }
-.phase .pp { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.mini { height: 4px; background: var(--surface-2); border-radius: 99px; overflow: hidden; margin-top: auto; }
-.mini span { display: block; height: 100%; background: var(--ok); }
-.phase.done .pn { color: var(--ok); }
-.phase.cur { background: var(--surface-2); box-shadow: inset 0 3px 0 var(--accent); }
-
 /* Barra de filtros */
 .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
 .toolbar select, .toolbar input[type="search"] { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; min-width: 0; }
@@ -113,22 +100,34 @@ details.about[open] > summary::before { content: "▾ "; }
 .btn:hover { border-color: var(--accent); }
 .btn.primary { background: var(--accent); color: var(--on-accent); border-color: transparent; font-weight: 600; }
 
-/* Lista de entregas */
-.group { margin-bottom: 26px; }
-.group-h { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
-.group-h h3 { font: 500 19px/1.2 var(--f-label); margin: 0; }
-.group-h span { font-size: 13px; color: var(--muted); }
-.items { display: flex; flex-direction: column; gap: 8px; }
-.item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); scroll-margin-top: 16px; }
+/* Quadro: uma coluna por fase */
+.board { display: grid; grid-template-columns: repeat(6, minmax(220px, 1fr)); gap: 12px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x proximity; align-items: start; }
+.col { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); display: flex; flex-direction: column; min-width: 0; scroll-snap-align: start; scroll-margin-top: 16px; }
+.col.cur { border-color: var(--accent); }
+.col-h { padding: 14px 14px 12px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; }
+.col-h .pn { font: 500 12px/1 var(--f-label); letter-spacing: .12em; color: var(--accent); text-transform: uppercase; }
+.col.done .col-h .pn { color: var(--ok); }
+.col-h h3 { font: 600 15px/1.25 var(--f-display); margin: 0; }
+.col-h .pp { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.mini { height: 4px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
+.mini span { display: block; height: 100%; background: var(--ok); }
+.col-body { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+.col-empty { font-size: 12.5px; color: var(--muted); padding: 10px 4px; text-align: center; }
+.item { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 8px; scroll-margin-top: 16px; min-width: 0; }
+.item:hover { border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); }
 .item.target { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
 .item.is-next { border-color: var(--accent); }
-.item-main { display: grid; grid-template-columns: 46px minmax(0, 1fr) 170px 118px 150px; gap: 14px; align-items: center; padding: 12px 14px; }
-.num { font: 700 20px/1 var(--f-display); color: var(--accent); font-variant-numeric: tabular-nums; }
+.item-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.num { font: 700 17px/1 var(--f-display); color: var(--accent); font-variant-numeric: tabular-nums; }
 .item.st-concluido .num { color: var(--ok); }
+.item.st-concluido .ttl-btn .t { color: var(--muted); }
 .ttl-btn { background: none; border: 0; padding: 0; text-align: left; cursor: pointer; min-width: 0; }
-.ttl-btn .t { font: 600 15px/1.35 var(--f-display); display: block; }
-.ttl-btn .d { font-size: 13px; color: var(--muted); display: block; margin-top: 2px; }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.ttl-btn .t { font: 600 14px/1.35 var(--f-display); display: block; }
+.ttl-btn .d { font-size: 12.5px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-top: 4px; }
+.item-foot { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+.item-foot span { min-width: 0; overflow-wrap: anywhere; }
+.item-foot .late { color: var(--crit); font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .chip { font-size: 11.5px; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); text-decoration: none; max-width: 100%; overflow-wrap: anywhere; }
 a.chip:hover { border-color: var(--accent); color: var(--fg); }
 .chip.dep-ok { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, transparent); }
@@ -136,11 +135,7 @@ a.chip:hover { border-color: var(--accent); color: var(--fg); }
 .chip.wait { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 55%, transparent); }
 .chip.late { color: var(--crit); border-color: color-mix(in srgb, var(--crit) 60%, transparent); }
 .chip.next-chip { color: var(--on-accent); background: var(--accent); border-color: transparent; font-weight: 600; }
-.cell { font-size: 13px; min-width: 0; }
-.cell .k { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-.cell .v { overflow-wrap: anywhere; }
-.cell .v.late { color: var(--crit); font-weight: 600; }
-.status { width: 100%; border-radius: 99px; padding: 6px 10px; font-size: 13px; font-weight: 600; border: 1px solid transparent; cursor: pointer; background: var(--surface-2); }
+.status { max-width: 150px; border-radius: 99px; padding: 4px 8px; font-size: 12px; font-weight: 600; border: 1px solid transparent; cursor: pointer; background: var(--surface-2); }
 .status option { background: var(--surface); color: var(--fg); }
 .s-concluido { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 50%, transparent); }
 .s-andamento { color: var(--info); border-color: color-mix(in srgb, var(--info) 50%, transparent); }
@@ -148,9 +143,13 @@ a.chip:hover { border-color: var(--accent); color: var(--fg); }
 .s-nao { color: var(--muted); border-color: var(--line); }
 .s-bloqueado { color: var(--crit); border-color: color-mix(in srgb, var(--crit) 55%, transparent); }
 
-.edit { border-top: 1px solid var(--line); padding: 14px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.editor { border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); color: var(--fg); padding: 0; width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 32px); }
+.editor::backdrop { background: rgb(10 6 4 / .65); }
+.editor-h { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+.editor-h b { font: 600 16px/1.3 var(--f-display); }
+.edit { padding: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .edit label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); min-width: 0; }
-.edit .wide { grid-column: span 2; }
+.edit .wide { grid-column: 1 / -1; }
 .edit .full { grid-column: 1 / -1; }
 .edit input, .edit textarea, .edit select { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; color: var(--fg); font-size: 14px; min-width: 0; width: 100%; }
 .edit textarea { min-height: 64px; resize: vertical; }
@@ -169,28 +168,15 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
   .summary, .row2 { grid-template-columns: minmax(0, 1fr); }
   .product { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .row3 { grid-template-columns: minmax(0, 1fr); }
-  .track { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .phase:nth-child(3n) { border-right: 0; }
-  .phase:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
-  .item-main { grid-template-columns: 38px minmax(0, 1fr) 150px; }
-  .item-main .c-resp, .item-main .c-prazo { grid-column: 2 / 3; }
-  .item-main .c-prazo { grid-row: 3; }
-  .item-main .c-status { grid-column: 3; grid-row: 1; }
-  .edit { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 560px) {
   .wrap { padding-inline: 16px; }
   .product { grid-template-columns: minmax(0, 1fr); }
-  .track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .phase:nth-child(n) { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .phase:nth-child(2n) { border-right: 0; }
-  .item-main { grid-template-columns: 32px minmax(0, 1fr); gap: 8px 12px; }
-  .item-main .c-status, .item-main .c-resp, .item-main .c-prazo { grid-column: 2; grid-row: auto; }
+  .board { grid-template-columns: repeat(6, minmax(78vw, 1fr)); }
   .edit { grid-template-columns: minmax(0, 1fr); }
-  .edit .wide { grid-column: auto; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .item, .phase, .btn { transition: border-color .15s, background-color .15s; }
+  .item, .btn { transition: border-color .15s, background-color .15s; }
 }
 </style>
 </head>
@@ -226,26 +212,24 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
 
   <section aria-labelledby="h-fases">
     <div class="sec-tag">02 · Ordem de entrega</div>
-    <h2 id="h-fases">Seis fases, na sequência em que destravam o produto</h2>
-    <p class="lead">Cada fase depende das anteriores. Clique numa fase para ir direto às entregas dela. A próxima entrega é a primeira da ordem que ainda não foi concluída e cujas dependências já estão prontas.</p>
-    <nav class="track" id="track" aria-label="Fases do projeto"></nav>
-  </section>
-
-  <section aria-labelledby="h-entregas">
-    <div class="sec-tag">03 · Entregáveis</div>
-    <h2 id="h-entregas">Tudo o que será entregue</h2>
+    <h2 id="h-fases">Seis fases, da esquerda para a direita</h2>
+    <p class="lead">Cada coluna é uma fase, e a ordem dentro dela é a ordem de entrega. Clique numa entrega para editar. A coluna em laranja é a fase da próxima entrega liberada.</p>
     <div class="toolbar">
       <input type="search" id="fBusca" placeholder="Buscar entrega, responsável ou nota" aria-label="Buscar">
-      <select id="fFase" aria-label="Filtrar por fase"><option value="">Todas as fases</option></select>
       <select id="fStatus" aria-label="Filtrar por status"><option value="">Todos os status</option></select>
       <select id="fResp" aria-label="Filtrar por responsável"><option value="">Todos os responsáveis</option></select>
       <button class="btn primary" id="btnNova" type="button">+ Nova entrega</button>
     </div>
-    <div id="lista"></div>
+    <div class="board" id="board" aria-label="Entregas por fase"></div>
   </section>
 
+  <dialog class="editor" id="editor" aria-labelledby="editorTitulo">
+    <div class="editor-h"><b id="editorTitulo">Editar entrega</b><button class="btn" type="button" id="btnFechar">Fechar</button></div>
+    <div id="editorBody"></div>
+  </dialog>
+
   <section aria-labelledby="h-produto">
-    <div class="sec-tag">04 · Referência do produto</div>
+    <div class="sec-tag">03 · Referência do produto</div>
     <h2 id="h-produto">O que é o Licenciamento</h2>
     <details class="about" id="about" open>
       <summary>Mostrar ou esconder a referência do produto</summary>
@@ -365,7 +349,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     { id: "e23", fase: "f6", titulo: "Primeira turma e certificação", entregavel: "Jornada de 14 dias com turma de ~20: online, testes e 4 dias presenciais (16h Speaker + 16h Licenciado), com Certificação Speaker no Dia 11 e Certificação Licenciado no Dia 13.", responsavel: "Leandro Vidal", status: "Não iniciado", depende: ["e22"], fonte: M + ", Partes 5 e 6" },
   ].map(e => ({ prazo: "", notas: "", ...e })) });
 
-  let doc = null, versao = 0, modo = "local", abertos = new Set(), confirmarExcluir = null, timer = null;
+  let doc = null, versao = 0, modo = "local", editando = null, confirmarExcluir = null, timer = null;
   const hoje = new Date().toISOString().slice(0, 10);
 
   /* ---------- Persistência ---------- */
@@ -443,15 +427,6 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
         : `<span class="lbl">Próxima entrega</span><span class="ttl">Nada liberado agora</span><p>As entregas abertas aguardam dependências ou estão bloqueadas.</p>`;
 
     const faseAtual = px ? px.fase : null;
-    $("track").innerHTML = FASES.map((f, i) => {
-      const es = lista.filter(e => e.fase === f.id), c = es.filter(concl).length;
-      const done = es.length && c === es.length;
-      return `<a class="phase${done ? " done" : ""}${f.id === faseAtual ? " cur" : ""}" href="#${f.id}" data-go="${f.id}">
-        <span class="pn">Fase ${i + 1}${done ? " · pronta" : f.id === faseAtual ? " · agora" : ""}</span>
-        <span class="pt">${esc(f.nome)}</span>
-        <span class="pp">${c}/${es.length} entregas</span>
-        <span class="mini"><span style="width:${es.length ? c / es.length * 100 : 0}%"></span></span></a>`;
-    }).join("");
 
     // filtros
     const fillSel = (id, vals, first) => {
@@ -459,29 +434,33 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
       el.innerHTML = `<option value="">${first}</option>` + vals.map(v => `<option value="${esc(v.v ?? v)}">${esc(v.t ?? v)}</option>`).join("");
       el.value = cur;
     };
-    fillSel("fFase", FASES.map((f, i) => ({ v: f.id, t: `Fase ${i + 1} · ${f.nome}` })), "Todas as fases");
     fillSel("fStatus", STATUS.map(s => s.v).concat(["Em atraso", "Aguardando dependência"]), "Todos os status");
     const resps = [...new Set(lista.map(e => e.responsavel || "A definir"))].sort();
     fillSel("fResp", resps, "Todos os responsáveis");
 
-    const q = $("fBusca").value.trim().toLowerCase(), ff = $("fFase").value, fs = $("fStatus").value, fr = $("fResp").value;
-    const passa = e => (!ff || e.fase === ff)
-      && (!fs || (fs === "Em atraso" ? atrasada(e) : fs === "Aguardando dependência" ? (!concl(e) && pendentesDeps(e).length > 0) : e.status === fs))
+    const q = $("fBusca").value.trim().toLowerCase(), fs = $("fStatus").value, fr = $("fResp").value;
+    const passa = e => (!fs || (fs === "Em atraso" ? atrasada(e) : fs === "Aguardando dependência" ? (!concl(e) && pendentesDeps(e).length > 0) : e.status === fs))
       && (!fr || (e.responsavel || "A definir") === fr)
       && (!q || [e.titulo, e.entregavel, e.responsavel, e.notas, "#" + pad(num[e.id])].join(" ").toLowerCase().includes(q));
 
-    let html = "";
-    FASES.forEach((f, i) => {
-      const es = lista.filter(e => e.fase === f.id && passa(e));
-      if (!es.length) return;
-      const todas = lista.filter(e => e.fase === f.id);
-      html += `<div class="group" id="${f.id}"><div class="group-h"><h3>Fase ${i + 1} · ${esc(f.nome)}</h3><span>${todas.filter(concl).length} de ${todas.length} concluídas</span></div><div class="items">${es.map(e => itemHTML(e, num, px)).join("")}</div></div>`;
-    });
-    $("lista").innerHTML = html || `<div class="empty">Nenhuma entrega com esses filtros.</div>`;
+    $("board").innerHTML = FASES.map((f, i) => {
+      const todas = lista.filter(e => e.fase === f.id), es = todas.filter(passa), c = todas.filter(concl).length;
+      const done = todas.length && c === todas.length;
+      return `<div class="col${done ? " done" : ""}${f.id === faseAtual ? " cur" : ""}" id="${f.id}">
+        <div class="col-h">
+          <span class="pn">Fase ${i + 1}${done ? " · pronta" : f.id === faseAtual ? " · agora" : ""}</span>
+          <h3>${esc(f.nome)}</h3>
+          <span class="pp">${c} de ${todas.length} concluídas</span>
+          <span class="mini"><span style="width:${todas.length ? c / todas.length * 100 : 0}%"></span></span>
+        </div>
+        <div class="col-body">${es.map(e => itemHTML(e, num, px)).join("") || `<div class="col-empty">${todas.length ? "Nada com esses filtros" : "Sem entregas"}</div>`}</div>
+      </div>`;
+    }).join("");
+    if (editando && porId(editando)) $("editorBody").innerHTML = editHTML(porId(editando));
   }
 
   function itemHTML(e, num, px) {
-    const st = stInfo(e.status), pend = pendentesDeps(e), late = atrasada(e), aberto = abertos.has(e.id);
+    const st = stInfo(e.status), late = atrasada(e);
     const deps = (e.depende || []).map(porId).filter(Boolean);
     const chips = [
       px && px.id === e.id ? `<span class="chip next-chip">Próxima</span>` : "",
@@ -491,19 +470,15 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     ].join("");
     const opts = STATUS.map(s => `<option${s.v === e.status ? " selected" : ""}>${s.v}</option>`).join("");
     return `<article class="item st-${concl(e) ? "concluido" : "aberto"}${px && px.id === e.id ? " is-next" : ""}" id="${e.id}">
-      <div class="item-main">
+      <div class="item-top">
         <span class="num">${pad(num[e.id])}</span>
-        <div style="min-width:0">
-          <button class="ttl-btn" type="button" data-toggle="${e.id}" aria-expanded="${aberto}">
-            <span class="t">${esc(e.titulo)}</span><span class="d">${esc(e.entregavel)}</span>
-          </button>
-          ${chips ? `<div class="chips">${chips}</div>` : ""}
-        </div>
-        <div class="cell c-resp"><span class="k">Responsável</span><span class="v">${esc(e.responsavel || "A definir")}</span></div>
-        <div class="cell c-prazo"><span class="k">Prazo</span><span class="v${late ? " late" : ""}">${esc(fmtData(e.prazo))}</span></div>
-        <div class="c-status"><select class="status ${st.cls}" data-status="${e.id}" id="st-${e.id}" aria-label="Status de ${esc(e.titulo)}">${opts}</select></div>
+        <select class="status ${st.cls}" data-status="${e.id}" id="st-${e.id}" aria-label="Status de ${esc(e.titulo)}">${opts}</select>
       </div>
-      ${aberto ? editHTML(e) : ""}
+      <button class="ttl-btn" type="button" data-toggle="${e.id}" aria-haspopup="dialog">
+        <span class="t">${esc(e.titulo)}</span><span class="d">${esc(e.entregavel)}</span>
+      </button>
+      ${chips ? `<div class="chips">${chips}</div>` : ""}
+      <div class="item-foot"><span>${esc(e.responsavel || "A definir")}</span><span class="${late ? "late" : ""}">${esc(fmtData(e.prazo))}</span></div>
     </article>`;
   }
 
@@ -534,15 +509,27 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
 
   /* ---------- Interação ---------- */
   function toast(t) { const el = $("toast"); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => el.hidden = true, 2200); }
+  function abrirEditor(id) {
+    editando = id; confirmarExcluir = null;
+    $("editorTitulo").textContent = `Entrega #${pad(numeros()[id])}`;
+    $("editorBody").innerHTML = editHTML(porId(id));
+    const dlg = $("editor");
+    if (!dlg.open) { try { dlg.showModal(); } catch (_) { dlg.setAttribute("open", ""); } }
+  }
+  function fecharEditor() { editando = null; confirmarExcluir = null; if ($("editor").open) $("editor").close(); }
+  $("editor").addEventListener("close", () => { editando = null; confirmarExcluir = null; });
+  $("btnFechar").addEventListener("click", fecharEditor);
+
   function irPara(id, abrir) {
-    const el = document.getElementById(id);
-    if (!el) { $("fBusca").value = ""; ["fFase", "fStatus", "fResp"].forEach(k => $(k).value = ""); render(); }
-    if (abrir && porId(id)) { abertos.add(id); render(); }
+    if (!document.getElementById(id)) { $("fBusca").value = ""; ["fStatus", "fResp"].forEach(k => $(k).value = ""); render(); }
     const alvo = document.getElementById(id);
     if (!alvo) return;
+    if ($("editor").open) fecharEditor();
     document.querySelectorAll(".item.target").forEach(x => x.classList.remove("target"));
     if (alvo.classList.contains("item")) alvo.classList.add("target");
-    alvo.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    const suave = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    alvo.scrollIntoView({ behavior: suave, block: "start", inline: "nearest" });
+    if (abrir && porId(id)) abrirEditor(id);
   }
   function copiar(texto, ok) {
     const fallback = () => { const t = document.createElement("textarea"); t.value = texto; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); toast(ok); } catch (_) { toast("Selecione e copie: " + texto); } t.remove(); };
@@ -553,7 +540,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     const t = ev.target.closest("[data-go],[data-toggle],[data-link],[data-del],[data-del-ok],[data-del-no],[data-move]");
     if (!t) return;
     if (t.dataset.go) { ev.preventDefault(); history.replaceState(null, "", "#" + t.dataset.go); irPara(t.dataset.go, false); return; }
-    if (t.dataset.toggle) { const id = t.dataset.toggle; abertos.has(id) ? abertos.delete(id) : abertos.add(id); confirmarExcluir = null; render(); return; }
+    if (t.dataset.toggle) { abrirEditor(t.dataset.toggle); return; }
     if (t.dataset.link) { copiar(location.href.split("#")[0] + "#" + t.dataset.link, "Link da entrega copiado"); return; }
     if (t.dataset.del) { confirmarExcluir = t.dataset.del; render(); return; }
     if (t.dataset.delNo) { confirmarExcluir = null; render(); return; }
@@ -561,7 +548,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
       const id = t.dataset.delOk;
       doc.entregas = doc.entregas.filter(e => e.id !== id);
       doc.entregas.forEach(e => e.depende = (e.depende || []).filter(d => d !== id));
-      abertos.delete(id); confirmarExcluir = null; salvar(); render(); toast("Entrega excluída"); return;
+      fecharEditor(); salvar(); render(); toast("Entrega excluída"); return;
     }
     if (t.dataset.move) {
       const e = porId(t.dataset.move), dir = Number(t.dataset.dir);
@@ -569,7 +556,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
       if (!outro) return;
       const a = doc.entregas.indexOf(e), b = doc.entregas.indexOf(outro);
       [doc.entregas[a], doc.entregas[b]] = [doc.entregas[b], doc.entregas[a]];
-      salvar(); render(); document.getElementById(e.id)?.scrollIntoView({ block: "nearest" });
+      salvar(); render();
     }
   });
 
@@ -583,16 +570,16 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
       const foco = document.getElementById(el.id); if (foco && k !== "depende") foco.focus();
       return;
     }
-    if (["fFase", "fStatus", "fResp"].includes(el.id)) render();
+    if (["fStatus", "fResp"].includes(el.id)) render();
   });
   $("fBusca").addEventListener("input", render);
 
   $("btnNova").addEventListener("click", () => {
     let n = doc.entregas.length + 1, id;
     do { id = "e" + pad(n++); } while (porId(id));
-    const fase = $("fFase").value || (proxima() || {}).fase || "f1";
+    const fase = (proxima() || {}).fase || "f1";
     doc.entregas.push({ id, fase, titulo: "Nova entrega", entregavel: "", responsavel: "A definir", prazo: "", status: "Não iniciado", depende: [], fonte: "", notas: "" });
-    abertos.add(id); salvar(); render(); irPara(id, false);
+    salvar(); render(); irPara(id, true);
     document.getElementById("ed-titulo-" + id)?.select();
   });
 
@@ -603,12 +590,12 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     try {
       const d = JSON.parse($("importTxt").value);
       if (!d || !Array.isArray(d.entregas)) throw new Error();
-      doc = d; abertos.clear(); $("importBox").hidden = true; $("importTxt").value = ""; salvar(); render(); toast("Backup restaurado");
+      doc = d; fecharEditor(); $("importBox").hidden = true; $("importTxt").value = ""; salvar(); render(); toast("Backup restaurado");
     } catch (_) { toast("Esse texto não é um backup válido do painel. Use o JSON copiado em “Copiar backup”."); }
   });
   $("btnReset").addEventListener("click", () => { $("resetBox").hidden = false; $("importBox").hidden = true; });
   $("btnResetCancel").addEventListener("click", () => $("resetBox").hidden = true);
-  $("btnResetOk").addEventListener("click", () => { doc = PLANO(); abertos.clear(); $("resetBox").hidden = true; salvar(); render(); toast("Plano original restaurado"); });
+  $("btnResetOk").addEventListener("click", () => { doc = PLANO(); fecharEditor(); $("resetBox").hidden = true; salvar(); render(); toast("Plano original restaurado"); });
 
   const dl = document.createElement("datalist"); dl.id = "pessoas";
   dl.innerHTML = PESSOAS.map(p => `<option value="${esc(p)}"></option>`).join(""); document.body.appendChild(dl);
