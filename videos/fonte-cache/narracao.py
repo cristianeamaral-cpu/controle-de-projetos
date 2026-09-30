@@ -4,7 +4,7 @@ from kokoro_onnx import Kokoro
 k=Kokoro('voices/kokoro-v1.0.onnx','voices/voices-v1.0.bin')
 segs=[
  "Definir os valores de apresentação com precisão é essencial para garantir negociações alinhadas à sua logística!",
- "Na aba Cachê e Formatos, você encontra três níveis de complexidade: Baixa, Média e Alta, estruturados de acordo com o deslocamento exigido para cada evento.",
+ "Na aba Cachês e Formatos, você encontra três níveis de complexidade: Baixa, Média e Alta, estruturados de acordo com o deslocamento exigido para cada evento.",
  "No campo Valor, insira o valor líquido exato que você deseja receber ao final.",
  "A plataforma fará a apresentação adequada dessa informação durante o processo de negociação com o contratante.",
  "Defina sua precificação com estratégia e garanta que seu perfil esteja pronto para as melhores oportunidades!",
