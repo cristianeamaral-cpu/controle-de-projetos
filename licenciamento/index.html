@@ -185,7 +185,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     <h1>Licenciamento TB School</h1>
     <p>O Licenciamento habilita a pessoa a dar aulas de comunicação e oratória em nome da TB School. Este painel mostra tudo o que precisa ser entregue para o produto ficar pronto para o mercado, em que ordem, com quem e em que situação está cada etapa.</p>
     <div class="meta">
-      <span>Vinícius Recanello · Leandro Vidal · Camila Loss · Cristiane Amaral · Emanuelle Smaniotto</span>
+      <span>Camila Loss · Cristiane Amaral · Emanuelle Smaniotto · Leandro Vidal · Vinícius Recanello</span>
       <span class="save-state" id="saveState">Carregando…</span>
     </div>
   </div>
@@ -280,7 +280,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     { id: "f5", nome: "Kit do Licenciado" },
     { id: "f6", nome: "Lançamento" },
   ];
-  const EQUIPE = ["Vinícius Recanello", "Leandro Vidal", "Camila Loss", "Cristiane Amaral", "Emanuelle Smaniotto"];
+  const EQUIPE = ["Camila Loss", "Cristiane Amaral", "Emanuelle Smaniotto", "Leandro Vidal", "Vinícius Recanello"];
   const SEM_RESP = "A definir";
   // Nomes usados na primeira versão do painel → nome completo da equipe
   const NOMES_ANTIGOS = { "Prof. Vinícius": "Vinícius Recanello", "Camila": "Camila Loss", "Manu": "Emanuelle Smaniotto", "PSA — Profissionais SA": "Cristiane Amaral" };
@@ -408,7 +408,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
       el.value = cur;
     };
     fillSel("fStatus", STATUS.map(s => s.v).concat(["Em atraso", "Aguardando dependência"]), "Todos os status");
-    const extras = [...new Set(lista.map(e => e.responsavel || SEM_RESP))].filter(r => r !== SEM_RESP && !EQUIPE.includes(r)).sort();
+    const extras = [...new Set(lista.map(e => e.responsavel || SEM_RESP))].filter(r => r !== SEM_RESP && !EQUIPE.includes(r)).sort((x, y) => x.localeCompare(y, "pt-BR"));
     fillSel("fResp", EQUIPE.concat(extras, [SEM_RESP]), "Todos os responsáveis");
 
     const q = $("fBusca").value.trim().toLowerCase(), fs = $("fStatus").value, fr = $("fResp").value;
