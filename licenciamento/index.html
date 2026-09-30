@@ -10,15 +10,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Oswald:wght@500&family=Inter:wght@400;500;600&display=swap">
 <style>
 /* Layout: faixa-hero no gradiente dos decks TB School → resumo (progresso + próxima entrega)
-   → trilha das 6 fases → lista ordenada de entregas agrupada por fase. Tema escuro único, como os decks. */
+   → jornada de 14 dias → quadro de 6 fases. Abaixo do hero: fundo preto e texto branco;
+   cor só nos status (situação, cartões e dependências). */
 :root {
   color-scheme: dark;
-  --bg: #16110e;
-  --surface: #211a16;
-  --surface-2: #2b221d;
-  --line: #3b2f28;
-  --fg: #f4ede7;
-  --muted: #b4a498;
+  --bg: #000000;
+  --surface: #0c0c0c;
+  --surface-2: #161616;
+  --line: #2c2c2c;
+  --fg: #ffffff;
+  --muted: #d6d6d6;
   --accent: #e8702a;
   --accent-soft: #f2a05f;
   --on-accent: #1a0e07;
@@ -26,6 +27,7 @@
   --warn: #e9bb4f;
   --crit: #ef6a5e;
   --info: #8fb2dc;
+  --st-nao: #7d7d7d;
   --hero-a: #22100a;
   --hero-b: #6a2a10;
   --hero-c: #d65a1c;
@@ -45,6 +47,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .wrap { max-width: 1440px; margin: 0 auto; padding-inline: 20px; }
 
 /* Hero */
+/* Abaixo do hero, o destaque deixa de ser laranja: branco sobre preto */
+main { --accent: #ffffff; --accent-soft: #ffffff; --on-accent: #000000; }
 .hero { background: linear-gradient(125deg, var(--hero-a) 0%, var(--hero-b) 55%, var(--hero-c) 100%); padding-block: 36px 34px; }
 .eyebrow { font: 600 var(--fs)/1 var(--f-display); letter-spacing: .08em; text-transform: uppercase; color: var(--accent-soft); display: flex; align-items: center; gap: 10px; }
 .dots { color: var(--accent); letter-spacing: 2px; }
@@ -69,16 +73,16 @@ h2 { font: 500 clamp(17px, 2.4vw, 23px)/1.15 var(--f-label); margin: 8px 0 16px;
 .counts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: var(--fs); color: var(--muted); }
 .counts b { color: var(--fg); font-variant-numeric: tabular-nums; }
 .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
-.next { background: var(--accent); color: var(--on-accent); border-color: transparent; display: flex; flex-direction: column; gap: 8px; }
+.next { background: var(--surface); color: var(--fg); border-color: var(--fg); display: flex; flex-direction: column; gap: 8px; }
 .next .lbl { font: 500 var(--fs)/1 var(--f-label); letter-spacing: .14em; text-transform: uppercase; }
 .next .ttl { font: 700 15px/1.25 var(--f-display); text-wrap: balance; }
 .next p { margin: 0; font-size: var(--fs); }
-.next a { color: var(--on-accent); font-weight: 600; }
+.next a { color: var(--fg); font-weight: 600; }
 .alert-line { font-size: var(--fs); color: var(--crit); margin-top: 10px; }
 .alert-line:empty { display: none; }
 
 /* Referência do produto: jornada de 14 dias */
-.journey { margin-bottom: 22px; padding: 24px 22px 26px; border-radius: var(--r); background: linear-gradient(125deg, var(--hero-a) 0%, #2a150c 55%, var(--hero-b) 100%); }
+.journey { margin-bottom: 22px; padding: 24px 22px 26px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); }
 .journey h3 { font: 500 clamp(17px, 2.4vw, 23px)/1.15 var(--f-label); margin: 0 0 18px; text-wrap: balance; }
 .days { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; }
 .day { background: rgb(255 255 255 / .04); border: 1px solid rgb(255 255 255 / .1); border-radius: var(--r); padding: 18px 18px 26px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
@@ -275,7 +279,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   const STATUS = [
-    { v: "Não iniciado", cls: "s-nao", cor: "var(--line)" },
+    { v: "Não iniciado", cls: "s-nao", cor: "var(--st-nao)" },
     { v: "Em andamento", cls: "s-andamento", cor: "var(--info)" },
     { v: "Em revisão", cls: "s-revisao", cor: "var(--warn)" },
     { v: "Bloqueado", cls: "s-bloqueado", cor: "var(--crit)" },
