@@ -79,10 +79,14 @@ h2 { font: 500 clamp(22px, 3.2vw, 30px)/1.15 var(--f-label); margin: 8px 0 16px;
 /* Referência do produto: jornada de 14 dias */
 .journey { margin-top: 28px; padding: 28px 24px 30px; border-radius: var(--r); background: linear-gradient(125deg, var(--hero-a) 0%, #2a150c 55%, var(--hero-b) 100%); }
 .journey h2 { font-size: clamp(24px, 3.6vw, 34px); margin-bottom: 22px; }
-.days { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.days { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; }
 .day { background: rgb(255 255 255 / .04); border: 1px solid rgb(255 255 255 / .1); border-radius: var(--r); padding: 18px 18px 26px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .day-n { font: 500 clamp(34px, 4.6vw, 48px)/1 var(--f-label); color: var(--fg); }
-.day p { margin: 0; font-size: 14px; color: var(--muted); max-width: 30ch; }
+.day p { margin: 0; font-size: 14px; color: var(--muted); max-width: 30ch; min-height: 3.1em; }
+.day-list { list-style: none; margin: 4px 0 0; padding: 14px 0 0; border-top: 1px solid rgb(255 255 255 / .1); display: flex; flex-direction: column; gap: 10px; }
+.day-list li { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 10px; font-size: 13px; line-height: 1.45; }
+.day-list b { font: 500 13px/1.45 var(--f-label); letter-spacing: .06em; text-transform: uppercase; color: var(--accent-soft); font-variant-numeric: tabular-nums; }
+.day-list span { color: var(--fg); min-width: 0; }
 .day.hl { border-color: color-mix(in srgb, var(--accent) 55%, transparent); box-shadow: inset 3px 0 0 var(--accent); }
 .day.hl .day-n { color: var(--accent-soft); }
 
@@ -225,9 +229,12 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     <div class="sec-tag">03 · Referência do produto</div>
     <h2 id="h-produto">Em 14 dias, você sai Licenciado certificado</h2>
     <div class="days">
-      <div class="day"><span class="day-n">7 dias</span><p>Conteúdo teórico no seu ritmo, online</p></div>
-      <div class="day"><span class="day-n">3 dias</span><p>Testes de aprovação, nota mínima 70%</p></div>
-      <div class="day hl"><span class="day-n">4 dias</span><p>Imersão presencial, prática e sua performance no palco avaliada</p></div>
+      <div class="day"><span class="day-n">7 dias</span><p>Conteúdo teórico no seu ritmo, online</p>
+        <ol class="day-list"><li><b>Dia 0</b><span>Acesso liberado. Espelho (autodiagnóstico) dos 12 pilares + início da Plateia — Eixo Expressão</span></li><li><b>Dia 1</b><span>Plateia — Eixo Expressão (conclusão) + Eixo Argumento (início)</span></li><li><b>Dia 2</b><span>Plateia — Eixo Argumento (conclusão)</span></li><li><b>Dia 3</b><span>Plateia — Eixo Substância (início)</span></li><li><b>Dia 4</b><span>Plateia — Eixo Substância (conclusão) + Eixo Conexão (início)</span></li><li><b>Dia 5</b><span>Plateia — Eixo Conexão (conclusão)</span></li><li><b>Dia 6</b><span>Revisão livre — estudo autônomo antes dos testes</span></li></ol></div>
+      <div class="day"><span class="day-n">3 dias</span><p>Testes de aprovação, nota mínima 70%</p>
+        <ol class="day-list"><li><b>Dia 7</b><span>Teste teórico — Eixo Expressão e Eixo Argumento (18 questões cada, nota mínima 70%)</span></li><li><b>Dia 8</b><span>Teste teórico — Eixo Substância e Eixo Conexão</span></li><li><b>Dia 9</b><span>Dia de tolerância — reforço e repetição de testes não aprovados</span></li></ol></div>
+      <div class="day hl"><span class="day-n">4 dias</span><p>Imersão presencial, prática e sua performance no palco avaliada</p>
+        <ol class="day-list"><li><b>Dia 10</b><span>Presencial — Dia 1: Mandala do Speaker (Expressão + Argumento)</span></li><li><b>Dia 11</b><span>Presencial — Dia 2: Mandala do Speaker (Substância + Conexão) + Certificação Speaker</span></li><li><b>Dia 12</b><span>Presencial — Dia 3: Mandala do Licenciado (Ciclo TB School + Direção)</span></li><li><b>Dia 13</b><span>Presencial — Dia 4: Mandala do Licenciado (Relacionamento + Ciclo TB School) + Certificação Licenciado</span></li></ol></div>
     </div>
   </section>
 
