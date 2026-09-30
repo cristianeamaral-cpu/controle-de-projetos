@@ -225,13 +225,16 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 const E={lin:x=>x,out:x=>1-Math.pow(1-x,3),io:x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,back:x=>{const c=1.5;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)}};
 const TW=[],CL=[];
-function A(sel,t0,t1,from,to,e='out'){const el=$(sel);if(!el)throw sel;for(const k in to)TW.push({el,k,t0,t1,a:from[k],b:to[k],e:E[e]});}
-function C(sel,t,cls){CL.push({el:$(sel),t,cls});}
+// time warp: maps the design timeline onto the narration timing
+const WA=[[0, 0], [1.0, 0.6], [6.57, 5.61], [7.9, 6.06], [11.53, 9.39], [12.0, 9.59], [20.53, 16.9], [21.0, 16.94], [25.65, 21.38], [27.1, 21.83], [32.45, 26.64], [32.9, 26.89], [37.23, 30.73], [38.8, 31.18], [47.85, 39.4]];
+function W(t){if(t<=WA[0][0])return t;for(let i=1;i<WA.length;i++)if(t<=WA[i][0]){const [a,na]=WA[i-1],[b,nb]=WA[i];return na+(nb-na)*(t-a)/(b-a);}const L=WA[WA.length-1];return t+(L[1]-L[0]);}
+function A(sel,t0,t1,from,to,e='out'){t0=W(t0);t1=W(t1);const el=$(sel);if(!el)throw sel;for(const k in to)TW.push({el,k,t0,t1,a:from[k],b:to[k],e:E[e]});}
+function C(sel,t,cls){CL.push({el:$(sel),t:W(t),cls});}
 function scene(sel,t0,t1){A(sel,t0,t0+.6,{o:0,s:1.03},{o:1,s:1});A(sel,t1-.5,t1,{o:1,s:1},{o:0,s:.98},'io');}
 function head(sel,t0){A(sel+' .eyebrow',t0,t0+.6,{o:0,x:-30},{o:1,x:0});A(sel+' .ttl',t0+.1,t0+.8,{o:0,y:40},{o:1,y:0});A(sel+' .steps',t0+.2,t0+.8,{o:0,s:.8},{o:1,s:1},'back');}
 function panel(sel,t0){A(sel,t0,t0+.9,{o:0,y:90},{o:1,y:0});}
 function pulse(sel,t0,t1){A(sel,t0,t0+.35,{o:0,s:1.06},{o:1,s:1});A(sel,t1,t1+.3,{o:1},{o:0},'lin');}
-const DASH=[]; function D(sel,t0,t1){DASH.push({el:$(sel),t0,t1});}
+const DASH=[]; function D(sel,t0,t1){DASH.push({el:$(sel),t0:W(t0),t1:W(t1)});}
 
 /* ---- timeline ---- */
 A('#stars',0,60,{x:0,y:0},{x:-80,y:-26},'lin');
@@ -310,7 +313,7 @@ window.seek=function(t){
   for(const c of CL)c.el.classList.toggle(c.cls,t>=c.t);
   for(const d of DASH){const p=Math.max(0,Math.min(1,(t-d.t0)/(d.t1-d.t0)));d.el.setAttribute('stroke-dashoffset',400*(1-E.io(p)));}
   const n=$$('.it.on').length; $('#cnt2').textContent=n+' de 6';
-  const cu=(t0,t1,v0,v1)=>Math.round(v0+(v1-v0)*E.io(Math.max(0,Math.min(1,(t-t0)/(t1-t0)))));
+  const cu=(t0,t1,v0,v1)=>{t0=W(t0);t1=W(t1);return Math.round(v0+(v1-v0)*E.io(Math.max(0,Math.min(1,(t-t0)/(t1-t0)))));};
   const nm=cu(16.6,17.6,0,6), no=cu(17.4,20.4,3,24);
   $('#nmt').textContent=nm; $('#bmt').style.width=(nm/6*100)+'%'; $('#nop').textContent=no; $('#bop').style.width=(no/24*100)+'%';
   $$('.brief').forEach(b=>{b.style.borderColor=b.classList.contains('hit')?'#1FAE5B':'';});
