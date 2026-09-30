@@ -28,6 +28,7 @@
   --crit: #ef6a5e;
   --info: #8fb2dc;
   --st-nao: #7d7d7d;
+  --psa: #ff640f; /* laranja PSA (profissionaissa.com.br): títulos e menu */
   --hero-a: #22100a;
   --hero-b: #6a2a10;
   --hero-c: #d65a1c;
@@ -49,6 +50,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* Hero */
 /* Abaixo do hero, o destaque deixa de ser laranja: branco sobre preto */
 main { --accent: #ffffff; --accent-soft: #ffffff; --on-accent: #000000; }
+/* Títulos e menu em laranja PSA */
+main h2, main .journey h3, main .sec-tag, main .col-h .pn, main .col-h h3, main .next .lbl, main .next .ttl, main .editor-h b { color: var(--psa); }
+main .btn.primary { background: var(--psa); color: #ffffff; }
 .hero { background: linear-gradient(125deg, var(--hero-a) 0%, var(--hero-b) 55%, var(--hero-c) 100%); padding-block: 36px 34px; }
 .eyebrow { font: 600 var(--fs)/1 var(--f-display); letter-spacing: .08em; text-transform: uppercase; color: var(--accent-soft); display: flex; align-items: center; gap: 10px; }
 .dots { color: var(--accent); letter-spacing: 2px; }
