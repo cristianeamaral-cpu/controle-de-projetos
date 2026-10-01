@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="fonts2.css">
+<style>
+:root{--or:#FD6E06;--ort:#F74E00;--eye:#FF5A0A;--dk:#121417;--line:#E7E9EE;--mut:#6B7280;--grn:#1FAE5B;--soft:#FFF1E7}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family:Manrope,sans-serif;color:var(--dk)}
+#stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(1300px 800px at 62% 18%,#0a1a44 0%,#061232 35%,#020818 70%,#000105 100%)}
+.H{font-family:Archivo;font-weight:900;font-stretch:68%;letter-spacing:-.5px;text-transform:uppercase}
+.scene{position:absolute;inset:0;opacity:0}
+.corner{position:absolute;right:48px;top:36px;color:#6a6c6c;font-size:46px;z-index:30}
+.corner i{color:var(--ort);font-style:normal}
+.hdr{position:absolute;left:210px;top:66px}
+.eyebrow{color:var(--eye);font-weight:700;font-size:25px;letter-spacing:.38em;margin-bottom:12px}
+.ttl{font-size:92px;line-height:.86;color:#fdfdfd}
+.ttl span{display:block;color:var(--ort)}
+.steps{position:absolute;right:210px;top:112px;display:flex;gap:14px}
+.steps b{width:50px;height:50px;border-radius:50%;border:2.5px solid rgba(255,255,255,.28);color:rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800}
+.steps b.on{background:var(--ort);border-color:var(--ort);color:#fff;box-shadow:0 0 0 6px rgba(247,78,0,.18)}
+.steps b.ok{border-color:var(--grn);color:var(--grn)}
+.panel{position:absolute;left:210px;top:330px;width:1500px;height:730px;background:linear-gradient(180deg,#fff 62%,#eef0f3);border-radius:24px;box-shadow:0 40px 120px rgba(0,0,0,.6);overflow:hidden}
+.band{height:118px;background:linear-gradient(90deg,#2a1206 0%,#7a2d06 45%,var(--ort) 100%);position:relative;padding:26px 40px;color:#fff}
+.band:before{content:"";position:absolute;left:0;top:0;height:5px;width:32%;background:var(--ort)}
+.band .t{font-size:44px}
+.band .s{font-size:19px;font-weight:600;opacity:.9;margin-top:2px}
+.band .psa{position:absolute;right:30px;top:36px;background:#3a3c40;color:#fff;font-size:24px;padding:6px 16px 4px;border-radius:22px}
+.band .psa i{color:var(--ort);font-style:normal}
+.cursor{position:absolute;left:0;top:0;width:34px;height:34px;z-index:40;filter:drop-shadow(0 3px 5px rgba(0,0,0,.35));transform-origin:0 0}
+.hl{position:absolute;inset:-10px;border:4px solid var(--or);border-radius:20px;opacity:0;box-shadow:0 0 0 8px rgba(253,110,6,.14);pointer-events:none}
+.tag{background:var(--or);color:#fff;font-size:15px;font-weight:800;padding:6px 12px;border-radius:8px;letter-spacing:.04em}
+/* profile strip + tabs */
+.prof{display:flex;align-items:center;gap:22px;padding:22px 40px;border-bottom:1px solid var(--line)}
+.prof img{width:86px;height:86px;border-radius:50%}
+.prof .n{font-size:24px;font-weight:800}.prof .r{font-size:17px;color:var(--mut)}
+.prof .fp{margin-left:40px;width:380px}.prof .fp .l{display:flex;justify-content:space-between;font-size:15px;font-weight:700;margin-bottom:6px}
+.prof .fp .b{height:10px;border-radius:6px;background:var(--grn)}
+.tabs{display:flex;gap:44px;padding:0 40px;border-bottom:3px solid #F2F3F6;font-size:19px;font-weight:800;color:#3b3f47;position:relative}
+.tabs span{padding:18px 4px 16px;position:relative}
+.tabs span.on{color:var(--ort)}
+.tabs span.on:after{content:"";position:absolute;left:-8px;right:-8px;bottom:-3px;height:4px;background:var(--ort);border-radius:3px}
+/* list */
+.content{padding:20px 40px}
+.h3{font-size:23px;font-weight:700;margin-bottom:14px}
+.search{height:54px;border:1.5px solid #c9ccd3;border-radius:8px;display:flex;align-items:center;padding:0 18px;font-size:18px;color:#9aa0aa;position:relative}
+.search:before{content:"Tema";position:absolute;left:12px;top:-10px;background:#fff;padding:0 6px;font-size:13px;color:#777}
+.sub{font-size:16px;font-weight:700;color:#333;margin:14px 0 8px;display:flex;align-items:center;gap:14px}
+.cnt{background:var(--soft);color:var(--ort);border-radius:20px;padding:4px 12px;font-size:15px;font-weight:800}
+.tree{column-count:2;column-gap:40px}
+.grp{break-inside:avoid;margin-bottom:10px}
+.gh{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:700;margin:4px 0 4px}
+.it{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:700;color:#2c3038;padding:4px 0 4px 34px;position:relative}
+.cb{width:22px;height:22px;border:2px solid #7c828c;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:900;flex:none}
+.it.on .cb,.gh.on .cb{background:var(--or);border-color:var(--or)}
+.it.on{color:var(--ort)}
+/* principal */
+.sel{height:64px;border:2px solid #2b2f36;border-radius:10px;display:flex;align-items:center;padding:0 22px;font-size:22px;position:relative;background:#fff}
+.sel:before{content:"Tema Principal *";position:absolute;left:14px;top:-11px;background:#fff;padding:0 6px;font-size:14px;color:#555}
+.sel .ar{margin-left:auto;font-size:20px;color:#555}
+.dd{position:absolute;left:0;right:0;top:70px;background:#fff;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.18);border:1px solid var(--line);opacity:0;z-index:5;overflow:hidden}
+.dd div{padding:14px 22px;font-size:20px;border-bottom:1px solid #f3f4f6}
+.dd div.hv{background:var(--soft);color:var(--ort);font-weight:800}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:12px;padding:14px 30px;font-size:20px;font-weight:800}
+.btn.or{background:var(--or);color:#fff;box-shadow:0 8px 20px rgba(253,110,6,.3)}
+.btn.ln{border:2px solid var(--or);color:var(--or);background:#fff}
+.rule{display:flex;align-items:center;gap:18px;background:#FFF6EF;border:2px solid #FFD9BF;border-radius:16px;padding:18px 24px;font-size:21px;font-weight:700}
+.rule b.one{font-family:Archivo;font-weight:900;font-stretch:68%;font-size:64px;color:var(--ort);line-height:1}
+.flag{position:absolute;display:flex;align-items:center;gap:12px;background:#0b1430;color:#fff;border-radius:14px;padding:14px 22px;font-weight:800;font-size:21px;opacity:0;box-shadow:0 16px 40px rgba(0,0,0,.25)}
+.toast{position:absolute;left:50%;margin-left:-170px;bottom:50px;background:#fff;border-radius:16px;padding:18px 26px;box-shadow:0 16px 40px rgba(0,0,0,.18);display:flex;gap:14px;align-items:center;font-weight:800;font-size:22px;opacity:0;z-index:5;border-left:6px solid var(--grn)}
+.ok{width:36px;height:36px;border-radius:50%;background:#E8F7EE;color:var(--grn);font-weight:900;font-size:21px;display:flex;align-items:center;justify-content:center;flex:none}
+/* match scene */
+.col{position:absolute;top:150px;bottom:40px}
+.chip{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px 20px;font-size:21px;font-weight:800;margin-bottom:14px;width:390px}
+.chip.main{border-color:var(--or);background:var(--soft);color:var(--ort)}
+.brief{background:#fff;border:2px solid var(--line);border-radius:16px;padding:18px 22px;margin-bottom:16px;width:520px;position:relative}
+.brief .k{font-size:14px;font-weight:800;letter-spacing:.2em;color:#8a909b}
+.brief .t{font-size:21px;font-weight:800;margin-top:6px}
+.brief .tg{display:inline-block;margin-top:10px;background:#F1F2F5;border-radius:20px;padding:5px 12px;font-size:15px;font-weight:800;color:#555}
+.brief .m{position:absolute;right:16px;top:16px;background:#E8F7EE;color:var(--grn);font-weight:900;font-size:15px;padding:6px 12px;border-radius:20px;opacity:0}
+.brief.no{opacity:.45}
+.engine{position:absolute;left:640px;top:250px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,#FFB27A,#F74E00);display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;box-shadow:0 0 0 18px rgba(247,78,0,.12),0 0 0 36px rgba(247,78,0,.06)}
+.kcard{flex:1;background:#fff;border:1.5px solid #EDEEF2;border-radius:20px;padding:28px 30px;box-shadow:0 6px 24px rgba(20,25,40,.06);position:relative;min-height:470px}
+.kh{font-size:15px;font-weight:800;letter-spacing:.22em;color:#8a909b}
+.knum{font-size:150px;line-height:1;margin-top:20px}.knum small{font-size:60px;color:#b0b5bf}
+.kbar{height:14px;border-radius:8px;background:#EEF0F3;overflow:hidden;margin-top:18px}.kbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ort),var(--or));border-radius:8px}
+.kn{font-size:18px;color:var(--mut);font-weight:600;margin-top:16px}
+.tr{display:flex;align-items:center;gap:14px;background:#F3FBF6;border:1.5px solid #D5EFDF;border-radius:14px;padding:16px 18px;font-size:21px;font-weight:800;margin-top:16px;opacity:0}
+.tr .ti{width:34px;height:34px;border-radius:50%;background:#E3F5EA;color:var(--grn);display:flex;align-items:center;justify-content:center}
+.tr .pr{margin-left:auto;background:var(--grn);color:#fff;font-size:13px;padding:6px 12px;border-radius:20px;letter-spacing:.06em}
+.boost{position:absolute;left:515px;top:540px;display:flex;align-items:center;gap:14px;background:var(--grn);color:#fff;font-weight:800;font-size:23px;padding:16px 28px;border-radius:40px;opacity:0;box-shadow:0 14px 34px rgba(31,174,91,.35)}
+/* intro/outro */
+#s1 .hdr{left:310px;top:360px}
+#s1 .ttl{font-size:150px}
+.tile{position:absolute;left:1380px;top:390px;width:300px;height:300px;border-radius:44px;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden}
+.tile .top{height:78px;background:var(--ort)}
+.tile svg{position:absolute;left:75px;top:108px}
+#s5 .cen{position:absolute;left:0;right:0;top:290px;text-align:center}
+#s5 .lg2{font-size:64px;color:#fff}
+#s5 .big{font-size:150px;line-height:.86;color:#fff;margin-top:34px}
+#s5 .big span{display:block;color:var(--ort)}
+#s5 .pl{display:inline-block;margin-top:40px;border:2px solid rgba(255,255,255,.3);border-radius:40px;padding:12px 30px;color:#fff;font-size:27px;font-weight:700}
+#s5 .pl b{color:var(--eye);font-weight:700}
+#s5 .sp{color:#e8e8e8;font-weight:700;font-size:23px;letter-spacing:.38em;margin-top:28px}
+
+/* ---- trends / play ---- */
+#s1 .ttl{font-size:118px}
+#s1 .tile{left:1480px}
+.ttl,.H{word-spacing:.16em}
+.card{background:#fff;border:1.5px solid #EDEEF2;border-radius:18px;padding:22px 26px;box-shadow:0 6px 24px rgba(20,25,40,.06);position:relative}
+.k2{font-size:14px;font-weight:800;letter-spacing:.22em;color:#8a909b}
+.lb3{font-size:16px;font-weight:800;color:#333;margin:18px 0 8px}
+.sel3{height:52px;border:1.5px solid #D5D8DE;border-radius:10px;display:flex;align-items:center;padding:0 16px;font-size:17px;position:relative;background:#fff}
+.sel3 .ar{margin-left:auto;color:#777}
+.dt{display:flex;gap:10px}.dt span{border:1.5px solid #D5D8DE;border-radius:10px;padding:9px 16px;font-size:15px;font-weight:700;color:#333}
+.dt span.on{border-color:#2F5BEA;color:#2F5BEA;background:#EEF2FF}
+.pl{display:flex;gap:10px;flex-wrap:wrap}.pl span{border-radius:10px;padding:9px 16px;font-size:15px;font-weight:800;display:inline-flex;align-items:center;gap:8px}
+.pl span i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.gen{margin-top:20px;background:#2F5BEA;color:#fff;border-radius:10px;padding:14px;text-align:center;font-size:18px;font-weight:800;position:relative}
+.cr{display:inline-flex;align-items:center;gap:8px;background:#EEF2FF;color:#2F5BEA;border-radius:20px;padding:6px 14px;font-size:14px;font-weight:800}
+.la{border:1.5px solid #EDEEF2;border-radius:12px;padding:12px 16px;margin-top:10px;font-size:15px}
+.la b{font-size:16px}.la .ok{float:right;background:#E8F7EE;color:var(--grn);border-radius:12px;padding:3px 10px;font-size:12px;font-weight:800}
+.la small{display:block;color:#888;margin-top:4px}
+.hot{border-radius:16px;background:linear-gradient(120deg,#FD6E06,#FF3D2E);color:#fff;padding:16px 18px;margin-top:16px}
+.hot .g{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.hot .g div{background:rgba(255,255,255,.18);border-radius:10px;padding:10px 12px;font-size:14px;font-weight:800;display:flex;justify-content:space-between}
+/* redes sociais */
+.net{position:absolute;width:300px;height:300px;border-radius:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;box-shadow:0 30px 70px rgba(0,0,0,.45);opacity:0}
+.net svg{width:130px;height:130px}
+.net .n{font-family:Archivo;font-weight:900;font-stretch:68%;font-size:46px;text-transform:uppercase;margin-top:12px;word-spacing:.16em}
+.hubIA{position:absolute;left:810px;top:700px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,#FFB27A,#F74E00);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;box-shadow:0 0 0 22px rgba(247,78,0,.14),0 0 0 44px rgba(247,78,0,.06);opacity:0}
+/* relatório */
+.rep{display:flex;gap:22px;position:absolute;left:40px;right:40px;top:150px}
+.rc{flex:1;background:#fff;border:2px solid #EDEEF2;border-radius:18px;padding:22px;position:relative;opacity:0}
+.rc .h{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:800}
+.rc .h i{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal}
+.bars{display:flex;align-items:flex-end;gap:12px;height:220px;margin-top:18px;border-bottom:2px solid #EEF0F3}
+.bars b{flex:1;border-radius:8px 8px 0 0;background:linear-gradient(180deg,#FD6E06,#FFB27A);height:0}
+.pain{background:#FFF4EE;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:16px;font-weight:700;color:#333;opacity:0}
+.post{border:1.5px dashed #c9ccd3;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:16px;font-weight:700;opacity:0}
+.post small{display:block;color:#888;font-weight:600;margin-top:4px}
+/* play */
+.ptabs{display:flex;gap:12px;padding:18px 30px 0}
+.ptabs span{border:2px solid #E2E4EA;border-radius:24px;padding:9px 20px;font-size:17px;font-weight:800;color:#444;background:#fff}
+.ptabs span.on{background:var(--or);border-color:var(--or);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:18px 30px}
+.pit{border-radius:14px;overflow:hidden;background:#121417;color:#fff;position:relative;opacity:0}
+.pit .th{height:150px;display:flex;align-items:center;justify-content:center;font-family:Archivo;font-weight:900;font-stretch:68%;font-size:34px;text-transform:uppercase;text-align:center;line-height:.95;word-spacing:.16em;background-size:cover;background-position:center}
+.pit .c{padding:12px 14px}.pit .c b{display:block;font-size:16px}.pit .c small{color:#aab;font-size:13px}
+.pit .tg{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.6);border-radius:8px;padding:3px 9px;font-size:12px;font-weight:800;letter-spacing:.06em}
+.pit .pl2{position:absolute;right:12px;top:108px;width:40px;height:40px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;font-size:16px}
+.home{position:absolute;left:40px;right:40px;top:150px;opacity:0}
+.dest{display:flex;gap:18px;margin-top:14px}
+.dest .dc{width:300px;border-radius:14px;background:#111;color:#fff;padding:14px;position:relative}
+.dest img{width:100%;border-radius:8px;margin-top:10px}
+.dest .b{background:var(--or);border-radius:8px;text-align:center;padding:8px;font-weight:800;font-size:14px;margin-top:10px}
+</style></head><body>
+<div id="stage">
+%%STARS%%
+<div class="corner H" id="corner">PSA<i>.</i></div>
+
+<!-- S1 INTRO -->
+<div class="scene" id="s1">
+  <div class="hdr"><div class="eyebrow" id="s1e">GUIA RÁPIDO · PARA PALESTRANTES</div>
+  <div class="ttl H"><div id="s1a">PSA TRENDS</div><span id="s1b">E PSA PLAY.</span></div></div>
+  <div class="tile" id="s1c"><div class="top"></div>
+    <svg width="150" height="150" viewBox="0 0 24 24" fill="none" stroke="#F74E00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;left:75px;top:108px"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
+</div>
+
+<!-- S2 PSA TRENDS -->
+<div class="scene" id="s2">
+  <div class="hdr"><div class="eyebrow">1 · PSA TRENDS</div><div class="ttl H">TEMA, PÚBLICO<span>E PERÍODO.</span></div></div>
+  <div class="steps"><b class="on">1</b><b>2</b><b>3</b></div>
+  <div class="panel" id="p2"><div class="band"><div class="t H">PSA TRENDS</div><div class="s">Insights reais do público, baseados em conversas da internet e da Base da PSA</div><div class="psa H">PSA<i>.</i></div></div>
+    <div class="card" style="position:absolute;left:40px;top:146px;width:720px">
+      <span class="cr">∞ 34 créditos disponíveis</span>
+      <div class="lb3">Tema da Palestra</div>
+      <div class="sel3" id="tema"><span id="tph" style="color:#888">Selecione um tema...</span><span id="tv" style="position:absolute;left:16px;opacity:0;font-weight:700">Liderança</span><span class="ar">⌄</span><div class="hl" id="htema"></div></div>
+      <div class="lb3">Data</div>
+      <div class="dt" id="dt" style="position:relative;display:inline-flex"><span id="d1" class="on">Última semana</span><span id="d2">Último mês</span><span id="d3">Últimos 3 meses</span><div class="hl" id="hdt" style="inset:-9px"></div></div>
+      <div class="lb3">Plataformas de Análise</div>
+      <div class="pl"><span style="background:#FFF1E7;color:#333"><i style="background:var(--or)"></i>Base PSA</span><span style="background:#FDECEC;color:#333"><i style="background:#E53935"></i>YouTube</span><span style="background:#EAF1FD;color:#333"><i style="background:#2F7BF6"></i>LinkedIn</span><span style="background:#F1F2F5;color:#333"><i style="background:#555"></i>X (Twitter)</span></div>
+      <div class="gen" id="gen">🔍 Gerar Trend Report</div>
+    </div>
+    <div style="position:absolute;left:790px;right:40px;top:146px">
+      <div class="card" style="padding:18px 20px"><div style="font-size:19px;font-weight:800">🕒 Últimas Análises</div>
+        <div class="la"><b>Criatividade</b><span class="ok">✓ Pronta</span><small>17/09/2026 — 24/09/2026</small></div>
+        <div class="la"><b>Tecnologia</b><span class="ok">✓ Pronta</span><small>09/08/2026 — 16/08/2026</small></div></div>
+      <div class="hot"><div style="font-weight:800;font-size:18px">↗ Tópicos em Alta</div><div class="g"><div>IA Generativa<span>+124%</span></div><div>ESG Corporativo<span>+89%</span></div><div>Soft Skills<span>+67%</span></div><div>Trabalho Híbrido<span>+52%</span></div></div></div>
+    </div>
+    <svg class="cursor" id="cur2" viewBox="0 0 24 24" style="z-index:30"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="#111" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  </div>
+</div>
+
+<!-- S3 REDES SOCIAIS (ênfase) -->
+<div class="scene" id="s3">
+  <div class="hdr"><div class="eyebrow">1 · PSA TRENDS · INTELIGÊNCIA DE MERCADO</div><div class="ttl H">REDES SOCIAIS<span>+ BASE DA PSA.</span></div></div>
+  <div class="net" id="nY" style="left:150px;top:330px;background:#FF0000"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4" fill="#fff"/><path d="M10 9l5 3-5 3z" fill="#FF0000"/></svg><div class="n">YouTube</div></div>
+  <div class="net" id="nL" style="left:580px;top:330px;background:#0A66C2"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="#fff"/><path d="M7.5 10v7M7.5 7.2v.1M11 17v-4.2c0-1.6 1-2.8 2.5-2.8S16 11 16 12.8V17M11 10v7" stroke="#0A66C2" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg><div class="n">LinkedIn</div></div>
+  <div class="net" id="nX" style="left:1010px;top:330px;background:#000;border:2px solid #333"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg><div class="n">X</div></div>
+  <div class="net" id="nP" style="left:1440px;top:330px;background:linear-gradient(140deg,#F74E00,#FD8A3D)"><div class="H" style="font-size:110px;line-height:1">PSA<i style="font-style:normal;color:#0b1430">.</i></div><div class="n">Base PSA</div></div>
+  <svg style="position:absolute;left:0;top:0" width="1920" height="1080"><g fill="none" stroke-width="5" stroke-linecap="round">
+    <path id="w1" d="M300 630 C 300 760, 700 760, 860 800" stroke="#FF4D4D" stroke-dasharray="900" stroke-dashoffset="900"/>
+    <path id="w2" d="M730 630 C 730 700, 820 720, 900 760" stroke="#4D9BFF" stroke-dasharray="900" stroke-dashoffset="900"/>
+    <path id="w3" d="M1160 630 C 1160 700, 1080 720, 1020 760" stroke="#BBBBBB" stroke-dasharray="900" stroke-dashoffset="900"/>
+    <path id="w4" d="M1590 630 C 1590 760, 1220 760, 1060 800" stroke="#FD8A3D" stroke-dasharray="900" stroke-dashoffset="900"/></g></svg>
+  <div class="hubIA" id="hub"><div class="H" style="font-size:96px;line-height:1">IA</div><div style="font-size:18px;font-weight:800;letter-spacing:.2em">CRUZA OS DADOS</div></div>
+</div>
+
+<!-- S4 RELATÓRIO -->
+<div class="scene" id="s4">
+  <div class="hdr"><div class="eyebrow">1 · PSA TRENDS · TREND REPORT</div><div class="ttl H">RELATÓRIOS<span>PRONTOS PARA USAR.</span></div></div>
+  <div class="steps"><b class="on">1</b><b>2</b><b>3</b></div>
+  <div class="panel" id="p4"><div class="band"><div class="t H">TREND REPORT · LIDERANÇA</div><div class="s">Último mês · Base PSA, YouTube, LinkedIn e X</div><div class="psa H">PSA<i>.</i></div></div>
+    <div class="rep">
+      <div class="rc" id="c1"><div class="h"><i style="background:#2F5BEA">↗</i>Volume de buscas</div>
+        <div class="bars"><b id="b1"></b><b id="b2"></b><b id="b3"></b><b id="b4"></b><b id="b5"></b><b id="b6"></b></div>
+        <div style="display:flex;justify-content:space-between;font-size:14px;color:#888;margin-top:6px"><span>sem 1</span><span>sem 2</span><span>sem 3</span><span>sem 4</span></div>
+        <div style="margin-top:12px;font-size:18px;font-weight:800;color:var(--grn)">+38% no período</div></div>
+      <div class="rc" id="c2"><div class="h"><i style="background:#E53935">!</i>Dores do mercado</div>
+        <div class="pain" id="p_1">Equipes desmotivadas após mudanças</div>
+        <div class="pain" id="p_2">Líderes sem preparo para o trabalho híbrido</div>
+        <div class="pain" id="p_3">Comunicação falha entre áreas</div></div>
+      <div class="rc" id="c3"><div class="h"><i style="background:var(--or)">✎</i>Ideias de posts</div>
+        <div class="post" id="i_1">“3 sinais de que sua equipe precisa de um novo líder”<small>Carrossel · LinkedIn</small></div>
+        <div class="post" id="i_2">“Liderança híbrida em 60 segundos”<small>Vídeo curto · YouTube</small></div>
+        <div class="post" id="i_3">“O erro nº 1 dos líderes em 2026”<small>Thread · X</small></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S5 PSA PLAY -->
+<div class="scene" id="s5">
+  <div class="hdr" id="h5a"><div class="eyebrow">2 · PSA PLAY</div><div class="ttl H">BIBLIOTECA<span>COMPLETA.</span></div></div>
+  <div class="hdr" id="h5b" style="opacity:0"><div class="eyebrow">2 · PSA PLAY</div><div class="ttl H">IMERSÕES E O REALITY<span>THE BEST SPEAKER.</span></div></div>
+  <div class="steps"><b class="ok">✓</b><b class="on">2</b><b>3</b></div>
+  <div class="panel" id="p5"><div class="band"><div class="t H" id="bt5">OLÁ, EDUARDO.</div><div class="s" id="bs5">Início · Destaques PSA</div><div class="psa H">PSA<i>.</i></div></div>
+    <div class="home" id="home"><div class="card"><div style="display:flex;align-items:center"><div><div style="font-size:24px;font-weight:800">Destaques PSA</div><div style="font-size:15px;color:#777">Continue sua evolução profissional</div></div><div class="cr" style="margin-left:auto;background:#F1F2F5;color:#333">Ver todos →</div></div>
+      <div class="dest"><div class="dc"><b>The Best Weeks - SEMESTRE</b><div style="font-size:13px;color:#aaa">Toda Palestra Começa com Estrutura</div><img src="weeks.png"><div class="b">Acessar agora</div></div>
+        <div class="dc"><b>The Best Weekend</b><div style="font-size:13px;color:#aaa">Programa intensivo de 8 horas</div><img src="weekend.png"><div class="b">Acessar agora</div></div>
+        <div class="dc" style="width:430px;padding:0;overflow:hidden"><img src="tbs.png" style="margin:0;border-radius:0"></div></div>
+      <div class="hl" id="hhome" style="inset:-10px"></div></div></div>
+    <div id="lib" style="position:absolute;left:0;right:0;top:118px;bottom:0;opacity:0">
+      <div class="ptabs"><span id="tA" class="on">Tudo</span><span id="tC">Cursos</span><span id="tW">Workshops</span><span id="tT">Programas de treinamento</span><span id="tI">Imersões</span><span id="tR">The Best Speaker</span></div>
+      <div class="grid">
+        <div class="pit" id="g1"><span class="tg">CURSO</span><div class="th" style="background:linear-gradient(140deg,#0b1430,#2F5BEA)">ORATÓRIA QUE CONVENCE</div><span class="pl2">▶</span><div class="c"><b>Oratória que convence</b><small>12 aulas</small></div></div>
+        <div class="pit" id="g2"><span class="tg">WORKSHOP</span><div class="th" style="background:linear-gradient(140deg,#2a1060,#C04BFF)">PITCH DE PALESTRA</div><span class="pl2">▶</span><div class="c"><b>Pitch de palestra</b><small>Ao vivo · gravado</small></div></div>
+        <div class="pit" id="g3"><span class="tg">TREINAMENTO</span><div class="th" style="background:linear-gradient(140deg,#0d3b2e,#1FAE5B)">VENDA DE PALESTRAS</div><span class="pl2">▶</span><div class="c"><b>Programa de vendas</b><small>6 módulos</small></div></div>
+        <div class="pit" id="g4"><span class="tg">CURSO</span><div class="th" style="background:linear-gradient(140deg,#3a1206,#F74E00)">STORYTELLING NO PALCO</div><span class="pl2">▶</span><div class="c"><b>Storytelling no palco</b><small>8 aulas</small></div></div>
+        <div class="pit" id="g5"><span class="tg">IMERSÃO</span><div class="th" style="background-image:url(weeks.png)"></div><span class="pl2">▶</span><div class="c"><b>The Best Weeks</b><small>Imersão · semestre</small></div></div>
+        <div class="pit" id="g6"><span class="tg">IMERSÃO</span><div class="th" style="background-image:url(weekend.png)"></div><span class="pl2">▶</span><div class="c"><b>The Best Weekend</b><small>Imersão · 8 horas</small></div></div>
+        <div class="pit" id="g7" style="grid-column:span 2"><span class="tg">REALITY · EPISÓDIOS</span><div class="th" style="background-image:url(tbs.png);background-position:center 42%"></div><span class="pl2">▶</span><div class="c"><b>The Best Speaker · 3ª edição</b><small>O único reality show de palestras do mundo</small></div><div class="hl" id="htbs" style="inset:-8px;border-radius:18px"></div></div>
+      </div>
+    </div>
+    <svg class="cursor" id="cur5" viewBox="0 0 24 24" style="z-index:30"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="#111" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  </div>
+</div>
+
+<!-- S6 OUTRO -->
+<div class="scene" id="s6">
+  <div style="position:absolute;left:0;right:0;top:280px;text-align:center">
+    <div class="H" id="o_lg" style="font-size:64px;color:#fff">PSA<i style="color:var(--ort);font-style:normal">.</i></div>
+    <div class="H" style="font-size:150px;line-height:.86;color:#fff;margin-top:34px"><div id="o_a">ACELERE</div><span id="o_b" style="display:block;color:var(--ort)">SEUS RESULTADOS.</span></div>
+    <div id="o_s" style="display:inline-block;margin-top:40px;border:2px solid rgba(255,255,255,.3);border-radius:40px;padding:12px 30px;color:#fff;font-size:27px;font-weight:700"><b style="color:var(--eye)">PSA Trends</b> · inteligência de mercado &nbsp;|&nbsp; <b style="color:var(--eye)">PSA Play</b> · capacitação</div>
+    <div id="o_st" style="color:#e8e8e8;font-weight:700;font-size:23px;letter-spacing:.38em;margin-top:28px">NOS VEMOS EM BREVE</div>
+  </div>
+</div>
+</div>
+<script>
+var OFF=0;
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+const E={lin:x=>x,out:x=>1-Math.pow(1-x,3),io:x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,back:x=>{const c=1.5;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)}};
+const TW=[],CL=[],TX=[],SH=[],HLS=[];
+function A(sel,t0,t1,from,to,e='out'){t0+=OFF;t1+=OFF;const el=$(sel);if(!el)throw sel;for(const k in to)TW.push({el,k,t0,t1,a:from[k],b:to[k],e:E[e]});}
+function C(sel,t,cls,off){t+=OFF;const el=$(sel);if(!el)throw sel;CL.push({el,t,cls,off});}
+function T(sel,t0,t1,text){const el=$(sel);if(!el)throw sel;TX.push({el,t0,t1,text});}
+function scene(sel,t0,t1){A(sel,t0,t0+.6,{o:0,s:1.03},{o:1,s:1});A(sel,t1-.5,t1,{o:1,s:1},{o:0,s:.98},'io');}
+function head(sel,t0){A(sel+' .eyebrow',t0,t0+.6,{o:0,x:-30},{o:1,x:0});A(sel+' .ttl',t0+.1,t0+.8,{o:0,y:40},{o:1,y:0});}
+function steps(sel,t0){A(sel+' .steps',t0+.2,t0+.8,{o:0,s:.8},{o:1,s:1},'back');}
+function panel(sel,t0){A(sel,t0,t0+.9,{o:0,y:90},{o:1,y:0});}
+function pulse(sel,t0,t1){A(sel,t0,t0+.35,{o:0,s:1.06},{o:1,s:1});A(sel,t1,t1+.3,{o:1},{o:0},'lin');}
+function swapHead(a,b,t){A(a,t,t+.3,{o:1},{o:0},'lin');A(b,t+.2,t+.8,{o:0,y:24},{o:1,y:0});}
+// highlight box that follows a target tab (time-based)
+function HL(hl,panel,list){HLS.push({hl:$(hl),panel:$(panel),list:list.map(([t,s])=>[t,$(s)])});}
+
+
+const DASH=[]; function D(sel,t0,t1){DASH.push({el:$(sel),t0:t0+OFF,t1:t1+OFF});}
+/* ---- timeline ---- */
+A('#stars',0,42,{x:0,y:0},{x:-60,y:-20},'lin');
+// S1 intro 0-3.6 (v0 0.6-3.12)
+scene('#s1',0,3.6);
+A('#s1e',.2,.8,{o:0,x:-30},{o:1,x:0});
+A('#s1a',.35,1.1,{o:0,y:60},{o:1,y:0});
+A('#s1b',.55,1.3,{o:0,y:60},{o:1,y:0});
+A('#s1c',.7,1.6,{o:0,y:80,r:8,s:.8},{o:1,y:0,r:0,s:1},'back');
+
+// S2 trends form 3.4-8.0 (v1 3.6-7.55: tema 5.46, público 5.91, período 6.59)
+scene('#s2',3.4,8.0); head('#s2',3.5); steps('#s2',3.5); panel('#p2',3.5);
+A('#cur2',4.2,5.2,{x:1000,y:650},{x:600,y:262},'io');
+pulse('#htema',5.1,6.3);
+A('#tph',5.4,5.5,{o:1},{o:0},'lin'); A('#tv',5.45,5.7,{o:0},{o:1},'lin');
+A('#cur2',6.0,6.6,{x:600,y:262},{x:300,y:300},'io');
+pulse('#hdt',6.4,7.6); C('#d1',6.7,'on',true); C('#d2',6.7,'on');
+
+// S3 redes sociais 7.8-13.1 (v2 8.0-12.95: redes 9.18, YouTube 10.06, LinkedIn 10.53, X 11.24, base 11.89)
+scene('#s3',7.8,14.7); A('#s3 .eyebrow',7.9,8.5,{o:0,x:-30},{o:1,x:0}); A('#s3 .ttl',8.0,8.7,{o:0,y:40},{o:1,y:0});
+A('#nY',11.1,11.6,{o:0,s:.4,y:40},{o:1,s:1,y:0},'back');
+A('#nL',11.65,12.15,{o:0,s:.4,y:40},{o:1,s:1,y:0},'back');
+A('#nX',12.4,12.9,{o:0,s:.4,y:40},{o:1,s:1,y:0},'back');
+A('#nP',13.0,13.5,{o:0,s:.4,y:40},{o:1,s:1,y:0},'back');
+A('#nY',11.6,12.0,{s:1},{s:1.06},'io'); A('#nY',12.0,12.4,{s:1.06},{s:1},'io');
+A('#hub',13.4,13.9,{o:0,s:.6},{o:1,s:1},'back');
+D('#w1',13.5,14.1); D('#w2',13.6,14.2); D('#w3',13.7,14.3); D('#w4',13.8,14.4);
+
+OFF=1.2;
+// S4 relatório 12.9-18.2 (v3 13.2-17.7: volume 14.66, dores 15.67, ideias 16.74)
+scene('#s4',13.3,18.2); head('#s4',13.35); steps('#s4',13.35); panel('#p4',13.4);
+A('#c1',14.3,14.8,{o:0,y:30},{o:1,y:0});
+A('#c2',15.4,15.9,{o:0,y:30},{o:1,y:0}); A('#p_1',15.8,16.1,{o:0,x:-12},{o:1,x:0}); A('#p_2',16.0,16.3,{o:0,x:-12},{o:1,x:0}); A('#p_3',16.2,16.5,{o:0,x:-12},{o:1,x:0});
+A('#c3',16.5,17.0,{o:0,y:30},{o:1,y:0}); A('#i_1',16.9,17.2,{o:0,x:-12},{o:1,x:0}); A('#i_2',17.1,17.4,{o:0,x:-12},{o:1,x:0}); A('#i_3',17.3,17.6,{o:0,x:-12},{o:1,x:0});
+
+// S5 PSA Play 18.0-31.4 (v4 18.4-27.42: biblioteca 20.2, cursos 21.5, workshops 21.95, programas 22.74; v5 27.6-30.95: imersões 28.14, reality 29.57)
+scene('#s5',18.0,31.4); head('#h5a',18.1); steps('#s5',18.1); panel('#p5',18.1);
+A('#home',18.4,18.9,{o:0,y:20},{o:1,y:0}); pulse('#hhome',18.8,19.9);
+A('#home',19.9,20.2,{o:1},{o:0},'lin'); A('#lib',20.0,20.4,{o:0},{o:1},'lin');
+A('#g1',20.3,20.6,{o:0,y:20},{o:1,y:0}); A('#g2',20.4,20.7,{o:0,y:20},{o:1,y:0}); A('#g3',20.5,20.8,{o:0,y:20},{o:1,y:0}); A('#g4',20.6,20.9,{o:0,y:20},{o:1,y:0});
+A('#g5',20.7,21.0,{o:0,y:20},{o:1,y:0}); A('#g6',20.8,21.1,{o:0,y:20},{o:1,y:0}); A('#g7',20.9,21.2,{o:0,y:20},{o:1,y:0});
+C('#tA',21.4,'on',true); C('#tC',21.4,'on'); C('#tC',21.9,'on',true); C('#tW',21.9,'on'); C('#tW',22.7,'on',true); C('#tT',22.7,'on'); C('#tT',25.0,'on',true); C('#tA',25.0,'on');
+A('#g1',21.4,21.7,{s:1},{s:1.05},'io'); A('#g1',21.7,22.1,{s:1.05},{s:1},'io'); A('#g4',21.5,21.8,{s:1},{s:1.05},'io'); A('#g4',21.8,22.2,{s:1.05},{s:1},'io');
+A('#g2',22.0,22.3,{s:1},{s:1.05},'io'); A('#g2',22.3,22.7,{s:1.05},{s:1},'io');
+A('#g3',22.8,23.1,{s:1},{s:1.05},'io'); A('#g3',23.1,23.5,{s:1.05},{s:1},'io');
+swapHead('#h5a','#h5b',27.6);
+C('#tA',28.1,'on',true); C('#tI',28.1,'on'); C('#tI',29.5,'on',true); C('#tR',29.5,'on');
+A('#g5',28.1,28.4,{s:1},{s:1.05},'io'); A('#g5',28.4,28.8,{s:1.05},{s:1},'io'); A('#g6',28.2,28.5,{s:1},{s:1.05},'io'); A('#g6',28.5,28.9,{s:1.05},{s:1},'io');
+pulse('#htbs',29.5,31.0);
+A('#cur5',28.9,29.8,{x:1300,y:300},{x:600,y:560},'io');
+
+// S6 outro 31.2-39.5 (v6 31.6-35.96)
+A('#s6',31.2,31.8,{o:0},{o:1},'lin');
+A('#corner',31.0,31.5,{o:1},{o:0},'lin');
+A('#o_lg',31.3,32.0,{o:0,y:30},{o:1,y:0});
+A('#o_a',31.5,32.2,{o:0,y:50},{o:1,y:0});
+A('#o_b',31.7,32.4,{o:0,y:50},{o:1,y:0});
+A('#o_s',32.1,32.8,{o:0,y:20},{o:1,y:0});
+A('#o_st',32.5,33.2,{o:0},{o:1},'lin');
+A('#stage',38.7,39.5,{o:1},{o:0},'lin');
+
+/* ---- engine ---- */
+const byEl=new Map();
+for(const t of TW){if(!byEl.has(t.el))byEl.set(t.el,{});const m=byEl.get(t.el);(m[t.k]=m[t.k]||[]).push(t);}
+for(const m of byEl.values())for(const k in m)m[k].sort((a,b)=>a.t0-b.t0);
+function val(list,t){if(t<list[0].t0)return list[0].a;let cur=list[0];for(const w of list)if(w.t0<=t)cur=w;if(t>=cur.t1)return cur.b;const p=cur.e((t-cur.t0)/(cur.t1-cur.t0));return cur.a+(cur.b-cur.a)*p;}
+const CLG=[];{const m=new Map();for(const c of CL){const k=c.el;if(!m.has(k))m.set(k,{});const g=m.get(k);if(!g[c.cls]){g[c.cls]={el:c.el,cls:c.cls,init:c.el.classList.contains(c.cls),evs:[]};CLG.push(g[c.cls]);}g[c.cls].evs.push(c);}for(const g of CLG)g.evs.sort((a,b)=>a.t-b.t);}
+function offs(el,root){let x=0,y=0,e=el;while(e&&e!==root){x+=e.offsetLeft;y+=e.offsetTop;e=e.offsetParent;}return [x,y];}
+window.seek=function(t){
+  for(const d of DASH){const p=Math.max(0,Math.min(1,(t-d.t0)/(d.t1-d.t0)));d.el.setAttribute('stroke-dashoffset',900*(1-E.io(p)));}
+  const H=[40,55,48,70,82,96]; H.forEach((h,i)=>{const p=Math.max(0,Math.min(1,(t-15.8-i*.12)/.5)); const el=document.querySelector('#b'+(i+1)); if(el) el.style.height=(h*E.out(p))+'%';});
+  for(const [el,m] of byEl){const v={};for(const k in m)v[k]=val(m[k],t);
+    if('o' in v)el.style.opacity=v.o;
+    el.style.transform=`translate(${v.x||0}px,${v.y||0}px) scale(${v.s??1}) rotate(${v.r||0}deg)`;}
+  for(const g of CLG){let on=g.init;for(const ev of g.evs){if(t>=ev.t)on=!ev.off;}if(g.cls!=='x')g.el.classList.toggle(g.cls,on);}
+  for(const x of TX){const p=Math.max(0,Math.min(1,(t-x.t0)/(x.t1-x.t0)));x.el.textContent=x.text.slice(0,Math.round(p*x.text.length));}
+  for(const h of HLS){let tg=h.list[0][1];for(const [tt,el] of h.list)if(t>=tt)tg=el;const [x,y]=offs(tg,h.panel);const pad=(tg.id==='ot4'||tg.tagName==='TR')?0:10;
+    h.hl.style.left=(x-pad)+'px';h.hl.style.top=(y-4)+'px';h.hl.style.width=(tg.offsetWidth+pad*2)+'px';h.hl.style.height=(tg.offsetHeight+8)+'px';}
+};
+seek(0);
+</script>
+</body></html>
