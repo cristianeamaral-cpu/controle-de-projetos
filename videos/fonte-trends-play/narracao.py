@@ -8,8 +8,7 @@ segs=[
  "No pê ésse á Trends, escolha um tema, o público e o período desejado.",
  "A Inteligência Artificial cruza dados de redes sociais, iutúbi, Linquedín e xis, com a base da pê ésse á,",
  "para gerar relatórios com volume de buscas, dores do mercado e ideias de pôusts!",
- "No pê ésse á Plêi, acesse nossa biblioteca completa de cursos, uôrquichóps e programas de treinamento especializados para impulsionar sua evolução profissional,",
- "além das imersões e episódios do riálity dê Bést Spíker.",
+ "No pê ésse á Plêi, acesse nossas imersões e episódios do riálity dê Bést Spíker.",
  "Explore essas ferramentas para acelerar seus resultados e nos vemos em breve!",
 ]
 def squeeze(s,sr,maxp=.18,thr=.008):

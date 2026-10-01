@@ -229,8 +229,8 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family
 
 <!-- S5 PSA PLAY -->
 <div class="scene" id="s5">
-  <div class="hdr" id="h5a"><div class="eyebrow">2 · PSA PLAY</div><div class="ttl H">CURSOS, WORKSHOPS<span>E TREINAMENTOS.</span></div></div>
-  <div class="hdr" id="h5b" style="opacity:0"><div class="eyebrow">2 · PSA PLAY</div><div class="ttl H">IMERSÕES E O REALITY<span>THE BEST SPEAKER.</span></div></div>
+  <div class="hdr" id="h5a"><div class="eyebrow">2 · PSA PLAY</div><div class="ttl H">IMERSÕES E<span>EPISÓDIOS.</span></div></div>
+  <div class="hdr" id="h5b" style="opacity:0"><div class="eyebrow">2 · PSA PLAY</div><div class="ttl H">O REALITY<span>THE BEST SPEAKER.</span></div></div>
   <div class="steps"><b class="ok">✓</b><b class="on">2</b><b>3</b></div>
   <div class="panel" id="p5"><div class="band"><div class="t H" id="bt5">OLÁ, EDUARDO.</div><div class="s" id="bs5">Início · Destaques PSA</div><div class="psa H">PSA<i>.</i></div></div>
     <div class="home" id="home"><div class="card"><div style="display:flex;align-items:center"><div><div style="font-size:24px;font-weight:800">Destaques PSA</div><div style="font-size:15px;color:#777">Continue sua evolução profissional</div></div><div class="cr" style="margin-left:auto;background:#F1F2F5;color:#333">Ver todos →</div></div>
@@ -247,7 +247,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family
   <div style="position:absolute;left:0;right:0;top:280px;text-align:center">
     <div class="H" id="o_lg" style="font-size:64px;color:#fff">PSA<i style="color:var(--ort);font-style:normal">.</i></div>
     <div class="H" style="font-size:150px;line-height:.86;color:#fff;margin-top:34px"><div id="o_a">ACELERE</div><span id="o_b" style="display:block;color:var(--ort)">SEUS RESULTADOS.</span></div>
-    <div id="o_s" style="display:inline-block;margin-top:40px;border:2px solid rgba(255,255,255,.3);border-radius:40px;padding:12px 30px;color:#fff;font-size:27px;font-weight:700"><b style="color:var(--eye)">PSA Trends</b> · inteligência de mercado &nbsp;|&nbsp; <b style="color:var(--eye)">PSA Play</b> · capacitação</div>
+    <div id="o_s" style="display:inline-block;margin-top:40px;border:2px solid rgba(255,255,255,.3);border-radius:40px;padding:12px 30px;color:#fff;font-size:27px;font-weight:700"><b style="color:var(--eye)">PSA Trends</b> · inteligência de mercado &nbsp;|&nbsp; <b style="color:var(--eye)">PSA Play</b> · imersões e reality</div>
     <div id="o_st" style="color:#e8e8e8;font-weight:700;font-size:23px;letter-spacing:.38em;margin-top:28px">NOS VEMOS EM BREVE</div>
   </div>
 </div>
@@ -305,24 +305,24 @@ A('#c1',14.3,14.8,{o:0,y:30},{o:1,y:0});
 A('#c2',15.4,15.9,{o:0,y:30},{o:1,y:0}); A('#p_1',15.8,16.1,{o:0,x:-12},{o:1,x:0}); A('#p_2',16.0,16.3,{o:0,x:-12},{o:1,x:0}); A('#p_3',16.2,16.5,{o:0,x:-12},{o:1,x:0});
 A('#c3',16.5,17.0,{o:0,y:30},{o:1,y:0}); A('#i_1',16.9,17.2,{o:0,x:-12},{o:1,x:0}); A('#i_2',17.1,17.4,{o:0,x:-12},{o:1,x:0}); A('#i_3',17.3,17.6,{o:0,x:-12},{o:1,x:0});
 
-// S5 PSA Play 18.0-31.4 (v4 18.4-27.42: biblioteca 20.2, cursos 21.5, workshops 21.95, programas 22.74; v5 27.6-30.95: imersões 28.14, reality 29.57)
-scene('#s5',18.0,31.4); head('#h5a',18.1); steps('#s5',18.1); panel('#p5',18.1);
-A('#home',18.4,18.9,{o:0,y:20},{o:1,y:0}); pulse('#hhome',18.8,21.0);
-// Destaques permanecem durante toda a fala do PSA Play
-swapHead('#h5a','#h5b',27.6);
-A('#dc1',28.1,28.5,{s:1},{s:1.04},'io'); A('#dc1',28.5,29.0,{s:1.04},{s:1},'io');
-A('#dc2',28.2,28.6,{s:1},{s:1.04},'io'); A('#dc2',28.6,29.1,{s:1.04},{s:1},'io');
-pulse('#hhome2',28.0,31.0);
+OFF=0;
+// S5 PSA Play 19.2-24.8 (v4 19.6-24.13: imersões 21.3, reality 22.7)
+scene('#s5',19.2,24.8); head('#h5a',19.3); steps('#s5',19.3); panel('#p5',19.3);
+A('#home',19.6,20.1,{o:0,y:20},{o:1,y:0}); pulse('#hhome',20.0,21.2);
+A('#dc1',21.2,21.6,{s:1},{s:1.04},'io'); A('#dc1',21.6,22.1,{s:1.04},{s:1},'io');
+A('#dc2',21.3,21.7,{s:1},{s:1.04},'io'); A('#dc2',21.7,22.2,{s:1.04},{s:1},'io');
+pulse('#hhome2',21.2,24.4);
+swapHead('#h5a','#h5b',22.5);
 
-// S6 outro 31.2-39.5 (v6 31.6-35.96)
-A('#s6',31.2,31.8,{o:0},{o:1},'lin');
-A('#corner',31.0,31.5,{o:1},{o:0},'lin');
-A('#o_lg',31.3,32.0,{o:0,y:30},{o:1,y:0});
-A('#o_a',31.5,32.2,{o:0,y:50},{o:1,y:0});
-A('#o_b',31.7,32.4,{o:0,y:50},{o:1,y:0});
-A('#o_s',32.1,32.8,{o:0,y:20},{o:1,y:0});
-A('#o_st',32.5,33.2,{o:0},{o:1},'lin');
-A('#stage',38.7,39.5,{o:1},{o:0},'lin');
+// S6 outro 24.6-33 (v5 24.7-29.06)
+A('#s6',24.6,25.2,{o:0},{o:1},'lin');
+A('#corner',24.4,24.9,{o:1},{o:0},'lin');
+A('#o_lg',24.7,25.4,{o:0,y:30},{o:1,y:0});
+A('#o_a',24.9,25.6,{o:0,y:50},{o:1,y:0});
+A('#o_b',25.1,25.8,{o:0,y:50},{o:1,y:0});
+A('#o_s',25.5,26.2,{o:0,y:20},{o:1,y:0});
+A('#o_st',25.9,26.6,{o:0},{o:1},'lin');
+A('#stage',32.2,33,{o:1},{o:0},'lin');
 
 /* ---- engine ---- */
 const byEl=new Map();
