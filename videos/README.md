@@ -21,7 +21,7 @@ Todos os vídeos seguem o vídeo de referência **"Minha Conta + Google Calendar
 fundo azul-marinho com constelação, títulos em Archivo Black condensada (branco + laranja `#F74E00`),
 sobretítulo laranja espaçado, painel branco com faixa laranja, logo "PSA." no canto e textos da
 interface em Manrope. Sem legendas. Trilha: a mesma música de fundo (repetida com transição suave
-quando o vídeo passa de 68 s). Voz: Kokoro `pf_dora`, velocidade 0,98, pausas de respiração (0,55 s entre frases da mesma cena,
+quando o vídeo passa de 68 s). Voz: Kokoro `pf_dora` (com `psa_fix.py`, que ajusta a fonética de "PSA", "Ecossistema" e "CRM" para a pronúncia brasileira), velocidade 0,98, pausas de respiração (0,55 s entre frases da mesma cena,
 1,2 s entre cenas) e tratamento leve (EQ de presença, compressão suave e ambiência curta).
 
 ## Como o vídeo foi gerado (`fonte/`)

@@ -1,5 +1,6 @@
 import soundfile as sf, json, numpy as np
 from kokoro_onnx import Kokoro
+import sys; sys.path.insert(0,'.'); import psa_fix
 k=Kokoro('voices/kokoro-v1.0.onnx','voices/voices-v1.0.bin')
 segs=[
  "Olá, palestrante! Seja bem-vindo ao Ecossistema pê ésse á.",
@@ -13,7 +14,7 @@ segs=[
 ]
 out=[]
 for i,t in enumerate(segs):
-    s,sr=k.create(t,voice='pf_dora',speed=1.05,lang='pt-br')
+    s,sr=psa_fix.create(k,t,voice='pf_dora',speed=1.05)
     # trim silence
     idx=np.where(np.abs(s)>0.01)[0]; s=s[max(idx[0]-800,0):idx[-1]+1600]
     sf.write(f'vo/s{i}.wav',s,sr); out.append(len(s)/sr)

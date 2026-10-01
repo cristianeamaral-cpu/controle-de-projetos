@@ -1,6 +1,7 @@
 # Narração sintética ágil: pf_dora, velocidade 1,04, pausas internas encurtadas (máx. 0,18 s).
 import soundfile as sf, json, numpy as np
 from kokoro_onnx import Kokoro
+import sys; sys.path.insert(0,'.'); import psa_fix
 k=Kokoro('voices/kokoro-v1.0.onnx','voices/voices-v1.0.bin')
 segs=[
  "A seguir, apresentamos os módulos complementares desenvolvidos para fortalecer o seu perfil profissional.",
@@ -25,7 +26,7 @@ def squeeze(s,sr,maxp=.18,thr=.008):
     return np.concatenate(out)
 out=[]
 for i,t in enumerate(segs):
-    s,sr=k.create(t,voice='pf_dora',speed=1.04,lang='pt-br')
+    s,sr=psa_fix.create(k,t,voice='pf_dora',speed=1.04)
     idx=np.where(np.abs(s)>0.006)[0]; a=max(idx[0]-int(.02*sr),0); b=min(idx[-1]+int(.12*sr),len(s))
     s=squeeze(s[a:b].copy(),sr); n=int(.02*sr); s[:n]*=np.linspace(0,1,n); m=int(.08*sr); s[-m:]*=np.linspace(1,0,m)
     sf.write(f'vo/s{i}.wav',s,sr); out.append(round(len(s)/sr,2))

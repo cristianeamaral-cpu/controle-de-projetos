@@ -1,6 +1,7 @@
 # Narração mais fluida: velocidade natural, pontuação para respiração, caudas preservadas com fade.
 import soundfile as sf, json, numpy as np
 from kokoro_onnx import Kokoro
+import sys; sys.path.insert(0,'.'); import psa_fix
 k=Kokoro('voices/kokoro-v1.0.onnx','voices/voices-v1.0.bin')
 segs=[
  "Com o primeiro lóguin concluído, o próximo passo é estruturar e preencher sua página na plataforma pê ésse á.",
@@ -19,7 +20,7 @@ segs=[
 ]
 out=[]
 for i,t in enumerate(segs):
-    s,sr=k.create(t,voice='pf_dora',speed=0.98,lang='pt-br')
+    s,sr=psa_fix.create(k,t,voice='pf_dora',speed=0.98)
     idx=np.where(np.abs(s)>0.006)[0]; a=max(idx[0]-int(.05*sr),0); b=min(idx[-1]+int(.3*sr),len(s))
     s=s[a:b].copy(); n=int(.03*sr); s[:n]*=np.linspace(0,1,n); m=int(.2*sr); s[-m:]*=np.linspace(1,0,m)
     sf.write(f'vo/s{i}.wav',s,sr); out.append(round(len(s)/sr,2))
