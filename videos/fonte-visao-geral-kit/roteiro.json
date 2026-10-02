@@ -1,0 +1,12 @@
+[
+ {"id": "acesso",  "start": 0.0,   "vo": "O seu acesso foi liberado. Bem-vindo!"},
+ {"id": "agora",   "start": 2.7,   "vo": "E agora, por onde começar?"},
+ {"id": "calma",   "start": 5.53,  "vo": "Calma. Em poucos passos, você aprende a usar tudo."},
+ {"id": "reveal",  "start": 9.33,  "drop": true,  "vo": "Este é o seu Ecossistema PSA."},
+ {"id": "login",   "start": 12.93, "vo": "Primeiro, acesse e faça o seu login com e-mail, Google ou LinkedIn."},
+ {"id": "perfil",  "start": 18.13, "vo": "Depois, preencha o seu perfil até cem por cento: foto, biografia, dados e redes."},
+ {"id": "temas",   "start": 23.13, "vo": "Escolha os seus temas e defina os seus cachês por nível de complexidade."},
+ {"id": "crm",     "start": 28.13, "vo": "Inscreva-se nas oportunidades e organize as suas demandas no CRM da PSA."},
+ {"id": "ia",      "start": 33.23, "vo": "E tenha a IA a seu favor: assistentes, análise de palestra e o PSA Trêndis."},
+ {"id": "cta",     "start": 38.63, "vo": "Cada passo tem um vídeo curto nesta série. Assista e comece hoje mesmo!"}
+]
