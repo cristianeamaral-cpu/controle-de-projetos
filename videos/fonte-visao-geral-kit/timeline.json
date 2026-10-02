@@ -4,7 +4,7 @@
   "start": 0.0,
   "vo": "O seu acesso foi liberado. Bem-vindo!",
   "voStart": 0.25,
-  "audio": 2.18,
+  "audio": 1.99,
   "rate": 10,
   "dur": 2.7
  },
@@ -13,7 +13,7 @@
   "start": 2.7,
   "vo": "E agora, por onde começar?",
   "voStart": 2.95,
-  "audio": 1.64,
+  "audio": 1.28,
   "rate": 10,
   "dur": 2.83
  },
@@ -22,7 +22,7 @@
   "start": 5.53,
   "vo": "Calma. Em poucos passos, você aprende a usar tudo.",
   "voStart": 5.78,
-  "audio": 2.79,
+  "audio": 2.72,
   "rate": 10,
   "dur": 3.8
  },
@@ -32,7 +32,7 @@
   "drop": true,
   "vo": "Este é o seu Ecossistema PSA.",
   "voStart": 9.58,
-  "audio": 1.89,
+  "audio": 1.84,
   "rate": 10,
   "dur": 3.6
  },
@@ -41,7 +41,7 @@
   "start": 12.93,
   "vo": "Primeiro, acesse e faça o seu login com e-mail, Google ou LinkedIn.",
   "voStart": 13.18,
-  "audio": 3.5,
+  "audio": 3.54,
   "rate": 10,
   "dur": 5.2
  },
@@ -50,7 +50,7 @@
   "start": 18.13,
   "vo": "Depois, preencha o seu perfil até cem por cento: foto, biografia, dados e redes.",
   "voStart": 18.38,
-  "audio": 4.73,
+  "audio": 4.89,
   "rate": 10,
   "dur": 5.0
  },
@@ -59,7 +59,7 @@
   "start": 23.13,
   "vo": "Escolha os seus temas e defina os seus cachês por nível de complexidade.",
   "voStart": 23.38,
-  "audio": 4.03,
+  "audio": 3.55,
   "rate": 10,
   "dur": 5.0
  },
@@ -68,7 +68,7 @@
   "start": 28.13,
   "vo": "Inscreva-se nas oportunidades e organize as suas demandas no CRM da PSA.",
   "voStart": 28.38,
-  "audio": 4.61,
+  "audio": 4.07,
   "rate": 10,
   "dur": 5.1
  },
@@ -77,7 +77,7 @@
   "start": 33.23,
   "vo": "E tenha a IA a seu favor: assistentes, análise de palestra e o PSA Trêndis.",
   "voStart": 33.48,
-  "audio": 4.83,
+  "audio": 4.54,
   "rate": 10,
   "dur": 5.4
  },
@@ -86,7 +86,7 @@
   "start": 38.63,
   "vo": "Cada passo tem um vídeo curto nesta série. Assista e comece hoje mesmo!",
   "voStart": 38.88,
-  "audio": 3.98,
+  "audio": 3.91,
   "rate": 10,
   "dur": 8.2
  }
