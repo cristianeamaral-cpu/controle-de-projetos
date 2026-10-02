@@ -1,0 +1,47 @@
+[
+ {
+  "id": "gancho",
+  "min": 4.4,
+  "vo": "O seu acesso ao Ecossistema pê ésse á já está liberado!"
+ },
+ {
+  "id": "dor",
+  "min": 5.0,
+  "vo": "E agora, por onde começar? Calma: em poucos passos, você aprende a usar tudo."
+ },
+ {
+  "id": "revela",
+  "min": 3.6,
+  "vo": "Este é o seu Ecossistema pê, ésse, á."
+ },
+ {
+  "id": "p1",
+  "min": 5.4,
+  "vo": "Primeiro, acesse o site e faça seu lóguin com e-mail, gúgou ou Linquedín."
+ },
+ {
+  "id": "p2",
+  "min": 5.0,
+  "vo": "Depois, complete o seu perfil até chegar a cem por cento."
+ },
+ {
+  "id": "p3",
+  "min": 5.0,
+  "vo": "Escolha os seus temas e defina os seus cachês."
+ },
+ {
+  "id": "p4",
+  "min": 5.4,
+  "vo": "Candidate-se às oportunidades e organize tudo no CRM da pê ésse á."
+ },
+ {
+  "id": "p5",
+  "min": 5.4,
+  "vo": "Conte também com as assistentes de IA, a análise de palestra e o PSA Trends."
+ },
+ {
+  "id": "fecha",
+  "min": 7.6,
+  "vo": "Cada passo tem um vídeo curto nesta série. Assista e comece hoje mesmo!"
+ }
+]
