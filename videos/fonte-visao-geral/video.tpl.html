@@ -4,11 +4,11 @@
 <style>
 :root{--or:#f85000;--gr:#1fc46b;--w:#fff;--w2:rgba(255,255,255,.62);--w3:rgba(255,255,255,.12)}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:1920px;height:1080px;overflow:hidden;background:#050505;font-family:Manrope,sans-serif;color:#fff}
-#stage{position:absolute;inset:0;overflow:hidden;background:#050505}
-#glow{position:absolute;inset:0;background:radial-gradient(900px 640px at 50% 52%,rgba(248,80,0,.22),rgba(248,80,0,.06) 45%,transparent 70%)}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#000105;font-family:Manrope,sans-serif;color:#fff}
+#stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(1300px 800px at 62% 18%,#0a1a44 0%,#061232 35%,#020818 70%,#000105 100%)}
+#glow{position:absolute;inset:0;background:radial-gradient(900px 640px at 50% 55%,rgba(248,80,0,.07),transparent 65%)}
 #plex,#grain{position:absolute;inset:0}
-#vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.85) 100%);pointer-events:none}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55) 100%);pointer-events:none}
 #flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:90}
 #logo{position:absolute;left:60px;top:46px;font-family:Archivo;font-weight:900;font-stretch:72%;font-size:54px;letter-spacing:-.5px;z-index:80;opacity:0}
 #logo i{color:var(--or);font-style:normal}
@@ -20,7 +20,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#050505;font-fam
 .el{position:absolute;opacity:0;will-change:transform,opacity,filter}
 .ctr{left:0;right:0;text-align:center}
 .glass{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.14);border-radius:22px;backdrop-filter:blur(6px)}
-.msg{background:#16181d;border:1.5px solid rgba(255,255,255,.1);border-radius:22px 22px 22px 6px;padding:18px 24px;font-size:30px;font-weight:600;max-width:640px}
+.msg{background:#0d1530;border:1.5px solid rgba(255,255,255,.1);border-radius:22px 22px 22px 6px;padding:18px 24px;font-size:30px;font-weight:600;max-width:640px}
 .msg small{display:block;font-size:17px;color:var(--w2);margin-bottom:6px;font-weight:700;letter-spacing:.08em}
 .chip{display:inline-flex;align-items:center;gap:12px;border-radius:40px;padding:14px 26px;font-size:28px;font-weight:800}
 .btn{display:inline-flex;align-items:center;gap:14px;background:var(--or);color:#fff;border-radius:16px;padding:22px 42px;font-size:34px;font-weight:800;box-shadow:0 18px 50px rgba(248,80,0,.4)}
@@ -28,14 +28,14 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#050505;font-fam
 .opp{display:flex;align-items:center;gap:20px;padding:22px 26px;margin-bottom:16px}
 .opp .t{font-size:26px;font-weight:800}.opp .d{font-size:19px;color:var(--w2);margin-top:4px}
 .kcol{width:380px;padding:18px}.kcol .h{font-size:20px;font-weight:800;letter-spacing:.12em;color:var(--w2);margin-bottom:14px}
-.kcard{background:#16181d;border:1.5px solid rgba(255,255,255,.12);border-radius:16px;padding:18px 20px;font-size:22px;font-weight:800}
+.kcard{background:#0d1530;border:1.5px solid rgba(255,255,255,.12);border-radius:16px;padding:18px 20px;font-size:22px;font-weight:800}
 .kcard small{display:block;color:var(--w2);font-size:16px;font-weight:600;margin-top:6px}
 .ai{display:flex;align-items:center;gap:16px;padding:18px 24px;margin-bottom:16px}
 .ai b{width:54px;height:54px;border-radius:14px;background:rgba(248,80,0,.16);color:var(--or);display:flex;align-items:center;justify-content:center;font-size:26px}
 .ai .t{font-size:28px;font-weight:800}.ai .d{font-size:19px;color:var(--w2)}
 </style></head><body>
 <div id="stage">
- <div id="glow"></div><canvas id="plex" width="1920" height="1080"></canvas><canvas id="grain" width="480" height="270" style="width:1920px;height:1080px;opacity:.10;mix-blend-mode:screen"></canvas>
+ <div id="glow"></div><canvas id="plex" width="1920" height="1080"></canvas><canvas id="grain" width="480" height="270" style="width:1920px;height:1080px;opacity:.05;mix-blend-mode:screen"></canvas>
  <div id="logo">PSA<i>.</i></div>
 
 
@@ -60,35 +60,35 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#050505;font-fam
  <div class="sc" data-scene="p1" data-nozoom="1">
   <div class="el M or" style="left:140px;top:250px;font-size:26px;letter-spacing:.3em" data-in="0.05" data-a="left">PASSO 1</div>
   <div class="el B" style="left:140px;top:300px;font-size:84px" data-in="0.1" data-a="slam">ACESSE E<br>FAÇA LOGIN<span class="or">.</span></div>
-  <div class="el" style="left:832px;top:262px;width:976px;height:556px;border-radius:18px;border:2px solid rgba(255,255,255,.18);box-shadow:0 0 0 10px rgba(248,80,0,.08),0 40px 120px rgba(0,0,0,.6);background:#0b0b0d" data-in="0" data-a="fade"></div>
+  <div class="el" style="left:832px;top:262px;width:976px;height:556px;border-radius:18px;border:2px solid rgba(255,255,255,.18);box-shadow:0 0 0 10px rgba(248,80,0,.08),0 40px 120px rgba(0,0,0,.6);background:#050b1c" data-in="0" data-a="fade"></div>
   <div class="el" style="left:140px;top:560px" data-in="{W:p1:e-mail}" data-a="pop"><span class="chip" style="background:rgba(255,255,255,.1)">✉ E-mail</span></div><div class="el" style="left:140px;top:652px" data-in="{W:p1:gúgou}" data-a="pop"><span class="chip" style="background:rgba(255,255,255,.1)">G Google</span></div><div class="el" style="left:140px;top:744px" data-in="{W:p1:Linquedín}" data-a="pop"><span class="chip" style="background:rgba(255,255,255,.1)">in LinkedIn</span></div>
  </div>
 
  <div class="sc" data-scene="p2" data-nozoom="1">
   <div class="el M or" style="left:140px;top:250px;font-size:26px;letter-spacing:.3em" data-in="0.05" data-a="left">PASSO 2</div>
   <div class="el B" style="left:140px;top:300px;font-size:84px" data-in="0.1" data-a="slam">PERFIL<br><span class="or">100%.</span></div>
-  <div class="el" style="left:832px;top:262px;width:976px;height:556px;border-radius:18px;border:2px solid rgba(255,255,255,.18);box-shadow:0 0 0 10px rgba(248,80,0,.08),0 40px 120px rgba(0,0,0,.6);background:#0b0b0d" data-in="0" data-a="fade"></div>
+  <div class="el" style="left:832px;top:262px;width:976px;height:556px;border-radius:18px;border:2px solid rgba(255,255,255,.18);box-shadow:0 0 0 10px rgba(248,80,0,.08),0 40px 120px rgba(0,0,0,.6);background:#050b1c" data-in="0" data-a="fade"></div>
   <div class="el" style="left:140px;top:560px" data-in="{W:p2:perfil}" data-a="pop"><span class="chip" style="background:rgba(255,255,255,.1)">Foto · biografia · dados · redes</span></div><div class="el" style="left:140px;top:652px" data-in="{W:p2:cem}" data-a="pop"><span class="chip" style="background:rgba(31,196,107,.18);color:#1fc46b">✓ 100% completo</span></div>
  </div>
 
  <div class="sc" data-scene="p3" data-nozoom="1">
   <div class="el M or" style="left:140px;top:250px;font-size:26px;letter-spacing:.3em" data-in="0.05" data-a="left">PASSO 3</div>
   <div class="el B" style="left:140px;top:300px;font-size:84px" data-in="0.1" data-a="slam">TEMAS<br>E <span class="or">CACHÊS.</span></div>
-  <div class="el" style="left:832px;top:262px;width:976px;height:556px;border-radius:18px;border:2px solid rgba(255,255,255,.18);box-shadow:0 0 0 10px rgba(248,80,0,.08),0 40px 120px rgba(0,0,0,.6);background:#0b0b0d" data-in="0" data-a="fade"></div>
+  <div class="el" style="left:832px;top:262px;width:976px;height:556px;border-radius:18px;border:2px solid rgba(255,255,255,.18);box-shadow:0 0 0 10px rgba(248,80,0,.08),0 40px 120px rgba(0,0,0,.6);background:#050b1c" data-in="0" data-a="fade"></div>
   <div class="el" style="left:140px;top:560px" data-in="{W:p3:temas}" data-a="pop"><span class="chip" style="background:rgba(255,255,255,.1)">★ Macro temas e tema principal</span></div><div class="el" style="left:140px;top:652px" data-in="{W:p3:cachês}" data-a="pop"><span class="chip" style="background:rgba(255,255,255,.1)">R$ Baixa · Média · Alta</span></div>
  </div>
 
  <div class="sc" data-scene="p4" data-nozoom="1">
   <div class="el M or" style="left:140px;top:250px;font-size:26px;letter-spacing:.3em" data-in="0.05" data-a="left">PASSO 4</div>
   <div class="el B" style="left:140px;top:300px;font-size:84px" data-in="0.1" data-a="slam">OPORTUNIDADES<br>E <span class="or">CRM.</span></div>
-  <div class="el" style="left:832px;top:262px;width:976px;height:556px;border-radius:18px;border:2px solid rgba(255,255,255,.18);box-shadow:0 0 0 10px rgba(248,80,0,.08),0 40px 120px rgba(0,0,0,.6);background:#0b0b0d" data-in="0" data-a="fade"></div>
+  <div class="el" style="left:832px;top:262px;width:976px;height:556px;border-radius:18px;border:2px solid rgba(255,255,255,.18);box-shadow:0 0 0 10px rgba(248,80,0,.08),0 40px 120px rgba(0,0,0,.6);background:#050b1c" data-in="0" data-a="fade"></div>
   <div class="el" style="left:140px;top:560px" data-in="{W:p4:Candidate}" data-a="pop"><span class="chip" style="background:var(--or)">➤ Candidate-se</span></div><div class="el" style="left:140px;top:652px" data-in="{W:p4:CRM}" data-a="pop"><span class="chip" style="background:rgba(255,255,255,.1)">▦ CRM PSA</span></div>
  </div>
 
  <div class="sc" data-scene="p5" data-nozoom="1">
   <div class="el M or" style="left:140px;top:250px;font-size:26px;letter-spacing:.3em" data-in="0.05" data-a="left">PASSO 5</div>
   <div class="el B" style="left:140px;top:300px;font-size:84px" data-in="0.1" data-a="slam">IA A SEU<br><span class="or">FAVOR.</span></div>
-  <div class="el" style="left:832px;top:262px;width:976px;height:556px;border-radius:18px;border:2px solid rgba(255,255,255,.18);box-shadow:0 0 0 10px rgba(248,80,0,.08),0 40px 120px rgba(0,0,0,.6);background:#0b0b0d" data-in="0" data-a="fade"></div>
+  <div class="el" style="left:832px;top:262px;width:976px;height:556px;border-radius:18px;border:2px solid rgba(255,255,255,.18);box-shadow:0 0 0 10px rgba(248,80,0,.08),0 40px 120px rgba(0,0,0,.6);background:#050b1c" data-in="0" data-a="fade"></div>
   <div class="el" style="left:140px;top:560px" data-in="{W:p5:assistentes}" data-a="pop"><span class="chip" style="background:rgba(255,255,255,.1)">✦ 4 assistentes de IA</span></div><div class="el" style="left:140px;top:652px" data-in="{W:p5:análise}" data-a="pop"><span class="chip" style="background:rgba(255,255,255,.1)">▶ Análise de palestra</span></div><div class="el" style="left:140px;top:744px" data-in="{W:p5:Trends}" data-a="pop"><span class="chip" style="background:rgba(255,255,255,.1)">↗ PSA Trends</span></div>
  </div>
  <!-- FECHAMENTO -->
@@ -112,8 +112,8 @@ const scenes=$$('.sc').map(el=>({el,s:SC[el.dataset.scene],els:[...el.querySelec
 // plexus
 const P=[];{let r=12345;const R=()=>(r=(r*16807)%2147483647)/2147483647;for(let i=0;i<70;i++)P.push([R()*1920,R()*1080,(R()-.5)*14,(R()-.5)*10]);}
 function plex(t){const c=$('#plex').getContext('2d');c.clearRect(0,0,1920,1080);const pts=P.map(([x,y,vx,vy])=>[(x+vx*t+1920*4)%1920,(y+vy*t+1080*4)%1080]);
- for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i][0]-pts[j][0],dy=pts[i][1]-pts[j][1],d=Math.hypot(dx,dy);if(d<230){c.strokeStyle=`rgba(255,255,255,${.08*(1-d/230)})`;c.lineWidth=1;c.beginPath();c.moveTo(...pts[i]);c.lineTo(...pts[j]);c.stroke();}}
- pts.forEach((p,i)=>{c.fillStyle=i%9==0?'rgba(248,80,0,.6)':'rgba(255,255,255,.25)';c.beginPath();c.arc(p[0],p[1],i%3?1.6:2.4,0,7);c.fill();});}
+ for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i][0]-pts[j][0],dy=pts[i][1]-pts[j][1],d=Math.hypot(dx,dy);if(d<230){c.strokeStyle=`rgba(150,170,220,${.10*(1-d/230)})`;c.lineWidth=1;c.beginPath();c.moveTo(...pts[i]);c.lineTo(...pts[j]);c.stroke();}}
+ pts.forEach((p,i)=>{c.fillStyle=i%9==0?'rgba(255,110,40,.5)':'rgba(180,195,235,.30)';c.beginPath();c.arc(p[0],p[1],i%3?1.6:2.4,0,7);c.fill();});}
 function grain(t){const c=$('#grain').getContext('2d'),im=c.createImageData(480,270);let r=(Math.floor(t*30)*9301+49297)%233280||1;for(let i=0;i<im.data.length;i+=4){r=(r*16807)%2147483647;const v=(r&255);im.data[i]=im.data[i+1]=im.data[i+2]=v;im.data[i+3]=255;}c.putImageData(im,0,0);}
 function anim(x,a,p){ // p 0..1
  const q=E.o(p);
@@ -126,7 +126,7 @@ function anim(x,a,p){ // p 0..1
 window.seek=function(t){
  plex(t);grain(t);
  const post=t>=DROP;
- $('#stage').style.filter=post?'none':'saturate(.25) contrast(1.05)';
+ $('#stage').style.filter=post?'none':'saturate(.6)';
  const inClip=scenes.some(S=>S.el.dataset.nozoom&&t>=S.s.start&&t<S.s.start+S.s.dur); const beat=(post&&!inClip)?Math.pow(1-((t-DROP)%0.5)/0.5,6):0; $('#stage').style.transform=`scale(${1+beat*0.006})`;
  let fl=0;
  for(const S of scenes){const s=S.s,lt=t-s.start,end=s.start+s.dur;let op=0;
