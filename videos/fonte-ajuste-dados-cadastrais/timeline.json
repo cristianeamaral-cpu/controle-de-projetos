@@ -4,7 +4,7 @@
   "start": 0.0,
   "vo": "Agora que você já entrou na plataforma, vamos montar a sua página na PSA.",
   "voStart": 0.25,
-  "audio": 3.94,
+  "audio": 4.16,
   "rate": 0,
   "dur": 8.0
  },
@@ -14,7 +14,7 @@
   "drop": true,
   "vo": "Em Meu Perfil, o indicador de força da sua página mostra quanto falta. A meta é chegar a cem por cento.",
   "voStart": 8.25,
-  "audio": 5.68,
+  "audio": 5.98,
   "rate": 0,
   "dur": 10.93
  },
@@ -23,7 +23,7 @@
   "start": 18.93,
   "vo": "Escolha bem a sua foto de perfil. É essa imagem que os contratantes vão ver no site da PSA, então ela precisa passar uma imagem profissional.",
   "voStart": 19.18,
-  "audio": 8.45,
+  "audio": 8.91,
   "rate": 0,
   "dur": 15.07
  },
@@ -32,7 +32,7 @@
   "start": 34.0,
   "vo": "Depois, preencha a sua biografia profissional e conte a sua trajetória. Para ganhar tempo, use o botão Gerar com IA e receba uma sugestão pronta para ajustar.",
   "voStart": 34.25,
-  "audio": 8.64,
+  "audio": 9.1,
   "rate": 0,
   "dur": 17.0
  },
@@ -41,7 +41,7 @@
   "start": 51.0,
   "vo": "Na frase de destaque, resuma o seu posicionamento em trinta a sessenta caracteres.",
   "voStart": 51.25,
-  "audio": 4.27,
+  "audio": 4.51,
   "rate": 0,
   "dur": 8.03
  },
@@ -50,7 +50,7 @@
   "start": 59.03,
   "vo": "Siga com os dados pessoais: nome, nome artístico, CPF, RG e formação. Em contato, informe o WhatsApp e um contato de emergência.",
   "voStart": 59.28,
-  "audio": 8.5,
+  "audio": 8.95,
   "rate": 0,
   "dur": 12.24
  },
@@ -59,7 +59,7 @@
   "start": 71.27,
   "vo": "Em redes sociais, inclua Instagram, Facebook, LinkedIn e o seu vídeo do YouTube.",
   "voStart": 71.52,
-  "audio": 4.55,
+  "audio": 4.79,
   "rate": 0,
   "dur": 7.63
  },
@@ -68,7 +68,7 @@
   "start": 78.9,
   "vo": "Informe a sua localização, que ajuda no cálculo da logística dos eventos, e marque o seu momento atual.",
   "voStart": 79.15,
-  "audio": 5.47,
+  "audio": 5.76,
   "rate": 0,
   "dur": 9.67
  },
@@ -77,7 +77,7 @@
   "start": 88.57,
   "vo": "Salve as alterações. Pronto: o seu perfil está completo e visível para os contratantes.",
   "voStart": 88.82,
-  "audio": 4.59,
+  "audio": 4.84,
   "rate": 0,
   "dur": 9.43
  },
@@ -86,7 +86,7 @@
   "start": 98.0,
   "vo": "Perfil completo, mais oportunidades!",
   "voStart": 98.25,
-  "audio": 2.29,
+  "audio": 2.42,
   "rate": 0,
   "dur": 4.83
  }
