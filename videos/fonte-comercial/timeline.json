@@ -1,0 +1,77 @@
+{
+ "total": 47.6,
+ "scenes": [
+  {
+   "id": "gancho",
+   "start": 0.0,
+   "dur": 5.2,
+   "voStart": 0.15,
+   "voDur": 2.269,
+   "vo": "O convite para palestrar chegou. E agora?"
+  },
+  {
+   "id": "dor",
+   "start": 5.2,
+   "dur": 6.0,
+   "voStart": 5.35,
+   "voDur": 4.527,
+   "vo": "Contato no WhatsApp, proposta no e-mail, cachê na planilha. E a oportunidade escapa."
+  },
+  {
+   "id": "revela",
+   "start": 11.2,
+   "dur": 3.6,
+   "voStart": 11.35,
+   "voDur": 2.226,
+   "vo": "Apresentamos o Ecossistema pê ésse á."
+  },
+  {
+   "id": "perfil",
+   "start": 14.8,
+   "dur": 5.0,
+   "voStart": 14.95,
+   "voDur": 3.097,
+   "vo": "Monte seu perfil completo e escolha o seu Tema Principal."
+  },
+  {
+   "id": "oport",
+   "start": 19.8,
+   "dur": 5.0,
+   "voStart": 19.95,
+   "voDur": 3.673,
+   "vo": "Receba oportunidades todos os dias e candidate-se com um clique."
+  },
+  {
+   "id": "crm",
+   "start": 24.8,
+   "dur": 5.0,
+   "voStart": 24.95,
+   "voDur": 2.948,
+   "vo": "Organize cada negociação no cê érre éme pê ésse á."
+  },
+  {
+   "id": "ia",
+   "start": 29.8,
+   "dur": 5.0,
+   "voStart": 29.95,
+   "voDur": 3.865,
+   "vo": "Conte com quatro assistentes de IA e com a análise da sua palestra."
+  },
+  {
+   "id": "numero",
+   "start": 34.8,
+   "dur": 5.0,
+   "voStart": 34.95,
+   "voDur": 3.716,
+   "vo": "São mais de quarenta e cinco pontos de perfórmance, em cinco eixos."
+  },
+  {
+   "id": "fecha",
+   "start": 39.8,
+   "dur": 7.8,
+   "voStart": 39.95,
+   "voDur": 6.425,
+   "vo": "Ecossistema pê ésse á. Sua carreira de palestrante em um só lugar. Acesse profissionais ésse á, ponto com, ponto bê érre."
+  }
+ ]
+}

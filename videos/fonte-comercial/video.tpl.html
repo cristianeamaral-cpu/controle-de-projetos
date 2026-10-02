@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="fonts2.css">
+<style>
+:root{--or:#f85000;--gr:#1fc46b;--w:#fff;--w2:rgba(255,255,255,.62);--w3:rgba(255,255,255,.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#050505;font-family:Manrope,sans-serif;color:#fff}
+#stage{position:absolute;inset:0;overflow:hidden;background:#050505}
+#glow{position:absolute;inset:0;background:radial-gradient(900px 640px at 50% 52%,rgba(248,80,0,.22),rgba(248,80,0,.06) 45%,transparent 70%)}
+#plex,#grain{position:absolute;inset:0}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.85) 100%);pointer-events:none}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:90}
+#logo{position:absolute;left:60px;top:46px;font-family:Archivo;font-weight:900;font-stretch:72%;font-size:54px;letter-spacing:-.5px;z-index:80;opacity:0}
+#logo i{color:var(--or);font-style:normal}
+.sc{position:absolute;inset:0;opacity:0;transform-origin:50% 50%}
+.B{font-family:Archivo;font-weight:900;font-stretch:72%;text-transform:uppercase;letter-spacing:-1px;word-spacing:.14em;line-height:.95}
+.C{font-family:Archivo;font-weight:900;font-stretch:62%;letter-spacing:-1px}
+.M{font-family:'DejaVu Sans Mono',monospace}
+.or{color:var(--or)}.gr{color:var(--gr)}.w2{color:var(--w2)}
+.el{position:absolute;opacity:0;will-change:transform,opacity,filter}
+.ctr{left:0;right:0;text-align:center}
+.glass{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.14);border-radius:22px;backdrop-filter:blur(6px)}
+.msg{background:#16181d;border:1.5px solid rgba(255,255,255,.1);border-radius:22px 22px 22px 6px;padding:18px 24px;font-size:30px;font-weight:600;max-width:640px}
+.msg small{display:block;font-size:17px;color:var(--w2);margin-bottom:6px;font-weight:700;letter-spacing:.08em}
+.chip{display:inline-flex;align-items:center;gap:12px;border-radius:40px;padding:14px 26px;font-size:28px;font-weight:800}
+.btn{display:inline-flex;align-items:center;gap:14px;background:var(--or);color:#fff;border-radius:16px;padding:22px 42px;font-size:34px;font-weight:800;box-shadow:0 18px 50px rgba(248,80,0,.4)}
+.bar{height:22px;border-radius:12px;background:rgba(255,255,255,.1);overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--or),#ff8a3d);border-radius:12px}
+.opp{display:flex;align-items:center;gap:20px;padding:22px 26px;margin-bottom:16px}
+.opp .t{font-size:26px;font-weight:800}.opp .d{font-size:19px;color:var(--w2);margin-top:4px}
+.kcol{width:380px;padding:18px}.kcol .h{font-size:20px;font-weight:800;letter-spacing:.12em;color:var(--w2);margin-bottom:14px}
+.kcard{background:#16181d;border:1.5px solid rgba(255,255,255,.12);border-radius:16px;padding:18px 20px;font-size:22px;font-weight:800}
+.kcard small{display:block;color:var(--w2);font-size:16px;font-weight:600;margin-top:6px}
+.ai{display:flex;align-items:center;gap:16px;padding:18px 24px;margin-bottom:16px}
+.ai b{width:54px;height:54px;border-radius:14px;background:rgba(248,80,0,.16);color:var(--or);display:flex;align-items:center;justify-content:center;font-size:26px}
+.ai .t{font-size:28px;font-weight:800}.ai .d{font-size:19px;color:var(--w2)}
+</style></head><body>
+<div id="stage">
+ <div id="glow"></div><canvas id="plex" width="1920" height="1080"></canvas><canvas id="grain" width="480" height="270" style="width:1920px;height:1080px;opacity:.10;mix-blend-mode:screen"></canvas>
+ <div id="logo">PSA<i>.</i></div>
+
+ <!-- 1 GANCHO -->
+ <div class="sc" data-scene="gancho">
+  <div class="el" style="left:330px;top:250px" data-in="0.25" data-a="left"><div class="msg"><small>NOVA MENSAGEM · 09:41</small>Oi! Você faz palestra sobre liderança?</div></div>
+  <div class="el" style="left:330px;top:420px" data-in="1.1" data-a="left"><div class="msg"><small>NOVA MENSAGEM · 09:42</small>Qual é o seu cachê?</div></div>
+  <div class="el" style="left:330px;top:590px" data-in="1.9" data-a="left"><div class="msg"><small>NOVA MENSAGEM · 09:42</small>Tem um vídeo seu palestrando?</div></div>
+  <div class="el B" style="left:1080px;top:380px;font-size:190px" data-in="{W:gancho:agora}" data-a="slam">E AGORA<span class="or">?</span></div>
+ </div>
+
+ <!-- 2 DOR -->
+ <div class="sc" data-scene="dor">
+  <div class="el B ctr" style="top:300px;font-size:200px" data-in="{W:dor:WhatsApp}" data-out="{W:dor:proposta}" data-a="slam">WHATSAPP.</div>
+  <div class="el B ctr" style="top:300px;font-size:200px" data-in="{W:dor:e-mail}" data-out="{W:dor:cachê}" data-a="slam">E-MAIL.</div>
+  <div class="el B ctr" style="top:300px;font-size:200px" data-in="{W:dor:planilha}" data-out="{W:dor:oportunidade}" data-a="slam">PLANILHA.</div>
+  <div class="el B ctr" style="top:250px;font-size:150px" data-in="{W:dor:oportunidade}" data-a="slam">A OPORTUNIDADE<br><span class="or">ESCAPA.</span></div>
+  <div class="el ctr w2" style="top:620px;font-size:30px;font-weight:700;letter-spacing:.3em" data-in="0.4" data-out="{W:dor:oportunidade}" data-a="fade">TUDO ESPALHADO</div>
+ </div>
+
+ <!-- 3 REVELAÇÃO (drop) -->
+ <div class="sc" data-scene="revela">
+  <div class="el ctr w2" style="top:330px;font-size:34px;font-weight:800;letter-spacing:.45em" data-in="0.05" data-a="up">APRESENTAMOS</div>
+  <div class="el B ctr" style="top:400px;font-size:220px" data-in="{W:revela:Ecossistema}" data-a="slam">ECOSSISTEMA <span class="or">PSA.</span></div>
+ </div>
+
+ <!-- 4 PERFIL -->
+ <div class="sc" data-scene="perfil">
+  <div class="el B" style="left:160px;top:200px;font-size:130px" data-in="0.1" data-a="slam">PERFIL<br><span class="or">COMPLETO.</span></div>
+  <div class="el glass" style="left:980px;top:250px;width:780px;padding:36px 40px" data-in="0.35" data-a="right">
+   <div style="display:flex;justify-content:space-between;font-size:24px;font-weight:800"><span>Força da sua Página</span><span id="pct">0%</span></div>
+   <div class="bar" style="margin-top:18px"><i id="pbar"></i></div>
+   <div class="M w2" style="font-size:18px;margin-top:16px">foto · biografia · frase · dados · redes · localização</div>
+  </div>
+  <div class="el" style="left:980px;top:520px" data-in="{W:perfil:Tema}" data-a="pop"><span class="chip" style="background:var(--or)">★ TEMA PRINCIPAL · LIDERANÇA</span></div>
+ </div>
+
+ <!-- 5 OPORTUNIDADES -->
+ <div class="sc" data-scene="oport">
+  <div class="el B" style="left:140px;top:220px;font-size:104px" data-in="0.1" data-a="slam">OPORTUNIDADES<br><span class="or">TODO DIA.</span></div>
+  <div class="el glass opp" style="left:1080px;top:200px;width:720px" data-in="{W:oport:oportunidades}" data-a="right"><div style="flex:1"><div class="t">Convenção anual de vendas</div><div class="d">SP · Liderança · Palestra</div></div><span class="chip" style="background:rgba(255,255,255,.1);font-size:20px;padding:10px 18px">NOVA</span></div>
+  <div class="el glass opp" style="left:1080px;top:330px;width:720px" data-in="{W:oport:dias}" data-a="right"><div style="flex:1"><div class="t">Semana do cliente</div><div class="d">RS · Experiência do cliente</div></div><span class="chip" style="background:rgba(255,255,255,.1);font-size:20px;padding:10px 18px">NOVA</span></div>
+  <div class="el" style="left:1300px;top:500px" data-in="{W:oport:candidate}" data-out="{W:oport:clique}+0.6" data-a="pop"><span class="btn">➤ Candidatar</span></div>
+  <div class="el" style="left:1210px;top:500px" data-in="{W:oport:clique}+0.6" data-a="pop"><span class="chip" style="background:rgba(31,196,107,.16);color:var(--gr);font-size:32px">✓ Candidatura enviada</span></div>
+ </div>
+
+ <!-- 6 CRM -->
+ <div class="sc" data-scene="crm">
+  <div class="el B ctr" style="top:130px;font-size:120px" data-in="0.1" data-a="slam">TUDO NO <span class="or">CRM PSA.</span></div>
+  <div class="el" style="left:250px;top:400px;display:flex;gap:30px" data-in="0.4" data-a="up">
+   <div class="glass kcol"><div class="h">PROPOSTA ENVIADA</div><div style="height:96px"></div></div>
+   <div class="glass kcol"><div class="h">NEGOCIAÇÃO</div><div style="height:96px"></div></div>
+   <div class="glass kcol" style="border-color:rgba(31,196,107,.4)"><div class="h gr">FECHADO</div><div style="height:96px"></div></div>
+  </div>
+  <div class="el kcard" id="kc" style="left:268px;top:466px;width:344px" data-in="0.6" data-a="pop">Convenção anual de vendas<small id="kcs">Proposta enviada</small></div>
+ </div>
+
+ <!-- 7 IA -->
+ <div class="sc" data-scene="ia">
+  <div class="el B" style="left:160px;top:200px;font-size:130px" data-in="0.1" data-a="slam"><span class="or">4</span> ASSISTENTES<br>DE IA.</div>
+  <div class="el glass ai" style="left:1060px;top:170px;width:700px" data-in="{W:ia:quatro}" data-a="right"><b>✦</b><div><div class="t">Clara</div><div class="d">Posicionamento de marca pessoal</div></div></div>
+  <div class="el glass ai" style="left:1060px;top:290px;width:700px" data-in="{W:ia:quatro}+0.15" data-a="right"><b>✦</b><div><div class="t">Santiago</div><div class="d">Estratégia de vendas</div></div></div>
+  <div class="el glass ai" style="left:1060px;top:410px;width:700px" data-in="{W:ia:quatro}+0.3" data-a="right"><b>✦</b><div><div class="t">Ariadne</div><div class="d">Estrutura de palestras · HandMap</div></div></div>
+  <div class="el glass ai" style="left:1060px;top:530px;width:700px" data-in="{W:ia:quatro}+0.45" data-a="right"><b>✦</b><div><div class="t">Kali</div><div class="d">Trilho da palestra · Forja</div></div></div>
+  <div class="el glass ai" style="left:1060px;top:680px;width:700px;border-color:rgba(248,80,0,.6)" data-in="{W:ia:análise}" data-a="pop"><b>▶</b><div><div class="t">Análise de Palestra</div><div class="d">Vídeos de até 1h30</div></div></div>
+ </div>
+
+ <!-- 8 NÚMERO -->
+ <div class="sc" data-scene="numero">
+  <div class="el C ctr or" style="top:190px;font-size:420px;line-height:1" data-in="{W:numero:mais}" data-a="slam">+<span id="n45">0</span></div>
+  <div class="el B ctr" style="top:640px;font-size:76px" data-in="{W:numero:pontos}" data-a="up">PONTOS DE PERFORMANCE</div>
+  <div class="el ctr" style="top:760px" data-in="{W:numero:cinco}" data-a="pop"><span class="chip" style="background:var(--or);font-size:34px">EM 5 EIXOS · ANÁLISE COMPLETA</span></div>
+ </div>
+
+ <!-- 9 FECHAMENTO -->
+ <div class="sc" data-scene="fecha">
+  <div class="el B ctr" style="top:250px;font-size:200px" data-in="0.1" data-a="slam">ECOSSISTEMA <span class="or">PSA.</span></div>
+  <div class="el ctr" style="top:500px;font-size:44px;font-weight:700" data-in="{W:fecha:Sua}" data-a="up">Sua carreira de palestrante em um só lugar.</div>
+  <div class="el ctr" style="top:640px" data-in="{W:fecha:Acesse}" data-a="pop"><span class="btn">Acesse profissionaissa.com.br</span></div>
+ </div>
+</div>
+<div id="vig"></div><div id="flash"></div>
+
+<script>
+const TL=%%TL%%;
+const DROP=TL.scenes.find(s=>s.id==='revela').start;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const E={o:x=>1-Math.pow(1-x,3),io:x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,b:x=>{const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)}};
+const cl=v=>Math.max(0,Math.min(1,v));
+const SC={};TL.scenes.forEach(s=>SC[s.id]=s);
+const scenes=$$('.sc').map(el=>({el,s:SC[el.dataset.scene],els:[...el.querySelectorAll('.el')].map(e=>({e,i:+e.dataset.in,o:e.dataset.out?+e.dataset.out:null,a:e.dataset.a||'up'}))}));
+// plexus
+const P=[];{let r=12345;const R=()=>(r=(r*16807)%2147483647)/2147483647;for(let i=0;i<70;i++)P.push([R()*1920,R()*1080,(R()-.5)*14,(R()-.5)*10]);}
+function plex(t){const c=$('#plex').getContext('2d');c.clearRect(0,0,1920,1080);const pts=P.map(([x,y,vx,vy])=>[(x+vx*t+1920*4)%1920,(y+vy*t+1080*4)%1080]);
+ for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i][0]-pts[j][0],dy=pts[i][1]-pts[j][1],d=Math.hypot(dx,dy);if(d<230){c.strokeStyle=`rgba(255,255,255,${.08*(1-d/230)})`;c.lineWidth=1;c.beginPath();c.moveTo(...pts[i]);c.lineTo(...pts[j]);c.stroke();}}
+ pts.forEach((p,i)=>{c.fillStyle=i%9==0?'rgba(248,80,0,.6)':'rgba(255,255,255,.25)';c.beginPath();c.arc(p[0],p[1],i%3?1.6:2.4,0,7);c.fill();});}
+function grain(t){const c=$('#grain').getContext('2d'),im=c.createImageData(480,270);let r=(Math.floor(t*30)*9301+49297)%233280||1;for(let i=0;i<im.data.length;i+=4){r=(r*16807)%2147483647;const v=(r&255);im.data[i]=im.data[i+1]=im.data[i+2]=v;im.data[i+3]=255;}c.putImageData(im,0,0);}
+function anim(x,a,p){ // p 0..1
+ const q=E.o(p);
+ if(a==='slam'){const s=1.6-0.6*E.o(p);return `opacity:${cl(p*2.2)};transform:scale(${s});filter:blur(${(1-q)*18}px)`;}
+ if(a==='pop'){return `opacity:${cl(p*3)};transform:scale(${0.4+0.6*E.b(p)})`;}
+ if(a==='left')return `opacity:${q};transform:translateX(${-80*(1-q)}px)`;
+ if(a==='right')return `opacity:${q};transform:translateX(${80*(1-q)}px)`;
+ if(a==='fade')return `opacity:${q}`;
+ return `opacity:${q};transform:translateY(${60*(1-q)}px)`;}
+window.seek=function(t){
+ plex(t);grain(t);
+ const post=t>=DROP;
+ $('#stage').style.filter=post?'none':'saturate(.25) contrast(1.05)';
+ const beat=post?Math.pow(1-((t-DROP)%0.5)/0.5,6):0; $('#stage').style.transform=`scale(${1+beat*0.006})`;
+ let fl=0;
+ for(const S of scenes){const s=S.s,lt=t-s.start,end=s.start+s.dur;let op=0;
+  if(t>=s.start&&t<end){op=1; if(s.start<DROP||s.id==='revela'&&false){ if(lt<0.25&&s.start>0)op=lt/0.25; if(end-t<0.25&&end<=DROP)op=Math.min(op,(end-t)/0.25);} }
+  if(post&&s.start>=DROP&&t>=s.start&&lt<0.12) fl=Math.max(fl,1-lt/0.12);
+  S.el.style.opacity=op; if(!op)continue;
+  S.el.style.transform=`scale(${1+0.05*cl(lt/s.dur)})`;
+  for(const x of S.els){let st='opacity:0';const dl=s.id==='fecha'&&false?0:0;
+   if(lt>=x.i){const p=cl((lt-x.i)/(x.a==='slam'?0.32:0.45));st=anim(x.e,x.a,p);
+    if(x.o!==null&&lt>=x.o){const q=cl((lt-x.o)/0.18);st=`opacity:${1-q};transform:scale(${1+0.08*q})`;}}
+   x.e.style.cssText=x.e.style.cssText.replace(/opacity:[^;]*;?|transform:[^;]*;?|filter:[^;]*;?/g,'')+';'+st;}
+ }
+ $('#flash').style.opacity=fl*0.85;
+ const f=SC.fecha; $('#logo').style.opacity=(t>=DROP+0.6&&t<f.start)?1:0;
+ // perfil bar
+ const pf=SC.perfil, pp=cl((t-pf.start-0.6)/2.2); $('#pbar').style.width=(E.io(pp)*100)+'%'; $('#pct').textContent=Math.round(E.io(pp)*100)+'%'; if(pp>=1)$('#pct').style.color='#1fc46b';
+ // crm card movement
+ const cr=SC.crm, cl1=t-cr.start; const k=$('#kc');
+ let x=268,stg='Proposta enviada',col='';
+ if(cl1>1.8){x=268+410*E.io(cl((cl1-1.8)/0.5));stg='Em negociação';}
+ if(cl1>3.2){x=678+410*E.io(cl((cl1-3.2)/0.5));stg='✓ Contrato fechado';col='rgba(31,196,107,.6)';}
+ k.style.left=x+'px'; $('#kcs').textContent=stg; k.style.borderColor=col||''; $('#kcs').style.color=col?'#1fc46b':'';
+ // count 45
+ const nm=SC.numero, n0=+document.querySelector('[data-scene=numero] .el').dataset.in; $('#n45').textContent=Math.round(45*E.o(cl((t-nm.start-n0)/1.0)));
+};
+seek(0);
+</script>
+</body></html>
