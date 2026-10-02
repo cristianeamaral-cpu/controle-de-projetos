@@ -5,7 +5,7 @@ d='/tmp/claude-0/-home-user-controle-de-projetos/a7e4ab82-d7ae-55cd-9826-274306e
 tts=sherpa_onnx.OfflineTts(sherpa_onnx.OfflineTtsConfig(model=sherpa_onnx.OfflineTtsModelConfig(
     vits=sherpa_onnx.OfflineTtsVitsModelConfig(model=d+'pt_BR-faber-medium.onnx',tokens=d+'tokens.txt',data_dir=d+'espeak-ng-data'),num_threads=4)))
 # grafias só de pronúncia (o texto falado é o do roteiro)
-FALA={'LinkedIn':'Línquedin','Instagram':'Instagrã','YouTube':'Iutúbi','cachês':'kachês','biografia,':'bio grafia,','Ecossistema PSA.':'Ecossistema PSA!','Calma.':'Calma!','Gerar com IA':'Gerár com IA','É essa imagem':'É exatamente essa imagem'}
+FALA={'LinkedIn':'Línquedim','Instagram':'Instagrã','YouTube':'Iutúbi','cachês':'kachês','biografia,':'bio grafia,','Ecossistema PSA.':'Ecossistema PSA!','Calma.':'Calma!','Gerar com IA':'Gerár com IA','É essa imagem':'É exatamente essa imagem'}
 TOTAL=json.load(open('cortes.json'))['total']; os.makedirs('audio',exist_ok=True)
 cenas=json.load(open('roteiro.json',encoding='utf-8'))
 def gera(c,sp):
