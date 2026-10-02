@@ -1,6 +1,6 @@
 # Trilha original sintetizada (numpy): 120 BPM, Lá menor (Am F C G). Tensão até o drop; groove depois.
 import numpy as np, json, soundfile as sf
-SR=48000; TL=json.load(open('v11/timeline.json')); T=TL['total']+0.6
+SR=48000; TL=json.load(open('timeline.json')); T=TL['total']+0.6
 DROP=[s for s in TL['scenes'] if s['id']=='revela'][0]['start']
 CUTS=[s['start'] for s in TL['scenes']][1:]
 N=int(T*SR); L=np.zeros(N); Rr=np.zeros(N); t=np.arange(N)/SR
@@ -71,4 +71,4 @@ add(fin,FIM,0,0.55)
 add(np.sin(2*np.pi*np.cumsum(60*np.exp(-x*3)+35)/SR)*np.exp(-x*1.8),FIM,0,0.6)
 y=np.stack([L,Rr],1); y/=np.max(np.abs(y))+1e-9; y*=0.9
 fo=int(0.8*SR); y[-fo:]*=np.linspace(1,0,fo)[:,None]
-sf.write('v11/trilha.wav',y,SR); print('trilha',T,'drop',DROP)
+sf.write('trilha.wav',y,SR); print('trilha',T,'drop',DROP)
