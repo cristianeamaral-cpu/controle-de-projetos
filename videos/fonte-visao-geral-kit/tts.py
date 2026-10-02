@@ -3,7 +3,7 @@ import asyncio, os, json, subprocess, re
 import edge_tts, imageio_ffmpeg
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
-VOZ, RATE, PITCH = 'pt-BR-AntonioNeural', '+10%', '+0Hz'
+VOZ, RATE, PITCH = 'pt-BR-FranciscaNeural', '+10%', '+0Hz'
 TOTAL = json.load(open('cortes.json'))['total']
 os.makedirs('audio', exist_ok=True)
 cenas = json.load(open('roteiro.json', encoding='utf-8'))
