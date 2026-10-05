@@ -306,7 +306,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
   const NOMES_ANTIGOS = { "Prof. Vinícius": "Vinícius Recanello", "Camila": "Camila Loss", "Manu": "Emanuelle Smaniotto", "PSA — Profissionais SA": "Cristiane Amaral" };
 
   const AF = "07 · Apresentação Final", M = "06 · Manual Final", D = "07 · Decisões Finais", A = "Arquitetura do Produto";
-  const PLANO = () => ({ versaoPlano: 3, entregas: [
+  const PLANO = () => ({ versaoPlano: 4, entregas: [
     { id: "e01", fase: "f1", titulo: "Nomenclatura e escopo fechados", entregavel: "Mandala do Mentor passa a ser Mandala do Licenciado, incluindo a formação comercial (Vendas) e o próprio Ciclo TB School como conteúdo.", responsavel: "Leandro Vidal", status: "Concluído", depende: [], fonte: D + ", p. 3" },
     { id: "e02", fase: "f1", titulo: "Manual da Metodologia e da Jornada do Licenciado", entregavel: "As 7 partes: Mandala do Speaker, Ciclo TB School, Mandala do Licenciado, conexão Ciclo × Mandala, processo de formação, timeline de 14 dias e Kit do Licenciado.", responsavel: "Leandro Vidal", status: "Concluído", depende: ["e01"], fonte: M },
     { id: "e03", fase: "f1", titulo: "Definição formal do produto Licenciamento", entregavel: "Documento do produto: o que o Licenciado compra, o que pode fazer em nome da TB School e a regra de aplicar integralmente a metodologia (mesmo Ciclo, pilares e rubrica).", responsavel: "Camila Loss", status: "Não iniciado", depende: ["e02"], fonte: A + ", p. 4 e 13", notas: "Fora do escopo de Leandro e Prof. Vinícius." },
@@ -323,7 +323,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
     { id: "e12", fase: "f3", titulo: "Conteúdo gravado do eixo Vendas", entregavel: "6 pilares: Prospecção, Gestão de Leads, Pitch de Vendas, Máquina de Vendas, Ferramentas de Gestão e Leitura de Nicho (Atração · Conversão · Retenção). Todo fora do presencial.", responsavel: "Vinícius Recanello", status: "Não iniciado", depende: ["e05"], fonte: M + ", Partes 3 e 5" },
 
     { id: "e13", fase: "f4", titulo: "Plataforma no ar", entregavel: "Acesso do candidato, Espelho, Plateia, testes com nota mínima e repetição no Dia 9, radar Espelho × Novo Espelho e emissão dos certificados.", responsavel: "A definir", status: "Não iniciado", depende: ["e08", "e09", "e10", "e11"], fonte: A + ", p. 13 · " + M + ", Parte 5" },
-    { id: "e24", fase: "f4", titulo: "Onboarding pós-compra do Licenciado", entregavel: "Jornada do cliente logo depois da compra: boas-vindas, cadastro com aceite da metodologia, escolha da turma (define o Dia 0) e liberação do acesso à plataforma.", responsavel: "Cristiane Amaral", status: "Em andamento", depende: ["e03", "e13"], fonte: AF + ", p. 9 e 14 · " + M + ", Parte 5", notas: "MVP publicado em /licenciamento/onboarding/ (8 passos, progresso salvo só no navegador, turmas de exemplo). Falta integrar à plataforma, usar as datas reais das turmas e enviar o acesso ao cliente." },
+    { id: "e24", fase: "f4", titulo: "Onboarding pós-compra do Licenciado", entregavel: "Jornada do cliente logo depois da compra: boas-vindas, cadastro com aceite da metodologia, escolha da turma (define o Dia 0) e liberação do acesso à plataforma.", responsavel: "Cristiane Amaral", status: "Em andamento", depende: ["e03", "e13"], fonte: AF + ", p. 9 e 14 · " + M + ", Parte 5", notas: "MVP publicado em /licenciamento/onboarding/ (8 passos, progresso salvo só no navegador). Turmas em Porto Alegre: time interno PSA em 24/10/2026 e time externo em 26 e 27/10/2026. Falta integrar à plataforma e enviar o acesso ao cliente." },
 
     { id: "e14", fase: "f5", titulo: "Kit 1 · Livro de referência teórica", entregavel: "Curadoria bibliográfica dos 4 eixos de cada Mandala, organizada por pilar.", responsavel: "Vinícius Recanello", status: "Não iniciado", depende: ["e06"], fonte: M + ", Parte 7" },
     { id: "e15", fase: "f5", titulo: "Kit 2 · Slides esquematizados", entregavel: "O conteúdo de cada Plateia em tópicos prontos para projeção em sala.", responsavel: "A definir", status: "Não iniciado", depende: ["e09"], fonte: M + ", Parte 7" },
@@ -346,9 +346,17 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
   function lsGet() { try { return JSON.parse(localStorage.getItem(LS_KEY) || "null"); } catch (_) { return null; } }
   function lsSet(d) { try { localStorage.setItem(LS_KEY, JSON.stringify(d)); } catch (_) {} }
 
-  // Planos salvos antes da versão 3 ganham a entrega "Onboarding pós-compra" (#e24)
+  // Planos salvos antes da versão 3 ganham a entrega "Onboarding pós-compra" (#e24); os da versão 3 recebem as notas novas dela
   function atualizarPlano(d) {
-    if ((d.versaoPlano || 1) >= 3) return false;
+    const v = d.versaoPlano || 1;
+    if (v >= 4) return false;
+    if (v === 3) {
+      // Versão 4: notas da #e24 com as turmas reais (só se o texto ainda for o original)
+      const e = d.entregas.find(x => x.id === "e24");
+      if (e && e.notas === "MVP publicado em /licenciamento/onboarding/ (8 passos, progresso salvo só no navegador, turmas de exemplo). Falta integrar à plataforma, usar as datas reais das turmas e enviar o acesso ao cliente.") e.notas = PLANO().entregas.find(x => x.id === "e24").notas;
+      d.versaoPlano = 4;
+      return true;
+    }
     const novo = PLANO().entregas.find(e => e.id === "e24");
     if (!d.entregas.some(e => e.id === "e24")) {
       const i = d.entregas.findIndex(e => e.id === "e13");
@@ -356,7 +364,7 @@ footer .tools { display: flex; flex-wrap: wrap; gap: 8px; }
       const marco = d.entregas.find(e => e.id === "e22");
       if (marco && !(marco.depende || []).includes("e24")) marco.depende = (marco.depende || []).concat("e24");
     }
-    d.versaoPlano = 3;
+    d.versaoPlano = 4;
     return true;
   }
   function atualizarNomes(d) {

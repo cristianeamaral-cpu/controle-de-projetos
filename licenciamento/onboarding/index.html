@@ -89,7 +89,7 @@ label.f { display: flex; flex-direction: column; gap: 5px; font-size: 12px; colo
 .check .when { display: block; font-size: 12px; color: var(--muted); }
 .checks { display: flex; flex-direction: column; gap: 8px; }
 
-.turmas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.turmas { display: grid; grid-template-columns: minmax(0, 360px); gap: 12px; }
 .turma { text-align: left; background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 14px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
 .turma:hover { border-color: color-mix(in srgb, var(--psa) 60%, var(--line)); }
 .turma[aria-pressed="true"] { border-color: var(--psa); box-shadow: inset 3px 0 0 var(--psa); }
@@ -214,21 +214,20 @@ footer { border-top: 1px solid var(--line); padding-block: 16px 28px; color: var
     [12, "Mandala do Licenciado — Ciclo TB School + Direção"],
     [13, "Mandala do Licenciado — Relacionamento + Ciclo TB School + teste do Ciclo + Certificação Licenciado"],
   ];
-  // Turmas de exemplo: as datas reais são definidas pela TB School
+  // Turmas abertas: "aulas" são as datas dos encontros presenciais; o Dia 0 fica 10 dias antes da primeira aula
   const TURMAS = [
-    { id: "t1", cidade: "São Paulo · SP", inicio: "2026-11-16" },
-    { id: "t2", cidade: "Curitiba · PR", inicio: "2026-12-07" },
-    { id: "t3", cidade: "Porto Alegre · RS", inicio: "2027-02-22" },
+    { id: "poa-2026-10-interno", publico: "Time interno PSA", cidade: "Porto Alegre · RS", aulas: ["2026-10-24"] },
+    { id: "poa-2026-10-externo", publico: "Time externo", cidade: "Porto Alegre · RS", aulas: ["2026-10-26", "2026-10-27"] },
   ];
   const PREPARO = [
     ["presenca", "Confirmar presença nos 4 dias presenciais", "A participação integral é obrigatória para a certificação."],
-    ["agenda", "Bloquear a agenda das 08h às 18h nos Dias 10 a 13", "Dois turnos por dia, com um intervalo de 15 minutos em cada."],
+    ["agenda", "Bloquear a agenda das 08h às 18h nos dias de aula", "Dois turnos por dia, com um intervalo de 15 minutos em cada."],
     ["viagem", "Organizar viagem e hospedagem, se a turma for em outra cidade", ""],
-    ["revisao", "Revisar a Plateia do Ciclo TB School", "O teste do Ciclo tem 20 questões e é feito no Dia 13, às 16h45."],
+    ["revisao", "Revisar a Plateia do Ciclo TB School", "O teste do Ciclo tem 20 questões e é feito no encerramento do presencial."],
   ];
   const CERT = [
-    ["speaker", "Recebi a Certificação Speaker", "Dia 11 · radar comparando Espelho e Novo Espelho dos 4 eixos"],
-    ["licenciado", "Recebi a Certificação Licenciado", "Dia 13 · depois do teste do Ciclo TB School"],
+    ["speaker", "Recebi a Certificação Speaker", "No presencial · radar comparando Espelho e Novo Espelho dos 4 eixos"],
+    ["licenciado", "Recebi a Certificação Licenciado", "No encerramento do presencial · depois do teste do Ciclo TB School"],
   ];
   const POS = [
     ["kit", "Acessar o Kit do Licenciado", "Livro de referência, slides, fichas e cartões, diagnóstico + Agente de IA, canal de vídeos e Relatório de Condução."],
@@ -246,7 +245,7 @@ footer { border-top: 1px solid var(--line); padding-block: 16px 28px; color: var
     { id: "espelho", t: "Espelho", s: "Dia 0 · autodiagnóstico" },
     { id: "estudo", t: "Plateia online", s: "Dias 0 a 6" },
     { id: "testes", t: "Testes teóricos", s: "Dias 7 a 9 · mínimo 70%" },
-    { id: "presencial", t: "Imersão presencial", s: "Dias 10 a 13 · certificação" },
+    { id: "presencial", t: "Imersão presencial", s: "Aulas presenciais · certificação" },
     { id: "pos", t: "Primeiros passos como Licenciado", s: "Kit, Comunidade e 1ª turma" },
   ];
 
@@ -261,7 +260,8 @@ footer { border-top: 1px solid var(--line); padding-block: 16px 28px; color: var
   const addDias = (iso, n) => { const d = new Date(iso + "T12:00:00"); d.setDate(d.getDate() + n); return d; };
   const fmt = d => d.toLocaleDateString("pt-BR", { weekday: "short", day: "2-digit", month: "2-digit" }).replace(".", "");
   const fmtLongo = d => d.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
-  const dia0 = () => turma() ? addDias(turma().inicio, -10) : null;
+  const dia0 = () => turma() ? addDias(turma().aulas[0], -10) : null;
+  const listaAulas = t => t.aulas.map(a => fmt(addDias(a, 0))).join(" e ");
   const dataDia = n => dia0() ? fmt(addDias(dia0().toISOString().slice(0, 10), n)) : `Dia ${n}`;
 
   /* ---------- Conclusão de cada passo ---------- */
@@ -334,9 +334,9 @@ footer { border-top: 1px solid var(--line); padding-block: 16px 28px; color: var
       return `
       <span class="tag">Passo 3 de 8</span><h2>Escolha sua turma presencial</h2>
       <p class="lead">A data da imersão presencial define toda a sua jornada: o seu Dia 0, quando o acesso à plataforma é liberado, fica 10 dias antes do primeiro dia presencial. Cada turma tem cerca de 20 pessoas.</p>
-      <div class="turmas">${TURMAS.map(x => { const ini = addDias(x.inicio, 0), fim = addDias(x.inicio, 3); return `<button type="button" class="turma" data-turma="${x.id}" aria-pressed="${st.turma === x.id}">
-        <span class="ex">Exemplo · datas a confirmar</span><span class="cid">${esc(x.cidade)}</span>
-        <span class="dt">Presencial: ${fmt(ini)} a ${fmt(fim)}</span><span class="dt">Seu Dia 0: ${fmt(addDias(x.inicio, -10))}</span></button>`; }).join("")}</div>
+      <div class="turmas">${TURMAS.map(x => { return `<button type="button" class="turma" data-turma="${x.id}" aria-pressed="${st.turma === x.id}">
+        <span class="cid">${esc(x.publico)}</span><span class="dt">${esc(x.cidade)}</span>
+        <span class="dt">${x.aulas.length === 1 ? "Aula" : "Aulas"}: ${listaAulas(x)}</span><span class="dt">Seu Dia 0: ${fmt(addDias(x.aulas[0], -10))}</span></button>`; }).join("")}</div>
       ${t ? `<h3>Sua jornada de 14 dias</h3>
       <ol class="timeline">
         <li class="fase">7 dias · conteúdo online</li>${ESTUDO.map(([d, txt]) => `<li><span class="d">${dataDia(d)}</span><span class="k">Dia ${d}</span><span>${esc(txt)}</span></li>`).join("")}
@@ -344,7 +344,7 @@ footer { border-top: 1px solid var(--line); padding-block: 16px 28px; color: var
         <li><span class="d">${dataDia(7)}</span><span class="k">Dia 7</span><span>Testes de Expressão e Argumento (18 questões cada)</span></li>
         <li><span class="d">${dataDia(8)}</span><span class="k">Dia 8</span><span>Testes de Substância e Conexão</span></li>
         <li><span class="d">${dataDia(9)}</span><span class="k">Dia 9</span><span>Dia de tolerância: reforço e repetição de testes não aprovados</span></li>
-        <li class="fase">4 dias · presencial em ${esc(t.cidade)}</li>${PRESENCIAL.map(([d, txt]) => `<li><span class="d">${dataDia(d)}</span><span class="k">Dia ${d}</span><span>${esc(txt)}</span></li>`).join("")}
+        <li class="fase">Aulas presenciais em ${esc(t.cidade)} · ${esc(t.publico)}</li>${t.aulas.map((a, i) => `<li><span class="d">${fmt(addDias(a, 0))}</span><span class="k">Aula ${i + 1}</span><span>Imersão presencial: Mandala do Speaker, Mandala do Licenciado e certificações</span></li>`).join("")}
       </ol>` : ""}`;
     },
 
@@ -375,11 +375,13 @@ footer { border-top: 1px solid var(--line); padding-block: 16px 28px; color: var
     presencial: () => {
       const liberado = EIXOS.every(e => aprovado(e.id)), t = turma();
       return `
-      <span class="tag">Passo 7 de 8 · Dias 10 a 13</span><h2>Imersão presencial e certificação</h2>
-      <p class="lead">Quatro dias presenciais${t ? " em " + esc(t.cidade) : ""}, das 08h às 18h, com turma de cerca de 20 pessoas: 16 horas de Mandala do Speaker e 16 horas de Mandala do Licenciado. Você sai certificado ainda no encontro.</p>
+      <span class="tag">Passo 7 de 8 · aulas presenciais</span><h2>Imersão presencial e certificação</h2>
+      <p class="lead">${t ? `${t.aulas.length === 1 ? "Aula presencial" : "Aulas presenciais"} em ${esc(t.cidade)} (${esc(t.publico)}): ${listaAulas(t)}, das 08h às 18h.` : "Escolha sua turma no passo 3 para ver as datas das aulas."} A imersão reúne uma turma de cerca de 20 pessoas: 16 horas de Mandala do Speaker e 16 horas de Mandala do Licenciado. Você sai certificado ainda no encontro.</p>
       ${liberado ? "" : `<div class="alert">Você ainda não foi aprovado nos 4 testes teóricos (passo 6). A aprovação é obrigatória para participar do presencial.</div>`}
-      <h3>Agenda</h3>
-      <ol class="timeline">${PRESENCIAL.map(([d, txt], i) => `<li><span class="d">${dataDia(d)}</span><span class="k">Dia ${i + 1}</span><span>${esc(txt)}</span></li>`).join("")}</ol>
+      ${t ? `<h3>${t.aulas.length === 1 ? "Data da aula" : "Datas das aulas"}</h3>
+      <ol class="timeline">${t.aulas.map((a, i) => `<li><span class="d">${fmt(addDias(a, 0))}</span><span class="k">Aula ${i + 1}</span><span>08h às 18h · ${esc(t.cidade)}</span></li>`).join("")}</ol>` : ""}
+      <h3>Programação do presencial</h3>
+      <ol class="timeline">${PRESENCIAL.map(([d, txt], i) => `<li><span class="d">Bloco ${i + 1}</span><span class="k">Dia ${d}</span><span>${esc(txt)}</span></li>`).join("")}</ol>
       <h3>Antes de ir</h3>
       <div class="checks">${PREPARO.map(([k, txt, q]) => chk("preparo", k, txt, q)).join("")}</div>
       <h3>Certificações</h3>

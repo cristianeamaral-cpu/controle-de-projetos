@@ -40,7 +40,8 @@ metodologia), escolha da turma (que calcula as datas dos 14 dias), Espelho dos
 12 pilares com radar, Plateia online (Dias 0–6), testes por eixo com nota
 mínima de 70% (pré-requisito do presencial), imersão presencial com as duas
 certificações e os primeiros passos como Licenciado (Kit, Comunidade, Vendas e
-primeira turma). As turmas são exemplos e o progresso fica salvo só no
+primeira turma). As turmas são em Porto Alegre (time interno PSA em 24/10/2026; time externo em 26 e
+27/10/2026) e o progresso fica salvo só no
 navegador.
 
 ### Endereço próprio (landing page)
