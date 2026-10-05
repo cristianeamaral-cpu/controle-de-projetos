@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Onboarding do Licenciado</title>
+<meta name="description" content="Primeiros passos de quem comprou o Licenciamento TB School: do cadastro à certificação e à primeira turma.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Oswald:wght@500&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: cabeçalho no gradiente TB School → barra de progresso → trilha de 8 passos à esquerda
+   e o passo aberto à direita. Mesmo visual do painel: fundo preto, texto branco, laranja PSA nos títulos. */
+:root {
+  color-scheme: dark;
+  --bg: #000000;
+  --surface: #0c0c0c;
+  --surface-2: #161616;
+  --line: #2c2c2c;
+  --fg: #ffffff;
+  --muted: #cfcfcf;
+  --psa: #ff640f;
+  --ok: #6cc592;
+  --warn: #e9bb4f;
+  --crit: #ef6a5e;
+  --hero-a: #22100a;
+  --hero-b: #6a2a10;
+  --hero-c: #d65a1c;
+  --f-display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --f-label: "Oswald", "Arial Narrow", "Segoe UI", sans-serif;
+  --f-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --r: 10px;
+  --fs: 13px;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 var(--fs)/1.55 var(--f-body); }
+a { color: var(--fg); }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--psa); outline-offset: 2px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; }
+
+.hero { background: linear-gradient(125deg, var(--hero-a) 0%, var(--hero-b) 55%, var(--hero-c) 100%); padding-block: 30px 28px; }
+.eyebrow { font: 600 12px/1 var(--f-display); letter-spacing: .08em; text-transform: uppercase; color: #f2a05f; display: flex; gap: 10px; align-items: center; }
+.dots { color: #e8702a; letter-spacing: 2px; }
+.hero h1 { font: 700 clamp(24px, 4vw, 36px)/1.12 var(--f-display); margin: 14px 0 10px; text-wrap: balance; }
+.hero p { margin: 0; max-width: 64ch; color: #eadfd6; }
+.hero .links { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12px; color: #d9c6b8; }
+.hero .links a { color: #ffffff; }
+
+.progress { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.progress .pct { font: 700 26px/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.progress .bar { flex: 1 1 240px; height: 8px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
+.progress .bar span { display: block; height: 100%; background: var(--psa); transition: width .3s; }
+.progress .next { color: var(--muted); }
+.progress .next b { color: var(--fg); }
+
+.layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 24px; padding-block: 24px 40px; align-items: start; }
+.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; position: sticky; top: calc(12px + env(safe-area-inset-top, 0px)); }
+.steps button { width: 100%; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; align-items: center; text-align: left; background: none; border: 1px solid transparent; border-radius: 8px; padding: 8px 10px; cursor: pointer; }
+.steps button:hover { background: var(--surface); }
+.steps button[aria-current="step"] { background: var(--surface); border-color: var(--psa); }
+.steps .n { width: 28px; height: 28px; border-radius: 99px; border: 1px solid var(--line); display: grid; place-items: center; font: 600 12px/1 var(--f-display); color: var(--muted); }
+.steps .done .n { background: var(--ok); border-color: var(--ok); color: #000; }
+.steps [aria-current="step"] .n { border-color: var(--psa); color: var(--psa); }
+.steps .t { font-weight: 600; display: block; }
+.steps .s { font-size: 12px; color: var(--muted); display: block; }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 26px; min-width: 0; }
+.tag { font: 500 12px/1 var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--psa); }
+.panel h2 { font: 500 clamp(22px, 3vw, 28px)/1.15 var(--f-label); color: var(--psa); margin: 8px 0 8px; text-wrap: balance; }
+.panel .lead { color: var(--muted); margin: 0 0 20px; max-width: 68ch; }
+.panel h3 { font: 600 15px/1.3 var(--f-display); margin: 22px 0 10px; color: var(--psa); }
+
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.grid4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.box { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 14px; min-width: 0; }
+.box b { display: block; margin-bottom: 4px; }
+.box p { margin: 0; color: var(--muted); }
+.big { font: 500 30px/1 var(--f-label); color: var(--psa); display: block; margin-bottom: 8px; }
+
+label.f { display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--muted); min-width: 0; }
+.f input, .f select, .f textarea { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; color: var(--fg); font-size: var(--fs); width: 100%; min-width: 0; }
+.f textarea { min-height: 70px; resize: vertical; }
+.check { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface-2); cursor: pointer; }
+.check input { margin-top: 3px; accent-color: var(--psa); width: 16px; height: 16px; flex: none; }
+.check.on { border-color: color-mix(in srgb, var(--ok) 60%, transparent); }
+.check .when { display: block; font-size: 12px; color: var(--muted); }
+.checks { display: flex; flex-direction: column; gap: 8px; }
+
+.turmas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.turma { text-align: left; background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 14px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
+.turma:hover { border-color: color-mix(in srgb, var(--psa) 60%, var(--line)); }
+.turma[aria-pressed="true"] { border-color: var(--psa); box-shadow: inset 3px 0 0 var(--psa); }
+.turma .cid { font: 600 15px/1.3 var(--f-display); }
+.turma .dt { color: var(--muted); }
+.ex { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--warn); }
+
+.timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.timeline li { display: grid; grid-template-columns: 110px 64px minmax(0, 1fr); gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.timeline .d { color: var(--muted); font-variant-numeric: tabular-nums; }
+.timeline .k { font: 500 12px/1.4 var(--f-label); letter-spacing: .06em; text-transform: uppercase; color: var(--psa); }
+.timeline .fase { grid-column: 1 / -1; padding-top: 14px; border-bottom: 0; font: 500 13px/1 var(--f-label); letter-spacing: .12em; text-transform: uppercase; color: var(--fg); }
+
+.espelho { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px); gap: 22px; align-items: start; }
+.eixo { margin-bottom: 14px; }
+.eixo > b { font: 500 13px/1 var(--f-label); letter-spacing: .1em; text-transform: uppercase; color: var(--fg); display: block; margin-bottom: 8px; }
+.pilar { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px; align-items: center; padding: 4px 0; }
+.scale { display: flex; gap: 6px; }
+.scale button { width: 34px; height: 30px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface-2); cursor: pointer; font-variant-numeric: tabular-nums; }
+.scale button:hover { border-color: var(--psa); }
+.scale button[aria-pressed="true"] { background: var(--psa); border-color: var(--psa); color: #fff; font-weight: 600; }
+.radar-box { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 12px; position: sticky; top: 12px; }
+.radar-box svg { width: 100%; height: auto; display: block; }
+.radar-box .cap { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+.tip { position: fixed; pointer-events: none; background: var(--fg); color: var(--bg); font-size: 12px; padding: 5px 8px; border-radius: 6px; z-index: 5; }
+
+.testes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.teste .res { margin-top: 8px; font-weight: 600; }
+.res.ok { color: var(--ok); } .res.no { color: var(--crit); } .res.na { color: var(--muted); font-weight: 400; }
+.alert { border: 1px solid var(--warn); background: color-mix(in srgb, var(--warn) 10%, transparent); border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; }
+.alert.okk { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 10%, transparent); }
+
+.nav { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); }
+.btn { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 10px 16px; cursor: pointer; font-weight: 500; }
+.btn:hover { border-color: var(--fg); }
+.btn.primary { background: var(--psa); border-color: var(--psa); color: #fff; font-weight: 600; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.hint { color: var(--muted); font-size: 12px; align-self: center; }
+footer { border-top: 1px solid var(--line); padding-block: 16px 28px; color: var(--muted); font-size: 12px; display: flex; flex-wrap: wrap; gap: 10px 20px; justify-content: space-between; align-items: center; }
+.confirm { display: inline-flex; gap: 8px; align-items: center; color: var(--crit); }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .steps { position: static; flex-direction: row; overflow-x: auto; padding-bottom: 6px; }
+  .steps li { flex: 0 0 auto; }
+  .steps button { grid-template-columns: 28px auto; }
+  .steps .s { display: none; }
+  .grid4, .testes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .turmas { grid-template-columns: minmax(0, 1fr); }
+  .espelho { grid-template-columns: minmax(0, 1fr); }
+  .radar-box { position: static; max-width: 360px; }
+}
+@media (max-width: 560px) {
+  .wrap { padding-inline: 16px; }
+  .panel { padding: 18px 16px; }
+  .grid2, .grid4, .testes { grid-template-columns: minmax(0, 1fr); }
+  .pilar { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .timeline li { grid-template-columns: 86px minmax(0, 1fr); }
+  .timeline .k { grid-column: 2; }
+  .timeline li > span:last-child { grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce) { .progress .bar span { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dots" aria-hidden="true">●●●●</span> TB School · Onboarding do Licenciado</div>
+    <h1>Bem-vindo ao Licenciamento TB School</h1>
+    <p>Você comprou o direito de dar aulas de comunicação e oratória em nome da TB School. Siga os 8 passos abaixo: em 14 dias você sai Licenciado certificado e pronto para conduzir sua primeira turma.</p>
+    <div class="links"><span>Protótipo (MVP): seu progresso fica salvo só neste navegador.</span><a href="/licenciamento/">Ver o painel de entregas do produto →</a></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="progress" aria-live="polite">
+    <span class="pct" id="pct">0%</span>
+    <span class="bar" aria-hidden="true"><span id="barFill" style="width:0%"></span></span>
+    <span class="next" id="proximo"></span>
+  </div>
+
+  <div class="layout">
+    <nav aria-label="Passos do onboarding"><ol class="steps" id="steps"></ol></nav>
+    <main class="panel" id="panel" tabindex="-1"></main>
+  </div>
+
+  <footer>
+    <span>Conteúdo baseado no Manual da Metodologia e da Jornada do Licenciado (06 · Manual Final).</span>
+    <span id="resetArea"><button class="btn" type="button" id="btnReset">Recomeçar o onboarding</button></span>
+  </footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+(() => {
+  "use strict";
+  const KEY = "tbschool-onboarding-licenciado";
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  /* ---------- Conteúdo (Manual Final) ---------- */
+  const EIXOS = [
+    { id: "expressao", nome: "Expressão", pilares: ["Oratória", "Performance", "Linguagem Corporal"] },
+    { id: "argumento", nome: "Argumento", pilares: ["Retórica", "Persuasão", "Negociação"] },
+    { id: "substancia", nome: "Substância", pilares: ["Narrativa", "Perspectiva", "Autoridade"] },
+    { id: "conexao", nome: "Conexão", pilares: ["Empatia", "Escuta Ativa", "Presença Digital"] },
+  ];
+  const PILARES = EIXOS.flatMap(e => e.pilares);
+  const ESTUDO = [
+    [0, "Acesso liberado. Espelho (autodiagnóstico) dos 12 pilares + início da Plateia — Eixo Expressão"],
+    [1, "Plateia — Eixo Expressão (conclusão) + Eixo Argumento (início)"],
+    [2, "Plateia — Eixo Argumento (conclusão)"],
+    [3, "Plateia — Eixo Substância (início)"],
+    [4, "Plateia — Eixo Substância (conclusão) + Eixo Conexão (início)"],
+    [5, "Plateia — Eixo Conexão (conclusão)"],
+    [6, "Revisão livre — estudo autônomo antes dos testes"],
+  ];
+  const PRESENCIAL = [
+    [10, "Mandala do Speaker — Expressão + Argumento"],
+    [11, "Mandala do Speaker — Substância + Conexão + Certificação Speaker"],
+    [12, "Mandala do Licenciado — Ciclo TB School + Direção"],
+    [13, "Mandala do Licenciado — Relacionamento + Ciclo TB School + teste do Ciclo + Certificação Licenciado"],
+  ];
+  // Turmas de exemplo: as datas reais são definidas pela TB School
+  const TURMAS = [
+    { id: "t1", cidade: "São Paulo · SP", inicio: "2026-11-16" },
+    { id: "t2", cidade: "Curitiba · PR", inicio: "2026-12-07" },
+    { id: "t3", cidade: "Porto Alegre · RS", inicio: "2027-02-22" },
+  ];
+  const PREPARO = [
+    ["presenca", "Confirmar presença nos 4 dias presenciais", "A participação integral é obrigatória para a certificação."],
+    ["agenda", "Bloquear a agenda das 08h às 18h nos Dias 10 a 13", "Dois turnos por dia, com um intervalo de 15 minutos em cada."],
+    ["viagem", "Organizar viagem e hospedagem, se a turma for em outra cidade", ""],
+    ["revisao", "Revisar a Plateia do Ciclo TB School", "O teste do Ciclo tem 20 questões e é feito no Dia 13, às 16h45."],
+  ];
+  const CERT = [
+    ["speaker", "Recebi a Certificação Speaker", "Dia 11 · radar comparando Espelho e Novo Espelho dos 4 eixos"],
+    ["licenciado", "Recebi a Certificação Licenciado", "Dia 13 · depois do teste do Ciclo TB School"],
+  ];
+  const POS = [
+    ["kit", "Acessar o Kit do Licenciado", "Livro de referência, slides, fichas e cartões, diagnóstico + Agente de IA, canal de vídeos e Relatório de Condução."],
+    ["comunidade", "Entrar na Comunidade TB School", "Encontros mensais ao vivo de Vendas e de Metodologia, abertos a todos os Licenciados."],
+    ["vendas", "Assistir ao conteúdo gravado do eixo Vendas", "Prospecção, Gestão de Leads, Pitch, Máquina de Vendas, Ferramentas de Gestão e Leitura de Nicho."],
+    ["cliente", "Fazer o diagnóstico do primeiro cliente com o Agente de IA", "O mesmo exercício praticado no encerramento do Dia 13."],
+    ["turma", "Conduzir a primeira turma e enviar o Relatório de Condução", "O relatório é obrigatório a cada turma conduzida."],
+  ];
+  const NICHOS = ["Corporativo / empresas", "Educação", "Saúde", "Jurídico", "Tecnologia", "Varejo e vendas", "Setor público", "Outro"];
+
+  const PASSOS = [
+    { id: "boasvindas", t: "Boas-vindas", s: "O que você comprou" },
+    { id: "perfil", t: "Seu cadastro", s: "Dados e área de atuação" },
+    { id: "turma", t: "Escolha sua turma", s: "Define o seu Dia 0" },
+    { id: "espelho", t: "Espelho", s: "Dia 0 · autodiagnóstico" },
+    { id: "estudo", t: "Plateia online", s: "Dias 0 a 6" },
+    { id: "testes", t: "Testes teóricos", s: "Dias 7 a 9 · mínimo 70%" },
+    { id: "presencial", t: "Imersão presencial", s: "Dias 10 a 13 · certificação" },
+    { id: "pos", t: "Primeiros passos como Licenciado", s: "Kit, Comunidade e 1ª turma" },
+  ];
+
+  /* ---------- Estado ---------- */
+  const novo = () => ({ atual: 0, visto: false, perfil: { nome: "", email: "", cidade: "", nicho: "", publico: "", experiencia: "" }, aceite: false, turma: "", espelho: {}, estudo: {}, testes: {}, preparo: {}, cert: {}, pos: {} });
+  let st;
+  try { st = Object.assign(novo(), JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (_) { st = novo(); }
+  const salvar = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (_) {} };
+
+  /* ---------- Datas ---------- */
+  const turma = () => TURMAS.find(t => t.id === st.turma);
+  const addDias = (iso, n) => { const d = new Date(iso + "T12:00:00"); d.setDate(d.getDate() + n); return d; };
+  const fmt = d => d.toLocaleDateString("pt-BR", { weekday: "short", day: "2-digit", month: "2-digit" }).replace(".", "");
+  const fmtLongo = d => d.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
+  const dia0 = () => turma() ? addDias(turma().inicio, -10) : null;
+  const dataDia = n => dia0() ? fmt(addDias(dia0().toISOString().slice(0, 10), n)) : `Dia ${n}`;
+
+  /* ---------- Conclusão de cada passo ---------- */
+  const aprovado = id => Number(st.testes[id]) >= 70;
+  const FEITO = {
+    boasvindas: () => st.visto,
+    perfil: () => !!(st.perfil.nome.trim() && /\S+@\S+\.\S+/.test(st.perfil.email) && st.perfil.cidade.trim() && st.perfil.nicho && st.aceite),
+    turma: () => !!turma(),
+    espelho: () => PILARES.every(p => st.espelho[p]),
+    estudo: () => ESTUDO.every(([d]) => st.estudo[d]),
+    testes: () => EIXOS.every(e => aprovado(e.id)),
+    presencial: () => PREPARO.every(([k]) => st.preparo[k]) && CERT.every(([k]) => st.cert[k]),
+    pos: () => POS.every(([k]) => st.pos[k]),
+  };
+  const feitos = () => PASSOS.filter(p => FEITO[p.id]()).length;
+
+  /* ---------- Render ---------- */
+  function renderTopo() {
+    const n = feitos(), pct = Math.round(n / PASSOS.length * 100);
+    $("pct").textContent = pct + "%";
+    $("barFill").style.width = pct + "%";
+    const prox = PASSOS.findIndex(p => !FEITO[p.id]());
+    $("proximo").innerHTML = prox < 0
+      ? "<b>Onboarding concluído.</b> Você já opera como Licenciado TB School."
+      : `${n} de ${PASSOS.length} passos concluídos · Próximo: <b>${prox + 1}. ${esc(PASSOS[prox].t)}</b>`;
+    $("steps").innerHTML = PASSOS.map((p, i) => `<li><button type="button" data-ir="${i}" class="${FEITO[p.id]() ? "done" : ""}"${i === st.atual ? ' aria-current="step"' : ""}>
+      <span class="n">${FEITO[p.id]() ? "✓" : i + 1}</span><span><span class="t">${esc(p.t)}</span><span class="s">${esc(p.s)}</span></span></button></li>`).join("");
+  }
+
+  const chk = (grupo, k, txt, quando, extra = "") => `<label class="check${st[grupo][k] ? " on" : ""}"><input type="checkbox" data-grupo="${grupo}" data-k="${k}" id="c-${grupo}-${k}"${st[grupo][k] ? " checked" : ""}${extra}><span>${esc(txt)}${quando ? `<span class="when">${esc(quando)}</span>` : ""}</span></label>`;
+
+  const TELAS = {
+    boasvindas: () => `
+      <span class="tag">Passo 1 de 8</span><h2>Você agora faz parte da rede TB School</h2>
+      <p class="lead">O Licenciamento habilita você a dar aulas de comunicação e oratória em nome da TB School, incompany ou em qualquer outro formato, aplicando integralmente a metodologia: o mesmo Ciclo, os mesmos pilares e a mesma rubrica de avaliação.</p>
+      <h3>O que está incluído</h3>
+      <div class="grid2">
+        <div class="box"><b>As duas Mandalas</b><p>Mandala do Speaker (4 eixos, 12 pilares), que você vai ensinar, e Mandala do Licenciado (Ciclo TB School, Direção, Relacionamento e Vendas), que forma você como formador e empreendedor.</p></div>
+        <div class="box"><b>Formação de 14 dias</b><p>7 dias de conteúdo online, 3 dias de testes e 4 dias de imersão presencial.</p></div>
+        <div class="box"><b>Duas certificações</b><p>Certificação Speaker no Dia 11 e Certificação Licenciado no Dia 13, ainda no presencial.</p></div>
+        <div class="box"><b>Kit do Licenciado e Comunidade</b><p>7 itens para operar depois de certificado, incluindo a Comunidade TB School, com encontros mensais ao vivo.</p></div>
+      </div>
+      <h3>Como funciona a sua jornada</h3>
+      <div class="grid4">
+        <div class="box"><span class="big">7 dias</span><p>Conteúdo teórico no seu ritmo, online</p></div>
+        <div class="box"><span class="big">3 dias</span><p>Testes de aprovação, nota mínima 70%</p></div>
+        <div class="box"><span class="big">4 dias</span><p>Imersão presencial, prática e sua performance no palco avaliada</p></div>
+        <div class="box"><span class="big">Depois</span><p>Kit, Comunidade, eixo Vendas e sua primeira turma</p></div>
+      </div>`,
+
+    perfil: () => {
+      const p = st.perfil, campo = (k, lbl, tipo = "text", ph = "") => `<label class="f">${lbl}<input type="${tipo}" id="p-${k}" data-perfil="${k}" value="${esc(p[k])}" placeholder="${esc(ph)}"></label>`;
+      return `
+      <span class="tag">Passo 2 de 8</span><h2>Seu cadastro</h2>
+      <p class="lead">Esses dados criam seu acesso à plataforma e ajudam a TB School a indicar clientes da sua região e do seu nicho. Pelo princípio "Cada Palco Tem Sua Plateia", o nicho molda como você vai aplicar o método.</p>
+      <div class="grid2">
+        ${campo("nome", "Nome completo")}
+        ${campo("email", "E-mail de acesso à plataforma", "email", "nome@empresa.com.br")}
+        ${campo("cidade", "Cidade e estado onde vai atuar", "text", "Ex.: Curitiba · PR")}
+        <label class="f">Nicho principal<select id="p-nicho" data-perfil="nicho"><option value="">Escolha</option>${NICHOS.map(n => `<option${n === p.nicho ? " selected" : ""}>${esc(n)}</option>`).join("")}</select></label>
+        <label class="f">Experiência como formador ou palestrante<select id="p-experiencia" data-perfil="experiencia"><option value="">Escolha (opcional)</option>${["Nunca conduzi turmas", "Já conduzi algumas turmas", "Conduzo turmas com frequência"].map(n => `<option${n === p.experiencia ? " selected" : ""}>${n}</option>`).join("")}</select></label>
+        <label class="f">Para quem você quer dar aulas?<textarea id="p-publico" data-perfil="publico" placeholder="Ex.: líderes de equipes comerciais em empresas de médio porte">${esc(p.publico)}</textarea></label>
+      </div>
+      <h3>Compromisso com a metodologia</h3>
+      ${chk("_aceite", "aceite", "Li e aceito: todo curso que eu ministrar em nome da TB School segue integralmente a metodologia (mesmo Ciclo, mesmos pilares, mesma rubrica de avaliação).", "Obrigatório para seguir")}`;
+    },
+
+    turma: () => {
+      const t = turma();
+      return `
+      <span class="tag">Passo 3 de 8</span><h2>Escolha sua turma presencial</h2>
+      <p class="lead">A data da imersão presencial define toda a sua jornada: o seu Dia 0, quando o acesso à plataforma é liberado, fica 10 dias antes do primeiro dia presencial. Cada turma tem cerca de 20 pessoas.</p>
+      <div class="turmas">${TURMAS.map(x => { const ini = addDias(x.inicio, 0), fim = addDias(x.inicio, 3); return `<button type="button" class="turma" data-turma="${x.id}" aria-pressed="${st.turma === x.id}">
+        <span class="ex">Exemplo · datas a confirmar</span><span class="cid">${esc(x.cidade)}</span>
+        <span class="dt">Presencial: ${fmt(ini)} a ${fmt(fim)}</span><span class="dt">Seu Dia 0: ${fmt(addDias(x.inicio, -10))}</span></button>`; }).join("")}</div>
+      ${t ? `<h3>Sua jornada de 14 dias</h3>
+      <ol class="timeline">
+        <li class="fase">7 dias · conteúdo online</li>${ESTUDO.map(([d, txt]) => `<li><span class="d">${dataDia(d)}</span><span class="k">Dia ${d}</span><span>${esc(txt)}</span></li>`).join("")}
+        <li class="fase">3 dias · testes</li>
+        <li><span class="d">${dataDia(7)}</span><span class="k">Dia 7</span><span>Testes de Expressão e Argumento (18 questões cada)</span></li>
+        <li><span class="d">${dataDia(8)}</span><span class="k">Dia 8</span><span>Testes de Substância e Conexão</span></li>
+        <li><span class="d">${dataDia(9)}</span><span class="k">Dia 9</span><span>Dia de tolerância: reforço e repetição de testes não aprovados</span></li>
+        <li class="fase">4 dias · presencial em ${esc(t.cidade)}</li>${PRESENCIAL.map(([d, txt]) => `<li><span class="d">${dataDia(d)}</span><span class="k">Dia ${d}</span><span>${esc(txt)}</span></li>`).join("")}
+      </ol>` : ""}`;
+    },
+
+    espelho: () => `
+      <span class="tag">Passo 4 de 8 · Dia 0${dia0() ? " · " + fmt(dia0()) : ""}</span><h2>Espelho: seu ponto de partida</h2>
+      <p class="lead">Dê uma nota de 1 a 5 para como você se vê hoje em cada um dos 12 pilares da Mandala do Speaker. Não há resposta certa: o Espelho é um autodiagnóstico, sem correção técnica. No Dia 11 você compara este radar com o Novo Espelho.</p>
+      <div class="espelho">
+        <div>${EIXOS.map(e => `<div class="eixo"><b>Eixo ${esc(e.nome)}</b>${e.pilares.map(p => `<div class="pilar"><span>${esc(p)}</span><span class="scale" role="group" aria-label="Nota para ${esc(p)}">${[1, 2, 3, 4, 5].map(n => `<button type="button" data-pilar="${esc(p)}" data-nota="${n}" aria-pressed="${st.espelho[p] === n}" aria-label="${esc(p)}: ${n}">${n}</button>`).join("")}</span></div>`).join("")}</div>`).join("")}</div>
+        <div class="radar-box">${radar()}<p class="cap">${Object.keys(st.espelho).length} de 12 pilares avaliados · 1 = começando, 5 = domino</p></div>
+      </div>`,
+
+    estudo: () => `
+      <span class="tag">Passo 5 de 8 · Dias 0 a 6</span><h2>Plateia online: estude no seu ritmo</h2>
+      <p class="lead">Na plataforma, cada pilar tem conteúdo teórico curado e direto aplicável. Marque cada dia conforme concluir o estudo. O Dia 6 é livre para revisar antes dos testes.</p>
+      <div class="checks">${ESTUDO.map(([d, txt]) => chk("estudo", d, txt, `Dia ${d}${dia0() ? " · " + dataDia(d) : ""}`)).join("")}</div>`,
+
+    testes: () => {
+      const todos = EIXOS.every(e => aprovado(e.id));
+      return `
+      <span class="tag">Passo 6 de 8 · Dias 7 a 9</span><h2>Testes teóricos da Mandala do Speaker</h2>
+      <p class="lead">São 4 testes, um por eixo, com 18 questões cada (5 objetivas + 1 subjetiva por pilar). A nota mínima é 70%. Se não passar em algum, use o Dia 9 para reforçar e repetir. A aprovação nos 4 testes é pré-requisito obrigatório para o presencial.</p>
+      <div class="alert okk" id="testesOk"${todos ? "" : " hidden"}>Aprovado nos 4 testes. Você está liberado para a imersão presencial.</div>
+      <div class="testes">${EIXOS.map((e, i) => { const v = st.testes[e.id], has = v !== undefined && v !== ""; return `<div class="box teste"><b>Eixo ${esc(e.nome)}</b><p>${i < 2 ? "Dia 7" : "Dia 8"}${dia0() ? " · " + dataDia(i < 2 ? 7 : 8) : ""}</p>
+        <label class="f" style="margin-top:10px">Sua nota (%)<input type="number" min="0" max="100" inputmode="numeric" id="t-${e.id}" data-teste="${e.id}" value="${has ? esc(v) : ""}" placeholder="0 a 100"></label>
+        <div class="res ${!has ? "na" : aprovado(e.id) ? "ok" : "no"}">${!has ? "Aguardando o teste" : aprovado(e.id) ? "✓ Aprovado" : "✗ Abaixo de 70% · refaça no Dia 9"}</div></div>`; }).join("")}</div>`;
+    },
+
+    presencial: () => {
+      const liberado = EIXOS.every(e => aprovado(e.id)), t = turma();
+      return `
+      <span class="tag">Passo 7 de 8 · Dias 10 a 13</span><h2>Imersão presencial e certificação</h2>
+      <p class="lead">Quatro dias presenciais${t ? " em " + esc(t.cidade) : ""}, das 08h às 18h, com turma de cerca de 20 pessoas: 16 horas de Mandala do Speaker e 16 horas de Mandala do Licenciado. Você sai certificado ainda no encontro.</p>
+      ${liberado ? "" : `<div class="alert">Você ainda não foi aprovado nos 4 testes teóricos (passo 6). A aprovação é obrigatória para participar do presencial.</div>`}
+      <h3>Agenda</h3>
+      <ol class="timeline">${PRESENCIAL.map(([d, txt], i) => `<li><span class="d">${dataDia(d)}</span><span class="k">Dia ${i + 1}</span><span>${esc(txt)}</span></li>`).join("")}</ol>
+      <h3>Antes de ir</h3>
+      <div class="checks">${PREPARO.map(([k, txt, q]) => chk("preparo", k, txt, q)).join("")}</div>
+      <h3>Certificações</h3>
+      <div class="checks">${CERT.map(([k, txt, q]) => chk("cert", k, txt, q, liberado ? "" : " disabled")).join("")}</div>`;
+    },
+
+    pos: () => `
+      <span class="tag">Passo 8 de 8 · depois da certificação</span><h2>Seus primeiros passos como Licenciado</h2>
+      <p class="lead">Depois de certificado você nunca opera sozinho: o Kit sustenta suas aulas, a Comunidade acompanha você sem prazo de término e o eixo Vendas forma você como empreendedor.</p>
+      <div class="checks">${POS.map(([k, txt, q]) => chk("pos", k, txt, q)).join("")}</div>
+      ${FEITO.pos() ? `<div class="alert okk" style="margin-top:16px">Parabéns! Você concluiu o onboarding e já conduziu sua primeira turma em nome da TB School.</div>` : ""}`,
+  };
+
+  function radar() {
+    const W = 320, cx = W / 2, cy = W / 2, R = 108, n = PILARES.length;
+    const pt = (i, v) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n, r = R * v / 5; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; };
+    let g = "";
+    for (let lv = 1; lv <= 5; lv++) g += `<polygon points="${PILARES.map((_, i) => pt(i, lv).join(",")).join(" ")}" fill="none" stroke="#2c2c2c" stroke-width="1"/>`;
+    PILARES.forEach((p, i) => {
+      const [x, y] = pt(i, 5), [lx, ly] = pt(i, 5.75);
+      g += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#2c2c2c" stroke-width="1"/>`;
+      const anc = Math.abs(lx - cx) < 4 ? "middle" : lx > cx ? "start" : "end";
+      g += `<text x="${lx}" y="${ly}" fill="#cfcfcf" font-size="12" text-anchor="${anc}" dominant-baseline="middle">${esc(p)}</text>`;
+    });
+    const vals = PILARES.map(p => st.espelho[p] || 0);
+    if (vals.some(Boolean)) {
+      g += `<polygon points="${vals.map((v, i) => pt(i, v).join(",")).join(" ")}" fill="rgb(255 100 15 / .28)" stroke="#ff640f" stroke-width="2" stroke-linejoin="round"/>`;
+      vals.forEach((v, i) => { if (!v) return; const [x, y] = pt(i, v); g += `<circle cx="${x}" cy="${y}" r="4" fill="#ff640f" stroke="#161616" stroke-width="2"/><circle cx="${x}" cy="${y}" r="12" fill="transparent" data-tip="${esc(PILARES[i])}: ${v} de 5"/>`; });
+    }
+    return `<svg viewBox="-92 -16 504 352" role="img" aria-label="Radar do Espelho: ${PILARES.map(p => `${p} ${st.espelho[p] || "sem nota"}`).join(", ")}">${g}</svg>`;
+  }
+
+  function renderPainel() {
+    const p = PASSOS[st.atual], fim = st.atual === PASSOS.length - 1;
+    const pode = st.atual === 0 || FEITO[p.id]();
+    const dica = { perfil: "Preencha nome, e-mail, cidade, nicho e o compromisso.", turma: "Escolha uma turma.", espelho: "Avalie os 12 pilares.", estudo: "Marque os 7 dias de estudo.", testes: "Registre nota de 70% ou mais nos 4 testes.", presencial: "Marque a preparação e as duas certificações.", pos: "Marque os 5 primeiros passos." }[p.id];
+    $("panel").innerHTML = TELAS[p.id]() + `<div class="nav">
+      <button class="btn" type="button" data-ir="${st.atual - 1}"${st.atual === 0 ? " disabled" : ""}>← Voltar</button>
+      ${pode ? "" : `<span class="hint">${esc(dica)}</span>`}
+      ${fim ? "" : `<button class="btn primary" type="button" data-avancar="1"${pode ? "" : " disabled"}>${st.atual === 0 ? "Começar" : "Continuar →"}</button>`}</div>`;
+  }
+
+  function render() { renderTopo(); renderPainel(); }
+  function ir(i, foco) {
+    if (i < 0 || i >= PASSOS.length) return;
+    st.atual = i; salvar(); render();
+    if (foco) { $("panel").focus({ preventScroll: true }); $("panel").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); }
+  }
+
+  /* ---------- Interação ---------- */
+  document.addEventListener("click", ev => {
+    const t = ev.target.closest("[data-ir],[data-avancar],[data-turma],[data-nota]");
+    if (!t) return;
+    if (t.dataset.ir !== undefined) return ir(Number(t.dataset.ir), true);
+    if (t.dataset.avancar) { if (st.atual === 0) st.visto = true; return ir(st.atual + 1, true); }
+    if (t.dataset.turma) { st.turma = t.dataset.turma; salvar(); render(); return; }
+    if (t.dataset.nota) { st.espelho[t.dataset.pilar] = Number(t.dataset.nota); salvar(); render(); document.querySelector(`[data-pilar="${CSS.escape(t.dataset.pilar)}"][data-nota="${t.dataset.nota}"]`)?.focus(); }
+  });
+  document.addEventListener("input", ev => {
+    const el = ev.target;
+    if (el.dataset.perfil) { st.perfil[el.dataset.perfil] = el.value; salvar(); renderTopo(); atualizarNav(); }
+    if (el.dataset.teste) { st.testes[el.dataset.teste] = el.value; salvar(); renderTopo(); atualizarNav(); atualizarTestes(); }
+  });
+  document.addEventListener("change", ev => {
+    const el = ev.target;
+    if (el.dataset.grupo) {
+      if (el.dataset.grupo === "_aceite") st.aceite = el.checked; else st[el.dataset.grupo][el.dataset.k] = el.checked;
+      salvar(); render(); document.getElementById(el.id)?.focus(); return;
+    }
+    if (el.dataset.perfil) { renderTopo(); atualizarNav(); }
+  });
+  // Atualiza o resultado dos testes sem redesenhar a tela (mantém o foco no campo)
+  function atualizarTestes() {
+    EIXOS.forEach(e => {
+      const r = document.querySelector(`#t-${e.id}`)?.closest(".teste")?.querySelector(".res");
+      if (!r) return;
+      const v = st.testes[e.id], has = v !== undefined && v !== "";
+      r.className = "res " + (!has ? "na" : aprovado(e.id) ? "ok" : "no");
+      r.textContent = !has ? "Aguardando o teste" : aprovado(e.id) ? "✓ Aprovado" : "✗ Abaixo de 70% · refaça no Dia 9";
+    });
+    const todos = EIXOS.every(e => aprovado(e.id)), box = $("testesOk");
+    if (box) box.hidden = !todos;
+  }
+  function atualizarNav() {
+    const b = document.querySelector("[data-avancar]"), ok = FEITO[PASSOS[st.atual].id]();
+    if (b) b.disabled = !ok;
+    const h = document.querySelector(".nav .hint"); if (h) h.hidden = ok;
+  }
+  // _aceite usa o mesmo componente de caixa de seleção
+  Object.defineProperty(st, "_aceite", { get: () => ({ aceite: st.aceite }), enumerable: false, configurable: true });
+
+  // Tooltip do radar
+  document.addEventListener("pointermove", ev => {
+    const el = ev.target.closest && ev.target.closest("[data-tip]"), tip = $("tip");
+    if (!el) { tip.hidden = true; return; }
+    tip.textContent = el.dataset.tip; tip.hidden = false;
+    tip.style.left = ev.clientX + 12 + "px"; tip.style.top = ev.clientY - 30 + "px";
+  });
+
+  // Recomeçar com confirmação na própria página
+  $("resetArea").addEventListener("click", ev => {
+    if (ev.target.id === "btnReset") $("resetArea").innerHTML = `<span class="confirm">Apagar todo o progresso? <button class="btn primary" type="button" id="resetOk">Apagar</button><button class="btn" type="button" id="resetNo">Cancelar</button></span>`;
+    if (ev.target.id === "resetNo" || ev.target.id === "resetOk") {
+      if (ev.target.id === "resetOk") { st = novo(); Object.defineProperty(st, "_aceite", { get: () => ({ aceite: st.aceite }), enumerable: false, configurable: true }); salvar(); render(); }
+      $("resetArea").innerHTML = `<button class="btn" type="button" id="btnReset">Recomeçar o onboarding</button>`;
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

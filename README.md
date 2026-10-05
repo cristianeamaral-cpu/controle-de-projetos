@@ -9,6 +9,7 @@ cadastrados manualmente no painel **/admin**.
 | `index.html` | Dashboard (visualização) |
 | `licenciamento/` | **Painel de entregas do Licenciamento TB School**: o que será entregue, em qual ordem e o status de cada etapa |
 | `vercel.json` | Abre o painel do Licenciamento na raiz dos domínios que começam com `licenciamento` |
+| `licenciamento/onboarding/` | MVP do onboarding de quem comprou o Licenciamento |
 | `api/licenciamento.js` | Função da Vercel que guarda o painel do Licenciamento no mesmo banco (chave própria) |
 | `admin/` | Painel de edição: projetos, listas de opções, seções e cartões do dashboard |
 | `api/data.js` | Função da Vercel que lê e grava os dados no banco (Upstash Redis) |
@@ -30,6 +31,17 @@ Gestor de entregas do produto Licenciamento TB School, montado a partir do
 - **Link direto por entrega:** `/licenciamento/#e07` abre a entrega 07 (botão
   “Copiar link” dentro de cada uma). `/licenciamento/#f3` abre a fase 3.
 - Edição na própria página; com o banco ligado, a equipe inteira vê o mesmo estado.
+
+### Onboarding do Licenciado (/licenciamento/onboarding/)
+
+MVP do que o cliente vê depois de comprar o Licenciamento, em 8 passos
+baseados no Manual Final: boas-vindas, cadastro (com o compromisso de seguir a
+metodologia), escolha da turma (que calcula as datas dos 14 dias), Espelho dos
+12 pilares com radar, Plateia online (Dias 0–6), testes por eixo com nota
+mínima de 70% (pré-requisito do presencial), imersão presencial com as duas
+certificações e os primeiros passos como Licenciado (Kit, Comunidade, Vendas e
+primeira turma). As turmas são exemplos e o progresso fica salvo só no
+navegador.
 
 ### Endereço próprio (landing page)
 
