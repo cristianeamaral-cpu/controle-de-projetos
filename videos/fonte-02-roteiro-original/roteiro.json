@@ -1,0 +1,73 @@
+[
+ {
+  "id": "abertura",
+  "start": 0.69,
+  "vo": "Com o primeiro login concluído, o próximo passo é estruturar e preencher sua página na plataforma PSA."
+ },
+ {
+  "id": "perfil",
+  "start": 8.24,
+  "vo": "Ao acessar a aba Meu Perfil, você visualizará o indicador de força da sua página na parte superior.",
+  "drop": true
+ },
+ {
+  "id": "meta",
+  "start": 15.0,
+  "vo": "O objetivo é atingir cem por cento de preenchimento."
+ },
+ {
+  "id": "foto",
+  "start": 19.57,
+  "vo": "Atente-se à escolha da sua foto de perfil, pois a imagem enviada neste campo será exatamente a mesma exibida publicamente no site da PSA para os contratantes."
+ },
+ {
+  "id": "imagem",
+  "start": 30.3,
+  "vo": "Ela representa a sua imagem profissional no mercado."
+ },
+ {
+  "id": "biografia",
+  "start": 34.59,
+  "vo": "Em seguida, preencha a sua biografia profissional."
+ },
+ {
+  "id": "trajetoria",
+  "start": 37.68,
+  "vo": "Este espaço serve para descrever sua trajetória, conquistas e experiência de palco."
+ },
+ {
+  "id": "ia",
+  "start": 43.11,
+  "vo": "Para otimizar o tempo de preenchimento, você pode utilizar o recurso Gerar com IA para obter uma sugestão estruturada."
+ },
+ {
+  "id": "frase",
+  "start": 51.38,
+  "vo": "Abaixo, insira sua frase de destaque: um resumo objetivo do seu posicionamento, entre trinta e sessenta caracteres."
+ },
+ {
+  "id": "dados",
+  "start": 59.72,
+  "vo": "Prossiga com o preenchimento dos dados pessoais: nome, nome artístico, CPF, RG e formação."
+ },
+ {
+  "id": "contato",
+  "start": 66.3,
+  "vo": "E das informações de contato, incluindo o WhatsApp e um contato de emergência."
+ },
+ {
+  "id": "redes",
+  "start": 71.89,
+  "vo": "Na seção Redes Sociais, inclua os links do Instagram, Facebook e LinkedIn, e o vídeo em destaque do YouTube."
+ },
+ {
+  "id": "local",
+  "start": 79.54,
+  "vo": "Por fim, informe sua localização, essencial para o cálculo logístico dos eventos, e selecione as opções referentes ao seu momento atual."
+ },
+ {
+  "id": "pronto",
+  "start": 89.17,
+  "vo": "Ao concluir e salvar as alterações, seu perfil estará completo, atualizado e pronto para visualização pelos contratantes."
+ }
+]
