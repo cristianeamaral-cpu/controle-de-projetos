@@ -1,0 +1,223 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "pt-BR",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Como faço o login na plataforma?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>O acesso é feito pelo site <a href=\"https://profissionaissa.com.br\" target=\"_blank\" rel=\"noopener\">profissionaissa.com.br</a>. Clique no botão <strong>Login</strong> no menu superior direito. Você pode entrar utilizando seu e-mail cadastrado, sua conta do Google (Gmail) ou sua conta do LinkedIn.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso ter mais de um login?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Não. Por questões de conformidade com a LGPD, cada palestrante deve possuir apenas um perfil único (não é possível criar um login separado para assessoria, por exemplo).</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual navegador é recomendado para uso?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>O ecossistema é 100% responsivo e funciona em qualquer dispositivo móvel e navegador, porém é validado e testado oficialmente no <strong>Google Chrome</strong>. Recomenda-se utilizar o Chrome para garantir o funcionamento ideal de todas as ferramentas.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso selecionar mais de um Macro Tema?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Sim, é possível selecionar múltiplos macro temas para mapear suas áreas de atuação.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso selecionar mais de um Tema Principal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Não. É necessário definir exatamente <strong>1 Tema Principal</strong> (que pode ser um macro tema ou um tema específico).</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Por que a seleção de temas é importante?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Os temas cadastrados no seu perfil definem diretamente a quais <strong>Oportunidades de Palestras</strong> você poderá se candidatar na plataforma.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O que significam as complexidades Baixa, Média e Alta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Refere-se ao nível de deslocamento e logística necessários para a prestação do serviço. A plataforma permite diferenciar o valor do cachê de acordo com essas complexidades.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Como devo preencher o campo de valor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>No campo \"Valor\", deve ser inserido o valor final líquido exato que você deseja receber do cliente final.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso subir uma gravação feita pelo celular diretamente na plataforma?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Não. A plataforma aceita apenas vídeos hospedados no YouTube. Para cadastrar, insira o link/código do vídeo do YouTube no campo correspondente.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Como funcionam os eventos e a emissão de certificados?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Para cada evento, é gerado um QR Code. Ao final da palestra, os espectadores escaneiam o código para avaliar sua apresentação. Após o preenchimento da avaliação, o público pode baixar o certificado de participação.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Consigo baixar o arquivo do certificado para publicar nas redes sociais?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Sim, acessando a aba <strong>Eventos</strong> no perfil público.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso ocultar um depoimento recebido?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Sim. Para que qualquer depoimento fique visível no seu perfil público e no site da PSA, é necessário conceder a sua aprovação manual.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Para que serve este campo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Serve como repositório interno de informações para uso exclusivo da equipe de eventos da PSA na organização de encontros presenciais futuros e logística do palestrante.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quero publicar meus livros e conteúdos, é possível?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Sim! Na aba Biblioteca, você pode cadastrar títulos, descrições, capas e incluir os links diretos para venda em marketplaces (como Amazon ou loja própria), além de artigos e vídeos.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "A partir de qual momento tenho acesso às oportunidades?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>O acesso às oportunidades diárias é liberado a partir do momento em que você possui uma assinatura ativa da plataforma do Ecossistema de Palestrantes.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Me candidatei a uma oportunidade. Qual é o próximo passo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Os curadores da PSA avaliam a aderência do seu perfil e da sua justificativa ao briefing do cliente. Se o seu perfil for aprovado, você passa a participar da fase de negociação com o contratante.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Minhas demandas cadastradas ficam disponíveis para a equipe da PSA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Não. Todas as demandas e negociações cadastradas por você no CRM são de visualização estritamente exclusiva do palestrante. (Apenas as negociações iniciadas pela própria PSA aparecem com a marcação \"Demanda PSA\".)</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quais são os Assistentes de IA disponíveis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>O ecossistema conta com quatro consultoras especializadas:</p><ul><li><strong>Clara</strong>: Estratégia e posicionamento de marca pessoal.</li><li><strong>Santiago</strong>: Estratégia de vendas e consultoria comercial.</li><li><strong>Ariadne</strong>: Estruturação de palestras pela metodologia HandMap.</li><li><strong>Kali</strong>: Desenvolvimento do trilho da palestra pela metodologia Forja.</li></ul>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso utilizar mais de uma IA ao mesmo tempo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Sim, você pode manter janelas de conversa abertas com diferentes assistentes simultaneamente.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Para que serve a Análise de Palestra por IA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Serve para avaliar gravações de palestras em vídeo de até 1h30. Ela oferece duas modalidades:</p><ul><li><strong>Essencial</strong>: Análise gratuita dos pilares iniciais.</li><li><strong>Completo</strong>: Avaliação aprofundada dividida em 5 eixos e mais de 45 pontos de performance (mapa da palestra, mensagem e conteúdo, alinhamento, comunicação verbal e performance).</li></ul>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Como funcionam os créditos de IA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Os créditos são renovados mensalmente a cada virada de mês conforme o seu plano contratado. Caso seus créditos acabem antes do fim do mês, é possível adquirir pacotes adicionais.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Como funciona o PSA Trends?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>O palestrante seleciona um tema do seu perfil, o público-alvo, o objetivo e o período de análise (última semana, último mês ou últimos 3 meses). A IA cruza dados de redes sociais (YouTube, LinkedIn, Twitter/X) com dados internos da PSA para gerar um relatório completo com volume de buscas, principais dores do público, tendências e sugestões de publicações.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O que é o PSA Play?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>É o hub de treinamento da plataforma, que reúne mais de 500 conteúdos, incluindo palestras, imersões gravadas, episódios do reality show <em>The Best Speaker</em> e cursos gratuitos e pagos.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O que é o Advisor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>É um canal para se conectar diretamente com especialistas da PSA e receber orientação e mentoria personalizada para a sua carreira.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O que posso gerenciar na seção Minha Conta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Você pode editar seus dados cadastrais (nome, e-mail, telefone, CPF, senha), visualizar e alterar seu plano, checar o extrato de utilização de créditos e consultar seu <strong>PSA Score</strong> (índice de qualidade profissional).</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Como funciona a integração da Minha Agenda?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>A ferramenta conecta sua agenda do ecossistema diretamente ao seu Google Agenda:</p><ol><li>Acesse <strong>Minha Agenda</strong> dentro de <strong>Minha Conta</strong>.</li><li>Conecte sua conta do Google para sincronizar seus compromissos automaticamente.</li><li>Configure o nível de privacidade: escolha entre mostrar o título dos compromissos ou apenas os horários ocupados.</li></ol>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Para que serve a integração da agenda?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Com a agenda conectada, a PSA identifica automaticamente os seus horários livres para lhe oferecer oportunidades de palestras sem gerar conflitos de horários.</p>"
+      }
+    }
+  ]
+}
