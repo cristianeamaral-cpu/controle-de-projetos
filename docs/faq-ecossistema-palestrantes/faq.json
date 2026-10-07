@@ -1,0 +1,283 @@
+{
+  "titulo": "FAQ - Ecossistema de Palestrantes PSA",
+  "versao": "1.0.0",
+  "atualizado_em": "2026-10-07",
+  "idioma": "pt-BR",
+  "secoes": [
+    {
+      "id": "acesso-login",
+      "ordem": 1,
+      "titulo": "Como Acessar a Plataforma & Login",
+      "subsecoes": [
+        {
+          "id": "acesso-login-geral",
+          "titulo": null,
+          "perguntas": [
+            {
+              "id": "como-fazer-login",
+              "pergunta": "Como faço o login na plataforma?",
+              "resposta": "O acesso é feito pelo site [profissionaissa.com.br](https://profissionaissa.com.br). Clique no botão **Login** no menu superior direito. Você pode entrar utilizando seu e-mail cadastrado, sua conta do Google (Gmail) ou sua conta do LinkedIn."
+            },
+            {
+              "id": "mais-de-um-login",
+              "pergunta": "Posso ter mais de um login?",
+              "resposta": "Não. Por questões de conformidade com a LGPD, cada palestrante deve possuir apenas um perfil único (não é possível criar um login separado para assessoria, por exemplo)."
+            },
+            {
+              "id": "navegador-recomendado",
+              "pergunta": "Qual navegador é recomendado para uso?",
+              "resposta": "O ecossistema é 100% responsivo e funciona em qualquer dispositivo móvel e navegador, porém é validado e testado oficialmente no **Google Chrome**. Recomenda-se utilizar o Chrome para garantir o funcionamento ideal de todas as ferramentas."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "perfil-publico",
+      "ordem": 2,
+      "titulo": "Meu Perfil Público",
+      "subsecoes": [
+        {
+          "id": "aba-temas",
+          "titulo": "Aba Temas",
+          "perguntas": [
+            {
+              "id": "mais-de-um-macro-tema",
+              "pergunta": "Posso selecionar mais de um Macro Tema?",
+              "resposta": "Sim, é possível selecionar múltiplos macro temas para mapear suas áreas de atuação."
+            },
+            {
+              "id": "mais-de-um-tema-principal",
+              "pergunta": "Posso selecionar mais de um Tema Principal?",
+              "resposta": "Não. É necessário definir exatamente **1 Tema Principal** (que pode ser um macro tema ou um tema específico)."
+            },
+            {
+              "id": "importancia-selecao-temas",
+              "pergunta": "Por que a seleção de temas é importante?",
+              "resposta": "Os temas cadastrados no seu perfil definem diretamente a quais **Oportunidades de Palestras** você poderá se candidatar na plataforma."
+            }
+          ]
+        },
+        {
+          "id": "aba-cache-formatos",
+          "titulo": "Aba Cachê e Formatos",
+          "perguntas": [
+            {
+              "id": "complexidades-cache",
+              "pergunta": "O que significam as complexidades Baixa, Média e Alta?",
+              "resposta": "Refere-se ao nível de deslocamento e logística necessários para a prestação do serviço. A plataforma permite diferenciar o valor do cachê de acordo com essas complexidades."
+            },
+            {
+              "id": "campo-valor",
+              "pergunta": "Como devo preencher o campo de valor?",
+              "resposta": "No campo \"Valor\", deve ser inserido o valor final líquido exato que você deseja receber do cliente final."
+            }
+          ]
+        },
+        {
+          "id": "aba-palestra",
+          "titulo": "Aba Palestra",
+          "perguntas": [
+            {
+              "id": "upload-video-celular",
+              "pergunta": "Posso subir uma gravação feita pelo celular diretamente na plataforma?",
+              "resposta": "Não. A plataforma aceita apenas vídeos hospedados no YouTube. Para cadastrar, insira o link/código do vídeo do YouTube no campo correspondente."
+            }
+          ]
+        },
+        {
+          "id": "aba-eventos",
+          "titulo": "Aba Eventos (Leads & Certificados)",
+          "perguntas": [
+            {
+              "id": "eventos-certificados",
+              "pergunta": "Como funcionam os eventos e a emissão de certificados?",
+              "resposta": "Para cada evento, é gerado um QR Code. Ao final da palestra, os espectadores escaneiam o código para avaliar sua apresentação. Após o preenchimento da avaliação, o público pode baixar o certificado de participação."
+            },
+            {
+              "id": "baixar-certificado",
+              "pergunta": "Consigo baixar o arquivo do certificado para publicar nas redes sociais?",
+              "resposta": "Sim, acessando a aba **Eventos** no perfil público."
+            }
+          ]
+        },
+        {
+          "id": "aba-depoimentos",
+          "titulo": "Aba Depoimentos",
+          "perguntas": [
+            {
+              "id": "ocultar-depoimento",
+              "pergunta": "Posso ocultar um depoimento recebido?",
+              "resposta": "Sim. Para que qualquer depoimento fique visível no seu perfil público e no site da PSA, é necessário conceder a sua aprovação manual."
+            }
+          ]
+        },
+        {
+          "id": "aba-informacoes-curso",
+          "titulo": "Aba Informações para Curso",
+          "perguntas": [
+            {
+              "id": "para-que-serve-informacoes-curso",
+              "pergunta": "Para que serve este campo?",
+              "resposta": "Serve como repositório interno de informações para uso exclusivo da equipe de eventos da PSA na organização de encontros presenciais futuros e logística do palestrante."
+            }
+          ]
+        },
+        {
+          "id": "aba-biblioteca",
+          "titulo": "Aba Biblioteca",
+          "perguntas": [
+            {
+              "id": "publicar-livros",
+              "pergunta": "Quero publicar meus livros e conteúdos, é possível?",
+              "resposta": "Sim! Na aba Biblioteca, você pode cadastrar títulos, descrições, capas e incluir os links diretos para venda em marketplaces (como Amazon ou loja própria), além de artigos e vídeos."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oportunidades",
+      "ordem": 3,
+      "titulo": "Oportunidades de Palestras",
+      "subsecoes": [
+        {
+          "id": "oportunidades-geral",
+          "titulo": null,
+          "perguntas": [
+            {
+              "id": "acesso-oportunidades",
+              "pergunta": "A partir de qual momento tenho acesso às oportunidades?",
+              "resposta": "O acesso às oportunidades diárias é liberado a partir do momento em que você possui uma assinatura ativa da plataforma do Ecossistema de Palestrantes."
+            },
+            {
+              "id": "proximo-passo-candidatura",
+              "pergunta": "Me candidatei a uma oportunidade. Qual é o próximo passo?",
+              "resposta": "Os curadores da PSA avaliam a aderência do seu perfil e da sua justificativa ao briefing do cliente. Se o seu perfil for aprovado, você passa a participar da fase de negociação com o contratante."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crm",
+      "ordem": 4,
+      "titulo": "CRM PSA",
+      "subsecoes": [
+        {
+          "id": "crm-geral",
+          "titulo": null,
+          "perguntas": [
+            {
+              "id": "visibilidade-demandas-crm",
+              "pergunta": "Minhas demandas cadastradas ficam disponíveis para a equipe da PSA?",
+              "resposta": "Não. Todas as demandas e negociações cadastradas por você no CRM são de visualização estritamente exclusiva do palestrante. (Apenas as negociações iniciadas pela própria PSA aparecem com a marcação \"Demanda PSA\".)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ia-analise-palestra",
+      "ordem": 5,
+      "titulo": "Assistentes de Inteligência Artificial & Análise de Palestra",
+      "subsecoes": [
+        {
+          "id": "ia-geral",
+          "titulo": null,
+          "perguntas": [
+            {
+              "id": "assistentes-disponiveis",
+              "pergunta": "Quais são os Assistentes de IA disponíveis?",
+              "resposta": "O ecossistema conta com quatro consultoras especializadas:\n\n- **Clara**: Estratégia e posicionamento de marca pessoal.\n- **Santiago**: Estratégia de vendas e consultoria comercial.\n- **Ariadne**: Estruturação de palestras pela metodologia HandMap.\n- **Kali**: Desenvolvimento do trilho da palestra pela metodologia Forja."
+            },
+            {
+              "id": "mais-de-uma-ia",
+              "pergunta": "Posso utilizar mais de uma IA ao mesmo tempo?",
+              "resposta": "Sim, você pode manter janelas de conversa abertas com diferentes assistentes simultaneamente."
+            },
+            {
+              "id": "analise-palestra-ia",
+              "pergunta": "Para que serve a Análise de Palestra por IA?",
+              "resposta": "Serve para avaliar gravações de palestras em vídeo de até 1h30. Ela oferece duas modalidades:\n\n- **Essencial**: Análise gratuita dos pilares iniciais.\n- **Completo**: Avaliação aprofundada dividida em 5 eixos e mais de 45 pontos de performance (mapa da palestra, mensagem e conteúdo, alinhamento, comunicação verbal e performance)."
+            },
+            {
+              "id": "creditos-ia",
+              "pergunta": "Como funcionam os créditos de IA?",
+              "resposta": "Os créditos são renovados mensalmente a cada virada de mês conforme o seu plano contratado. Caso seus créditos acabem antes do fim do mês, é possível adquirir pacotes adicionais."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "psa-trends",
+      "ordem": 6,
+      "titulo": "PSA Trends",
+      "subsecoes": [
+        {
+          "id": "psa-trends-geral",
+          "titulo": null,
+          "perguntas": [
+            {
+              "id": "como-funciona-psa-trends",
+              "pergunta": "Como funciona o PSA Trends?",
+              "resposta": "O palestrante seleciona um tema do seu perfil, o público-alvo, o objetivo e o período de análise (última semana, último mês ou últimos 3 meses). A IA cruza dados de redes sociais (YouTube, LinkedIn, Twitter/X) com dados internos da PSA para gerar um relatório completo com volume de buscas, principais dores do público, tendências e sugestões de publicações."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "psa-play-advisor",
+      "ordem": 7,
+      "titulo": "PSA Play & Advisor",
+      "subsecoes": [
+        {
+          "id": "psa-play-advisor-geral",
+          "titulo": null,
+          "perguntas": [
+            {
+              "id": "o-que-e-psa-play",
+              "pergunta": "O que é o PSA Play?",
+              "resposta": "É o hub de treinamento da plataforma, que reúne mais de 500 conteúdos, incluindo palestras, imersões gravadas, episódios do reality show *The Best Speaker* e cursos gratuitos e pagos."
+            },
+            {
+              "id": "o-que-e-advisor",
+              "pergunta": "O que é o Advisor?",
+              "resposta": "É um canal para se conectar diretamente com especialistas da PSA e receber orientação e mentoria personalizada para a sua carreira."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conta-agenda",
+      "ordem": 8,
+      "titulo": "Minha Conta & Minha Agenda",
+      "subsecoes": [
+        {
+          "id": "conta-agenda-geral",
+          "titulo": null,
+          "perguntas": [
+            {
+              "id": "gerenciar-minha-conta",
+              "pergunta": "O que posso gerenciar na seção Minha Conta?",
+              "resposta": "Você pode editar seus dados cadastrais (nome, e-mail, telefone, CPF, senha), visualizar e alterar seu plano, checar o extrato de utilização de créditos e consultar seu **PSA Score** (índice de qualidade profissional)."
+            },
+            {
+              "id": "integracao-minha-agenda",
+              "pergunta": "Como funciona a integração da Minha Agenda?",
+              "resposta": "A ferramenta conecta sua agenda do ecossistema diretamente ao seu Google Agenda:\n\n1. Acesse **Minha Agenda** dentro de **Minha Conta**.\n2. Conecte sua conta do Google para sincronizar seus compromissos automaticamente.\n3. Configure o nível de privacidade: escolha entre mostrar o título dos compromissos ou apenas os horários ocupados."
+            },
+            {
+              "id": "para-que-serve-integracao-agenda",
+              "pergunta": "Para que serve a integração da agenda?",
+              "resposta": "Com a agenda conectada, a PSA identifica automaticamente os seus horários livres para lhe oferecer oportunidades de palestras sem gerar conflitos de horários."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

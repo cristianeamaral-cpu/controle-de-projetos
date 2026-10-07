@@ -12,6 +12,7 @@ cadastrados manualmente no painel **/admin**.
 | `assets/` | Estilos, cálculos e gráficos compartilhados |
 | [`docs/banco-de-dados.md`](docs/banco-de-dados.md) | **Como ligar o banco de dados na Vercel** |
 | [`docs/PROMPT.md`](docs/PROMPT.md) | Prompt/especificação original do dashboard |
+| [`docs/faq-ecossistema-palestrantes/`](docs/faq-ecossistema-palestrantes/README.md) | FAQ do Ecossistema de Palestrantes PSA em JSON, Markdown, HTML e JSON-LD |
 | [`docs/configuracao-hubspot.md`](docs/configuracao-hubspot.md) | Referência de pipeline, propriedades e relatórios no HubSpot |
 
 ## O que dá para fazer no /admin
