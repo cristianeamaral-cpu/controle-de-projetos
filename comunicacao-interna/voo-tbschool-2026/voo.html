@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Voo TBSCHOOL 2026</title>
+<link rel="stylesheet" href="fonts-local.css">
+<style>
+:root{
+  --navy:#07122b; --navy2:#0b1a3d; --ink:#0d1530; --orange:#ff5a0a; --orange2:#ff7a2e;
+  --brown:#3a1606; --muted:#6b7280; --line:#e8eaf0; --green:#22a45d;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#030814}
+body{font-family:Manrope,sans-serif;color:#fff;position:relative}
+.display{font-family:Archivo,sans-serif;font-weight:900;font-stretch:72%;letter-spacing:-.5px;line-height:.86;text-transform:uppercase}
+.o{color:var(--orange)}
+
+/* ---------- background ---------- */
+#bg{position:absolute;inset:0;background:
+  radial-gradient(900px 600px at 55% 22%, #12306e 0%, rgba(18,48,110,0) 70%),
+  radial-gradient(1400px 900px at 50% 40%, #0a1d47 0%, #050d22 60%, #02060f 100%)}
+#stars{position:absolute;inset:-60px;opacity:.55}
+
+/* ---------- persistent chrome ---------- */
+#logo{position:absolute;right:48px;top:40px;font-family:Archivo;font-weight:900;font-stretch:75%;font-size:46px;color:#c9ccd4;letter-spacing:-1px}
+#logo span{color:var(--orange)}
+#meter{position:absolute;left:1380px;top:104px;width:330px}
+#meter .lbl{font-size:17px;letter-spacing:5px;font-weight:600;color:#d9dce4;display:flex;justify-content:space-between;align-items:center}
+#meter .lbl b{letter-spacing:0;font-size:21px;font-weight:800;color:#fff}
+#meter .track{margin-top:14px;height:8px;border-radius:8px;background:rgba(255,255,255,.12);position:relative}
+#meter .fill{position:absolute;left:0;top:0;bottom:0;border-radius:8px;background:var(--orange);width:0}
+#meter .plane{position:absolute;top:-13px;width:30px;height:30px;margin-left:-15px;color:#fff}
+
+/* ---------- scenes ---------- */
+.scene{position:absolute;inset:0;animation:show .6s var(--s) both}
+.scene-in{position:absolute;inset:0;animation:hide .5s calc(var(--e) - .5s) both}
+@keyframes show{from{opacity:0}to{opacity:1}}
+@keyframes hide{from{opacity:1}to{opacity:0}}
+.a{animation:up .7s cubic-bezier(.2,.8,.2,1) calc(var(--s) + var(--d,0s)) both}
+@keyframes up{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1) calc(var(--s) + var(--d,0s)) both}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+.fade{animation:show .6s ease calc(var(--s) + var(--d,0s)) both}
+.ring{animation:ring .5s ease calc(var(--s) + var(--d,0s)) both}
+@keyframes ring{from{box-shadow:0 0 0 0 rgba(255,90,10,0);border-color:var(--line)}to{box-shadow:0 0 0 7px rgba(255,90,10,.14);border-color:var(--orange)}}
+
+.kicker{position:absolute;left:210px;top:70px;font-size:26px;letter-spacing:9px;font-weight:700;color:var(--orange)}
+.title{position:absolute;left:210px;top:112px;font-size:104px}
+
+/* app panel */
+.panel{position:absolute;left:210px;top:330px;width:1500px;height:730px;border-radius:22px;background:#f6f7fa;overflow:hidden;color:var(--ink);box-shadow:0 40px 80px rgba(0,0,0,.45)}
+.ph{height:118px;background:linear-gradient(90deg,#3a1606 0%,#6b2608 35%,#d24a08 75%,#ff5a0a 100%);padding:34px 40px;position:relative;color:#fff}
+.ph:before{content:"";position:absolute;left:0;top:0;height:5px;width:var(--bar,32%);background:var(--orange)}
+.ph h3{font-family:Archivo;font-weight:900;font-stretch:75%;font-size:42px;line-height:1;letter-spacing:-.5px}
+.ph p{font-size:20px;font-weight:500;margin-top:6px;opacity:.95}
+.ph .badge{position:absolute;right:30px;top:38px;background:#2a2d36;border-radius:22px;padding:6px 16px;font-family:Archivo;font-weight:900;font-stretch:75%;font-size:26px}
+.ph .badge span{color:var(--orange)}
+.pb{position:absolute;left:0;right:0;top:118px;bottom:0;padding:34px 40px}
+.card{background:#fff;border:2px solid var(--line);border-radius:18px;padding:30px 32px;position:relative}
+.ch{display:flex;align-items:center;gap:14px;font-size:27px;font-weight:700;color:var(--ink)}
+.ic{width:46px;height:46px;border-radius:10px;background:#fff0e7;color:var(--orange);display:grid;place-items:center;flex:none}
+.ic svg{width:24px;height:24px}
+.mini{font-size:15px;letter-spacing:4px;font-weight:700;color:#9aa1b0;text-transform:uppercase}
+.dark{background:#0b1430;color:#fff;border-color:#0b1430}
+.cursor{position:absolute;width:40px;height:40px;z-index:50;pointer-events:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35));display:none}
+.click{position:absolute;width:70px;height:70px;border-radius:50%;border:3px solid var(--orange);z-index:49;display:none;margin:-35px 0 0 -35px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#fff;border-radius:10px;padding:14px 24px;font-weight:700;font-size:22px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--orange);color:#c2410c;background:#fff4ec;border-radius:30px;padding:8px 18px;font-weight:700;font-size:19px}
+.check{width:24px;height:24px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;flex:none}
+.check svg{width:14px;height:14px}
+
+/* S1 intro */
+#s1 .kicker{left:310px;top:378px;font-size:22px;letter-spacing:8px}
+#s1 .title{left:306px;top:420px;font-size:170px}
+#s1 .appicon{position:absolute;left:1380px;top:385px;width:300px;height:300px;border-radius:34px;background:#fff;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+#s1 .appicon .top{height:78px;background:var(--orange)}
+#s1 .appicon svg{position:absolute;left:75px;top:105px;width:150px;height:150px;color:var(--orange)}
+
+/* boarding pass */
+.pass{display:flex;height:100%;border-radius:20px;overflow:hidden;background:#fff;border:2px solid var(--line)}
+.pass .main{flex:1;padding:34px 40px;position:relative}
+.pass .stub{width:360px;background:#0b1430;color:#fff;padding:34px 34px;position:relative;border-left:3px dashed #c9cede}
+.route{display:flex;align-items:center;gap:26px;margin:14px 0 26px}
+.route .city{font-family:Archivo;font-weight:900;font-stretch:72%;font-size:78px;line-height:.9;color:var(--ink)}
+.route .sub{font-size:18px;color:var(--muted);font-weight:600;margin-top:8px}
+.route .mid{flex:1;height:3px;background:repeating-linear-gradient(90deg,#c6cad6 0 12px,transparent 12px 22px);position:relative}
+.route .mid svg{position:absolute;top:-19px;width:40px;height:40px;color:var(--orange)}
+.fields{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px 30px}
+.f .k{font-size:15px;letter-spacing:4px;font-weight:700;color:#9aa1b0}
+.f .v{font-size:28px;font-weight:800;color:var(--ink);margin-top:6px}
+.stub .f .v{color:#fff}
+.stamp{position:absolute;right:40px;bottom:36px;border:5px solid var(--green);color:var(--green);font-family:Archivo;font-weight:900;font-stretch:75%;font-size:40px;padding:8px 20px;border-radius:12px;transform:rotate(-8deg);animation:stamp .45s cubic-bezier(.3,1.5,.5,1) calc(var(--s) + var(--d)) both}
+@keyframes stamp{from{opacity:0;transform:rotate(-8deg) scale(2.2)}to{opacity:1;transform:rotate(-8deg) scale(1)}}
+.barcode{height:90px;margin-top:26px;background:repeating-linear-gradient(90deg,#fff 0 3px,transparent 3px 6px,#fff 6px 7px,transparent 7px 11px,#fff 11px 15px,transparent 15px 17px)}
+
+/* S3 */
+.brand{display:flex;align-items:center;gap:22px}
+.logo-sq{width:110px;height:110px;border-radius:22px;display:grid;place-items:center;font-family:Archivo;font-weight:900;font-stretch:75%;font-size:44px;color:#fff;flex:none}
+.flight{position:relative;height:150px}
+.flight svg.path{position:absolute;inset:0;width:100%;height:100%}
+
+/* S4 counters */
+.big{font-family:Archivo;font-weight:900;font-stretch:72%;font-size:130px;line-height:.85;color:var(--orange)}
+.axes{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:26px}
+.axis{border:2px solid var(--line);border-radius:16px;padding:30px 26px;min-height:240px;background:#fff}
+.axis h4{font-family:Archivo;font-weight:900;font-stretch:75%;font-size:36px;color:var(--ink)}
+.axis p{font-size:20px;color:var(--muted);margin-top:8px;line-height:1.35;font-weight:500}
+.axis .n{font-size:15px;letter-spacing:4px;font-weight:700;color:var(--orange)}
+
+/* S5 list */
+.items{display:grid;grid-template-columns:1fr 1fr;gap:20px 26px}
+.item{display:flex;align-items:center;gap:20px;border:2px solid var(--line);border-radius:16px;padding:34px 30px;background:#fff;font-size:25px;font-weight:700;color:var(--ink)}
+.item .tick{width:38px;height:38px;border-radius:50%;border:3px solid #d5d9e3;display:grid;place-items:center;flex:none;position:relative}
+.item .tick i{position:absolute;inset:-3px;border-radius:50%;background:var(--orange);display:grid;place-items:center;color:#fff}
+.item .tick svg{width:20px;height:20px}
+
+/* S6 crew */
+.crew{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.mem{display:flex;align-items:center;gap:24px;border:2px solid var(--line);border-radius:18px;padding:44px 34px;background:#fff}
+.av{width:104px;height:104px;border-radius:50%;background:linear-gradient(135deg,#ffa36b,#ff5a0a);display:grid;place-items:center;font-family:Archivo;font-weight:900;font-stretch:75%;font-size:42px;color:#fff;flex:none}
+.mem h5{font-size:30px;font-weight:800;color:var(--ink)}
+.mem p{font-size:20px;color:var(--muted);margin-top:6px;font-weight:500}
+.tag{display:inline-block;margin-top:10px;font-size:14px;letter-spacing:3px;font-weight:800;color:var(--orange);background:#fff0e7;border-radius:6px;padding:5px 10px}
+
+/* S7 timeline */
+.tl{position:relative;height:330px;margin-top:10px}
+.tl .rail{position:absolute;left:150px;right:150px;top:118px;height:4px;background:repeating-linear-gradient(90deg,#c6cad6 0 12px,transparent 12px 22px)}
+.tl .railfill{position:absolute;left:150px;top:118px;height:4px;background:var(--orange);width:0}
+.node{position:absolute;top:0;width:300px;margin-left:-150px;text-align:center}
+.node .dot{width:66px;height:66px;margin:87px auto 0;border-radius:50%;background:#fff;border:4px solid #d5d9e3;display:grid;place-items:center;color:#9aa1b0}
+.node .dot svg{width:30px;height:30px}
+.node .lb{font-size:15px;letter-spacing:4px;font-weight:800;color:#9aa1b0;position:absolute;top:30px;left:0;right:0}
+.node .big2{font-family:Archivo;font-weight:900;font-stretch:72%;font-size:62px;color:var(--ink);margin-top:20px;line-height:.9}
+.node .sm{font-size:19px;color:var(--muted);font-weight:600;margin-top:8px}
+.node.on .dot{border-color:var(--orange);background:var(--orange);color:#fff}
+.tlplane{position:absolute;top:96px;width:48px;height:48px;margin-left:-24px;color:var(--orange)}
+.note{display:flex;align-items:center;gap:16px;background:#0b1430;color:#fff;border-radius:14px;padding:20px 26px;font-size:22px;font-weight:600}
+
+/* S8 notices */
+.notice{display:flex;gap:26px;align-items:flex-start;border:2px solid var(--line);border-radius:18px;padding:26px 30px;background:#fff;margin-bottom:20px}
+.notice .num{font-family:Archivo;font-weight:900;font-stretch:72%;font-size:64px;color:var(--orange);line-height:.8;width:50px;flex:none}
+.notice h5{font-size:28px;font-weight:800;color:var(--ink)}
+.notice p{font-size:21px;color:var(--muted);margin-top:6px;font-weight:500}
+.seat{display:flex;align-items:center;gap:14px;font-size:20px;font-weight:700;color:#fff}
+.seat .lamp{width:56px;height:56px;border-radius:12px;background:#1d2747;display:grid;place-items:center;color:#5a6688}
+.seat .lamp svg{width:32px;height:32px}
+.lampon{animation:lamp .3s ease calc(var(--s) + var(--d)) both}
+@keyframes lamp{from{background:#1d2747;color:#5a6688}to{background:#ffb000;color:#1a1200;box-shadow:0 0 30px rgba(255,176,0,.6)}}
+
+/* S9 ready */
+.pct{font-family:Archivo;font-weight:900;font-stretch:72%;font-size:120px;color:var(--green);line-height:.85}
+.gbar{height:16px;border-radius:10px;background:#e8eaf0;flex:1;position:relative;overflow:hidden}
+.gbar i{position:absolute;left:0;top:0;bottom:0;background:var(--green);border-radius:10px;animation:grow 1.2s ease calc(var(--s) + var(--d)) both}
+@keyframes grow{from{width:55%}to{width:100%}}
+.toast{position:absolute;display:flex;align-items:center;gap:12px;background:#fff;border:2px solid #cdeedd;color:var(--ink);border-radius:12px;padding:14px 22px;font-size:21px;font-weight:700;box-shadow:0 12px 30px rgba(0,0,0,.15)}
+
+/* S10 end */
+#s10 .end{position:absolute;left:0;right:0;top:300px;text-align:center}
+#s10 .end .lg{font-family:Archivo;font-weight:900;font-stretch:75%;font-size:58px;color:#fff;letter-spacing:-1px}
+#s10 .end .lg span{color:var(--orange)}
+#s10 .end h1{font-size:150px;margin-top:30px}
+#s10 .pill{display:inline-block;background:#08132e;margin-top:56px;border:2px solid rgba(255,255,255,.35);border-radius:40px;padding:16px 34px;font-size:26px;font-weight:600;color:#fff}
+#s10 .small{margin-top:26px;font-size:20px;color:#8f9bb8;font-weight:500;letter-spacing:.5px}
+#fadeout{position:absolute;inset:0;background:#000;animation:show 1s var(--s) both;z-index:100}
+</style>
+</head>
+<body>
+<div id="bg"></div>
+<svg id="stars" width="2040" height="1200"></svg>
+
+<!-- ============ S1 INTRO ============ -->
+<div class="scene" id="s1" style="--s:0s;--e:7s"><div class="scene-in">
+  <div class="kicker a" style="--d:.2s">SENHORAS E SENHORES · SÓ PARA QUEM É DA CASA</div>
+  <div class="title display a" style="--d:.35s">Novidade<br><span class="o">a bordo.</span></div>
+  <div class="appicon pop" style="--d:.8s"><div class="top"></div>
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>
+  </div>
+</div></div>
+
+<!-- ============ S2 PASSAGEM ============ -->
+<div class="scene" id="s2" style="--s:7s;--e:16s"><div class="scene-in">
+  <div class="kicker a" style="--d:.1s">CHECK-IN · LANÇAMENTO EXCLUSIVO</div>
+  <div class="title display a" style="--d:.2s">Sua passagem<br><span class="o">foi emitida.</span></div>
+  <div class="panel a" style="--d:.4s;--bar:14%">
+    <div class="ph"><h3>CARTÃO DE EMBARQUE</h3><p>PSA Linhas Aéreas do Conhecimento</p><div class="badge">PSA<span>.</span></div></div>
+    <div class="pb">
+      <div class="pass">
+        <div class="main">
+          <div class="mini">Nº do voo · TBSCHOOL 2026 &nbsp;·&nbsp; Reserva · LICENC</div>
+          <div class="route">
+            <div><div class="city">PSA</div><div class="sub">Nosso palco</div></div>
+            <div class="mid"><svg class="s2plane" viewBox="0 0 24 24" fill="currentColor" style="left:0;transform:rotate(90deg)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg></div>
+            <div style="text-align:right"><div class="city">TBS</div><div class="sub">Escolas licenciadas</div></div>
+          </div>
+          <div class="fields">
+            <div class="f a" style="--d:1.4s"><div class="k">PASSAGEIRO</div><div class="v">Todo o time PSA</div></div>
+            <div class="f a" style="--d:1.7s"><div class="k">CLASSE</div><div class="v">Protagonista</div></div>
+            <div class="f a" style="--d:2.0s"><div class="k">ASSENTO</div><div class="v">1A · 1ª fila</div></div>
+            <div class="f a" style="--d:2.3s"><div class="k">DESTINO</div><div class="v">Licenciamento The Best School</div></div>
+            <div class="f a" style="--d:2.6s"><div class="k">PORTÃO</div><div class="v">LICENC</div></div>
+            <div class="f a" style="--d:2.9s"><div class="k">SELO DE BORDO</div><div class="v">Escola oficial do The Best Speaker</div></div>
+          </div>
+          <div class="stamp" style="--d:5.2s">EMBARQUE CONFIRMADO</div>
+        </div>
+        <div class="stub">
+          <div class="mini" style="color:#ff8a4c">VOCÊ É O PRIMEIRO A SABER</div>
+          <div class="f" style="margin-top:26px"><div class="k">VOO</div><div class="v">TBSCHOOL 2026</div></div>
+          <div class="f" style="margin-top:22px"><div class="k">CHECK-IN</div><div class="v">HOJE</div></div>
+          <div class="barcode"></div>
+          <div class="btn" id="btnDetalhes" style="margin-top:26px;width:100%;justify-content:center;font-size:20px">Ver detalhes da viagem</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ S3 O QUE É ============ -->
+<div class="scene" id="s3" style="--s:16s;--e:26s"><div class="scene-in">
+  <div class="kicker a" style="--d:.1s">O QUE É ESSE VOO, AFINAL?</div>
+  <div class="title display a" style="--d:.2s">O palco<br><span class="o">vai mais longe.</span></div>
+  <div class="panel a" style="--d:.4s;--bar:28%">
+    <div class="ph"><h3>LICENCIAMENTO</h3><p>The Best School em todo o Brasil</p><div class="badge">PSA<span>.</span></div></div>
+    <div class="pb">
+      <div style="display:grid;grid-template-columns:1fr 430px 1fr;align-items:center;gap:0">
+        <div class="card a" style="--d:.9s"><div class="brand"><div class="logo-sq" style="background:var(--orange)">PSA</div><div><div style="font-size:28px;font-weight:800">PSA</div><div style="font-size:20px;color:var(--muted);font-weight:600;margin-top:4px">A maior curadoria de palestrantes do Brasil</div></div></div></div>
+        <div class="flight">
+          <svg class="path" viewBox="0 0 430 150"><path id="arc" d="M20 120 Q215 -20 410 120" fill="none" stroke="#c6cad6" stroke-width="3" stroke-dasharray="10 9"/><path id="arcfill" d="M20 120 Q215 -20 410 120" fill="none" stroke="#ff5a0a" stroke-width="4" stroke-dasharray="560" stroke-dashoffset="560"/></svg>
+          <svg id="s3plane" viewBox="0 0 24 24" fill="#ff5a0a" style="position:absolute;width:46px;height:46px;left:0;top:0;opacity:0"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>
+        </div>
+        <div class="card dark a" style="--d:1.2s"><div class="brand"><div class="logo-sq" style="background:#fff;color:#0b1430">TBS</div><div><div style="font-size:28px;font-weight:800">The Best School</div><div style="font-size:20px;color:#aab3cc;font-weight:600;margin-top:4px">Escolas licenciadas em todo o país</div></div></div></div>
+      </div>
+      <div class="card a" style="--d:3.4s;margin-top:34px;font-size:27px;line-height:1.45;font-weight:500;color:#2a3352">
+        Educadores e empreendedores de todo o Brasil poderão <b style="color:var(--ink)">vender e ministrar cursos de comunicação e oratória</b> com a chancela da The Best School, a escola oficial do The Best Speaker Brasil.
+        <div style="margin-top:18px;display:flex;gap:14px;flex-wrap:wrap">
+          <span class="chip pop" style="--d:5.4s">✦ Metodologia nascida da expertise PSA</span>
+          <span class="chip pop" style="--d:5.8s">✦ O jeito PSA ganhando salas de aula pelo país</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ S4 ESCALAS ============ -->
+<div class="scene" id="s4" style="--s:26s;--e:36s"><div class="scene-in">
+  <div class="kicker a" style="--d:.1s">ESCALAS DA ROTA</div>
+  <div class="title display a" style="--d:.2s">Uma rota<br><span class="o">em mandala.</span></div>
+  <div class="panel a" style="--d:.4s;--bar:42%">
+    <div class="ph"><h3>A METODOLOGIA</h3><p>Cada licenciado passa por todas as escalas</p><div class="badge">PSA<span>.</span></div></div>
+    <div class="pb">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+        <div class="card a" style="--d:.8s;display:flex;align-items:flex-end;gap:18px"><div class="big" data-count="4" data-t0="27.2" data-t1="28.2">0</div><div style="font-size:26px;font-weight:700;padding-bottom:10px">eixos</div></div>
+        <div class="card a" style="--d:1.0s;display:flex;align-items:flex-end;gap:18px"><div class="big" data-count="12" data-t0="27.4" data-t1="28.6">0</div><div style="font-size:26px;font-weight:700;padding-bottom:10px">pilares da<br>comunicação</div></div>
+        <div class="card a" style="--d:1.2s;display:flex;align-items:flex-end;gap:18px"><div class="big" data-count="14" data-t0="27.6" data-t1="29.0">0</div><div style="font-size:26px;font-weight:700;padding-bottom:10px">dias de imersão<br>com certificação</div></div>
+      </div>
+      <div class="axes">
+        <div class="axis a ring" style="--d:3.4s"><div class="n">EIXO 1</div><h4>EXPRESSÃO</h4><p>Oratória, performance, linguagem corporal</p></div>
+        <div class="axis a ring" style="--d:4.6s"><div class="n">EIXO 2</div><h4>ARGUMENTO</h4><p>Retórica, persuasão, negociação</p></div>
+        <div class="axis a ring" style="--d:5.8s"><div class="n">EIXO 3</div><h4>SUBSTÂNCIA</h4><p>Narrativa, perspectiva, autoridade</p></div>
+        <div class="axis a ring" style="--d:7.0s"><div class="n">EIXO 4</div><h4>CONEXÃO</h4><p>Presença digital, escuta ativa, empatia</p></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ S5 BAGAGEM ============ -->
+<div class="scene" id="s5" style="--s:36s;--e:44s"><div class="scene-in">
+  <div class="kicker a" style="--d:.1s">BAGAGEM INCLUÍDA</div>
+  <div class="title display a" style="--d:.2s">Todo licenciado<br><span class="o">embarca com:</span></div>
+  <div class="panel a" style="--d:.4s;--bar:56%">
+    <div class="ph"><h3>BAGAGEM DE MÃO</h3><p>Itens despachados para cada escola licenciada</p><div class="badge">PSA<span>.</span></div></div>
+    <div class="pb">
+      <div class="items">
+        <div class="item a" style="--d:.8s"><div class="tick"><i class="pop" style="--d:1.6s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 12.5l4.5 4.5L19 7"/></svg></i></div>Imersão de 14 dias com certificação</div>
+        <div class="item a" style="--d:.9s"><div class="tick"><i class="pop" style="--d:2.4s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 12.5l4.5 4.5L19 7"/></svg></i></div>Uso da marca e chancela The Best School</div>
+        <div class="item a" style="--d:1.0s"><div class="tick"><i class="pop" style="--d:3.2s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 12.5l4.5 4.5L19 7"/></svg></i></div>Manuais institucional, de gestão e comercial</div>
+        <div class="item a" style="--d:1.1s"><div class="tick"><i class="pop" style="--d:4.0s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 12.5l4.5 4.5L19 7"/></svg></i></div>Comunidade e mentor de referência da região</div>
+        <div class="item a" style="--d:1.2s"><div class="tick"><i class="pop" style="--d:4.8s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 12.5l4.5 4.5L19 7"/></svg></i></div>Scripts de venda por nicho</div>
+        <div class="item a" style="--d:1.3s"><div class="tick"><i class="pop" style="--d:5.6s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 12.5l4.5 4.5L19 7"/></svg></i></div>Reuniões periódicas de suporte</div>
+      </div>
+      <div class="a" style="--d:6.2s;margin-top:28px;display:flex;justify-content:flex-end"><span class="chip" style="border-color:var(--green);color:var(--green);background:#ecfaf2">✓ 6 de 6 itens a bordo</span></div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ S6 TRIPULAÇÃO ============ -->
+<div class="scene" id="s6" style="--s:44s;--e:52s"><div class="scene-in">
+  <div class="kicker a" style="--d:.1s">SUA TRIPULAÇÃO</div>
+  <div class="title display a" style="--d:.2s">Quem está<br><span class="o">no comando.</span></div>
+  <div class="panel a" style="--d:.4s;--bar:70%">
+    <div class="ph"><h3>TRIPULAÇÃO</h3><p>Quem conduz este voo</p><div class="badge">PSA<span>.</span></div></div>
+    <div class="pb">
+      <div class="crew">
+        <div class="mem a ring" style="--d:.8s"><div class="av">MS</div><div><h5>Márcio Spagnolo</h5><p>Fundador e CEO da PSA</p><span class="tag">COMANDANTE</span></div></div>
+        <div class="mem a" style="--d:1.3s"><div class="av">OC</div><div><h5>Otaviano Costa</h5><p>Ator, comunicador e sócio da The Best School</p></div></div>
+        <div class="mem a" style="--d:1.8s"><div class="av">MS</div><div><h5>Manu Smaniotto</h5><p>Diretora de Produto e Inovação da PSA</p></div></div>
+        <div class="mem a" style="--d:2.3s"><div class="av">LV</div><div><h5>Leandro Vidal</h5><p>Instrutor pedagógico e speaker</p></div></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ S7 ITINERÁRIO ============ -->
+<div class="scene" id="s7" style="--s:52s;--e:60s"><div class="scene-in">
+  <div class="kicker a" style="--d:.1s">ITINERÁRIO</div>
+  <div class="title display a" style="--d:.2s">Check-in hoje.<br><span class="o">Decolagem em breve.</span></div>
+  <div class="panel a" style="--d:.4s;--bar:84%">
+    <div class="ph"><h3>ITINERÁRIO</h3><p>Portão de embarque: Licenciamento The Best School</p><div class="badge">PSA<span>.</span></div></div>
+    <div class="pb">
+      <div class="tl">
+        <div class="rail"></div><div class="railfill" id="railfill"></div>
+        <div class="node" id="n1" style="left:150px"><div class="lb">CHECK-IN DO TIME</div><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div><div class="big2">HOJE</div><div class="sm">Este comunicado</div></div>
+        <div class="node" id="n2" style="left:710px"><div class="lb">DECOLAGEM</div><div class="dot"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg></div><div class="big2" id="cfgData">DD/MM</div><div class="sm" id="cfgHora">Lançamento oficial · 00:00</div></div>
+        <div class="node" id="n3" style="left:1270px"><div class="lb">POUSO</div><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 21h16M6 17l-2-6 2-1 3 3 4-1-4-8 2-1 7 7 3-1a1.5 1.5 0 0 1 1 2.5L8 17z"/></svg></div><div class="big2" id="cfgMes">MÊS</div><div class="sm">1ª turma de licenciados</div></div>
+        <svg class="tlplane" id="tlplane" viewBox="0 0 24 24" fill="currentColor" style="transform:rotate(90deg);left:150px;opacity:0"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>
+      </div>
+      <div class="note a" style="--d:4.6s"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ff7a2e" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>O portão fecha quando o assunto chegar ao mercado. <b style="color:#ff8a4c">Até lá, a novidade é nossa.</b></div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ S8 AVISOS ============ -->
+<div class="scene" id="s8" style="--s:60s;--e:68s"><div class="scene-in">
+  <div class="kicker a" style="--d:.1s">AVISOS DE BORDO</div>
+  <div class="title display a" style="--d:.2s">Sigilo<br><span class="o">afivelado.</span></div>
+  <div class="a" style="--d:.5s;position:absolute;left:1380px;top:200px"><div class="seat"><div class="lamp lampon" style="--d:1.0s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="5" r="2"/><path d="M8 22v-7l-2-4 3-3h6l3 3-2 4v7M8 14h8"/></svg></div>Aperte os cintos</div></div>
+  <div class="panel a" style="--d:.4s;--bar:94%">
+    <div class="ph"><h3>AVISOS DE BORDO</h3><p>Leia antes da decolagem</p><div class="badge">PSA<span>.</span></div></div>
+    <div class="pb">
+      <div class="notice a ring" style="--d:1.2s"><div class="num">1</div><div><h5>Mantenha o sigilo afivelado até a decolagem oficial.</h5><p>A novidade ainda não foi divulgada para fora.</p></div></div>
+      <div class="notice a" style="--d:2.6s"><div class="num">2</div><div><h5>Conhece um educador com perfil de licenciado?</h5><p>Guarde o nome. Em breve vamos abrir o embarque.</p></div></div>
+      <div class="notice a" style="--d:4.0s"><div class="num">3</div><div><h5>Dúvidas durante o voo?</h5><p>Fale com a tripulação de Produto e Inovação.</p></div></div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ S9 PRONTO ============ -->
+<div class="scene" id="s9" style="--s:68s;--e:75s"><div class="scene-in">
+  <div class="kicker a" style="--d:.1s">PRONTO</div>
+  <div class="title display a" style="--d:.2s">Time a bordo.<br><span class="o">Rumo ao lançamento.</span></div>
+  <div class="panel a" style="--d:.4s;--bar:100%">
+    <div class="ph"><h3>RESUMO DO VOO</h3><p>TBSCHOOL 2026</p><div class="badge">PSA<span>.</span></div></div>
+    <div class="pb" style="display:grid;grid-template-columns:1fr 560px;gap:26px">
+      <div class="card">
+        <div class="ch"><div class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg></div>Rota do voo</div>
+        <div style="display:flex;align-items:center;gap:28px;margin-top:20px"><div class="pct">100%</div><div class="gbar"><i style="--d:.6s"></i></div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:30px">
+          <span class="chip pop" style="--d:1.0s">✓ Passagem</span><span class="chip pop" style="--d:1.2s">✓ Destino</span><span class="chip pop" style="--d:1.4s">✓ Rota</span><span class="chip pop" style="--d:1.6s">✓ Bagagem</span><span class="chip pop" style="--d:1.8s">✓ Tripulação</span><span class="chip pop" style="--d:2.0s">✓ Itinerário</span><span class="chip pop" style="--d:2.2s">✓ Avisos</span>
+        </div>
+        <div class="btn a" id="btnDestino" style="--d:2.4s;position:absolute;left:32px;bottom:36px">Conhecer o destino →</div>
+        <div class="toast a" style="--d:4.4s;left:32px;bottom:118px"><span class="check" style="background:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>Link interno · não compartilhe antes do lançamento</div>
+      </div>
+      <div class="card dark">
+        <div class="mini" style="color:#ff8a4c">PASSAGEIRO · CLASSE PROTAGONISTA</div>
+        <div style="display:flex;align-items:center;gap:20px;margin-top:22px"><div class="av" style="width:90px;height:90px;font-size:34px">PSA</div><div><div style="font-size:30px;font-weight:800">Todo o time PSA</div><div style="font-size:19px;color:#aab3cc;margin-top:4px">Assento 1A · primeira fila do palco</div></div></div>
+        <div style="margin-top:28px;font-size:22px;line-height:1.5;color:#dfe4f2;font-style:italic">“Você tem o conteúdo, nós temos o palco. Agora o palco vai mais longe.”</div>
+        <div class="chip" style="margin-top:28px;border-color:var(--green);color:#5fe39a;background:rgba(34,164,93,.12)">✓ EMBARQUE CONFIRMADO</div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ============ S10 FIM ============ -->
+<div class="scene" id="s10" style="--s:75s;--e:999s"><div class="scene-in">
+  <div class="end">
+    <div class="lg a" style="--d:.2s">PSA<span>.</span></div>
+    <h1 class="display a" style="--d:.4s">Aprender é o maior<br><span class="o">show da terra.</span></h1>
+    <div class="pill a" style="--d:1.0s">Obrigado por voar com a PSA · <span class="o">Um novo ponto de vista muda a vista toda.</span></div>
+  </div>
+</div></div>
+
+<!-- persistent chrome -->
+<div id="logo">PSA<span>.</span></div>
+<div id="meter"><div class="lbl">ROTA DO VOO <b id="mval">0%</b></div><div class="track"><div class="fill" id="mfill"></div><svg class="plane" id="mplane" viewBox="0 0 24 24" fill="currentColor" style="transform:rotate(90deg)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg></div></div>
+<svg class="cursor" id="cursor" viewBox="0 0 24 24"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="#111" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+<div class="click" id="clickfx"></div>
+<div id="fadeout" style="--s:81s"></div>
+
+<script>
+// ===== Preencha antes de renderizar =====
+const CONFIG = { data: "DD/MM", hora: "00:00", mes: "MÊS" };
+document.getElementById('cfgData').textContent = CONFIG.data;
+document.getElementById('cfgHora').textContent = 'Lançamento oficial · ' + CONFIG.hora;
+document.getElementById('cfgMes').textContent = CONFIG.mes;
+
+const DURATION = 82;
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const lerp=(a,b,x)=>a+(b-a)*x;
+const seg=(t,t0,t1)=>ease(clamp((t-t0)/(t1-t0)));
+
+// constellation background (seeded)
+(function(){let s=7;const r=()=>(s=(s*16807)%2147483647)/2147483647;
+ const svg=document.getElementById('stars');let h='';const pts=[];
+ for(let i=0;i<70;i++)pts.push([r()*2040,r()*1200]);
+ pts.forEach((p,i)=>{pts.slice(i+1).forEach(q=>{const d=Math.hypot(p[0]-q[0],p[1]-q[1]);if(d<190)h+=`<line x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}" stroke="#5b74b8" stroke-opacity="${(.45*(1-d/190)).toFixed(2)}" stroke-width="1"/>`})});
+ pts.forEach((p,i)=>h+=`<circle cx="${p[0]}" cy="${p[1]}" r="${i%9==0?3:2}" fill="${i%9==0?'#ff6a1a':'#8ea3dd'}" fill-opacity=".8"/>`);
+ svg.innerHTML=h;})();
+
+// meter keyframes: [time, value]
+const MK=[[7,0],[8.5,14],[16,14],[17.5,28],[26,28],[27.5,42],[36,42],[37.5,56],[44,56],[45.5,70],[52,70],[53.5,84],[60,84],[61.5,94],[68,94],[69.5,100]];
+function meterVal(t){if(t<=MK[0][0])return 0;for(let i=1;i<MK.length;i++){const[a,va]=MK[i-1],[b,vb]=MK[i];if(t<=b)return lerp(va,vb,seg(t,a,b));}return 100;}
+
+// cursor waypoints per scene: [t,x,y,click?]
+const CUR=[
+ [[11.6,1600,1100],[12.8,1500,915],[13.3,1500,915,1],[15.6,1500,915]],
+ [[70.6,700,1100],[71.6,430,965],[72.1,430,965,1],[74.6,430,965]],
+];
+function cursorAt(t){for(const path of CUR){if(t>=path[0][0]&&t<=path[path.length-1][0]){for(let i=1;i<path.length;i++){const a=path[i-1],b=path[i];if(t<=b[0]){const x=seg(t,a[0],b[0]);return{x:lerp(a[1],b[1],x),y:lerp(a[2],b[2],x),click:path.filter(p=>p[3]).map(p=>p[0])}}}}}return null;}
+
+let anims=[];
+const counters=[...document.querySelectorAll('[data-count]')];
+function seek(t){
+  const ms=t*1000;
+  document.getElementById('stars').style.transform=`translate(${-t*0.5}px,${Math.sin(t/9)*12}px)`;
+  anims.forEach(a=>{a.currentTime=ms;});
+  // meter
+  const m=document.getElementById('meter');m.style.opacity=(t<7.2||t>75)?Math.max(0,t<7.2?(t-6.6)/.6:1-(t-75)/.5):1;
+  const v=meterVal(t);document.getElementById('mval').textContent=Math.round(v)+'%';
+  document.getElementById('mfill').style.width=v+'%';document.getElementById('mplane').style.left=v+'%';
+  // counters
+  counters.forEach(c=>{c.textContent=Math.round(c.dataset.count*seg(t,+c.dataset.t0,+c.dataset.t1))});
+  // S2 plane along route
+  document.querySelector('.s2plane').style.left=`calc(${seg(t,8.6,11.2)*100}% - 20px)`;
+  // S3 arc flight
+  const f=seg(t,17.6,19.8);const arc=document.getElementById('arcfill');arc.style.strokeDashoffset=560*(1-f);
+  const P=document.getElementById('arc');const L=P.getTotalLength();const p=P.getPointAtLength(L*f),p2=P.getPointAtLength(Math.min(L,L*f+1));
+  const pl=document.getElementById('s3plane');pl.style.opacity=t>17.4?1:0;pl.style.left=(p.x-23)+'px';pl.style.top=(p.y-23)+'px';
+  pl.style.transform=`rotate(${Math.atan2(p2.y-p.y,p2.x-p.x)*180/Math.PI+90}deg)`;
+  // S7 timeline
+  const g=seg(t,53.4,56.6);document.getElementById('railfill').style.width=(1120*g)+'px';
+  const tp=document.getElementById('tlplane');tp.style.left=(150+1120*g)+'px';tp.style.opacity=t>53.2&&g<1?1:0;
+  ['n1','n2','n3'].forEach((n,i)=>document.getElementById(n).classList.toggle('on',t>=53.2+i*1.6));
+  // cursor
+  const c=cursorAt(t),ce=document.getElementById('cursor'),cf=document.getElementById('clickfx');
+  if(c){ce.style.display='block';ce.style.left=c.x+'px';ce.style.top=c.y+'px';
+    const k=c.click.find(ct=>t>=ct&&t<ct+.5);if(k!==undefined){const x=(t-k)/.5;cf.style.display='block';cf.style.left=c.x+'px';cf.style.top=c.y+'px';cf.style.transform=`scale(${.4+x})`;cf.style.opacity=1-x;}else cf.style.display='none';
+  }else{ce.style.display='none';cf.style.display='none';}
+  // button press feedback
+  document.getElementById('btnDetalhes').style.background=(t>13.3&&t<16)?'#d94400':'';
+  document.getElementById('btnDestino').style.background=(t>72.1)?'#d94400':'';
+}
+window.seek=seek;window.DURATION=DURATION;
+window.ready=document.fonts.ready.then(()=>{anims=document.getAnimations();anims.forEach(a=>a.pause());seek(0);return true;});
+</script>
+</body>
+</html>
