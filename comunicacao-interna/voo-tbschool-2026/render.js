@@ -1,4 +1,5 @@
 // node render.js preview 3,12,20  -> PNGs  |  node render.js video out.mp4 [fps]
+// Também grava timeline.json (início da locução de cada cena) para o mixar.sh.
 const { chromium } = require('/opt/node-tools/node_modules/playwright');
 const { spawn } = require('child_process');
 const path = require('path');
@@ -9,6 +10,8 @@ const path = require('path');
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
   await page.goto('file://' + path.join(__dirname, 'voo.html'));
   await page.evaluate(() => window.ready);
+  const tl = await page.evaluate(() => ({ duration: window.DURATION, scenes: window.TIMELINE }));
+  require('fs').writeFileSync(path.join(__dirname, 'timeline.json'), JSON.stringify(tl, null, 1));
   if (mode === 'preview') {
     for (const t of arg.split(',').map(Number)) {
       await page.evaluate(t => window.seek(t), t);

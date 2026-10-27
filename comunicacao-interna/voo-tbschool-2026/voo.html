@@ -122,8 +122,9 @@ svg.i{width:1em;height:1em;flex:none}
 .note{display:flex;align-items:center;gap:16px;background:#0b1430;color:#fff;border-radius:14px;padding:20px 26px;font-size:22px;font-weight:600}
 /* S8 14 dias */
 .days{display:flex;height:190px;border-radius:16px;overflow:hidden;margin-top:6px}
-.days > div{position:relative;flex:none;white-space:nowrap;padding:30px 26px;color:#fff;overflow:hidden}
+.days > div{position:relative;flex:none;white-space:nowrap;padding:30px 0;color:#fff;overflow:hidden}
 .days .lbl{font-family:Archivo;font-weight:900;font-stretch:72%;font-size:84px;line-height:.9}
+.days .lbl,.days .sub{padding:0 26px}
 .days .sub{font-size:19px;font-weight:600;margin-top:10px;opacity:.9}
 .cert{display:flex;align-items:center;gap:24px;margin-top:30px}
 /* S9 kit */
@@ -203,12 +204,12 @@ svg.i{width:1em;height:1em;flex:none}
       <div class="k">PASSAGEIRO</div>
       <div class="pax">Todo o time PSA</div>
       <div class="grid">
-        <div class="a" style="--d:1.3s"><div class="k">CLASSE</div><div class="v">Protagonista</div></div>
-        <div class="a" style="--d:1.6s"><div class="k">ASSENTO</div><div class="v">1A · primeira fila do palco</div></div>
-        <div class="a" style="--d:1.9s"><div class="k">DESTINO</div><div class="v">Licenciamento<br>TB School</div></div>
-        <div class="a" style="--d:2.2s"><div class="k">SELO DE BORDO</div><div class="v">Escola oficial do The Best<br>Speaker Brasil</div></div>
+        <div class="a" data-cue="2" style="--d:1.3s"><div class="k">CLASSE</div><div class="v">Protagonista</div></div>
+        <div class="a" data-cue="2@.5" style="--d:1.6s"><div class="k">ASSENTO</div><div class="v">1A · primeira fila do palco</div></div>
+        <div class="a" data-cue="3" style="--d:1.9s"><div class="k">DESTINO</div><div class="v">Licenciamento<br>TB School</div></div>
+        <div class="a" data-cue="3@.5" style="--d:2.2s"><div class="k">SELO DE BORDO</div><div class="v">Escola oficial do The Best<br>Speaker Brasil</div></div>
       </div>
-      <div class="stamp" style="--d:4.2s">EMBARQUE CONFIRMADO</div>
+      <div class="stamp" data-cue="end" style="--d:4.2s">EMBARQUE CONFIRMADO</div>
     </div>
     <div class="stub">
       <div class="k">VOO</div><div class="sv">TBSCHOOL 2026</div>
@@ -225,14 +226,14 @@ svg.i{width:1em;height:1em;flex:none}
   <div class="panel a" style="--d:.4s;--bar:12%">
     <div class="ph"><h3>LICENCIAMENTO</h3><p>O mercado hoje</p><div class="badge">PSA<span>.</span></div></div>
     <div class="pb" style="display:grid;grid-template-columns:1fr 1fr;gap:26px">
-      <div class="card a" style="--d:.9s"><h4>O QUE EXISTE HOJE</h4>
-        <div class="bullet a" style="--d:1.4s">Formadores talentosos, mas sem estrutura pedagógica</div>
-        <div class="bullet a" style="--d:1.9s">Qualidade que varia de professor para professor</div>
-        <div class="bullet a" style="--d:2.4s">Nenhum padrão que se repete de cidade em cidade</div>
+      <div class="card a" data-cue="2" style="--d:.9s"><h4>O QUE EXISTE HOJE</h4>
+        <div class="bullet a" data-cue="2" style="--d:1.4s">Formadores talentosos, mas sem estrutura pedagógica</div>
+        <div class="bullet a" data-cue="3" style="--d:1.9s">Qualidade que varia de professor para professor</div>
+        <div class="bullet a" data-cue="4" style="--d:2.4s">Nenhum padrão que se repete de cidade em cidade</div>
       </div>
-      <div class="card dark a" style="--d:3.4s"><h4 style="color:#ff8a4c">A OPORTUNIDADE</h4>
+      <div class="card dark a" data-cue="5" style="--d:3.4s"><h4 style="color:#ff8a4c">A OPORTUNIDADE</h4>
         <p style="font-size:30px;line-height:1.5;color:#dfe4f2;margin-top:26px">Um mercado gigante, faminto por comunicação bem ensinada — e quase sem ninguém entregando isso com consistência.</p>
-        <div class="chip pop" style="--d:5.2s;margin-top:26px;background:rgba(255,90,10,.12);color:#ff9b63">Essa lacuna é o Licenciamento</div>
+        <div class="chip pop" data-cue="6" style="--d:5.2s;margin-top:26px;background:rgba(255,90,10,.12);color:#ff9b63">Essa lacuna é o Licenciamento</div>
       </div>
     </div>
   </div>
@@ -245,15 +246,15 @@ svg.i{width:1em;height:1em;flex:none}
   <div class="panel a" style="--d:.4s;--bar:24%">
     <div class="ph"><h3>LICENCIAMENTO</h3><p>5 pilares que sustentam o negócio do licenciado desde o primeiro dia</p><div class="badge">PSA<span>.</span></div></div>
     <div class="pb">
-      <div class="card a" style="--d:.8s;font-size:25px;line-height:1.5;font-weight:500;color:#2a3352;padding:24px 30px;border-left:6px solid var(--orange)">
+      <div class="card a" data-cue="2" style="--d:.8s;font-size:25px;line-height:1.5;font-weight:500;color:#2a3352;padding:24px 30px;border-left:6px solid var(--orange)">
         A metodologia da TB School — proprietária, testada e estruturada — pronta para ser replicada <b style="color:var(--ink)">com fidelidade, na cidade do licenciado, com a marca dele, sob a chancela TB School.</b>
       </div>
       <div class="pillars" style="margin-top:26px">
-        <div class="card a ring" style="--d:2.2s;--r:2.6s"><div class="n">01</div><h4 style="margin-top:8px">Mandala do Speaker</h4><p>O conteúdo que ele domina para ensinar</p></div>
-        <div class="card a ring" style="--d:2.7s;--r:3.1s"><div class="n">02</div><h4 style="margin-top:8px">Ciclo TB School</h4><p>A metodologia que garante fidelidade</p></div>
-        <div class="card a ring" style="--d:3.2s;--r:3.6s"><div class="n">03</div><h4 style="margin-top:8px">Mandala do Licenciado</h4><p>O que o forma como mentor e empreendedor</p></div>
-        <div class="card a ring" style="--d:3.7s;--r:4.1s"><div class="n">04</div><h4 style="margin-top:8px">Kit do Licenciado</h4><p>Tudo pronto para operar e vender</p></div>
-        <div class="card a ring" style="--d:4.2s;--r:4.6s"><div class="n">05</div><h4 style="margin-top:8px">Comunidade</h4><p>Suporte contínuo, turma após turma</p></div>
+        <div class="card a ring" data-cue="3" style="--d:2.2s;--r:2.6s"><div class="n">01</div><h4 style="margin-top:8px">Mandala do Speaker</h4><p>O conteúdo que ele domina para ensinar</p></div>
+        <div class="card a ring" data-cue="3@.15" style="--d:2.7s;--r:3.1s"><div class="n">02</div><h4 style="margin-top:8px">Ciclo TB School</h4><p>A metodologia que garante fidelidade</p></div>
+        <div class="card a ring" data-cue="3@.3" style="--d:3.2s;--r:3.6s"><div class="n">03</div><h4 style="margin-top:8px">Mandala do Licenciado</h4><p>O que o forma como mentor e empreendedor</p></div>
+        <div class="card a ring" data-cue="3@.45" style="--d:3.7s;--r:4.1s"><div class="n">04</div><h4 style="margin-top:8px">Kit do Licenciado</h4><p>Tudo pronto para operar e vender</p></div>
+        <div class="card a ring" data-cue="3@.6" style="--d:4.2s;--r:4.6s"><div class="n">05</div><h4 style="margin-top:8px">Comunidade</h4><p>Suporte contínuo, turma após turma</p></div>
       </div>
     </div>
   </div>
@@ -267,12 +268,12 @@ svg.i{width:1em;height:1em;flex:none}
     <div class="ph"><h3>LICENCIAMENTO</h3><p>Mandala do Speaker · o conteúdo que o licenciado passa a dominar</p><div class="badge">PSA<span>.</span></div></div>
     <div class="pb">
       <div class="axes">
-        <div class="axis a" style="--d:.9s"><div class="n">EIXO 1</div><h4>EXPRESSÃO</h4><div class="q">Como falar</div><hr><p>Oratória · Performance · Linguagem corporal</p></div>
-        <div class="axis a" style="--d:1.4s"><div class="n">EIXO 2</div><h4>ARGUMENTO</h4><div class="q">Como convencer</div><hr><p>Retórica · Persuasão · Negociação</p></div>
-        <div class="axis a" id="axSub" style="--d:1.9s"><div class="n">EIXO 3</div><h4>SUBSTÂNCIA</h4><div class="q">O que dizer</div><hr><p>Narrativa · Perspectiva · Autoridade</p></div>
-        <div class="axis a" style="--d:2.4s"><div class="n">EIXO 4</div><h4>CONEXÃO</h4><div class="q">Como se relacionar</div><hr><p>Empatia · Escuta ativa · Presença digital</p></div>
+        <div class="axis a" data-cue="1" style="--d:.9s"><div class="n">EIXO 1</div><h4>EXPRESSÃO</h4><div class="q">Como falar</div><hr><p>Oratória · Performance · Linguagem corporal</p></div>
+        <div class="axis a" data-cue="1@.25" style="--d:1.4s"><div class="n">EIXO 2</div><h4>ARGUMENTO</h4><div class="q">Como convencer</div><hr><p>Retórica · Persuasão · Negociação</p></div>
+        <div class="axis a" id="axSub" data-cue="1@.5" style="--d:1.9s"><div class="n">EIXO 3</div><h4>SUBSTÂNCIA</h4><div class="q">O que dizer</div><hr><p>Narrativa · Perspectiva · Autoridade</p></div>
+        <div class="axis a" data-cue="1@.75" style="--d:2.4s"><div class="n">EIXO 4</div><h4>CONEXÃO</h4><div class="q">Como se relacionar</div><hr><p>Empatia · Escuta ativa · Presença digital</p></div>
       </div>
-      <div class="note a" style="--d:4.4s;margin-top:26px"><svg class="i" style="width:30px;height:30px;color:#ff7a2e"><use href="#star"/></svg><span><b style="color:#ff8a4c">Substância é o diferencial:</b> o mercado ensina como falar; a TB School ensina o que vale a pena ser dito.</span></div>
+      <div class="note a" data-cue="2" style="--d:4.4s;margin-top:26px"><svg class="i" style="width:30px;height:30px;color:#ff7a2e"><use href="#star"/></svg><span><b style="color:#ff8a4c">Substância é o diferencial:</b> o mercado ensina como falar; a TB School ensina o que vale a pena ser dito.</span></div>
     </div>
   </div>
 </div></div>
@@ -285,13 +286,13 @@ svg.i{width:1em;height:1em;flex:none}
     <div class="ph"><h3>LICENCIAMENTO</h3><p>Ciclo TB School · a estrutura que garante fidelidade em escala</p><div class="badge">PSA<span>.</span></div></div>
     <div class="pb">
       <div class="steps">
-        <div class="step a" id="st1" style="--d:.8s"><div class="num">01</div><h4>Espelho</h4><p>Autodiagnóstico inicial: o ponto de partida antes de qualquer correção.</p></div>
-        <div class="step a" id="st2" style="--d:1.0s"><div class="num">02</div><h4>Plateia</h4><p>Conteúdo teórico curado, direto aplicável ao que vem a seguir.</p></div>
-        <div class="step a" id="st3" style="--d:1.2s"><div class="num">03</div><h4>Ensaio</h4><p>Prática guiada com feedback imediato. O núcleo da sessão.</p></div>
-        <div class="step a" id="st4" style="--d:1.4s"><div class="num">04</div><h4>Palco</h4><p>Execução real, avaliada por rubrica, com devolutiva pública.</p></div>
-        <div class="step a" id="st5" style="--d:1.6s"><div class="num">05</div><h4>Novo Espelho</h4><p>Nova autoavaliação, comparada ao ponto de partida.</p></div>
+        <div class="step a" id="st1" data-cue="0@.4" style="--d:.8s"><div class="num">01</div><h4>Espelho</h4><p>Autodiagnóstico inicial: o ponto de partida antes de qualquer correção.</p></div>
+        <div class="step a" id="st2" data-cue="0@.5" style="--d:1.0s"><div class="num">02</div><h4>Plateia</h4><p>Conteúdo teórico curado, direto aplicável ao que vem a seguir.</p></div>
+        <div class="step a" id="st3" data-cue="0@.6" style="--d:1.2s"><div class="num">03</div><h4>Ensaio</h4><p>Prática guiada com feedback imediato. O núcleo da sessão.</p></div>
+        <div class="step a" id="st4" data-cue="0@.7" style="--d:1.4s"><div class="num">04</div><h4>Palco</h4><p>Execução real, avaliada por rubrica, com devolutiva pública.</p></div>
+        <div class="step a" id="st5" data-cue="0@.8" style="--d:1.6s"><div class="num">05</div><h4>Novo Espelho</h4><p>Nova autoavaliação, comparada ao ponto de partida.</p></div>
       </div>
-      <div class="note a" style="--d:6.4s;margin-top:26px"><svg class="i" style="width:30px;height:30px;color:#ff7a2e"><use href="#ok"/></svg>Mesma sequência em qualquer pilar, cidade ou mentor. <b style="color:#ff8a4c">A experiência é sempre a mesma.</b></div>
+      <div class="note a" data-cue="1" style="--d:6.4s;margin-top:26px"><svg class="i" style="width:30px;height:30px;color:#ff7a2e"><use href="#ok"/></svg>Mesma sequência em qualquer pilar, cidade ou mentor. <b style="color:#ff8a4c">A experiência é sempre a mesma.</b></div>
     </div>
   </div>
 </div></div>
@@ -304,12 +305,12 @@ svg.i{width:1em;height:1em;flex:none}
     <div class="ph"><h3>LICENCIAMENTO</h3><p>Mandala do Licenciado · o que forma o mentor e empreendedor</p><div class="badge">PSA<span>.</span></div></div>
     <div class="pb">
       <div class="axes">
-        <div class="axis a ring" style="--d:.8s;--r:1.4s"><div class="n">01</div><h4>CICLO TB SCHOOL</h4><hr><p>A metodologia pronta que ele compra e domina</p></div>
-        <div class="axis a ring" style="--d:1.6s;--r:2.2s"><div class="n">02</div><h4>DIREÇÃO</h4><hr><p>Conduzir uma sala com autoridade e ritmo</p></div>
-        <div class="axis a ring" style="--d:2.4s;--r:3.0s"><div class="n">03</div><h4>RELACIONAMENTO</h4><hr><p>Criar vínculo real que sustenta seus alunos</p></div>
-        <div class="axis a ring" style="--d:3.2s;--r:3.8s"><div class="n">04</div><h4>VENDAS</h4><hr><p>Prospectar, converter e reter, como empreendedor</p></div>
+        <div class="axis a ring" data-cue="0@.35" style="--d:.8s;--r:1.4s"><div class="n">01</div><h4>CICLO TB SCHOOL</h4><hr><p>A metodologia pronta que ele compra e domina</p></div>
+        <div class="axis a ring" data-cue="0@.55" style="--d:1.6s;--r:2.2s"><div class="n">02</div><h4>DIREÇÃO</h4><hr><p>Conduzir uma sala com autoridade e ritmo</p></div>
+        <div class="axis a ring" data-cue="0@.7" style="--d:2.4s;--r:3.0s"><div class="n">03</div><h4>RELACIONAMENTO</h4><hr><p>Criar vínculo real que sustenta seus alunos</p></div>
+        <div class="axis a ring" data-cue="0@.85" style="--d:3.2s;--r:3.8s"><div class="n">04</div><h4>VENDAS</h4><hr><p>Prospectar, converter e reter, como empreendedor</p></div>
       </div>
-      <div class="a" style="--d:4.6s;margin-top:28px;display:flex;justify-content:flex-end"><span class="chip">Ele não vira só um formador. Vira dono de um negócio.</span></div>
+      <div class="a" data-cue="end" style="--d:4.6s;margin-top:28px;display:flex;justify-content:flex-end"><span class="chip">Ele não vira só um formador. Vira dono de um negócio.</span></div>
     </div>
   </div>
 </div></div>
@@ -327,7 +328,7 @@ svg.i{width:1em;height:1em;flex:none}
         <div id="d3" style="background:var(--orange);width:0"><div class="lbl">4 DIAS</div><div class="sub">Imersão presencial no palco</div></div>
       </div>
       <div style="display:flex;justify-content:space-between;margin-top:12px;font-family:'IBM Plex Mono';font-size:18px;color:#9aa1b0;font-weight:500"><span>DIA 1</span><span>DIA 14</span></div>
-      <div class="card dark a" style="--d:5.0s;margin-top:40px;padding:40px 34px">
+      <div class="card dark a" data-cue="2" style="--d:5.0s;margin-top:40px;padding:40px 34px">
         <div class="cert"><div style="width:96px;height:96px;border-radius:50%;background:var(--orange);display:grid;place-items:center;flex:none" class="pop" ><svg style="width:54px;height:54px;color:#fff"><use href="#cert"/></svg></div>
         <div><h4 style="font-size:40px">CERTIFICADO NA SALA</h4><p style="font-size:22px">Ao final dos 4 dias de imersão, o candidato sai como Licenciado TB School, pronto para operar. Sem meses de curso.</p></div></div>
       </div>
@@ -342,16 +343,16 @@ svg.i{width:1em;height:1em;flex:none}
   <div class="panel a" style="--d:.4s;--bar:78%">
     <div class="ph"><h3>LICENCIAMENTO</h3><p>Kit do Licenciado · tudo pronto para vender</p><div class="badge">PSA<span>.</span></div></div>
     <div class="pb" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px">
-      <div class="card a" style="--d:.8s"><h4>O QUE VEM NA MALA</h4>
-        <div class="kitrow"><span class="tick pop" style="--d:1.4s"><svg><use href="#ok"/></svg></span>Livro de referência teórica</div>
-        <div class="kitrow"><span class="tick pop" style="--d:1.9s"><svg><use href="#ok"/></svg></span>Slides prontos para a sala</div>
-        <div class="kitrow"><span class="tick pop" style="--d:2.4s"><svg><use href="#ok"/></svg></span>Fichas, cartões e rubricas</div>
-        <div class="kitrow" style="border:0"><span class="tick pop" style="--d:2.9s"><svg><use href="#ok"/></svg></span>Canal privado com vídeos</div>
+      <div class="card a" data-cue="1" style="--d:.8s"><h4>O QUE VEM NA MALA</h4>
+        <div class="kitrow"><span class="tick pop" data-cue="1@.2" style="--d:1.4s"><svg><use href="#ok"/></svg></span>Livro de referência teórica</div>
+        <div class="kitrow"><span class="tick pop" data-cue="1@.4" style="--d:1.9s"><svg><use href="#ok"/></svg></span>Slides prontos para a sala</div>
+        <div class="kitrow"><span class="tick pop" data-cue="1@.6" style="--d:2.4s"><svg><use href="#ok"/></svg></span>Fichas, cartões e rubricas</div>
+        <div class="kitrow" style="border:0"><span class="tick pop" data-cue="1@.85" style="--d:2.9s"><svg><use href="#ok"/></svg></span>Canal privado com vídeos</div>
       </div>
-      <div class="card dark a" style="--d:3.6s;border:2px solid var(--orange)"><div class="n">E MAIS</div><h4 style="margin-top:10px;color:#ff8a4c">AGENTE DE IA</h4><p style="font-size:21px">Conhece toda a Mandala e monta o treinamento certo para cada cliente, a partir de um diagnóstico simples.</p></div>
+      <div class="card dark a" data-cue="2" style="--d:3.6s;border:2px solid var(--orange)"><div class="n">E MAIS</div><h4 style="margin-top:10px;color:#ff8a4c">AGENTE DE IA</h4><p style="font-size:21px">Conhece toda a Mandala e monta o treinamento certo para cada cliente, a partir de um diagnóstico simples.</p></div>
       <div style="display:grid;grid-template-rows:1fr 1fr;gap:22px">
-        <div class="card a" style="--d:4.8s"><div class="n">COMUNIDADE TB SCHOOL</div><h4 style="margin-top:10px">ENCONTROS MENSAIS AO VIVO</h4><p>Ninguém voa sozinho.</p></div>
-        <div class="card a" style="--d:5.8s;display:flex;align-items:center;gap:20px"><div class="big" id="autores" style="font-size:96px">0</div><p style="margin:0">autores reais e verificáveis por trás de cada pilar</p></div>
+        <div class="card a" data-cue="2@.55" style="--d:4.8s"><div class="n">COMUNIDADE TB SCHOOL</div><h4 style="margin-top:10px">ENCONTROS MENSAIS AO VIVO</h4><p>Ninguém voa sozinho.</p></div>
+        <div class="card a" data-cue="3" style="--d:5.8s;display:flex;align-items:center;gap:20px"><div class="big" id="autores" style="font-size:96px">0</div><p style="margin:0">autores reais e verificáveis por trás de cada pilar</p></div>
       </div>
     </div>
   </div>
@@ -364,10 +365,10 @@ svg.i{width:1em;height:1em;flex:none}
   <div class="panel a" style="--d:.4s;--bar:86%">
     <div class="ph"><h3>LICENCIAMENTO</h3><p>Tripulação deste voo</p><div class="badge">PSA<span>.</span></div></div>
     <div class="pb"><div class="crew">
-      <div class="mem a ring" style="--d:.8s;--r:1.2s"><div class="av">MS</div><div><h5>Márcio Spagnolo</h5><p>Fundador e CEO da PSA</p><span class="tag">COMANDANTE</span></div></div>
-      <div class="mem a" style="--d:1.3s"><div class="av">OC</div><div><h5>Otaviano Costa</h5><p>Ator, comunicador e sócio da The Best School</p></div></div>
-      <div class="mem a" style="--d:1.8s"><div class="av">MS</div><div><h5>Manu Smaniotto</h5><p>Diretora de Produto e Inovação da PSA</p></div></div>
-      <div class="mem a" style="--d:2.3s"><div class="av">LV</div><div><h5>Leandro Vidal</h5><p>Instrutor pedagógico e speaker</p></div></div>
+      <div class="mem a ring" data-cue="0@.25" style="--d:.8s;--r:1.2s"><div class="av">MS</div><div><h5>Márcio Spagnolo</h5><p>Fundador e CEO da PSA</p><span class="tag">COMANDANTE</span></div></div>
+      <div class="mem a" data-cue="0@.45" style="--d:1.3s"><div class="av">OC</div><div><h5>Otaviano Costa</h5><p>Ator, comunicador e sócio da The Best School</p></div></div>
+      <div class="mem a" data-cue="0@.65" style="--d:1.8s"><div class="av">MS</div><div><h5>Manu Smaniotto</h5><p>Diretora de Produto e Inovação da PSA</p></div></div>
+      <div class="mem a" data-cue="0@.85" style="--d:2.3s"><div class="av">LV</div><div><h5>Leandro Vidal</h5><p>Instrutor pedagógico e speaker</p></div></div>
     </div></div>
   </div>
 </div></div>
@@ -382,11 +383,11 @@ svg.i{width:1em;height:1em;flex:none}
       <div class="gate">
         <div class="gh">Portão de embarque: Licenciamento</div>
         <div class="cols">
-          <div class="a" style="--d:1.0s"><div class="ico" style="background:#ffeadd;color:#ff6410"><svg><use href="#mail"/></svg></div><div class="t">Check-in do time<br>(este comunicado)</div><div class="val">HOJE</div><div class="ex">Você é o primeiro a saber</div></div>
-          <div class="a" style="--d:1.8s"><div class="ico" style="background:#e3eaff;color:var(--blue)"><svg><use href="#star"/></svg></div><div class="t">Decolagem<br>(lançamento oficial)</div><div class="val" id="cfgHora">00:00</div><div><span class="ex" id="cfgData">dd/mm/2026</span></div></div>
-          <div class="a" style="--d:2.6s"><div class="ico" style="background:#fbe6f6;color:#b33fb0"><svg><use href="#cap"/></svg></div><div class="t">Pouso<br>(1ª turma de licenciados)</div><div class="val" id="cfgMes">MÊS</div><div class="ex">Imersão de 14 dias</div></div>
+          <div class="a" data-cue="0" style="--d:1.0s"><div class="ico" style="background:#ffeadd;color:#ff6410"><svg><use href="#mail"/></svg></div><div class="t">Check-in do time<br>(este comunicado)</div><div class="val">HOJE</div><div class="ex">Você é o primeiro a saber</div></div>
+          <div class="a" data-cue="1" style="--d:1.8s"><div class="ico" style="background:#e3eaff;color:var(--blue)"><svg><use href="#star"/></svg></div><div class="t">Decolagem<br>(lançamento oficial)</div><div class="val" id="cfgHora">00:00</div><div><span class="ex" id="cfgData">dd/mm/2026</span></div></div>
+          <div class="a" data-cue="2" style="--d:2.6s"><div class="ico" style="background:#fbe6f6;color:#b33fb0"><svg><use href="#cap"/></svg></div><div class="t">Pouso<br>(1ª turma de licenciados)</div><div class="val" id="cfgMes">MÊS</div><div class="ex">Imersão de 14 dias</div></div>
         </div>
-        <div class="ft a" style="--d:3.6s">O portão fecha quando o assunto chegar ao mercado. Até lá, a novidade é nossa.</div>
+        <div class="ft a" data-cue="end" style="--d:3.6s">O portão fecha quando o assunto chegar ao mercado. Até lá, a novidade é nossa.</div>
       </div>
     </div>
   </div>
@@ -400,9 +401,9 @@ svg.i{width:1em;height:1em;flex:none}
   <div class="panel a" style="--d:.4s;--bar:97%">
     <div class="ph"><h3>LICENCIAMENTO</h3><p>Leia antes da decolagem</p><div class="badge">PSA<span>.</span></div></div>
     <div class="pb">
-      <div class="notice a ring" style="--d:1.2s;--r:1.6s"><div class="num">1</div><div><h5>Mantenha o sigilo afivelado até a decolagem oficial.</h5><p>A novidade ainda não foi divulgada para fora.</p></div></div>
-      <div class="notice a" style="--d:2.6s"><div class="num">2</div><div><h5>Conhece um educador com perfil de licenciado?</h5><p>Guarde o nome. Em breve vamos abrir o embarque.</p></div></div>
-      <div class="notice a" style="--d:4.0s"><div class="num">3</div><div><h5>Dúvidas durante o voo?</h5><p>Fale com a tripulação de Produto e Inovação.</p></div></div>
+      <div class="notice a ring" data-cue="0@.3" style="--d:1.2s;--r:1.6s"><div class="num">1</div><div><h5>Mantenha o sigilo afivelado até a decolagem oficial.</h5><p>A novidade ainda não foi divulgada para fora.</p></div></div>
+      <div class="notice a" data-cue="1" style="--d:2.6s"><div class="num">2</div><div><h5>Conhece um educador com perfil de licenciado?</h5><p>Guarde o nome. Em breve vamos abrir o embarque.</p></div></div>
+      <div class="notice a" data-cue="3" style="--d:4.0s"><div class="num">3</div><div><h5>Dúvidas durante o voo?</h5><p>Fale com a tripulação de Produto e Inovação.</p></div></div>
     </div>
   </div>
 </div></div>
@@ -446,8 +447,9 @@ svg.i{width:1em;height:1em;flex:none}
 <div id="meter"><div class="lbl">ROTA DO VOO <b id="mval">0%</b></div><div class="track"><div class="fill" id="mfill"></div><svg class="plane" id="mplane"><use href="#plane"/></svg></div></div>
 <svg class="cursor" id="cursor" viewBox="0 0 24 24"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="#111" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
 <div class="click" id="clickfx"></div>
-<div id="fadeout" style="--s:116s"></div>
+<div id="fadeout"></div>
 
+<script src="cues.js"></script>
 <script>
 // ===== Preencha antes de renderizar (enquanto estiverem no padrão, aparecem marcados em amarelo) =====
 const CONFIG = { hora: "00:00", data: "dd/mm/2026", mes: "MÊS" };
@@ -457,7 +459,31 @@ for (const k of ['hora','data','mes']) {
   el.textContent = CONFIG[k]; el.classList.toggle('hl', CONFIG[k] === DEF[k]);
 }
 
-const DURATION = 117;
+// ===== Linha do tempo guiada pela locução (cues.js, gerado por narrar.py) =====
+const LEAD = 0.8, TAIL = 1.3;   // locução começa 0,8s após a cena entrar; 1,3s de respiro no fim
+const MIN = {s1:6,s2:9,s13:7,s14:7};
+const IDS = Object.keys(NARR);
+const START = {}; let acc = 0;
+for (const id of IDS) { START[id] = acc; acc += Math.max(MIN[id] || 7, LEAD + NARR[id].dur + TAIL); }
+const DURATION = acc;
+const SEND = id => { const i = IDS.indexOf(id); return i + 1 < IDS.length ? START[IDS[i + 1]] : 9999; };
+// "i" = início da frase i; "i@f" = fração f da frase i; "end" = fim da locução da cena (relativo à cena)
+function cueRel(id, c) {
+  const n = NARR[id];
+  if (c === 'end') return LEAD + n.dur;
+  const [i, f] = c.split('@'); return LEAD + n.starts[+i] + (+(f || 0)) * n.durs[+i];
+}
+const cue = (id, c) => START[id] + cueRel(id, c);
+for (const id of IDS) {
+  const el = document.getElementById(id);
+  el.style.setProperty('--s', START[id] + 's'); el.style.setProperty('--e', SEND(id) + 's');
+  el.querySelectorAll('[data-cue]').forEach(x => {
+    const d = cueRel(id, x.dataset.cue) - .15;
+    x.style.setProperty('--d', d + 's'); x.style.setProperty('--r', (d + .4) + 's');
+  });
+}
+document.getElementById('fadeout').style.setProperty('--s', (DURATION - 1) + 's');
+window.TIMELINE = IDS.map(id => ({ id, start: START[id] + LEAD }));
 const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
 const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 const lerp=(a,b,x)=>a+(b-a)*x;
@@ -470,36 +496,39 @@ const seg=(t,t0,t1)=>ease(clamp((t-t0)/(t1-t0)));
  pts.forEach((p,i)=>h+=`<circle cx="${p[0]}" cy="${p[1]}" r="${i%9==0?3:2}" fill="${i%9==0?'#ff6a1a':'#8ea3dd'}" fill-opacity=".8"/>`);
  svg.innerHTML=h;})();
 
-// rota do voo: [tempo, %]
-const MK=[[6,0],[7.5,6],[16,6],[17.5,12],[25,12],[26.5,24],[35,24],[36.5,36],[45,36],[46.5,48],[55,48],[56.5,58],[63,58],[64.5,68],[72,68],[73.5,78],[81,78],[82.5,86],[88,86],[89.5,92],[96,92],[97.5,97],[104,97],[105.5,100]];
+// rota do voo: sobe no início de cada cena
+const PCT = {s2:6,s3:12,s4:24,s5:36,s6:48,s7:58,s8:68,s9:78,s10:86,s11:92,s12:97,s13:100};
+const MK = [[START.s2, 0]]; let last = 0;
+for (const id of Object.keys(PCT)) { MK.push([START[id], last], [START[id] + 1.5, PCT[id]]); last = PCT[id]; }
 function meterVal(t){if(t<=MK[0][0])return 0;for(let i=1;i<MK.length;i++){const[a,va]=MK[i-1],[b,vb]=MK[i];if(t<=b)return lerp(va,vb,seg(t,a,b));}return 100;}
 
-const CUR=[[[106.6,700,1100],[107.6,430,975],[108.1,430,975,1],[109.6,430,975]]];
+const T13 = START.s13;
+const CUR=[[[T13+2.6,700,1100],[T13+3.6,430,975],[T13+4.1,430,975,1],[T13+6.6,430,975]]];
 function cursorAt(t){for(const path of CUR){if(t>=path[0][0]&&t<=path[path.length-1][0]){for(let i=1;i<path.length;i++){const a=path[i-1],b=path[i];if(t<=b[0]){const x=seg(t,a[0],b[0]);return{x:lerp(a[1],b[1],x),y:lerp(a[2],b[2],x),click:path.filter(p=>p[3]).map(p=>p[0])}}}}}return null;}
 
 let anims=[];
 function seek(t){
   anims.forEach(a=>{a.currentTime=t*1000;});
   document.getElementById('stars').style.transform=`translate(${-t*0.5}px,${Math.sin(t/9)*12}px)`;
-  const m=document.getElementById('meter');m.style.opacity=t<6.2?Math.max(0,(t-5.6)/.6):t>110?Math.max(0,1-(t-110)/.5):1;
+  const m=document.getElementById('meter');m.style.opacity=t<START.s2+.2?Math.max(0,(t-START.s2+.4)/.6):t>START.s14?Math.max(0,1-(t-START.s14)/.5):1;
   const v=meterVal(t);document.getElementById('mval').textContent=Math.round(v)+'%';
   document.getElementById('mfill').style.width=v+'%';document.getElementById('mplane').style.left=v+'%';
   // S5: Substância vira destaque
-  document.getElementById('axSub').classList.toggle('hot',t>=38.8);
+  document.getElementById('axSub').classList.toggle('hot',t>=cue('s5','2@.15'));
   // S6: etapas acendem em sequência
-  for(let i=1;i<=5;i++)document.getElementById('st'+i).classList.toggle('on',t>=47+i*.8);
+  for(let i=1;i<=5;i++)document.getElementById('st'+i).classList.toggle('on',t>=cue('s6','0@'+(.3+.1*i))+.2);
   // S8: barras dos 14 dias (7/3/4 de 1420px)
-  document.getElementById('d1').style.width=(710*seg(t,64.4,65.8))+'px';
-  document.getElementById('d2').style.width=(304*seg(t,65.8,66.8))+'px';
-  document.getElementById('d3').style.width=(406*seg(t,66.8,67.9))+'px';
+  document.getElementById('d1').style.width=(710*seg(t,cue('s8','1'),cue('s8','1@.35')))+'px';
+  document.getElementById('d2').style.width=(304*seg(t,cue('s8','1@.4'),cue('s8','1@.65')))+'px';
+  document.getElementById('d3').style.width=(406*seg(t,cue('s8','1@.7'),cue('s8','1@.95')))+'px';
   // S9: contador de autores
-  document.getElementById('autores').textContent=Math.round(40*seg(t,78.2,79.4))+(t>79.4?'+':'');
+  document.getElementById('autores').textContent=Math.round(40*seg(t,cue('s9','3@.3'),cue('s9','3@.8')))+(t>cue('s9','3@.8')?'+':'');
   // cursor
   const c=cursorAt(t),ce=document.getElementById('cursor'),cf=document.getElementById('clickfx');
   if(c){ce.style.display='block';ce.style.left=c.x+'px';ce.style.top=c.y+'px';
     const k=c.click.find(ct=>t>=ct&&t<ct+.5);if(k!==undefined){const x=(t-k)/.5;cf.style.display='block';cf.style.left=c.x+'px';cf.style.top=c.y+'px';cf.style.transform=`scale(${.4+x})`;cf.style.opacity=1-x;}else cf.style.display='none';
   }else{ce.style.display='none';cf.style.display='none';}
-  document.getElementById('btnDestino').style.background=t>108.1?'#d94400':'';
+  document.getElementById('btnDestino').style.background=t>T13+4.1?'#d94400':'';
 }
 window.seek=seek;window.DURATION=DURATION;
 window.ready=document.fonts.ready.then(()=>{anims=document.getAnimations();anims.forEach(a=>a.pause());seek(0);return true;});
